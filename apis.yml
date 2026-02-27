@@ -1,0 +1,99 @@
+name: Audatex
+description: Audatex provides automotive claims and repair solutions, offering data and technology services for the automotive insurance, collision repair, and fleet management industries.
+image: https://www.audatex.com/logo.png
+url: https://www.audatex.com
+created: '2025'
+modified: '2025'
+apis:
+- name: Audatex Claims API
+  description: API for automotive claims processing, damage assessment, and repair cost estimation
+  image: https://www.audatex.com/apis/claims-logo.png
+  humanURL: https://www.audatex.com/solutions/claims
+  baseURL: https://api.audatex.com/v1/claims
+  tags:
+  - Claims
+  - Insurance
+  - Automotive
+  - Damage Assessment
+  properties:
+  - type: Documentation
+    url: https://developer.audatex.com/claims/docs
+  - type: OpenAPI
+    url: https://api.audatex.com/claims/openapi.json
+  - type: Authentication
+    url: https://developer.audatex.com/authentication
+  contact:
+  - FN: Audatex API Support
+    email: api-support@audatex.com
+    url: https://developer.audatex.com/support
+- name: Audatex Repair API
+  description: API for accessing repair methods, labor times, and parts information for vehicle repairs
+  image: https://www.audatex.com/apis/repair-logo.png
+  humanURL: https://www.audatex.com/solutions/repair
+  baseURL: https://api.audatex.com/v1/repair
+  tags:
+  - Repair
+  - Automotive
+  - Parts
+  - Labor Times
+  properties:
+  - type: Documentation
+    url: https://developer.audatex.com/repair/docs
+  - type: OpenAPI
+    url: https://api.audatex.com/repair/openapi.json
+  - type: Authentication
+    url: https://developer.audatex.com/authentication
+  contact:
+  - FN: Audatex API Support
+    email: api-support@audatex.com
+    url: https://developer.audatex.com/support
+- name: Audatex Vehicle Data API
+  description: API for accessing comprehensive vehicle identification, specifications, and pricing data
+  image: https://www.audatex.com/apis/vehicle-logo.png
+  humanURL: https://www.audatex.com/solutions/vehicle-data
+  baseURL: https://api.audatex.com/v1/vehicle
+  tags:
+  - Vehicle Data
+  - VIN Decode
+  - Automotive
+  - Specifications
+  properties:
+  - type: Documentation
+    url: https://developer.audatex.com/vehicle/docs
+  - type: OpenAPI
+    url: https://api.audatex.com/vehicle/openapi.json
+  - type: Authentication
+    url: https://developer.audatex.com/authentication
+  contact:
+  - FN: Audatex API Support
+    email: api-support@audatex.com
+    url: https://developer.audatex.com/support
+common:
+- type: Portal
+  url: https://developer.audatex.com
+- type: Authentication
+  url: https://developer.audatex.com/authentication
+- type: Getting Started
+  url: https://developer.audatex.com/getting-started
+- type: Terms of Service
+  url: https://www.audatex.com/terms
+- type: Privacy Policy
+  url: https://www.audatex.com/privacy
+- type: Status
+  url: https://status.audatex.com
+- type: Support
+  url: https://developer.audatex.com/support
+- type: SDKs
+  url: https://developer.audatex.com/sdks
+maintainers:
+- FN: Audatex API Team
+  email: api-team@audatex.com
+  url: https://developer.audatex.com
+tags:
+- Automotive
+- Insurance
+- Claims
+- Repair
+- Vehicle Data
+- Collision
+- Fleet Management
