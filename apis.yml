@@ -9,8 +9,8 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Automotive
-  - Insurance
   - Claims
+  - Insurance
   - Repair
   - Vehicle Data
 url: >-
@@ -28,9 +28,9 @@ apis:
     humanURL: https://www.audatex.com/
     baseURL: https://api.audatex.com
     tags:
+      - Automotive
       - Claims
       - Insurance
-      - Automotive
     properties:
       - type: Documentation
         url: https://www.audatex.com/solutions/
