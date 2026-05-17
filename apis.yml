@@ -69,7 +69,7 @@ common:
   url: https://www.audatex.com/
 - type: Documentation
   url: https://www.audatex.com/solutions/
-- type: Privacy Policy
+- type: PrivacyPolicy
   url: https://www.audatex.com/privacy-policy/
 - type: TermsOfService
   url: https://www.audatex.com/terms-and-conditions/
