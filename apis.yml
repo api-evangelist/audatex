@@ -65,6 +65,8 @@ apis:
     - type: Authentication
       url: https://na.api.solera.com/
 common:
+  - type: DomainSecurity
+    url: security/audatex-domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/audatex-a-solera-company
   - type: Website
