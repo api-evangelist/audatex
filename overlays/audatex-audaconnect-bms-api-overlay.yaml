@@ -1,0 +1,29 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for AudaConnect BMS API
+  version: '2026-09-17'
+  x-generated: '2026-09-17'
+  x-method: generated
+  x-source: openapi/audatex-audaconnect-bms-api-openapi.yml (Swagger 2.0) plus the docs, probes and derived artifacts
+    in this repo
+extends: ../openapi/audatex-audaconnect-bms-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      provider: audatex
+      api: audatex:audatex-audaconnect-bms-api
+      harvested: '2026-09-17'
+      source: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/swagger/docs/v1
+      demo_source: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/swagger/docs/v1
+      build_production: 2.25.26162.1
+      build_demo: 2.25.26160.2
+- target: $.paths["/v1/bmsapi/site/subscriptions/{subscriptionId}/notifications"].get
+  update:
+    x-poll-interval-hint: ~5 minutes (spec summary)
+    x-obsolete-fields:
+    - ResourceURIs
+- target: $.paths["/v2/bmsapi/assessments/axformat"].post
+  update:
+    x-supersedes: Assessment_AssessmentImportAXShell
+    x-note: v2 uses the assessment number in the AXFORMAT if supplied.

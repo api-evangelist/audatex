@@ -1,0 +1,27 @@
+generated: '2026-09-17'
+method: generated
+source: >-
+  Packaged Agent Skills generated from openapi/audatex-audaconnect-api-openapi.yml (Swagger 2.0,
+  93 operations, verbatim from https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/swagger/docs/v1)
+  and openapi/audatex-api-gateway-openapi.yml (OpenAPI 3.0.1, 75 operations). Every operationId is
+  verified verbatim in the spec; cross-cutting rules cite ../authentication/, ../conventions/,
+  ../errors/ and ../asyncapi/. Searched the AudaConnect portal, audatex.co.uk and solera.com for
+  provider-published skills / AGENTS.md first — none exist.
+skills:
+  - file: audatex-subscribe-to-assessment-notifications.md
+    name: Subscribe to assessment notifications
+    api: openapi/audatex-audaconnect-api-openapi.yml
+    operations: [Notification_GetTopics, Notification_GetSubscriptions, Notification_Subscribe, Notification_PushSubscribe, Notification_GetNotifications, Notification_Unsubscribe]
+  - file: audatex-import-and-export-an-assessment.md
+    name: Import and export an assessment in AxFormat
+    api: openapi/audatex-audaconnect-api-openapi.yml
+    operations: [Assessment_Search, AssessmentImport_ImportAssessmentV2, Assessment_GetSummary, Assessment_GetAssessment, AssessmentExport_ExportAssessment, AssessmentReport_GetReportDefinitions, AssessmentReport_Get]
+  - file: audatex-lookup-and-value-a-vehicle.md
+    name: Look up and value a vehicle
+    api: openapi/audatex-audaconnect-api-openapi.yml
+    operations: [Vehicle_GetVIwithVRN, Vehicle_GetViWithVinPlus, Vehicle_GetDetailedVIwithVinPlus, Vehicle_GetPaintCodewithVin, Vehicle_GetValuation, History_GetHistory]
+  - file: audatex-guided-image-capture-and-ai-triage.md
+    name: Guided image capture and AI triage
+    api: openapi/audatex-api-gateway-openapi.yml
+    operations: []
+    note: The API Gateway spec declares no operationIds; steps are bound by method + path.

@@ -1,0 +1,159 @@
+generated: '2026-09-17'
+method: searched
+kind: webhook-catalog
+source: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics (notification topics reference,
+  fetched 2026-09-17), openapi/audatex-audaconnect-api-openapi.yml (Notification_* operations, SubscriptionPush
+  / NotificationMessage models), openapi/audatex-audaconnect-bms-api-openapi.yml (Event_* operations) and openapi/audatex-api-gateway-openapi.yml
+  (Webhooks operations, WebhookEventType enum).
+summary: 'Audatex publishes NO AsyncAPI document; this file captures the two documented event surfaces verbatim
+  from the help pages and specs. (1) AudaConnect WebAPI / BMS API: hierarchical notification TOPICS you subscribe
+  to per user, site or company, then either poll (recommended ~every 5 minutes) or receive as a push to a URL in
+  JSON or XML. 12 topics are documented. (2) Audatex API Gateway: classic WEBHOOKS — register a callbackUri with
+  None / Basic / OAuth2 authentication for any of 14 event types about image-capture requests, VI processing and
+  SMS/communication delivery. A Webhooks pointer is earned; an AsyncAPI pointer is NOT emitted because none exists.'
+surfaces:
+- name: AudaConnect notification subscriptions
+  api: Audatex AudaConnect API
+  style: topic-subscription (poll or push)
+  docs: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  operations:
+    list_topics: Notification_GetTopics (GET /api/notifications/topics)
+    subscribe_poll: Notification_Subscribe (POST /api/notifications/subscriptions, scope System.Notifications)
+    subscribe_push: Notification_PushSubscribe (POST /api/notifications/pushsubscriptions, scope System.PushNotifications)
+      — body SubscribeDataWithPush {TopicCode, Push {URL, Format XML|JSON, AuthEnabled, AuthScheme, AuthParameter}}
+    poll: Notification_GetNotifications (GET /api/notifications/{subscriptionId}) — a push subscription can also
+      be polled "to allow recovery after downtime on the receiving service"
+    unsubscribe: Notification_Unsubscribe (DELETE /api/notifications/subscriptions/{id})
+    list_subscriptions: Notification_GetSubscriptions
+  bms_equivalents: Event_GetTopics, Event_SiteSubscribe / Event_CompanySubscribe / Event_UserSubscribe, Event_*NotificationsGet
+    (poll every ~5 minutes), Event_*Unsubscribe — scope BMS.Basic
+  payload:
+    schema: AudaAPI.Models.Notification.NotificationMessage
+    fields:
+    - NotificationId (uuid)
+    - SubscriptionId (uuid)
+    - EventType
+    - Topic
+    - Message
+    - CompanyCode
+    - SiteId
+    - CreatedAt (date-time)
+    - Parameters[] {Key, Value}
+    - Resources[] {ResourceType, ResourceId (uuid)}
+    note: BMS NotificationMessage additionally lists ResourceURIs, marked obsolete in the spec text.
+  topic_hierarchy: 'Topics are hierarchical: a subscription to ASSESSMENT.MAIL receives ASSESSMENT.MAIL.RECEIVED
+    and ASSESSMENT.MAIL.SENT.'
+  topics:
+  - topic: ASSESSMENT.EXPORT.CREATED
+    group: Assessment Export
+    description: Raised when an assessment is exported in AEG. The resources collection contains a list of export
+      formats and the resource ID for each.
+    parameters:
+      assessmentid: ID (Guid) of the exported assessment.
+    note: The exportAxFormat endpoint does not raise this notification.
+  - topic: ASSESSMENT.IMAGE.CREATED
+    group: Assessment Images
+    description: Raised when an image is added to an assessment. The image resource is the ID (Guid) of the new
+      image.
+    parameters:
+      assessmentId: ID (Guid) of the assessment to which the image was added.
+  - topic: ASSESSMENT.IMAGE.DELETED
+    group: Assessment Images
+    description: Raised when an image is removed from an assessment. The image resource is the ID (Guid) of the
+      image that was removed.
+    parameters:
+      assessmentId: ID (Guid) of the assessment from which the image was removed.
+  - topic: ASSESSMENT.MAIL.RECEIVED
+    group: Assessment Mail
+    description: Raised when an assessment mail is received.
+    parameters:
+      assessmentId: ID (Guid) of the associated assessment.
+      sender: ID of the terminal from which the mail was sent.
+      recipient: ID of the terminal to which the mail was sent.
+  - topic: ASSESSMENT.MAIL.SENT
+    group: Assessment Mail
+    description: Raised when an assessment mail is sent.
+    parameters:
+      assessmentId: ID (Guid) of the associated assessment.
+      recipient: ID of the terminal to which the mail was sent.
+  - topic: ASSESSMENT.STATUS.ASSIGNED
+    group: Assessment Status
+    description: Raised when an assessment is assigned to another user. The userid resource is the ID (Guid) of
+      the user to which the assessment was assigned.
+    parameters:
+      assessmentId: ID (Guid) of the assessment that was reassigned.
+  - topic: ASSESSMENT.STATUS.AUTHORISED
+    group: Assessment Status
+    description: Raised when an authorization notice is received.
+    parameters:
+      assessmentId: ID (Guid) of the assessment that was authorized.
+  - topic: ASSESSMENT.STATUS.COMPLETED
+    group: Assessment Status
+    description: Raised when an assessment is marked as completed.
+    parameters:
+      assessmentId: ID (Guid) of the assessment that was completed.
+  - topic: ASSESSMENT.STATUS.CREATED
+    group: Assessment Status
+    description: Raised when a new assessment shell has been created.
+    parameters:
+      assessmentId: ID (Guid) of the new assessment.
+    note: Raised when the shell is first created, so the assessment contains only originator, work provider and
+      assessment number. The importAxFormat endpoint does not raise this notification.
+  - topic: ASSESSMENT.STATUS.RECEIVED
+    group: Assessment Status
+    description: Raised when an assessment is received from another terminal.
+    parameters:
+      assessmentId: ID (Guid) of the assessment that was sent.
+      sender: ID of the terminal from which the assessment was sent.
+  - topic: ASSESSMENT.STATUS.SENT
+    group: Assessment Status
+    description: Raised when an assessment is sent to another terminal.
+    parameters:
+      assessmentId: ID (Guid) of the assessment that was sent.
+      recipient: ID of the terminal to which the assessment was sent.
+  - topic: ASSESSMENT.STATUS.UPDATED
+    group: Assessment Status
+    description: Raised when an assessment document has been updated.
+    parameters:
+      assessmentId: ID (Guid) of the assessment that has been updated.
+    note: Not raised when images are created or deleted, when mail is received or sent, or when the assessment is
+      reassigned, authorised or marked as complete.
+- name: API Gateway webhooks
+  api: Audatex API Gateway (Intelligent Vehicle Inspection)
+  style: webhook (HTTP callback)
+  docs: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  operations:
+    create: POST /api/v1/Webhooks — WebhookReqViewModel {callbackUri, authentication {AuthenticationViewModel},
+      webhookEvents[] WebhookEventType}
+    list: GET /api/v1/Webhooks
+    get: GET /api/v1/Webhooks/{id}
+    update: PUT /api/v1/Webhooks/{id}
+    delete: DELETE /api/v1/Webhooks/{id}
+    debug: GET /api/v1/Webhooks/debug — WebhookDebugEventViewModel {webhookId, eventType, eventName, sendDate, result,
+      isSuccess} by imageCaptureId and optional event
+  callback_authentication:
+  - None
+  - Basic
+  - OAuth2
+  events:
+  - event: ImageRequest_Sent
+  - event: ImageRequest_Delivered
+  - event: ImageRequest_Undelivered
+  - event: ImageRequest_Opened
+  - event: ImageRequest_Reminder
+  - event: ImageRequest_Completed
+  - event: ImageRequest_Expired
+  - event: ImageRequest_Deletion_Completed
+  - event: ImageCollection_Estimatic_Attachment_Processed
+  - event: ImageCollection_Vi_No_Calculation_Processed
+  - event: ImageCollection_Ai_Triage_Completed
+  - event: Communication_Delivered
+  - event: Communication_Undelivered
+  - event: Ping_Sent
+  payload: Not declared in the OpenAPI — the callback body schema is undocumented; only the event-type enum and
+    the debug view are machine-readable.
+  signing: No signature or verification scheme is documented; callback authentication is outbound (the gateway authenticates
+    TO your callbackUri).
+counts:
+  audaconnect_topics: 12
+  api_gateway_event_types: 14

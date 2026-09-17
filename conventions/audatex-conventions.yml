@@ -1,0 +1,146 @@
+generated: '2026-09-17'
+method: searched
+source: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help (developers' guide), https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  (API reference + notification topics), the five specs in openapi/, and live unauthenticated responses from audaconnect.ax-aee.co.uk,
+  api-demo.audatex.com and services-pat.auda-target.com (2026-09-17).
+summary: 'Cross-cutting semantics for the Audatex API estate: OAuth 2.0 bearer tokens (30-minute lifetime, refresh
+  tokens on the authorization-code flow), JSON or XML negotiated by Accept, no pagination contract, no idempotency
+  mechanism, no field selection, per-request correlation ids from two different gateways, path/query versioning
+  that differs by API family, and a hierarchical topic-subscription model (poll or push) for events. Reversal paths
+  exist for a handful of writes; no reversal window is documented anywhere.'
+authentication:
+  styles:
+  - oauth2_bearer
+  header: 'Authorization: Bearer <access_token>'
+  token_lifetime_seconds: 1800
+  see: authentication/audatex-authentication.yml
+  scopes: scopes/audatex-scopes.yml
+content_negotiation:
+  request:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
+  response:
+  - application/json
+  - text/json
+  - application/xml
+  - text/xml
+  note: Every AudaConnect operation declares JSON and XML on both consumes and produces; the API Gateway additionally
+    accepts application/json-patch+json and application/*+json on write bodies and offers text/plain on responses.
+    Assessment documents travel as AXFORMAT strings (JSON or XML flavours).
+pagination:
+  style: none
+  documented: false
+  notes: No page, cursor, limit or offset parameter is declared on any list operation across the five specs. Assessment_Get
+    returns the user's assessment list ordered by last update in full; Assessment_Search / SearchV2 / SearchV3 narrow
+    by criteria rather than page.
+field_selection:
+  supported: false
+  notes: No fields / expand / sparse-fieldset parameters. Assessment_GetSummary vs Assessment_GetAssessment is the
+    only granularity choice.
+idempotency:
+  documented: false
+  header: null
+  coverage: none
+  scope: []
+  notes: 'No Idempotency-Key header or replay-protection mechanism is documented in the developers'' guide or declared
+    in any of the five specs (zero matches for "idempoten"). The write surface includes non-idempotent POST creates:
+    Assessment_Post (shell assessment), AssessmentImport_ImportAssessment(V2), Image_AddImage, PartsOrder_OrderUpload,
+    TotalLoss_RequestQuote, Notification_Subscribe (which at least answers 409 Already subscribed on a duplicate),
+    and on the API Gateway POST /api/v1/ImageCapture (sends an SMS to a policyholder each call), POST /api/v1/PingEvent,
+    POST /api/v1/Reminder. No Idempotency pointer is emitted: the agent-readiness idempotency dimension is a genuine
+    zero here.'
+  agent_risk: An agent that retries POST /api/v1/ImageCapture or /ImageCapture/WithLink after a timeout sends the
+    customer a second SMS; retrying Assessment_Post creates a second shell assessment. Use Notification_GetSubscriptions
+    / GET /api/v1/ImageCapture/{id} to check state before re-issuing a create.
+dry_run_mode:
+  supported: na-partial
+  notes: No dry-run or validate-only flag on any operation. The only rehearsal surface is the separate DEMO environment
+    (sandbox/audatex-sandbox.yml). BMS_WhoAmI (GET /v1/bmsapi/whoami) and GET /AudaAPI.WebAPI/api/users/me let a
+    client prove its token before writing.
+reversibility:
+  grade: documented
+  notes: Reversal operations exist for three write surfaces but NO reversal window is stated anywhere in the specs
+    or help pages, so the grade is documented (reversal path only), not verified. Most writes — assessment import,
+    image add, parts-order upload, image-capture SMS, AI triage requests — have no undo at all.
+  surfaces:
+  - write: Notification_Subscribe / Notification_PushSubscribe (create a topic subscription)
+    reversal: Notification_Unsubscribe (DELETE /api/notifications/subscriptions/{id})
+    window: null
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - write: Event_SiteSubscribe / Event_CompanySubscribe / Event_UserSubscribe
+    reversal: Event_SiteUnsubscribe / Event_CompanyUnsubscribe / Event_UserUnsubscribe
+    window: null
+    api: openapi/audatex-audaconnect-bms-api-openapi.yml
+  - write: TotalLoss_RequestQuote (create a Total Loss Avoidance quote)
+    reversal: TotalLoss_CancelQuote (GET /api/tla/cancelQuote/{quoteId})
+    window: null
+    api: openapi/audatex-audaconnect-api-openapi.yml
+    note: Cancellation is exposed as a GET — a non-safe side effect on a safe method.
+  - write: Supplier_RegisterSupplier
+    reversal: Supplier_DeleteRegisteredSupplier
+    window: null
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - write: POST /api/v1/ImageCapture (send image-capture SMS)
+    reversal: DELETE /api/v1/ImageCapture/{imageCaptureId} (Delete Image Request; emits ImageRequest_Deletion_Completed
+      webhook)
+    window: null
+    api: openapi/audatex-api-gateway-openapi.yml
+    note: Deleting the request does not unsend the SMS already delivered to the policyholder.
+  - write: POST /api/v1/Webhooks, POST /api/v1/Job, POST /api/v1/Template, POST /api/v1/Audio, POST /api/v1/Video
+    reversal: DELETE on the same resource
+    window: null
+    api: openapi/audatex-api-gateway-openapi.yml
+  - write: Assessment_Post / AssessmentImport_ImportAssessment / Image_AddImage / PartsOrder_OrderUpload
+    reversal: null
+    window: null
+    api: openapi/audatex-audaconnect-api-openapi.yml
+    note: No delete or void operation; Assessment_Close and Assessment_CompleteAssessment change state forward,
+      not back.
+versioning:
+  see: lifecycle/audatex-lifecycle.yml
+  summary: Unversioned + additive V2/V3 operations (AudaConnect WebAPI); /v1 /v2 path segments (BMS API, API Gateway);
+    required api-version query parameter with api-supported-versions response header (GIC, Dashboard Assignment).
+request_tracing:
+  supported: true
+  method: probed
+  headers:
+  - name: Correlation-Id
+    hosts:
+    - audaconnect.ax-aee.co.uk
+    note: UUID returned on every AudaConnect response including 401s (observed 992731bc-f3cd-4077-9b0e-d44b5c4ea397).
+      Quote it to servicedesk@audatex.co.uk.
+  - name: X-Kong-Request-Id
+    hosts:
+    - api-demo.audatex.com
+    note: Kong 3.10.0.16 enterprise edge in front of the NA APIs; also emits X-Kong-Upstream-Latency / X-Kong-Proxy-Latency
+      and Via.
+gateways:
+  audaconnect: Microsoft-IIS/8.5, ASP.NET 4.0 (X-AspNet-Version header exposed)
+  north_america: kong/3.10.0.16-enterprise-edition
+  api_gateway: ASP.NET Core (Swashbuckle-generated OpenAPI; HSTS max-age=31536000; includeSubDomains)
+error_envelope:
+  see: errors/audatex-problem-types.yml
+  rfc9457: false
+  summary: Plain-text bodies on AudaConnect; ASP.NET Core ProblemDetails (without problem+json) or field dictionaries
+    on the API Gateway; {"error":{code,message,innerError}} on GIC/Assignment.
+rate_limit_signaling:
+  see: rate-limits/audatex-rate-limits.yml
+  headers: []
+  status_on_exhaustion: 429
+  note: 429 is declared on exactly one operation (POST /api/v1/PingEvent, API Gateway) with no documented limit
+    value and no RateLimit-* or Retry-After header.
+events:
+  see: asyncapi/audatex-webhooks.yml
+  models:
+  - api: AudaConnect WebAPI / BMS API
+    style: topic subscriptions — poll (GET notifications every ~5 minutes) or push to a URL in JSON or XML with
+      optional auth scheme/parameter
+    topics: hierarchical, e.g. ASSESSMENT.MAIL covers ASSESSMENT.MAIL.RECEIVED and ASSESSMENT.MAIL.SENT
+  - api: API Gateway
+    style: webhooks — callbackUri + authentication (None | Basic | OAuth2) + webhookEvents[] of 14 WebhookEventType
+      values; GET /api/v1/Webhooks/debug returns delivery history
+locks:
+  note: 'Assessment_GetAssessment: "a lock will not be created" — the WebAPI distinguishes read without lock from
+    edit; Assessment_PostSummary updates the assessment with posted values. Lock results are enumerated by ReferenceData_AssessmentLockResult.'

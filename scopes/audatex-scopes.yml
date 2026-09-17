@@ -1,0 +1,218 @@
+generated: '2026-09-17'
+method: searched
+source: openapi/audatex-audaconnect-api-openapi.yml, openapi/audatex-audaconnect-bms-api-openapi.yml, openapi/audatex-dashboard-assignment-api-openapi.yml,
+  openapi/audatex-gic-integration-api-openapi.yml; scope descriptions and the space-delimited scope parameter confirmed
+  against the AudaConnect developers' guide https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help; identity-server
+  scopes_supported read from https://dispatch-login-demo.audatex.com/.well-known/openid-configuration (2026-09-17)
+schemes:
+- name: oauth2
+  source: openapi/audatex-audaconnect-api-openapi.yml
+  flows:
+  - flow: implicit
+    authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+  description: OAuth2 Implicit Grant
+- name: oauth2
+  source: openapi/audatex-audaconnect-bms-api-openapi.yml
+  flows:
+  - flow: implicit
+    authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+  description: OAuth2 Implicit Grant
+- name: oauth2
+  source: openapi/audatex-dashboard-assignment-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+  description: Authorization using the JWT Bearer scheme
+- name: oauth2
+  source: openapi/audatex-gic-integration-api-openapi.yml
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+  description: Authorization using the JWT Bearer scheme
+scopes:
+- scope: Assessment.Detail+ImageAccess
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Assessment.EditAssessmentAdminData
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Assessment.ImageAdmin
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Assessment.MailReport
+  description: Creates a PDF for a mail.
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Assessment.MainIndex
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: BMS.Basic
+  description: Basic access to assessment data for your BMS application
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-bms-api-openapi.yml
+- scope: BMS.Extended
+  description: Extened access to assessment data for your BMS application
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-bms-api-openapi.yml
+- scope: BMS.Parts
+  description: Access to BMS Parts Apis
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-bms-api-openapi.yml
+- scope: BMS.PartsOrders
+  description: Access to BMS Parts Orders Apis
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-bms-api-openapi.yml
+- scope: Internal.DataServices
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Internal.HistoryCheckService
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Manage.Suppliers
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Parts.GetParts
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Parts.UpdateParts
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: ReferenceData.Company
+  description: Read access to basic info on your company
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: ReferenceData.My
+  description: Read access to your basic info e.g. email, user name
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: ReferenceData.System
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: ReferenceData.SystemAdmin
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: System.Notifications
+  description: Create subscriptions and poll for notifications
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: System.PushNotifications
+  description: Create subscriptions and receive push notifications
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: TLA.CreateQuote
+  description: Create Total Loss Avoidance quotes
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Vehicle.Lookup
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Vehicle.LookupDetailed
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: Vehicle.Valuation
+  description: Perform CAP valuations
+  flows:
+  - implicit
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+- scope: b2b.fnol.api
+  description: Audatex Assignment API Access
+  flows:
+  - password
+  sources:
+  - openapi/audatex-dashboard-assignment-api-openapi.yml
+  - openapi/audatex-gic-integration-api-openapi.yml
+- scope: readAccess
+  sources:
+  - openapi/audatex-dashboard-assignment-api-openapi.yml
+  - openapi/audatex-gic-integration-api-openapi.yml
+- scope: writeAccess
+  sources:
+  - openapi/audatex-dashboard-assignment-api-openapi.yml
+  - openapi/audatex-gic-integration-api-openapi.yml
+docs: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+notes: AudaConnect scopes are requested space-delimited and URL-encoded (scope=BMS.Basic BMS.Extended) and are granted
+  per registered client application after Audatex approval. readAccess / writeAccess appear only in the GIC and
+  Dashboard Assignment global security requirement and are NOT declared in either spec's securitySchemes nor in
+  the identity server's scopes_supported — a spec defect, recorded as-is. The dispatch-login OpenID Connect discovery
+  document advertises 34 scopes_supported (openid, profile, email, offline_access, b2b.fnol.api, b2b.admin.api,
+  b2b.fnol.documents, b2b.lien.api, mobile.inspection.api, estimatics.api, hqclaims.api, vinhistory.api, gofnol.api,
+  ...); only b2b.fnol.api is bound to a published OpenAPI, so the others are listed for reference below and not
+  counted as API scopes.
+identity_server_scopes_supported:
+- user.organization
+- cosec
+- email
+- profile
+- user.entity
+- openid
+- user.profile
+- user.office
+- address
+- marketdata.web.api
+- eagle.api
+- omadi
+- api1
+- b2b.admin.api
+- novo.claims.manager
+- mobile.inspection.api
+- review.api
+- novo.estimating
+- b2b.fnol.api
+- fnol.test
+- b2b.fnol.transformer
+- a2e.admin.api
+- gofnol.api
+- vinhistory.api
+- gotime
+- SMAppServices
+- b2b.fnol.documents
+- estimatics.api
+- hqclaims.api
+- hqorg.AL
+- hqorg.SF
+- b2b.lien.api
+- b2b.lien.report
+- offline_access

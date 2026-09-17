@@ -1,0 +1,50 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  openapi/ (five live specs), https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help,
+  https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help, live unauthenticated responses from
+  api-demo.audatex.com (api-supported-versions header), and searches for a status page, changelog
+  and deprecation policy on audatex.co.uk, solera.com and the AudaConnect portals (2026-09-17).
+versioning:
+  scheme: mixed
+  notes: >-
+    AudaConnect WebAPI: unversioned /api/... paths with additive V2/V3 operations (Assessment_GetV2,
+    Assessment_SearchV3, /v2/api/assessments/importAxFormat) — old versions stay live. BMS API:
+    path-versioned /v1/bmsapi/... and /v2/bmsapi/... (v2 import honours the assessment number in
+    the AXFORMAT). API Gateway: /api/v1 and /api/v2 path segments (AiTriage, ViNoCalculation,
+    ImageCaptureExternal have v2). GIC and Dashboard Assignment: ASP.NET API Versioning — a
+    required `api-version` query parameter; an unversioned call answers 400
+    {"error":{"code":"ApiVersionUnspecified"}} and the response carries `api-supported-versions: 1.0`.
+  build_versions:
+    audaconnect_webapi: 2.25.26048.2
+    audaconnect_bms_api_production: 2.25.26162.1
+    audaconnect_bms_api_demo: 2.25.26160.2
+    api_gateway: 1.0.0+629b6e4e4890ace867a0a4e548423041dac1a76d
+    note: Build versions are printed in each Swagger info.description / help page and in GET /api/Introspection/AppDetails.
+changelog:
+  url: null
+  notes: >-
+    No dated changelog or release notes are published for any of the APIs. The only change signal
+    is the build version string on each help page. No ChangeLog pointer is emitted.
+status_page:
+  url: null
+  notes: >-
+    No public status page located (status.audatex.com and status.solera.com do not resolve; no
+    status link on audatex.co.uk/support/). No StatusPage pointer is emitted.
+deprecation:
+  policy_documented: false
+  sunset_header: false
+  deprecated_operations: []
+  obsolete_fields:
+    - api: Audatex AudaConnect BMS API
+      location: NotificationMessage.ResourceURIs
+      note: "Spec text: 'the ResourceURIs Array is obsolete and may no longer be populated' (Event_*NotificationsGet)."
+    - api: Audatex AudaConnect BMS API
+      schema: AudaAPI.BMSAPI.DTO.SubscriptionObsolete
+      note: An obsolete subscription DTO is still declared in the BMS definitions.
+  notes: >-
+    No deprecation or sunset policy is published and no operation in any of the five specs carries
+    `deprecated: true`; obsolescence is signalled only in prose. No Deprecation pointer is emitted.
+sla:
+  documented: false
+  notes: Service levels are contractual (Solera US/Canada Master Services Agreement); nothing API-specific is published.

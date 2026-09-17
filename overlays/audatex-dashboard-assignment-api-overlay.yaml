@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Solera Dashboard Assignment API
+  version: '2026-09-17'
+  x-generated: '2026-09-17'
+  x-method: generated
+  x-source: openapi/audatex-dashboard-assignment-api-openapi.yml (OpenAPI 3.0.1) plus the docs, probes and derived
+    artifacts in this repo
+extends: ../openapi/audatex-dashboard-assignment-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      provider: audatex
+      api: audatex:audatex-dashboard-assignment-api
+      harvested: '2026-09-17'
+      source: https://api-demo.audatex.com/TestAssignmentapi/swagger/v1/swagger.json
+      environment: demo/test
+      note: Published document exposes only /api/Version; assignment operations are documented to onboarded partners.
+- target: $.servers[0]
+  update:
+    x-host: https://api-demo.audatex.com

@@ -1,0 +1,40 @@
+# Audatex
+
+> Audatex (a Solera company) publishes automotive claims, assessment and vehicle-inspection APIs for insurers, bodyshops and integrators: the AudaConnect WebAPI and BMS API (Audatex UK), the Intelligent Vehicle Inspection API Gateway, and the North American GIC and Dashboard Assignment integration APIs. REST with JSON/XML, OAuth 2.0, access granted by the Audatex service desk after application registration.
+
+<!-- generated: 2026-09-17 | method: generated | source: apis.yml + repo artifacts (no provider llms.txt found on audaconnect.ax-aee.co.uk, audatex.co.uk, api-demo.audatex.com or solera.com) -->
+
+## APIs
+
+- [AudaConnect WebAPI reference](https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help): 93 operations — assessments (search, create shell, import/export AxFormat, PDF reports, calculations, images, mails), vehicle lookup by VRN/VIN and CAP valuation, parts prices and orders, suppliers, users, sites, work providers, Total Loss Avoidance quotes, notification subscriptions. Swagger: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/swagger/docs/v1
+- [AudaConnect BMS API guide](https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help): 25 operations for bodyshop management systems — assessment exports in AXFORMAT, images, part prices, parts orders, site/company/user topic subscriptions. Swagger: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/swagger/docs/v1
+- [Audatex API Gateway (Intelligent Vehicle Inspection)](https://services-pat.auda-target.com/APIGateway/swagger/index.html): 75 operations — image capture by SMS/link/QR, image/audio/video upload, AI Triage, VI damaged parts and calculations, damage-detection reports, claims, jobs, templates, reminders, intelligent offers, repairer search, webhooks (14 event types). OpenAPI: https://services-pat.auda-target.com/APIGateway/swagger/V1/swagger.json
+- [Audatex GIC Integration API](https://api-demo.audatex.com/TestGICapi/docs/index.html): 3 operations — GIC integration response for a work assignment, M31 event acknowledgements, version probe. OpenAPI: https://api-demo.audatex.com/TestGICapi/swagger/v1/swagger.json
+- [Solera Dashboard Assignment API](https://api-demo.audatex.com/TestAssignmentapi/docs/index.html): FNOL assignment integration; the public document exposes /api/Version only. OpenAPI: https://api-demo.audatex.com/TestAssignmentapi/swagger/v1/swagger.json
+- [Solera Integrations Public API (North America)](https://na.api.solera.com/): service catalog behind a Solera | Audatex login; ClaimImage Return API guide as PDF: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+
+## Authentication
+
+- [AudaConnect developers' guide](https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help): OAuth 2.0 authorization-code (30-minute access tokens + refresh tokens), implicit, and refresh-token flows; authorize at https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/OAuth20, token at https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/OAuth20/token; scopes space-delimited (e.g. BMS.Basic BMS.Extended).
+- [Register an application](https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register): applications are created in the AudaConnect Portal, reviewed by Audatex, then client id/secret are emailed.
+- [OpenID Connect discovery (North America)](https://dispatch-login-demo.audatex.com/.well-known/openid-configuration): identity server for the GIC and Dashboard Assignment APIs; token endpoint /connect/token, scope b2b.fnol.api.
+
+## Environments
+
+- [AudaConnect demo portal](https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/): full demo environment (portal, WebAPI, BMS API); credentials issued by the service desk.
+- [AudaConnect production portal](https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/)
+
+## Events
+
+- [Notification topics](https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics): 12 hierarchical ASSESSMENT.* topics, subscribed per user/site/company, delivered by polling or push (JSON or XML).
+- API Gateway webhooks: POST /api/v1/Webhooks with callbackUri, authentication (None/Basic/OAuth2) and webhookEvents[] — ImageRequest_*, ImageCollection_*, Communication_*, Ping_Sent.
+
+## Company
+
+- [Audatex UK](https://audatex.co.uk/): AudaConnect solution page https://audatex.co.uk/solutions/audaconnect/
+- [Support](https://audatex.co.uk/support/) · [Contact](https://audatex.co.uk/contact-us/) · service desk servicedesk@audatex.co.uk
+- [Solera (parent)](https://www.solera.com/) · [Privacy policy](https://audatex.co.uk/privacy-policy/) · [Master Services Agreement](https://www.solera.com/us-canada-master-services-agreement/)
+
+## Optional
+
+- [API Evangelist profile](https://github.com/api-evangelist/audatex): OpenAPI copies, authentication, scopes, conventions, error catalog, webhook catalog, data model and agent skills for these APIs.

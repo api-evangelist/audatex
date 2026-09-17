@@ -1,0 +1,39 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  Registry sweeps of npm (registry.npmjs.org search "audatex" / "solera" + package metadata), PyPI
+  (pypi.org/pypi/{audatex,solera,audaconnect}/json), NuGet (azuresearch-usnc.nuget.org "audatex"),
+  and GitHub org lookups (api.github.com/orgs/{audatex,solera,solera-inc,soleraholdings,audatex-uk}),
+  plus the AudaConnect help pages and the Solera / Audatex UK websites, 2026-09-17.
+summary:
+  first_party_sdk_count: 0
+  third_party_package_count: 0
+  note: >-
+    Audatex publishes NO client library in any public package registry. The AudaConnect developers'
+    guide offers two phpfiddle snippets (token exchange and refresh) as its only code samples, and
+    the WebAPI ships an ASP.NET help page plus a WADL at /AudaAPI.WebAPI/help/wadl/ — a contract, not
+    an SDK. Because no official SDK exists, this repo emits NO `SDKs` pointer in apis.yml: the
+    ergonomics sdk_count check must read a genuine zero here.
+
+# OWNERSHIP NOTE — the npm scope @solera/* (packages @solera/utils, @solera/logger,
+# @solera/notifications, @solera/frameworks; maintainer develop@solera.pe; repository
+# bitbucket.org/soleramobile/...) belongs to Solera, a software house in Peru, NOT to Solera
+# Holdings / Audatex. Do not "repair" this file by listing them.
+github_organization:
+  found: false
+  checked: '2026-09-17'
+  probed:
+    - {org: audatex, status: 404}
+    - {org: solera, status: 404}
+    - {org: solera-inc, status: 404}
+    - {org: soleraholdings, status: 404}
+    - {org: audatex-uk, status: 404}
+  note: No GitHub organization owned by Audatex or Solera Holdings was located.
+
+registries_probed:
+  - {registry: npm, query: audatex, first_party_hits: 0}
+  - {registry: npm, query: solera, first_party_hits: 0, note: '@solera/* is solera.pe (unrelated)'}
+  - {registry: pypi, packages: [audatex, solera, audaconnect], status: 404}
+  - {registry: nuget, query: audatex, hits: 0}
+
+packages: []

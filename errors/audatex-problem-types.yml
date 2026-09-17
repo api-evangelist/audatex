@@ -1,0 +1,140 @@
+generated: '2026-09-17'
+method: derived
+format: mixed
+source: Derived from the 4xx/5xx responses declared in openapi/audatex-audaconnect-api-openapi.yml (Swagger 2.0,
+  93 ops), openapi/audatex-audaconnect-bms-api-openapi.yml (25 ops) and openapi/audatex-api-gateway-openapi.yml
+  (OpenAPI 3.0.1, 75 ops), plus live unauthenticated responses observed 2026-09-17 on audaconnect.ax-aee.co.uk (401)
+  and api-demo.audatex.com (400). No provider error-reference page exists; GET /api/Introspection/ErrorCodes on
+  the API Gateway answers 200 with an empty object.
+rfc9457: false
+envelopes:
+- api: Audatex AudaConnect API / BMS API
+  media_type: text/plain (observed) — specs declare application/json, text/json, application/xml, text/xml
+  default_shape: plain-text message, e.g. "Unauthorised. Please provide valid user credentials."
+  correlation_header: Correlation-Id
+  note: Error responses in both Swagger 2.0 specs carry a description only — no schema — so the body shape is only
+    what was observed live.
+- api: Audatex API Gateway
+  media_type: application/json | text/json | text/plain
+  shapes:
+  - schema: ProblemDetails
+    fields:
+    - type
+    - title
+    - status
+    - detail
+    - instance
+    note: ASP.NET Core ProblemDetails on 21 declared 400 responses (Webhooks, Job, Template, ClientConfiguration,
+      PingEvent, Reminder ...), served WITHOUT the problem+json media type.
+  - schema: ValidationProblemDetails
+    fields:
+    - errors (map of field -> string[])
+    - type
+    - title
+    - status
+    - detail
+    - instance
+  - schema: 'object with additionalProperties: string'
+    note: A field -> message dictionary on 54 declared 400 responses (image capture, VI, offer, media upload).
+  - schema: ErrorViewModel / ViErrorViewModel
+    fields:
+    - code
+    - message
+    - properties[] (name, value)
+    note: Domain error objects embedded in VI calculation and image-capture responses.
+  - schema: string
+    note: Bare string bodies on 401 (22 ops), 403 (11), 404 (22), 500 (18) and 429 (1).
+- api: Audatex GIC API / Solera Dashboard Assignment API
+  media_type: application/json
+  default_shape: '{"error":{"code":"ApiVersionUnspecified","message":"An API version is required, but was not specified.","innerError":null}}'
+  note: Observed live on GET /TestGICapi/api/Version without api-version (400). Kong 3.10 enterprise edge; X-Kong-Request-Id
+    header is the trace id.
+problems:
+- status: 400
+  title: Bad Request
+  apis:
+  - AudaConnect API
+  - BMS API
+  - API Gateway
+  - GIC
+  meaning: 'AudaConnect: "The input data is invalid or not understood" (assessment import), "Topic format is not
+    valid" (subscriptions), "Specified mail cannot be returned as a report". API Gateway: validation failure (ProblemDetails
+    / field dictionary). GIC: missing api-version (ApiVersionUnspecified).'
+  remediation: Fix the request body / topic code; on GIC and Assignment always send api-version=1.0.
+- status: 401
+  title: Unauthorized
+  apis:
+  - AudaConnect API
+  - BMS API
+  - API Gateway
+  meaning: '"Invalid or missing authentication token" (spec); live body "Unauthorised. Please provide valid user
+    credentials."'
+  remediation: 'Obtain a fresh access token (AudaConnect tokens expire after 1800 s; refresh with grant_type=refresh_token)
+    and send Authorization: Bearer.'
+- status: 403
+  title: Forbidden
+  apis:
+  - BMS API
+  - API Gateway
+  meaning: '"Insufficient permissions for this resource" — the token lacks the required scope (e.g. BMS.Parts for
+    parts orders) or the entity is not permitted.'
+  remediation: Request the scope in the authorization request; scopes are granted per registered client application
+    by Audatex.
+- status: 404
+  title: Not Found
+  apis:
+  - AudaConnect API
+  - BMS API
+  - API Gateway
+  meaning: '"Non existing subscription", "Non existing topic", "No AudaMail found for specified ID", image capture
+    / job / template not found.'
+  remediation: Verify the id; subscriptions and image-capture requests can expire or be deleted.
+- status: 409
+  title: Conflict
+  apis:
+  - AudaConnect API
+  - BMS API
+  - API Gateway
+  meaning: '"Already subscribed" (Notification_Subscribe / PushSubscribe, Event_*Subscribe); API Gateway Assessment/Post
+    and ClientConfiguration conflicts.'
+  remediation: List existing subscriptions first (Notification_GetSubscriptions) and reuse the SubscriptionId instead
+    of re-subscribing.
+- status: 410
+  title: Gone
+  apis:
+  - BMS API
+  meaning: Declared on 4 BMS operations (assessment export retrieval) — the export is no longer available.
+  remediation: Re-request the export from the originating system.
+- status: 412
+  title: Precondition Failed
+  apis:
+  - BMS API
+  meaning: Declared on one BMS operation (assessment import) — a precondition on the assessment state was not met.
+  remediation: Check the assessment state before importing.
+- status: 429
+  title: Too Many Requests
+  apis:
+  - API Gateway
+  meaning: '"Returns an error if the rate limit has been exceeded" — declared ONLY on POST /api/v1/PingEvent. No
+    limit value or Retry-After header is documented.'
+  remediation: Back off and retry later; see rate-limits/audatex-rate-limits.yml.
+- status: 500
+  title: Internal Server Error
+  apis:
+  - AudaConnect API
+  - BMS API
+  - API Gateway
+  meaning: '"Internal server error" / "The server has failed to process the request" / "Sorry, an unexpected error
+    has occurred".'
+  remediation: Retry with backoff; quote the Correlation-Id (AudaConnect) or X-Kong-Request-Id (NA APIs) to servicedesk@audatex.co.uk.
+coverage:
+  audaconnect_api:
+    operations: 93
+    with_4xx_declared: 6
+    note: 84 of 93 operations declare only a 200; error behaviour is undocumented for most of the surface.
+  bms_api:
+    operations: 25
+    with_4xx_declared: 24
+  api_gateway:
+    operations: 75
+    with_4xx_declared: 71

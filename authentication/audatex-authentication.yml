@@ -1,0 +1,104 @@
+generated: '2026-09-17'
+method: searched
+source: Derived from the five specs in openapi/ (openapi/audatex-api-gateway-openapi.yml, openapi/audatex-audaconnect-api-openapi.yml,
+  openapi/audatex-audaconnect-bms-api-openapi.yml, openapi/audatex-dashboard-assignment-api-openapi.yml, openapi/audatex-gic-integration-api-openapi.yml,
+  openapi/audatex-audaconnect-api-openapi.yml), then upgraded from the AudaConnect developers' guide https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  and the OpenID Connect discovery document at https://dispatch-login-demo.audatex.com/.well-known/openid-configuration
+  (2026-09-17).
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - implicit
+  - password
+  identity_servers:
+  - name: AudaConnect OAuth 2.0 (Audatex UK)
+    authorization_url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/OAuth20
+    token_url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/OAuth20/token
+    demo_authorization_url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/OAuth20
+    serves:
+    - Audatex AudaConnect API
+    - Audatex AudaConnect BMS API
+  - name: Solera / Audatex dispatch-login (North America, OpenID Connect)
+    issuer: https://dispatch-login-demo.audatex.com
+    token_url: https://dispatch-login-demo.audatex.com/connect/token
+    authorization_url: https://dispatch-login-demo.audatex.com/connect/authorize
+    discovery: well-known/audatex-openid-configuration.json
+    serves:
+    - Audatex GIC API
+    - Solera Dashboard Assignment API
+schemes:
+- name: Bearer
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your\
+    \ token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\""
+  sources:
+  - openapi/audatex-api-gateway-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: implicit
+    authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+    scopes: 18
+  description: OAuth2 Implicit Grant
+  sources:
+  - openapi/audatex-audaconnect-api-openapi.yml
+  - openapi/audatex-audaconnect-bms-api-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: password
+    tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+    scopes: 1
+  description: Authorization using the JWT Bearer scheme
+  sources:
+  - openapi/audatex-dashboard-assignment-api-openapi.yml
+  - openapi/audatex-gic-integration-api-openapi.yml
+docs: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+documented_flows:
+  source: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  note: The developers' guide documents THREE OAuth 2.0 flows for AudaConnect while the Swagger securityDefinitions
+    declare only implicit — the spec under-describes the auth surface.
+  flows:
+  - flow: authorization_code
+    rfc: RFC 6749 §1.3.1
+    recommended_for: applications hosted on a secure server needing long-term access
+    authorize: GET https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/OAuth20?client_id=&redirect_uri=&scope=&response_type=code
+    token: 'POST https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/OAuth20/token (application/x-www-form-urlencoded:
+      code, client_id, client_secret, redirect_uri, grant_type=authorization_code)'
+    access_token_lifetime_seconds: 1800
+    refresh_token: true
+  - flow: refresh_token
+    token: POST https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/oauth20/token (client_id, client_secret, refresh_token,
+      grant_type=refresh_token) — or client_id/client_secret as HTTP Basic credentials
+    note: Returns a new access token and a new refresh token; losing the refresh token forces the user back through
+      consent.
+  - flow: implicit
+    rfc: RFC 6749 §1.3.2
+    recommended_for: applications running locally on a user device (secret cannot be protected)
+    authorize: GET https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/OAuth20?client_id=&redirect_uri=&scope=&response_type=token
+    access_token_lifetime_seconds: 1800
+    refresh_token: false
+    caveat: 'Guide: ''Some Audatex APIs will not work with the implicit flow. You should make us aware if you plan
+      to use this flow.'''
+  - flow: password
+    rfc: RFC 6749 §4.3
+    serves:
+    - Audatex GIC API
+    - Solera Dashboard Assignment API
+    token: POST https://dispatch-login-demo.audatex.com/connect/token
+    scope: b2b.fnol.api
+    note: Declared in the GIC and Dashboard Assignment OpenAPIs; the OIDC discovery document also advertises device_authorization_endpoint,
+      introspection and revocation.
+  token_usage: 'Authorization: Bearer <access_token> on every request (e.g. GET /AudaAPI.WebAPI/api/users/me).'
+  scope_delimiter: space (URL-encoded), e.g. scope=BMS.Basic BMS.Extended
+  registration: Applications must be registered and approved in the AudaConnect Portal (My Client Applications);
+    client id, secret and server endpoints are emailed after approval — https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  unauthenticated_response:
+    audaconnect: 401 text/plain "Unauthorised. Please provide valid user credentials." with a Correlation-Id header
+    api_gateway_and_gic: 401 (JWT Bearer; GIC additionally 400 ApiVersionUnspecified when api-version is missing)

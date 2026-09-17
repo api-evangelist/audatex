@@ -1,0 +1,55 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/Home/About,
+  https://audaconnect-demo.ax-aee.co.uk/AudaAPI.BMSAPI/home/help,
+  https://api-demo.audatex.com/TestGICapi/docs/index.html,
+  https://api-demo.audatex.com/TestAssignmentapi/docs/index.html,
+  https://services-pat.auda-target.com/APIGateway/swagger/index.html (all fetched 2026-09-17)
+summary: >-
+  Audatex publishes its non-production API instances on the open web: a full AudaConnect DEMO
+  environment (portal, WebAPI, BMS API and OAuth authorization server) on
+  audaconnect-demo.ax-aee.co.uk, DEMO/TEST instances of the GIC and Dashboard Assignment APIs on
+  api-demo.audatex.com, and the API Gateway on a pre-production acceptance-test (PAT) host. Each
+  serves Swagger UI with try-it-out, but every call needs credentials issued by the Audatex service
+  desk — there is no self-service sandbox key, no published test credentials and no test fixtures.
+environments:
+  - name: AudaConnect demo
+    hosts:
+      - https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/
+      - https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+      - https://audaconnect-demo.ax-aee.co.uk/AudaAPI.BMSAPI/
+    production_counterparts:
+      - https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+      - https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/
+      - https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/
+    oauth_authorization_url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/OAuth20
+    oauth_token_url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/OAuth20/token
+    swagger_ui: true
+    credentials: >-
+      Company Code + User Name + Password issued after application registration and approval
+      (register page: "you will be emailed ... your client id and secret and the Audaconnect Server
+      endpoints"). The demo BMS Swagger build (2.25.26160.2) is one patch behind production
+      (2.25.26162.1); the demo WebAPI build matches production (2.25.26048.2).
+  - name: GIC / Dashboard Assignment demo (North America)
+    hosts:
+      - https://api-demo.audatex.com/TestGICapi/docs/index.html
+      - https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+    identity_server: https://dispatch-login-demo.audatex.com (OpenID Connect discovery published)
+    swagger_ui: true
+    published_test_values:
+      - field: workAssignmentID
+        qa: '290240018'
+        demo: '332614611'
+        source: summary of POST /api/v1/GICIntegration/{workAssignmentID} in the GIC OpenAPI
+    credentials: OAuth 2.0 password grant with scope b2b.fnol.api; no public credentials.
+  - name: API Gateway PAT
+    hosts:
+      - https://services-pat.auda-target.com/APIGateway/swagger/index.html
+    swagger_ui: true
+    try_it_out: false
+    note: Swagger UI is configured with tryItOutEnabled false; the spec is readable, calls need a JWT Bearer token.
+test_vs_live_keys: null
+test_cards: null
+test_clocks: null
+fixtures: null

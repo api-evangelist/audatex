@@ -1,0 +1,176 @@
+generated: '2026-09-17'
+method: probed
+source: live probes of /.well-known/ on every Audatex / Solera host the record knows (2026-09-17)
+summary: >-
+  One real document is served: an OpenID Connect discovery document (RFC 8414 shaped, IdentityServer
+  style) on dispatch-login-demo.audatex.com — the authorization server that the GIC and Dashboard
+  Assignment OpenAPIs name as their tokenUrl. That is a genuine WellKnown hit and the pointer is
+  earned. Nothing else is served anywhere: no security.txt on any host (so NO SecurityTxt pointer),
+  no api-catalog, no ai-plugin.json, no oauth-protected-resource, and no A2A agent card on either
+  the canonical or the legacy path.
+pointer_basis: >-
+  WellKnown + OpenIDConnect pointers emitted on the strength of the 200 on
+  dispatch-login-demo.audatex.com/.well-known/openid-configuration (application/json, 2,493 bytes,
+  issuer https://dispatch-login-demo.audatex.com, 34 scopes_supported). SecurityTxt NOT emitted —
+  RFC 9116 is unimplemented on every host probed.
+false_positive_watch: >-
+  solera.com (apex) answers 301 to www.solera.com for every path; www.solera.com answers a 160 KB
+  WordPress 404 page for every /.well-known/* path. audatex.com answers a 97-byte meta-refresh to
+  solera.com at / and a plain 404 elsewhere. None of these are documents.
+hosts:
+  - host: https://dispatch-login-demo.audatex.com
+    role: OAuth 2.0 / OpenID Connect identity server named as tokenUrl by the GIC and Dashboard Assignment OpenAPIs
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json; charset=UTF-8
+        file: audatex-openid-configuration.json
+        issuer: https://dispatch-login-demo.audatex.com
+        checked: '2026-09-17'
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://audaconnect.ax-aee.co.uk
+    role: AudaConnect production portal + WebAPI + BMS API host
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://audaconnect-demo.ax-aee.co.uk
+    role: AudaConnect demo host
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://api-demo.audatex.com
+    role: GIC + Dashboard Assignment demo API host (Kong 3.10 enterprise edge)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://services-pat.auda-target.com
+    role: Audatex.APIGateway (Intelligent Vehicle Inspection) PAT host
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://na.api.solera.com
+    role: Solera Integrations Public API portal (login-gated)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.audatex.com
+    role: legacy brand domain — / is a meta-refresh to https://www.solera.com; every other path 404s
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.solera.com
+    role: parent company website (WordPress; every /.well-known/* path answers the 404 page)
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404

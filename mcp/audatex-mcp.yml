@@ -1,0 +1,116 @@
+generated: '2026-09-17'
+method: derived
+status: candidate
+source: >-
+  Derived from openapi/audatex-audaconnect-api-openapi.yml (Swagger 2.0, 93 operations) and
+  openapi/audatex-api-gateway-openapi.yml (OpenAPI 3.0.1, 75 operations). Searched the AudaConnect
+  portal/help pages, the Solera and Audatex UK websites, npm and GitHub for an official MCP server
+  ("audatex mcp", "solera mcp", "audaconnect mcp") — nothing published as of 2026-09-17.
+summary: >-
+  Audatex ships NO MCP server, hosted or local. This file is a CANDIDATE tool list derived from the
+  two substantive OpenAPIs so an integrator can see what an MCP surface over AudaConnect would look
+  like. Nothing here is callable by an agent today; deployment.mode is none by design.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  verified: derived
+  note: >-
+    No provider-shipped server exists. Any future server would need to front AudaConnect's OAuth 2.0
+    authorization-code flow (30-minute access tokens, refresh tokens, per-scope consent) — see
+    authentication/audatex-authentication.yml and scopes/audatex-scopes.yml.
+candidate_tools:
+  - name: search_assessments
+    description: Retrieve assessments for the logged-in user by vehicle registration or search criteria.
+    rest: [Assessment_Search, Assessment_SearchV2, Assessment_SearchV3]
+    scopes: [Assessment.MainIndex]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: get_assessment
+    description: Fetch a full assessment document, or its summary, by unique or composite ID.
+    rest: [Assessment_GetAssessment, Assessment_GetSummary]
+    scopes: [Assessment.Detail+ImageAccess]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: create_assessment_shell
+    description: Create a new shell assessment (originator, work provider, assessment number).
+    rest: [Assessment_Post]
+    scopes: [Assessment.EditAssessmentAdminData]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: import_assessment_axformat
+    description: Import an assessment from an AxFormat string (v2 honours the assessment number in the document).
+    rest: [AssessmentImport_ImportAssessment, AssessmentImport_ImportAssessmentV2]
+    scopes: [Assessment.EditAssessmentAdminData]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: export_assessment_axformat
+    description: Export an assessment in AxFormat.
+    rest: [AssessmentExport_ExportAssessment]
+    scopes: [Assessment.Detail+ImageAccess]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: get_assessment_report
+    description: Get a PDF report for an assessment using one of the published report definitions.
+    rest: [AssessmentReport_Get, AssessmentReport_GetReportDefinitions]
+    scopes: [Assessment.Detail+ImageAccess]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: list_assessment_images
+    description: List image headers for an assessment and fetch the JPEG binary for an image.
+    rest: [Image_GetImageHeaders, Image_GetImageData]
+    scopes: [Assessment.Detail+ImageAccess]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: add_assessment_image
+    description: Post a new image to an assessment.
+    rest: [Image_AddImage]
+    scopes: [Assessment.ImageAdmin]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: lookup_vehicle
+    description: Return vehicle information by registration (VRN) or VIN (VIN Plus, UK), including paint code.
+    rest: [Vehicle_GetVIwithVRN, Vehicle_GetViWithVinPlus, Vehicle_GetDetailedVIwithVinPlus, Vehicle_GetPaintCodewithVin]
+    scopes: [Vehicle.Lookup, Vehicle.LookupDetailed]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: value_vehicle
+    description: Return the CAP valuation for a registration and mileage.
+    rest: [Vehicle_GetValuation]
+    scopes: [Vehicle.Valuation]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: get_parts_prices
+    description: Get prices for parts from a supplier.
+    rest: [PartsOrder_GetPartsPrice]
+    scopes: [Parts.GetParts]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: manage_parts_order
+    description: Upload a parts order, read it, update it or its status, and change a part's status.
+    rest: [PartsOrder_OrderUpload, PartsOrder_GetPartOrder, PartsOrder_OrderUpdate, PartsOrder_UpdatePartStatus]
+    scopes: [Parts.UpdateParts]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: request_total_loss_quote
+    description: Check whether an assessment can be quoted, then request, update or cancel a Total Loss Avoidance quote.
+    rest: [TotalLoss_CanQuote, TotalLoss_RequestQuote, TotalLoss_UpdateQuote, TotalLoss_CancelQuote]
+    scopes: [TLA.CreateQuote, ReferenceData.Company]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: subscribe_notifications
+    description: List topics, create a poll or push subscription to a hierarchical topic, and poll it for notifications.
+    rest: [Notification_GetTopics, Notification_Subscribe, Notification_PushSubscribe, Notification_GetNotifications, Notification_Unsubscribe]
+    scopes: [System.Notifications, System.PushNotifications]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: get_reference_data
+    description: Return the complete list of a reference type (VehicleType, DamageArea, RepairMethod, AssessmentState, ...).
+    rest: [ReferenceData_VehicleType, ReferenceData_DamageArea, ReferenceData_RepairMethod, ReferenceData_AssessmentState]
+    scopes: [ReferenceData.System]
+    api: openapi/audatex-audaconnect-api-openapi.yml
+  - name: send_image_capture_request
+    description: Send a guided image-capture request to a policyholder by SMS, with a link, or as a QR code, and read its status.
+    rest_paths: ['POST /api/v1/ImageCapture', 'POST /api/v1/ImageCapture/WithLink', 'POST /api/v1/ImageCapture/WithQR', 'GET /api/v1/ImageCapture/{imageCaptureId}']
+    api: openapi/audatex-api-gateway-openapi.yml
+    note: The API Gateway spec declares no operationIds; tools are bound by method + path.
+  - name: run_ai_triage
+    description: Submit an AI Triage v2 request for an image capture and fetch its result.
+    rest_paths: ['POST /api/v2/AiTriage', 'GET /api/v2/AiTriage/{imageCaptureId}/{calculationId}']
+    api: openapi/audatex-api-gateway-openapi.yml
+  - name: run_vi_calculation
+    description: Submit a VI damaged-parts, no-calculation or full-calculation request and poll for the response.
+    rest_paths: ['POST /api/v1/ViDamagedParts', 'POST /api/v1/ViFullCalculation', 'POST /api/v2/ViNoCalculation', 'GET /api/v1/ViFullCalculation/{imageCaptureId}/{calculationId}']
+    api: openapi/audatex-api-gateway-openapi.yml
+  - name: manage_webhooks
+    description: Create, list, update and delete webhooks for the 14 API Gateway event types; read webhook debug history.
+    rest_paths: ['GET /api/v1/Webhooks', 'POST /api/v1/Webhooks', 'PUT /api/v1/Webhooks/{id}', 'DELETE /api/v1/Webhooks/{id}', 'GET /api/v1/Webhooks/debug']
+    api: openapi/audatex-api-gateway-openapi.yml

@@ -1,0 +1,1698 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "Audatex services for BMS Systems",
+    "description": "Allows a BMS system to get and update assessment related data. You can use this Swagger page to test the API. You will need to authenticate by clicking on the authentication status image on each operation. You will need to grant access to the BMS.Basic scope and supply valid Audatex credentials when prompted. The 'see more at' link below contains a lot more information on how you can setup authentication for your application. BMS API Build Version: 2.25.26162.1",
+    "contact": {
+      "name": "Audatex UK",
+      "url": "https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help",
+      "email": "servicedesk@audatex.co.uk"
+    }
+  },
+  "host": "audaconnect.ax-aee.co.uk",
+  "basePath": "/AudaAPI.BMSAPI",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/bmsapi/assessments/originator/{originator}/assessments/{assessmentnumber}": {
+      "get": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Get an AssessmentID by originator and Assessment Number",
+        "description": "Get an AssessmentID by originator and Assessment Number.",
+        "operationId": "Assessment_AssessmentIDviaOriginatorAndNumber",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "originator",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assessmentnumber",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/assessments/exports/{assessmentexportid}/axformat": {
+      "get": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Get an Assessment Export in AXFormat",
+        "description": "Gets an AEG Assessment Export in AxFormat for use by a BMS system.",
+        "operationId": "Assessment_AssessmentExportGetAx",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "assessmentexportid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "The input data is not understood"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "410": {
+            "description": "Resource has been superseded and no longer available"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/assessments/exports/{assessmentexportid}/axformatxml": {
+      "get": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Get an Assessment Export in AXFormat",
+        "description": "Gets an AEG Assessment Export in XmlFormat for use by a BMS system.",
+        "operationId": "Assessment_AssessmentExportGetXml",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "assessmentexportid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "The input data is not understood"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "410": {
+            "description": "Resource has been superseded and no longer available"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/assessments/exports/{assessmentexportid}": {
+      "get": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Get an Assessment Export",
+        "description": "Gets an AEG Assessment Export in for use by a BMS system.",
+        "operationId": "Assessment_AssessmentExportGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "assessmentexportid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.AXDTO"
+            }
+          },
+          "400": {
+            "description": "The input data is not understood"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "410": {
+            "description": "Resource has been superseded and no longer available"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/assessments/axformat": {
+      "post": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Import an axformat assessment shell.",
+        "description": "Imports an axFormat assessment shell and creates a new assessment.",
+        "operationId": "Assessment_AssessmentImportAXShell",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "A new assessment was created from the imported shell"
+          },
+          "400": {
+            "description": "The input data is not understood"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v2/bmsapi/assessments/axformat": {
+      "post": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Import an axformat assessment shell.",
+        "description": "Imports an axFormat assessment shell and creates a new assessment. This endpoint differs from the v1 version as it will use\r\nthe assessment number in the AXFORMAT, if supplied.",
+        "operationId": "Assessment_AssessmentImportAXShellV2",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "A new assessment was created from the imported shell"
+          },
+          "400": {
+            "description": "The input data is not understood"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/assessments/axformatxml": {
+      "post": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Import an AxFormatXml assessment document.",
+        "description": "This methods imports only those fields and records marked as importable, according to the AXFORMAT specification.",
+        "operationId": "Assessment_AssessmentImportAxFormatXml",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "description": "AxFormatXml assessment document.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "A new assessment was created from the imported shell"
+          },
+          "400": {
+            "description": "The input data is not understood"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v2/bmsapi/assessments/axformatxml": {
+      "post": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Import an AxFormatXml assessment document.",
+        "description": "This methods imports only those fields and records marked as importable, according to the AXFORMAT specification. This endpoint differs from the v1 version as it will use\r\nthe assessment number, if supplied.",
+        "operationId": "Assessment_AssessmentImportAxFormatXmlV2",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "description": "AxFormatXml assessment document.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "A new assessment was created from the imported shell"
+          },
+          "400": {
+            "description": "The input data is not understood"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/assessments/{assessmentid}/images/{imageid}": {
+      "get": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Get Assessment Image by image id",
+        "description": "Gets a JPEG image for an assessment by asssementid and imageid, images may have Null padding at the end of the file, uses BMS.Basic Scope.\r\nThere is currently a swagger issue, where the downloaded image does not get shown in swagger, however calling the endpoint directly will download the image sucessfully.",
+        "operationId": "Assessment_ImageDataGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "assessmentid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "imageid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/assessments/parts": {
+      "post": {
+        "tags": [
+          "Assessment"
+        ],
+        "summary": "Update Price / Part numbers in assessment.",
+        "description": "Update Price / Part numbers in assessment based on assessment number and originator.",
+        "operationId": "Assessment_AssessmentUpdatePartPrice",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "originator",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assessmentnumber",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partList",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Audatex.NextGen.Services.AssessmentServices.Interface.v1.AssessmentPart"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Audatex.NextGen.Services.AssessmentServices.Interface.v1.UpdatePartPriceResponse"
+            }
+          },
+          "400": {
+            "description": "The input data is not understood"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Resource does not exist"
+          },
+          "409": {
+            "description": "Assessment is parked or locked (open in AEG client) and cannot be accessed"
+          },
+          "410": {
+            "description": "Assessment never or no longer exists!"
+          },
+          "412": {
+            "description": "Assessment has never been calculated or cannot be calculated"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Parts"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/whoami": {
+      "get": {
+        "tags": [
+          "BMS"
+        ],
+        "summary": "Use this endpoint to prove you are authenticated.",
+        "description": "This endpoint is a helper and only returns who you are authenticated as.",
+        "operationId": "BMS_WhoAmI",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/topics": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Get all topics Sites or Companies can subscribe to.",
+        "description": "Get all topics Sites or Companies can subscribe to.",
+        "operationId": "Event_GetTopics",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.Topic"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/site/subscriptions": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Get all subscriptions for my site",
+        "description": "Get all subscriptions for my site.",
+        "operationId": "Event_SiteSubscriptionsGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.Subscription"
+              }
+            }
+          },
+          "204": {
+            "description": "OK - No subscriptions were found"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Subscribe my site to a Topic using the Topic code",
+        "description": "Subscribe my site to a Topic using the Topic code.   Only SubscriptionID may be populated in the response please ignore the other obsolete values.",
+        "operationId": "Event_SiteSubscribe",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "topicCode",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.SubscriptionObsolete"
+            }
+          },
+          "400": {
+            "description": "Topic format is not valid"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing topic"
+          },
+          "409": {
+            "description": "Already subscribed"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/site/subscriptions/{subscriptionId}": {
+      "delete": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Delete a subscription for my site",
+        "description": "Delete a subscription for my site.",
+        "operationId": "Event_SiteUnsubscribe",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing subscription"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/site/subscriptions/{subscriptionId}/notifications": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Poll this method to get notifications for a subscription, e.g. every 5 minutes",
+        "description": "Poll this method to get notifications for a subscription, e.g. every 5 minutes. . Note: the ResourceURIs Array is obsolete and may no longer be populated",
+        "operationId": "Event_SiteNotificationsGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.NotificationMessage"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing subscription"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/company/subscriptions": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Get all subscriptions for my company.",
+        "description": "Get all subscriptions for my company.",
+        "operationId": "Event_CompanySubscriptionsGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.Subscription"
+              }
+            }
+          },
+          "204": {
+            "description": "OK - No subscriptions were found"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Subscribe my company to a topic using the topic code.",
+        "description": "Subscribe my company to a topic using the topic code.  Only SubscriptionID may be populated in the response please ignore the other obsolete values.",
+        "operationId": "Event_CompanySubscribe",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "topicCode",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.SubscriptionObsolete"
+            }
+          },
+          "400": {
+            "description": "Topic format is not valid"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing topic"
+          },
+          "409": {
+            "description": "Already subscribed"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/company/subscriptions/{subscriptionId}": {
+      "delete": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Delete a subscription from my company.",
+        "description": "Delete a subscription from my company.",
+        "operationId": "Event_CompanyUnsubscribe",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing subscription"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/company/subscriptions/{subscriptionId}/notifications": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Poll this method to get notifications for a subscription, e.g. every 5 minutes",
+        "description": "Poll this method to get notifications for a subscription, e.g. every 5 minutes. Note: the ResourceURIs Array is obsolete and may no longer be populated",
+        "operationId": "Event_CompanyNotificationsGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.NotificationMessage"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing subscription"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/user/subscriptions": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Get all me personal subscriptions",
+        "description": "Get all subscriptions for my user.",
+        "operationId": "Event_UserSubscriptionsGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.Subscription"
+              }
+            }
+          },
+          "204": {
+            "description": "OK - No subscriptions were found"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Subscribe my user to a Topic using the Topic code",
+        "description": "Subscribe my user to a Topic using the Topic code.   Only SubscriptionID may be populated in the response please ignore the other obsolete values.",
+        "operationId": "Event_UserSubscribe",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "topicCode",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.SubscriptionObsolete"
+            }
+          },
+          "400": {
+            "description": "Topic format is not valid"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing topic"
+          },
+          "409": {
+            "description": "Already subscribed"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/user/subscriptions/{subscriptionId}": {
+      "delete": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Delete a subscription for my user",
+        "description": "Delete a subscription for my user.",
+        "operationId": "Event_UserUnsubscribe",
+        "consumes": [],
+        "produces": [],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing subscription"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/user/subscriptions/{subscriptionId}/notifications": {
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Poll this method to get notifications for a subscription, e.g. every 5 minutes",
+        "description": "Poll this method to get notifications for a subscription, e.g. every 5 minutes. . Note: the ResourceURIs Array is obsolete and may no longer be populated",
+        "operationId": "Event_UserNotificationsGet",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.NotificationMessage"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing subscription"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.Basic"
+            ]
+          }
+        ]
+      }
+    },
+    "/v1/bmsapi/partsorders/{partsorderid}": {
+      "get": {
+        "tags": [
+          "PartsOrder"
+        ],
+        "summary": "Get information about an order in the inpart system",
+        "description": "Get information about an order in the inpart system.",
+        "operationId": "PartsOrder_GetPartsOrders",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "partsorderid",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.Parts.PartsOrder"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or missing authentication token"
+          },
+          "403": {
+            "description": "Insufficient permissions for this resource"
+          },
+          "404": {
+            "description": "Non existing parts order"
+          },
+          "500": {
+            "description": "The server has failed to process the request"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "BMS.PartsOrders"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AudaAPI.BMSAPI.DTO.AXDTO": {
+      "type": "object",
+      "properties": {
+        "AssessmentID": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "System.Net.Mime.MediaTypeNames.Image": {
+      "type": "object",
+      "properties": {}
+    },
+    "Audatex.NextGen.Services.AssessmentServices.Interface.v1.AssessmentPart": {
+      "type": "object",
+      "properties": {
+        "GuideNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "RecomendedRetailPrice": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "Audatex.NextGen.Services.AssessmentServices.Interface.v1.UpdatePartPriceResponse": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "enum": [
+            "OK",
+            "OKWithWarning"
+          ],
+          "type": "string"
+        },
+        "StatusComment": {
+          "type": "string"
+        },
+        "PartStatusesList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Audatex.NextGen.Services.AssessmentServices.Interface.v1.PartStatus"
+          }
+        }
+      }
+    },
+    "Audatex.NextGen.Services.AssessmentServices.Interface.v1.PartStatus": {
+      "type": "object",
+      "properties": {
+        "GuideNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Price": {
+          "format": "double",
+          "type": "number"
+        },
+        "UpdateStatus": {
+          "type": "string"
+        },
+        "UpdateError": {
+          "type": "boolean"
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.Topic": {
+      "type": "object",
+      "properties": {
+        "TopicCode": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.Subscription": {
+      "type": "object",
+      "properties": {
+        "SubscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "Topic": {
+          "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.Topic"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Push": {
+          "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.SubscriptionPush"
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.SubscriptionPush": {
+      "type": "object",
+      "properties": {
+        "URL": {
+          "type": "string"
+        },
+        "Format": {
+          "enum": [
+            "Uninitialised",
+            "XML",
+            "JSON"
+          ],
+          "type": "string"
+        },
+        "AuthEnabled": {
+          "type": "boolean"
+        },
+        "AuthScheme": {
+          "type": "string"
+        },
+        "AuthParameter": {
+          "type": "string"
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.SubscriptionObsolete": {
+      "type": "object",
+      "properties": {
+        "SubscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "Topic": {
+          "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.Topic"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.NotificationMessage": {
+      "type": "object",
+      "properties": {
+        "NotificationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "SubscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "EventType": {
+          "type": "string"
+        },
+        "Topic": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        },
+        "CompanyCode": {
+          "type": "string"
+        },
+        "SiteId": {
+          "type": "string"
+        },
+        "CreatedAt": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.NotificationParameter"
+          }
+        },
+        "Resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.NotificationResource"
+          }
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.NotificationParameter": {
+      "type": "object",
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.NotificationResource": {
+      "type": "object",
+      "properties": {
+        "ResourceType": {
+          "type": "string"
+        },
+        "ResourceId": {
+          "format": "uuid",
+          "type": "string"
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.Parts.PartsOrder": {
+      "type": "object",
+      "properties": {
+        "AssessmentId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "SupplierName": {
+          "type": "string"
+        },
+        "PartsOrderId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "OrderReference": {
+          "type": "string"
+        },
+        "Status": {
+          "enum": [
+            "New",
+            "Confirmed",
+            "Dispatched",
+            "ReturnAccepted",
+            "Delivered",
+            "Cancelled",
+            "ReturnRequested",
+            "ReturnRejected"
+          ],
+          "type": "string"
+        },
+        "DeliveryDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "Parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AudaAPI.BMSAPI.DTO.Parts.Part"
+          }
+        }
+      }
+    },
+    "AudaAPI.BMSAPI.DTO.Parts.Part": {
+      "type": "object",
+      "properties": {
+        "OEPartNumber": {
+          "type": "string"
+        },
+        "OrderedPartNumber": {
+          "type": "string"
+        },
+        "Quantity": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "Status": {
+          "enum": [
+            "New",
+            "Confirmed",
+            "Delivered",
+            "ReturnAccepted",
+            "Cancelled",
+            "Dispatched",
+            "ReturnRequested",
+            "ReturnRejected"
+          ],
+          "type": "string"
+        },
+        "RepairerPrice": {
+          "format": "double",
+          "type": "number"
+        },
+        "InsurerPrice": {
+          "format": "double",
+          "type": "number"
+        },
+        "DeliveryDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "oauth2": {
+      "type": "oauth2",
+      "description": "OAuth2 Implicit Grant",
+      "flow": "implicit",
+      "authorizationUrl": "https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20",
+      "scopes": {
+        "BMS.Basic": "Basic access to assessment data for your BMS application",
+        "BMS.Extended": "Extened access to assessment data for your BMS application",
+        "BMS.Parts": "Access to BMS Parts Apis",
+        "BMS.PartsOrders": "Access to BMS Parts Orders Apis"
+      }
+    }
+  }
+}

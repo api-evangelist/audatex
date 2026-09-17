@@ -1,7 +1,7 @@
 aid: audatex
 name: Audatex
 description: |
-  Audatex (part of Solera Holdings) provides automotive claims and repair solutions with data and technology services for the automotive insurance, collision repair, and fleet management industries. It offers the AudaConnect API platform for third-party integration with claims processing, damage assessment, repair cost estimation, and vehicle data workflows. APIs are RESTful with JSON/XML support and OAuth 2.0 authentication.
+  Audatex (a Solera company) provides automotive claims and repair solutions with data and technology services for the automotive insurance, collision repair, and fleet management industries. It publishes the AudaConnect API platform for third-party integration (Audatex UK: assessments, vehicle reference data, parts orders, images, total-loss quotes and notification subscriptions, plus a bodyshop-management BMS API), an Intelligent Vehicle Inspection API Gateway (image capture, AI triage, video assessment, webhooks), and North American GIC / Dashboard Assignment integration APIs. APIs are RESTful with JSON/XML support, secured with OAuth 2.0 (AudaConnect portal and an OpenID Connect identity server), and access is granted through the AudaConnect service desk rather than self-service sign-up.
 type: Index
 deliveryModel:
   model: saas
@@ -15,17 +15,18 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 accessModel:
-  pricing: freemium
-  onboarding: unknown
+  pricing: contact-sales
+  onboarding: partner-approval
   trial: false
   try_now: false
   public: false
-  label: Freemium
-  confidence: medium
+  label: Contact sales / partner approval
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
+  - https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - https://audatex.co.uk/solutions/audaconnect/
+  generated: '2026-09-17'
+  method: searched
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/audatex.png
 tags:
   - Automotive
@@ -33,34 +34,117 @@ tags:
   - Insurance
   - Repair Management
   - Vehicle Data
+  - Collision Repair
+  - Vehicle Inspection
 url: >-
   https://raw.githubusercontent.com/api-evangelist/audatex/refs/heads/main/apis.yml
 created: '2025-01-01'
-modified: '2026-04-19'
+modified: '2026-09-17'
 specificationVersion: '0.23'
 apis:
   - aid: audatex:audatex-audaconnect-api
     name: Audatex AudaConnect API
     description: |
-      The AudaConnect API enables third-party software developers to access, query, and update the Audatex platform including assessments, vehicle reference data, repair orders, and photo management using RESTful methods with OAuth 2.0.
-    humanURL: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/Home/About
-    baseURL: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi
+      The AudaConnect WebAPI (Audatex UK) enables third-party software developers to access, query and update the Audatex platform: assessments (search, create shell, import/export AxFormat, PDF reports, calculations, images, mails), vehicle lookup by VRN/VIN and CAP valuation, parts prices and orders, suppliers, users, sites and work providers, total-loss-avoidance quotes, and topic-based notification subscriptions (poll or push). Swagger 2.0, 93 operations, OAuth 2.0 with 18 scopes.
+    humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
     tags:
+    - Assessment
+    - Claims
+    - Insurance
+    - Repair
+    - Vehicle Data
+    - Parts
+    - Notifications
+    tags_raw:
     - Assessments
     - Claims
     - Insurance
     - Repair
+    - Vehicle Data
+    - Parts
+    - Notifications
     properties:
     - type: Documentation
-      url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/Home/About
+      url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    - type: APIReference
+      url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
     - type: OpenAPI
-      url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+      url: openapi/audatex-audaconnect-api-openapi.yml
     - type: Authentication
-      url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/Home/About
+      url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+    - type: GettingStarted
+      url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+    - type: DeveloperPortal
+      url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+    - type: Sandbox
+      url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+    - type: Webhooks
+      url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+    - type: Overlay
+      url: overlays/audatex-audaconnect-api-overlay.yaml
+  - aid: audatex:audatex-audaconnect-bms-api
+    name: Audatex AudaConnect BMS API
+    description: |
+      Audatex services for Bodyshop Management Systems (BMS): lets a BMS get and update assessment-related data — resolve assessment IDs by originator and number, fetch and import assessment exports in AXFORMAT (JSON or XML), retrieve assessment images, update part prices and part numbers, look up parts orders, and subscribe a site, company or user to notification topics and poll for notifications. Swagger 2.0, 25 operations, OAuth 2.0 implicit grant with BMS.* scopes.
+    humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+    baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI
+    tags:
+    - Assessment
+    - Bodyshop
+    - Parts
+    - Repair
+    - Notifications
+    tags_raw:
+    - Assessments
+    - Bodyshop Management
+    - Parts
+    - Repair
+    - Notifications
+    properties:
+    - type: Documentation
+      url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+    - type: OpenAPI
+      url: openapi/audatex-audaconnect-bms-api-openapi.yml
+    - type: Authentication
+      url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+    - type: Sandbox
+      url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+    - type: Overlay
+      url: overlays/audatex-audaconnect-bms-api-overlay.yaml
+  - aid: audatex:audatex-api-gateway
+    name: Audatex API Gateway (Intelligent Vehicle Inspection)
+    description: |
+      The Audatex.APIGateway exposes Solera's guided image capture and intelligent vehicle inspection services: send image-capture requests by SMS, link or QR code, upload images, audio and video, run AI Triage, VI damaged-parts and VI calculation requests, fetch damage-detection reports, create claims, assessments, jobs, templates, reminders and intelligent offers, search repairers, and register webhooks for 14 event types. OpenAPI 3.0.1, 75 operations, JWT Bearer authorization. Published from Audatex's pre-production acceptance-test (PAT) host.
+    humanURL: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+    baseURL: https://services-pat.auda-target.com/APIGateway
+    tags:
+    - Vehicle Inspection
+    - Image Capture
+    - Claims
+    - AI Triage
+    - Webhooks
+    tags_raw:
+    - Vehicle Inspection
+    - Image Capture
+    - Claims
+    - AI Triage
+    - Webhooks
+    properties:
+    - type: Documentation
+      url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+    - type: APIReference
+      url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+    - type: OpenAPI
+      url: openapi/audatex-api-gateway-openapi.yml
+    - type: Webhooks
+      url: asyncapi/audatex-webhooks.yml
+    - type: Overlay
+      url: overlays/audatex-api-gateway-overlay.yaml
   - aid: audatex:audatex-gic-api
     name: Audatex GIC API
     description: |
-      The Audatex GIC (Global Integration Component) API provides integration capabilities for claims processing and vehicle damage assessment workflows in the insurance and collision repair industries.
+      The Audatex EAPI GIC (Global Integration Component) Integration API is the North American claims-integration surface used to post GIC integration responses for a work assignment and to acknowledge M31 events. OpenAPI 3.0.1, 3 operations, OAuth 2.0 password grant against the Solera/Audatex identity server (dispatch-login) with the b2b.fnol.api scope. Only the demo/test instance is publicly documented.
     humanURL: https://api-demo.audatex.com/TestGICapi/docs/index.html
     baseURL: https://api-demo.audatex.com/TestGICapi
     tags:
@@ -68,13 +152,49 @@ apis:
     - GIC
     - Insurance
     - Integration
+    tags_raw:
+    - Claims
+    - GIC
+    - Insurance
+    - Integration
     properties:
     - type: Documentation
       url: https://api-demo.audatex.com/TestGICapi/docs/index.html
-  - aid: audatex:solera-api-gateway
-    name: Solera API Gateway
+    - type: OpenAPI
+      url: openapi/audatex-gic-integration-api-openapi.yml
+    - type: Sandbox
+      url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+    - type: Overlay
+      url: overlays/audatex-gic-integration-api-overlay.yaml
+  - aid: audatex:audatex-dashboard-assignment-api
+    name: Solera Dashboard Assignment API
     description: |
-      The Solera API Gateway provides access to Audatex and Solera claims processing services including ClaimImage document return and other automotive claims data APIs for North American insurance markets.
+      The Solera Dashboard Assignment API (Audatex North America) is the FNOL assignment integration surface behind the Solera claims dashboard. The publicly served OpenAPI 3.0.1 document describes only the versioned /api/Version probe; assignment operations require the b2b.fnol.api scope from the dispatch-login identity server and are documented to onboarded partners. Only the demo/test instance is publicly documented.
+    humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+    baseURL: https://api-demo.audatex.com/TestAssignmentapi
+    tags:
+    - Claims
+    - FNOL
+    - Insurance
+    - Integration
+    tags_raw:
+    - Claims
+    - FNOL
+    - Insurance
+    - Integration
+    properties:
+    - type: Documentation
+      url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+    - type: OpenAPI
+      url: openapi/audatex-dashboard-assignment-api-openapi.yml
+    - type: Sandbox
+      url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+    - type: Overlay
+      url: overlays/audatex-dashboard-assignment-api-overlay.yaml
+  - aid: audatex:solera-api-gateway
+    name: Solera API Gateway (North America)
+    description: |
+      The Solera Integrations Public API portal for North America lists the Audatex/Solera claims services available to integrators, including the ClaimImage document-return API, with Swagger documentation for each service. The portal root redirects unauthenticated visitors to a Solera | Audatex login, so the service catalog and per-service Swagger documents are customer-gated; the ClaimImage Return API guide is served as a public PDF.
     humanURL: https://na.api.solera.com/
     baseURL: https://na.api.solera.com
     tags:
@@ -82,60 +202,115 @@ apis:
     - Documents
     - Insurance
     - Solera
+    tags_raw:
+    - Claims
+    - Documents
+    - Insurance
+    - Solera
     properties:
     - type: Documentation
-      url: https://na.api.solera.com/
-    - type: Authentication
-      url: https://na.api.solera.com/
+      url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+    - type: Login
+      url: https://na.api.solera.com/Login
 common:
+  - type: Website
+    url: https://audatex.co.uk/
+  - type: ParentCompany
+    url: https://www.solera.com/
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/audatex-uk/
+  - type: Twitter
+    url: https://x.com/AudatexUK
+  - type: YouTube
+    url: https://www.youtube.com/user/Audatexmarketing
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: Login
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Account/Login
+  - type: Support
+    url: https://audatex.co.uk/support/
+  - type: Contact
+    url: https://audatex.co.uk/contact-us/
+  - type: Blog
+    url: https://audatex.co.uk/news/
+  - type: PrivacyPolicy
+    url: https://audatex.co.uk/privacy-policy/
+  - type: TermsOfService
+    url: https://www.solera.com/us-canada-master-services-agreement/
+  - type: Sandbox
+    url: sandbox/audatex-sandbox.yml
+  - type: Authentication
+    url: authentication/audatex-authentication.yml
+  - type: OAuthScopes
+    url: scopes/audatex-scopes.yml
+  - type: OpenIDConnect
+    url: well-known/audatex-openid-configuration.json
+  - type: WellKnown
+    url: well-known/audatex-well-known.yml
+  - type: Conformance
+    url: conformance/audatex-conformance.yml
+  - type: ErrorCatalog
+    url: errors/audatex-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/audatex-lifecycle.yml
+  - type: Conventions
+    url: conventions/audatex-conventions.yml
+  - type: DataModel
+    url: data-model/audatex-data-model.yml
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: MCPServer
+    url: mcp/audatex-mcp.yml
+  - type: LLMsTxt
+    url: llms/audatex-llms.txt
+  - type: Packages
+    url: packages/audatex-packages.yml
+  - type: Plans
+    url: plans/audatex-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/audatex-rate-limits.yml
   - type: DomainSecurity
     url: security/audatex-domain-security.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/audatex-a-solera-company
-  - type: Website
-    url: https://www.audatex.com/
-  - type: Documentation
-    url: https://www.audatex.com/solutions/
-  - type: PrivacyPolicy
-    url: https://www.audatex.com/privacy-policy/
-  - type: TermsOfService
-    url: https://www.audatex.com/terms-and-conditions/
-  - type: Contact
-    url: https://www.audatex.com/contact/
   - type: Features
     data:
-    - name: Claims Assessment API
-      description: Search, download, upload, and amend vehicle damage assessments programmatically via the AudaConnect API.
-    - name: Repair Cost Estimation
-      description: Access Audatex repair cost estimation data and labor rates for collision repair workflow automation.
-    - name: Photo Management
-      description: Upload, retrieve, and manage vehicle damage photos attached to claims via the assessment API.
-    - name: Repair Order Integration
-      description: Create, update, and query repair orders from bodyshop management systems via BMS API integration.
-    - name: Vehicle Reference Data
-      description: Query vehicle reference data including make, model, trim, and VIN decoding for assessment setup.
+    - name: Assessment Access
+      description: Search, create, download/upload (AxFormat), amend, complete and report on vehicle damage assessments via the AudaConnect WebAPI.
+    - name: Vehicle Lookup and Valuation
+      description: Look up vehicle information by registration or VIN (VIN Plus), paint codes, and CAP valuations.
+    - name: Parts Pricing and Orders
+      description: Get supplier part prices, upload and update parts orders, and manage registered suppliers.
+    - name: Image, Audio and Video Capture
+      description: Send guided image-capture requests by SMS, link or QR code; upload images, audio and video; run AI Triage and VI damage calculations.
+    - name: Notifications and Webhooks
+      description: Subscribe to hierarchical assessment topics (poll or push) on AudaConnect, and register webhooks for 14 image-capture and communication event types on the API Gateway.
     - name: OAuth 2.0 Security
-      description: All AudaConnect APIs are secured with OAuth 2.0 authorization for enterprise-grade access control.
+      description: AudaConnect supports authorization-code, implicit and refresh-token flows with scoped access; NA services use an OpenID Connect identity server.
   - type: UseCases
     data:
     - name: Insurance Claims Automation
       description: Automate first notice of loss, damage assessment, and claims settlement workflows for auto insurers.
     - name: Bodyshop Management System Integration
-      description: Integrate bodyshop management systems with Audatex for repair order creation, parts pricing, and labor time.
+      description: Integrate bodyshop management systems with Audatex for assessment exchange, parts pricing, and parts orders.
     - name: Total Loss Determination
-      description: Access vehicle valuation and total loss thresholds to automate total loss claims decisions.
+      description: Request and manage Total Loss Avoidance quotes and vehicle valuations to inform total-loss decisions.
     - name: Digital Claims Submission
-      description: Enable digital submission of vehicle damage photos and assessment data from mobile apps to the Audatex platform.
+      description: Guide policyholders through mobile photo capture and feed images into AI triage and damage detection.
   - type: Integrations
     data:
     - name: Bodyshop Management Systems
-      description: Native integration with major BMS platforms for automated repair order and parts pricing workflows.
+      description: BMS API for automated assessment exchange, parts pricing, and parts-order workflows.
     - name: Insurance Core Systems
-      description: Integration with insurance policy and claims management systems for end-to-end claims processing.
-    - name: Vehicle History Providers
-      description: Integration with vehicle history and VIN data providers for complete vehicle information at claims initiation.
+      description: GIC and Dashboard Assignment APIs for insurer claims and FNOL assignment integration.
     - name: Parts Suppliers
-      description: Connection to OEM and aftermarket parts supplier catalogs for parts pricing and availability in repair estimates.
+      description: Supplier registration and parts-price lookups for repair estimates.
   - type: Solutions
     data:
     - name: Claims Process Automation
@@ -145,3 +320,8 @@ common:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-09-17'
+  status: enriched
+  artifacts_added: 34
+  pass: local-v3

@@ -1,0 +1,87 @@
+generated: '2026-09-17'
+method: derived
+source: >-
+  Derived from the five specs in openapi/ (securityDefinitions / securitySchemes, response media
+  types, error schemas), the OpenID Connect discovery document saved at
+  well-known/audatex-openid-configuration.json, the live 401/400 responses observed on
+  audaconnect.ax-aee.co.uk and api-demo.audatex.com, and searches of audatex.co.uk / solera.com
+  for compliance claims (2026-09-17).
+summary: >-
+  Audatex conforms to OAuth 2.0 (RFC 6749) and publishes an OpenID Connect / RFC 8414 discovery
+  document for its North American identity server. No RFC 9457 problem+json, no JSON:API, no OData,
+  no SCIM, no FAPI. The AudaConnect API's AXFORMAT assessment document is Audatex's own proprietary
+  interchange format, not an industry standard — no domain-standard signature is present in any
+  contract (automotive claims has no widely adopted open API standard to conform to, so this is
+  not penalised and nothing is invented to fill the slot).
+conformance:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      securityDefinitions.oauth2 (implicit) in openapi/audatex-audaconnect-api-openapi.yml and
+      openapi/audatex-audaconnect-bms-api-openapi.yml; components.securitySchemes.oauth2 (password)
+      in openapi/audatex-gic-integration-api-openapi.yml; authorization-code + refresh + implicit
+      flows documented at https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help.
+  - id: oidc
+    conforms: true
+    evidence: >-
+      https://dispatch-login-demo.audatex.com/.well-known/openid-configuration — issuer,
+      jwks_uri, authorization/token/userinfo/end_session endpoints, scopes_supported includes
+      openid, profile, email, offline_access; claims_supported lists standard OIDC claims.
+  - id: rfc8414
+    conforms: true
+    evidence: >-
+      The same discovery document carries revocation_endpoint, introspection_endpoint and
+      device_authorization_endpoint (RFC 8414 / RFC 7009 / RFC 7662 / RFC 8628 shape). Served only
+      under /.well-known/openid-configuration; /.well-known/oauth-authorization-server is 404.
+  - id: jwt-bearer
+    conforms: true
+    evidence: >-
+      openapi/audatex-api-gateway-openapi.yml securitySchemes.Bearer ("JWT Authorization header
+      using the Bearer scheme"); GIC/Assignment oauth2 description "Authorization using the JWT
+      Bearer scheme".
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      No application/problem+json anywhere. The API Gateway declares ASP.NET Core ProblemDetails /
+      ValidationProblemDetails schemas on 21 of its 400 responses but serves them as
+      application/json, text/json and text/plain; AudaConnect answers plain-text 401 bodies; GIC
+      wraps errors as {"error":{"code","message","innerError"}}.
+  - id: rfc7807
+    conforms: false
+    evidence: same as rfc9457 — ProblemDetails-shaped bodies without the problem+json media type.
+  - id: pagination
+    conforms: false
+    evidence: >-
+      No cursor or page parameters are declared on any list operation; Assessment_Get returns the
+      user's assessment list ordered by last-updated with no paging contract.
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header or equivalent in any spec or help page (zero matches for "idempoten").
+  - id: json:api
+    conforms: false
+    evidence: No application/vnd.api+json media type in any spec.
+  - id: odata
+    conforms: false
+    evidence: No $metadata surface or OData query options.
+  - id: scim
+    conforms: false
+    evidence: No urn:ietf:params:scim schema URN; user/company endpoints are proprietary.
+  - id: openapi
+    conforms: true
+    evidence: >-
+      Five live machine-readable contracts — Swagger 2.0 (AudaConnect WebAPI, BMS API) and
+      OpenAPI 3.0.1 (API Gateway, GIC, Dashboard Assignment) — all served from Audatex hosts.
+  - id: wadl
+    conforms: true
+    evidence: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help/wadl/ (200, application/xml) — a WADL for the AudaConnect WebAPI alongside the Swagger.
+domain_standard:
+  present: false
+  note: >-
+    The AXFORMAT assessment document (Assessment_AssessmentImportAXShell, AssessmentExport_ExportAssessment,
+    AudaAPI.BMSAPI.DTO.AXDTO) is Audatex's proprietary format. No CIECA BMS/EMS, ACORD or other
+    open automotive-claims standard is declared in any contract. Reward-only check; nothing invented.
+compliance_claims:
+  - claim: GDPR compliant integration
+    source: https://audatex.co.uk/solutions/audaconnect/ ("encrypted API-based platform which enables fast, secure and GDPR compliant integration"; "Data Privacy by Design")
+    certification: false
+    note: A marketing statement, not a certification — no SOC 2 / ISO 27001 attestation was located on audatex.co.uk or solera.com, so no Compliance pointer is emitted.

@@ -1,0 +1,42 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for AudaConnect WebAPI
+  version: '2026-09-17'
+  x-generated: '2026-09-17'
+  x-method: generated
+  x-source: openapi/audatex-audaconnect-api-openapi.yml (Swagger 2.0) plus the docs, probes and derived artifacts
+    in this repo
+extends: ../openapi/audatex-audaconnect-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      provider: audatex
+      api: audatex:audatex-audaconnect-api
+      harvested: '2026-09-17'
+      source: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/swagger/docs/v1
+      help: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+      wadl: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help/wadl/
+- target: $.securityDefinitions.oauth2
+  update:
+    x-documented-flows:
+    - authorization_code
+    - refresh_token
+    - implicit
+    x-token-lifetime-seconds: 1800
+    x-token-url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/OAuth20/token
+    x-docs: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+- target: $.paths["/api/notifications/topics"].get
+  update:
+    x-topic-catalog: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+    x-webhooks: asyncapi/audatex-webhooks.yml
+- target: $.paths["/api/tla/cancelQuote/{quoteId}"].get
+  update:
+    x-reversal-of: TotalLoss_RequestQuote
+    x-reversal-window: null
+    x-note: Cancellation exposed on GET — treat as unsafe.
+- target: $.paths["/api/assessments"].post
+  update:
+    x-idempotent: false
+    x-reversible: false
+    x-note: Creates a new shell assessment on every call; no delete exists.

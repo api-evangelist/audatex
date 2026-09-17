@@ -1,0 +1,42 @@
+openapi: 3.0.1
+info:
+  title: Solera Dashboard Assignment API
+  description: ''
+  contact:
+    name: Solera
+    url: http://www.audatex.us/product.asp?pageid=zContact_us
+  license:
+    name: '@SoleraNorth America, Inc. All rights reserved'
+    url: http://www.audatex.us/
+  version: '1.0'
+servers:
+- url: /TestAssignmentapi
+paths:
+  /api/Version:
+    get:
+      tags:
+      - Version
+      parameters:
+      - name: api-version
+        in: query
+        description: The requested API version
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Authorization using the JWT Bearer scheme
+      flows:
+        password:
+          tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
+          scopes:
+            b2b.fnol.api: Audatex Assignment API Access
+security:
+- oauth2:
+  - readAccess
+  - writeAccess

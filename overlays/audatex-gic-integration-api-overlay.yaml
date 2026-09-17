@@ -1,0 +1,37 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for EAPI GIC Integration API
+  version: '2026-09-17'
+  x-generated: '2026-09-17'
+  x-method: generated
+  x-source: openapi/audatex-gic-integration-api-openapi.yml (OpenAPI 3.0.1) plus the docs, probes and derived artifacts
+    in this repo
+extends: ../openapi/audatex-gic-integration-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      provider: audatex
+      api: audatex:audatex-gic-api
+      harvested: '2026-09-17'
+      source: https://api-demo.audatex.com/TestGICapi/swagger/v1/swagger.json
+      environment: demo/test
+      edge: kong/3.10.0.16-enterprise-edition
+- target: $.servers[0]
+  update:
+    x-host: https://api-demo.audatex.com
+- target: $.paths["/api/Version"].get
+  update:
+    x-observed-error:
+      status: 400
+      body:
+        error:
+          code: ApiVersionUnspecified
+          message: An API version is required, but was not specified.
+          innerError: null
+    x-response-headers:
+    - 'api-supported-versions: 1.0'
+- target: $.security
+  update:
+    x-note: readAccess / writeAccess are required globally but are not declared in components.securitySchemes.oauth2.flows.password.scopes
+      (only b2b.fnol.api is) — a spec defect recorded as-is.

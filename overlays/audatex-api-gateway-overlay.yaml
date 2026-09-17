@@ -1,0 +1,43 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Audatex.APIGateway
+  version: '2026-09-17'
+  x-generated: '2026-09-17'
+  x-method: generated
+  x-source: openapi/audatex-api-gateway-openapi.yml (OpenAPI 3.0.1) plus the docs, probes and derived artifacts
+    in this repo
+extends: ../openapi/audatex-api-gateway-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-api-evangelist:
+      provider: audatex
+      api: audatex:audatex-api-gateway
+      harvested: '2026-09-17'
+      source: https://services-pat.auda-target.com/APIGateway/swagger/V1/swagger.json
+      ownership: TLS certificate O=Solera Holdings LLC CN=*.auda-target.com; nameservers ns1/ns2.ax-aee.co.uk (Audatex
+        UK)
+      environment: pre-production acceptance test (PAT)
+      build: 1.0.0+629b6e4e4890ace867a0a4e548423041dac1a76d
+- target: $.servers[0]
+  update:
+    x-host: https://services-pat.auda-target.com
+    x-note: servers[].url is relative (/APIGateway); the absolute base is the PAT host the document is served from.
+- target: $.paths["/api/v1/ImageCapture"].post
+  update:
+    x-side-effect: sends an SMS to the policyholder
+    x-idempotent: false
+    x-reversal: DELETE /api/v1/ImageCapture/{imageCaptureId} (does not unsend the SMS)
+- target: $.paths["/api/v1/PingEvent"].post
+  update:
+    x-rate-limited: true
+    x-rate-limit-headers: []
+    x-note: The only operation declaring 429; no limit value documented.
+- target: $.paths["/api/v1/Webhooks"].post
+  update:
+    x-event-catalog: asyncapi/audatex-webhooks.yml
+    x-callback-payload-documented: false
+- target: $.components.schemas.ProblemDetails
+  update:
+    x-media-type-served: application/json (not application/problem+json)
+    x-rfc9457: false
