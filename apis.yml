@@ -55,7 +55,7 @@ apis:
     - Repair
     - Vehicle Data
     - Parts
-    - Notifications
+    - Notification
     tags_raw:
     - Assessments
     - Claims
@@ -91,10 +91,10 @@ apis:
     baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI
     tags:
     - Assessment
-    - Bodyshop
+    - Bodyshop Management
     - Parts
     - Repair
-    - Notifications
+    - Notification
     tags_raw:
     - Assessments
     - Bodyshop Management
@@ -123,7 +123,7 @@ apis:
     - Image Capture
     - Claims
     - AI Triage
-    - Webhooks
+    - Webhook
     tags_raw:
     - Vehicle Inspection
     - Image Capture
