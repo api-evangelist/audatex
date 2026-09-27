@@ -1,0 +1,352 @@
+openapi: 3.2.0
+info:
+  title: Audatex Audio API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Audio across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Audio
+paths:
+  /api/v1/Audio:
+    post:
+      tags:
+      - Audio
+      summary: Upload a File
+      description: This endpoint will allow a file to be uploaded
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: postApiV1Audio
+      x-operation-id-source: derived
+    get:
+      tags:
+      - Audio
+      summary: Get content of a file by fileId
+      description: This API will allow you to get a file stream
+      parameters:
+      - name: fileId
+        in: query
+        description: The id of the file
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns the file stream
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Stream'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '404':
+          description: Returns an error if the file is not found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: getApiV1Audio
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Audio
+      summary: delete content of a file by fileId
+      description: This API will allow you to delete a file stream
+      parameters:
+      - name: fileId
+        in: query
+        description: The id of the file
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns the file stream
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Stream'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Stream'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: deleteApiV1Audio
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Audio/Info:
+    post:
+      tags:
+      - Audio
+      summary: Create a file space in the service to be used to upload a file stream
+      description: This endpoint will create the file data necessary in DB to upload a file
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/FileModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FileModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/FileModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/FileModel'
+      responses:
+        '201':
+          description: Returns a created response with the fileId
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: postApiV1AudioInfo
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    FileModel:
+      type: object
+      properties:
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/FileType'
+        collectionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
+    FileType:
+      enum:
+      - MP4
+      - AVI
+      - MOV
+      - WAV
+      type: string
+    Stream:
+      type: object
+      properties:
+        canRead:
+          type: boolean
+          readOnly: true
+        canWrite:
+          type: boolean
+          readOnly: true
+        canSeek:
+          type: boolean
+          readOnly: true
+        canTimeout:
+          type: boolean
+          readOnly: true
+        length:
+          type: integer
+          format: int64
+          readOnly: true
+        position:
+          type: integer
+          format: int64
+        readTimeout:
+          type: integer
+          format: int32
+        writeTimeout:
+          type: integer
+          format: int32
+      additionalProperties: false
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

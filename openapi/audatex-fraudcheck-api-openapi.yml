@@ -1,0 +1,167 @@
+openapi: 3.2.0
+info:
+  title: Audatex Fraud Check API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged FraudCheck across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: FraudCheck
+paths:
+  /api/v1/FraudCheck/{imageCaptureId}:
+    get:
+      tags:
+      - FraudCheck
+      summary: Gets metadata about an image capture
+      description: This API will allow you to get metadata of an image capture
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: The id of the image capture
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '200':
+          description: Returns details
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ImageMetadataRespModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageMetadataRespModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ImageMetadataRespModel'
+        '401':
+          description: Returns an error if the user is not authorised
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: getApiV1FraudCheckByImageCaptureId
+      x-operation-id-source: derived
+    post:
+      tags:
+      - FraudCheck
+      summary: Add/Update metadata used in fraud check for an image capture
+      description: This API will allow you to add/update some metadata of an image capture
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: The id of the image capture
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema: {}
+          application/json:
+            schema: {}
+          text/json:
+            schema: {}
+          application/*+json:
+            schema: {}
+      responses:
+        '400':
+          description: 'Returns an error if the request fails validation: empty new data, image id not found, etc'
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '200':
+          description: Returns details of the image capture
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ImageMetadataRespModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageMetadataRespModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ImageMetadataRespModel'
+        '401':
+          description: Returns an error if the user is not authorised
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: postApiV1FraudCheckByImageCaptureId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    ImageMetadataRespModel:
+      type: object
+      properties:
+        imageId:
+          type: string
+          format: uuid
+        imageMetadata: {}
+        systemMetadata: {}
+        userMetadata: {}
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

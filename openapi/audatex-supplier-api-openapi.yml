@@ -1,0 +1,345 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: AudaConnect Supplier API
+  description: 'AudaConnect. You can use this Swagger page to test the API. You will need to authenticate either at the top of the page for multiple scopes or clicking on the authentication status image on each operation. You will need to use your supplied Client Application ID during when selecting scopes. AudaConnect API Build Version: 2.25.26048.2'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: Supplier
+paths:
+  /api/users/suppliers/all:
+    get:
+      tags:
+      - Supplier
+      summary: Get all suppliers
+      operationId: Supplier_GetSuppliers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Suppliers.Supplier'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Suppliers.Supplier'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Suppliers.Supplier'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Suppliers.Supplier'
+      security:
+      - oauth2:
+        - ReferenceData.Company
+  /api/users/suppliers/{id}:
+    get:
+      tags:
+      - Supplier
+      summary: Get a specific supplier
+      operationId: Supplier_GetSupplier
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the supplier.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Suppliers.Supplier'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Suppliers.Supplier'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Suppliers.Supplier'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Suppliers.Supplier'
+      security:
+      - oauth2:
+        - ReferenceData.Company
+    post:
+      tags:
+      - Supplier
+      summary: Create a new supplier
+      operationId: Supplier_AddSupplier
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the supplier.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Suppliers.SupplierDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Suppliers.SupplierDetails'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Suppliers.SupplierDetails'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Suppliers.SupplierDetails'
+      security:
+      - oauth2:
+        - Manage.Suppliers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Suppliers.SupplierDetails'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Suppliers.SupplierDetails'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Suppliers.SupplierDetails'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Suppliers.SupplierDetails'
+        description: The details for the supplier.
+        required: true
+  /api/users/suppliers/{id}/visibility/{visible}:
+    post:
+      tags:
+      - Supplier
+      summary: Set wether a supplier should be hidden from repairers in InPart
+      operationId: Supplier_SetSupplierVisibility
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the supplier.
+        required: true
+        schema:
+          type: string
+      - name: visible
+        in: path
+        description: True if the supplier should be available for new linkages in InPart, false otherwise
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: No Content
+      security:
+      - oauth2:
+        - Manage.Suppliers
+  /api/users/suppliers/registered:
+    get:
+      tags:
+      - Supplier
+      summary: Get all registered suppliers
+      operationId: Supplier_GetRegisteredSuppliers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Suppliers.RegisteredSupplier'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Suppliers.RegisteredSupplier'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Suppliers.RegisteredSupplier'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Suppliers.RegisteredSupplier'
+      security:
+      - oauth2:
+        - ReferenceData.Company
+  /api/users/suppliers/registered/{id}:
+    post:
+      tags:
+      - Supplier
+      summary: Register a supplier site.
+      operationId: Supplier_RegisterSupplier
+      parameters:
+      - name: id
+        in: path
+        description: The unqiue ID of the supplier.
+        required: true
+        schema:
+          type: string
+      - name: siteId
+        in: query
+        description: 'The unique ID of the site: 6 characters.'
+        required: true
+        schema:
+          type: string
+      - name: erpId
+        in: query
+        description: The ERP ID.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+      security:
+      - oauth2:
+        - Manage.Suppliers
+    delete:
+      tags:
+      - Supplier
+      summary: De-register a supplier
+      operationId: Supplier_DeleteRegisteredSupplier
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the supplier.
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+      security:
+      - oauth2:
+        - Manage.Suppliers
+  /api/users/suppliers/registered/{id}/{status}:
+    post:
+      tags:
+      - Supplier
+      summary: Update the status of a registered supplier
+      operationId: Supplier_UpdateRegisteredSupplierStatus
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the supplier.
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: path
+        description: The updated status of the supplier registration.
+        required: true
+        schema:
+          type: string
+          enum:
+          - OrderingAllowed
+          - OrderingNotAllowed
+      responses:
+        '204':
+          description: No Content
+      security:
+      - oauth2:
+        - Manage.Suppliers
+components:
+  schemas:
+    AudaAPI.Models.Suppliers.RegisteredSupplier:
+      type: object
+      properties:
+        ErpId:
+          type: string
+        Status:
+          enum:
+          - OrderingAllowed
+          - OrderingNotAllowed
+          type: string
+        Id:
+          type: string
+        SiteId:
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+    AudaAPI.Models.Suppliers.Supplier:
+      type: object
+      properties:
+        Reference:
+          type: string
+        Name:
+          type: string
+    AudaAPI.Models.Suppliers.SupplierDetails:
+      type: object
+      properties:
+        Address1:
+          type: string
+        Address2:
+          type: string
+        Address3:
+          type: string
+        Address4:
+          type: string
+        City:
+          type: string
+        Country:
+          type: string
+        Phone:
+          type: string
+        Fax:
+          type: string
+        Email:
+          type: string
+        PrimaryContact:
+          type: string
+        PrimaryContactEmail:
+          type: string
+        VATNumber:
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

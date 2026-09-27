@@ -1,0 +1,437 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: AudaConnect Reference Data API
+  description: 'AudaConnect. You can use this Swagger page to test the API. You will need to authenticate either at the top of the page for multiple scopes or clicking on the authentication status image on each operation. You will need to use your supplied Client Application ID during when selecting scopes. AudaConnect API Build Version: 2.25.26048.2'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: Reference Data
+paths:
+  /api/reference/VehicleType:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of VehicleType types
+      operationId: ReferenceData_VehicleType
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/CalculationType:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of CalculationType types
+      operationId: ReferenceData_CalculationType
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/AssessmentLockResult:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of AssessmentLockResult types
+      operationId: ReferenceData_AssessmentLockResult
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/AssessmentType:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of AssessmentType types
+      operationId: ReferenceData_AssessmentType
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/AuthorisationStatus:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of AuthorisationStatus types
+      operationId: ReferenceData_AuthorisationStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/ContactType:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of ContactType types
+      operationId: ReferenceData_ContactType
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/DamageArea:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of DamageArea types
+      operationId: ReferenceData_DamageArea
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/DamageCondition:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of DamageCondition types
+      operationId: ReferenceData_DamageCondition
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/DamageSeverity:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of DamageSeverity types
+      operationId: ReferenceData_DamageSeverity
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/ModelType:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of ModelType types
+      operationId: ReferenceData_ModelType
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/RepairMethod:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of RepairMethod types
+      operationId: ReferenceData_RepairMethod
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+  /api/reference/AssessmentState:
+    get:
+      tags:
+      - Reference Data
+      summary: Returns the complete list of AssessmentState types
+      operationId: ReferenceData_AssessmentState
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+      security:
+      - oauth2:
+        - ReferenceData.My
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

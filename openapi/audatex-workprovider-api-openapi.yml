@@ -1,0 +1,120 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: AudaConnect Workprovider API
+  description: 'AudaConnect. You can use this Swagger page to test the API. You will need to authenticate either at the top of the page for multiple scopes or clicking on the authentication status image on each operation. You will need to use your supplied Client Application ID during when selecting scopes. AudaConnect API Build Version: 2.25.26048.2'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: Workprovider
+paths:
+  /api/workproviders:
+    get:
+      tags:
+      - Workprovider
+      summary: Get configured workproviders
+      operationId: Workprovider_Get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+      security:
+      - oauth2:
+        - ReferenceData.System
+  /api/workproviders/{id}:
+    get:
+      tags:
+      - Workprovider
+      summary: Get details about a specific workprovider
+      operationId: getApiWorkprovidersById
+      parameters:
+      - name: id
+        in: path
+        description: The workprovider CODE or unique ID.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+      security:
+      - oauth2:
+        - ReferenceData.System
+      x-operation-id-source: normalized
+      x-operation-id-original: Workprovider_Get
+components:
+  schemas:
+    AudaAPI.Models.WorkProvider:
+      type: object
+      properties:
+        ID:
+          format: uuid
+          type: string
+        Description:
+          type: string
+        Code:
+          format: int32
+          type: integer
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

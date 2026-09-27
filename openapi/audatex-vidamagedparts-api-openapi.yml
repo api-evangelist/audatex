@@ -1,0 +1,400 @@
+openapi: 3.2.0
+info:
+  title: Audatex Vi Damaged Parts API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged ViDamagedParts across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: ViDamagedParts
+paths:
+  /api/v1/ViDamagedParts:
+    post:
+      tags:
+      - ViDamagedParts
+      summary: POST Vi DamagedParts request
+      description: This endpoint will allow you to request a VI DamagedParts
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ViDamagedPartsReqVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViDamagedPartsReqVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ViDamagedPartsReqVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ViDamagedPartsReqVM'
+      responses:
+        '202':
+          description: Returns an accepted response. The CalculationId returned, can be used in subsequent GET requests for ViDamagedParts.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+        '400':
+          description: Returns an error if the request fails validation or if the imageCapture cannot be found or if the imageCapture status is not yet complete
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: postApiV1ViDamagedParts
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/ViDamagedParts/{imageCaptureId}/{calculationId}:
+    get:
+      tags:
+      - ViDamagedParts
+      summary: GET a VI DamagedParts request
+      description: This endpoint will allow you to get the details of a VI DamagedParts
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: calculationId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns a response with the details of a ViDamagedParts
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ViDamagedPartsRespVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViDamagedPartsRespVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ViDamagedPartsRespVM'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV1ViDamagedPartsByImageCaptureIdByCalculationId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    ViDamagedPartsReqVM:
+      required:
+      - countryCode
+      - imageCaptureId
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        countryCode:
+          $ref: '#/components/schemas/Country'
+      additionalProperties: false
+    ViDamagedPartsPartsRespVM:
+      type: object
+      properties:
+        standardGuideNumber:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        genericPartName:
+          type:
+          - string
+          - 'null'
+        objectDetectionLabels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+        positions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+        relatedImageIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        position:
+          $ref: '#/components/schemas/ViDamagedPartsPositionRespVM'
+      additionalProperties: false
+    ViDamagedPartsValueRespVM:
+      type: object
+      properties:
+        damagedPartsGroupid:
+          type: string
+          format: uuid
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+        damagedPartsGroup:
+          type:
+          - string
+          - 'null'
+        side:
+          type:
+          - string
+          - 'null'
+        parts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViDamagedPartsPartsRespVM'
+      additionalProperties: false
+    ViDamagedPartsPositionRespVM:
+      type: object
+      properties:
+        code:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    Country:
+      enum:
+      - UK
+      - ZA
+      - US
+      - CA
+      - FR
+      - IE
+      - RO
+      - PL
+      - CH
+      - AD
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BW
+      - BR
+      - BG
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CZ
+      - DK
+      - DO
+      - EC
+      - SV
+      - EE
+      - FI
+      - GF
+      - DE
+      - GR
+      - GP
+      - GT
+      - HN
+      - HU
+      - IS
+      - IN
+      - ID
+      - IL
+      - IT
+      - JP
+      - KR
+      - KW
+      - LV
+      - LT
+      - LU
+      - MY
+      - MT
+      - MQ
+      - MX
+      - MD
+      - ME
+      - MA
+      - NA
+      - NL
+      - NC
+      - NZ
+      - NI
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PT
+      - PR
+      - MK
+      - RU
+      - RE
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ES
+      - SE
+      - TW
+      - TR
+      - UA
+      - AE
+      - GB
+      - VE
+      type: string
+    ViErrorViewModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorPropertyViewModel'
+      additionalProperties: false
+    ViDamagedPartsRespVM:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorViewModel'
+        damagedParts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViDamagedPartsValueRespVM'
+      additionalProperties: false
+    ViErrorPropertyViewModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    CalculationSelfViewModel:
+      type: object
+      properties:
+        calculationId:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

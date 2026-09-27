@@ -1,0 +1,310 @@
+openapi: 3.2.0
+info:
+  title: Audatex Image Attachment API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged ImageAttachment across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: ImageAttachment
+paths:
+  /api/v1/ImageAttachment:
+    post:
+      tags:
+      - ImageAttachment
+      summary: POST image capture image attachment
+      description: This endpoint will allow you to send a number of post image capture image attachment and will return an image attachment id
+      parameters:
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ImageAttachmentRequestVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageAttachmentRequestVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ImageAttachmentRequestVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ImageAttachmentRequestVM'
+      responses:
+        '202':
+          description: Returns an accepted response. The ImageAttachmentId returned, can be used in subsequent GET requests for image attachment
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ImageAttachmentSelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageAttachmentSelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ImageAttachmentSelfViewModel'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '400':
+          description: Returns an error if the request fails validation
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: postApiV1ImageAttachment
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/ImageAttachment/{imageCaptureId}/{imageAttachmentId}:
+    get:
+      tags:
+      - ImageAttachment
+      summary: GET image capture image attachment
+      description: This endpoint will allow you to get the details and status of the image capture image attachments
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: ImageCaptureId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageAttachmentId
+        in: path
+        description: ImageAttachmentId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a response with details of the image capture image attachment
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ImageAttachmentRespVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageAttachmentRespVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ImageAttachmentRespVM'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '400':
+          description: Returns an error if the request fails validation
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV1ImageAttachmentByImageCaptureIdByImageAttachmentId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    ImageAttachmentRequestVM:
+      required:
+      - estimaticImageAttachment
+      - imageCaptureId
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          format: uuid
+        estimaticImageAttachment:
+          $ref: '#/components/schemas/EstimaticImageAttachmentRequestVM'
+      additionalProperties: false
+    EstimaticImageAttachmentRequestVM:
+      required:
+      - country
+      - sourceSystem
+      - sourceSystemKey
+      type: object
+      properties:
+        sourceSystemKey:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: 'Key of the estimating source system
+
+            that you wish to upload the images for'
+        sourceSystem:
+          $ref: '#/components/schemas/EstimatingSourceSystem'
+        country:
+          $ref: '#/components/schemas/Country'
+        attachmentType:
+          $ref: '#/components/schemas/ImageAttachmentType'
+      additionalProperties: false
+    Country:
+      enum:
+      - UK
+      - ZA
+      - US
+      - CA
+      - FR
+      - IE
+      - RO
+      - PL
+      - CH
+      - AD
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BW
+      - BR
+      - BG
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CZ
+      - DK
+      - DO
+      - EC
+      - SV
+      - EE
+      - FI
+      - GF
+      - DE
+      - GR
+      - GP
+      - GT
+      - HN
+      - HU
+      - IS
+      - IN
+      - ID
+      - IL
+      - IT
+      - JP
+      - KR
+      - KW
+      - LV
+      - LT
+      - LU
+      - MY
+      - MT
+      - MQ
+      - MX
+      - MD
+      - ME
+      - MA
+      - NA
+      - NL
+      - NC
+      - NZ
+      - NI
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PT
+      - PR
+      - MK
+      - RU
+      - RE
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ES
+      - SE
+      - TW
+      - TR
+      - UA
+      - AE
+      - GB
+      - VE
+      type: string
+    EstimatingSourceSystem:
+      enum:
+      - AEG
+      - ADXE
+      - Qapter
+      type: string
+    OutputViewModel:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ErrorViewModel'
+        object: {}
+      additionalProperties: false
+    ImageAttachmentType:
+      enum:
+      - All
+      - Owner
+      type: string
+    ErrorViewModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageAttachmentSelfViewModel:
+      type: object
+      properties:
+        imageAttachmentId:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageAttachmentRespVM:
+      type: object
+      properties:
+        input: {}
+        output:
+          $ref: '#/components/schemas/OutputViewModel'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

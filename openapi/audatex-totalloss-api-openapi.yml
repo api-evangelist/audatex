@@ -1,0 +1,223 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: AudaConnect Total Loss API
+  description: 'AudaConnect. You can use this Swagger page to test the API. You will need to authenticate either at the top of the page for multiple scopes or clicking on the authentication status image on each operation. You will need to use your supplied Client Application ID during when selecting scopes. AudaConnect API Build Version: 2.25.26048.2'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: TotalLoss
+paths:
+  /api/tla/canQuote/{assessmentId}:
+    get:
+      tags:
+      - TotalLoss
+      operationId: TotalLoss_CanQuote
+      parameters:
+      - name: assessmentId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - ReferenceData.Company
+        - TLA.CreateQuote
+      summary: Total loss can quote
+      x-summary-source: derived
+  /api/tla/requestQuote:
+    post:
+      tags:
+      - TotalLoss
+      operationId: TotalLoss_RequestQuote
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - Assessment.Detail+ImageAccess
+        - ReferenceData.Company
+        - ReferenceData.System
+        - TLA.CreateQuote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.TLA.RequestQuote'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.TLA.RequestQuote'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.TLA.RequestQuote'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.TLA.RequestQuote'
+        required: true
+      summary: Total loss request quote
+      x-summary-source: derived
+  /api/tla/updateQuote:
+    post:
+      tags:
+      - TotalLoss
+      operationId: TotalLoss_UpdateQuote
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - ReferenceData.Company
+        - TLA.CreateQuote
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.TLA.UpdateQuote'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.TLA.UpdateQuote'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.TLA.UpdateQuote'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.TLA.UpdateQuote'
+        required: true
+      summary: Total loss update quote
+      x-summary-source: derived
+  /api/tla/cancelQuote/{quoteId}:
+    get:
+      tags:
+      - TotalLoss
+      operationId: TotalLoss_CancelQuote
+      parameters:
+      - name: quoteId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - ReferenceData.Company
+        - TLA.CreateQuote
+      summary: Total loss cancel quote
+      x-summary-source: derived
+components:
+  schemas:
+    AudaAPI.WebAPI.Models.TLA.UpdateQuote:
+      type: object
+      properties:
+        TlaQuoteId:
+          format: int32
+          type: integer
+        AssessmentId:
+          format: uuid
+          type: string
+        SupplierId:
+          format: int32
+          type: integer
+        PreAccidentValuation:
+          format: double
+          type: number
+    AudaAPI.WebAPI.Models.TLA.RequestQuote:
+      type: object
+      properties:
+        AssessmentId:
+          format: uuid
+          type: string
+        SupplierId:
+          format: int32
+          type: integer
+        PreAccidentValuation:
+          format: double
+          type: number
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

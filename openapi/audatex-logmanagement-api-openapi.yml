@@ -1,0 +1,105 @@
+openapi: 3.2.0
+info:
+  title: Audatex Log Management API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged LogManagement across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: LogManagement
+paths:
+  /api/LogManagement:
+    get:
+      tags:
+      - LogManagement
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogLevelResponse'
+      summary: Get api log management
+      x-summary-source: derived
+      operationId: getApiLogManagement
+      x-operation-id-source: derived
+    put:
+      tags:
+      - LogManagement
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/LogElevationRequest'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogElevationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/LogElevationRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/LogElevationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogLevelResponse'
+      summary: Replace api log management
+      x-summary-source: derived
+      operationId: putApiLogManagement
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    LogLevelResponse:
+      type: object
+      properties:
+        logLevel:
+          $ref: '#/components/schemas/LogLevel'
+        until:
+          type: string
+          format: date-time
+      additionalProperties: false
+    LogLevel:
+      enum:
+      - Trace
+      - Debug
+      - Information
+      - Warning
+      - Error
+      - Critical
+      - None
+      type: string
+    LogElevationRequest:
+      type: object
+      properties:
+        logLevel:
+          $ref: '#/components/schemas/LogLevel'
+        duration:
+          type: string
+          format: date-span
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

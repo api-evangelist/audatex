@@ -1,0 +1,501 @@
+openapi: 3.2.0
+info:
+  title: Audatex Template API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Template across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Template
+paths:
+  /api/v1/Template:
+    post:
+      tags:
+      - Template
+      summary: Add a Template associated to an EntityId
+      description: ''
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/TemplateReqViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateReqViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TemplateReqViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TemplateReqViewModel'
+      responses:
+        '201':
+          description: Returns a created response
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Returns an error if the user is not authorised
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: postApiV1Template
+      x-operation-id-source: derived
+    get:
+      tags:
+      - Template
+      summary: Get the template list
+      description: This endpoint will allow you to get the Template List
+      responses:
+        '200':
+          description: Returns the template list
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateResViewModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateResViewModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TemplateResViewModel'
+        '400':
+          description: Returns a bad request if there is no template
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '404':
+          description: Returns an error if any template do not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: getApiV1Template
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Template/{id}:
+    get:
+      tags:
+      - Template
+      summary: Get the template for a given id
+      description: This endpoint will allow you to get the Template for an Id
+      parameters:
+      - name: id
+        in: path
+        description: templateId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns the template for the id
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TemplateResViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResViewModel'
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '404':
+          description: Returns an error if the template do not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: getApiV1TemplateById
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Template
+      summary: Update the template
+      description: This endpoint will allow you to update the Template
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/TemplateReqViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateReqViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TemplateReqViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TemplateReqViewModel'
+      responses:
+        '204':
+          description: Returns no content
+        '400':
+          description: Returns a bad request if there is no template
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '404':
+          description: Returns an error if any template do not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Returns an error if any template cannot be updated
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: putApiV1TemplateById
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Template/{templateId}:
+    delete:
+      tags:
+      - Template
+      summary: Delete Template
+      description: This endpoint will allow you to delete a template.
+      parameters:
+      - name: templateId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns an Ok response
+        '400':
+          description: Returns an error if the request fails validation or if no template is found
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '404':
+          description: Returns an error if the template does not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorized
+      operationId: deleteApiV1TemplateByTemplateId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Template/Default:
+    get:
+      tags:
+      - Template
+      summary: Get the default template
+      description: This endpoint will allow you to get the Default Template
+      responses:
+        '200':
+          description: Returns the default template
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TemplateResViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResViewModel'
+        '400':
+          description: Returns a bad request if there is no template
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '404':
+          description: Returns an error if any template do not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Indicates an internal server error or an unexpected error occurred
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: getApiV1TemplateDefault
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Template/Default/{name}:
+    put:
+      tags:
+      - Template
+      summary: Update the default template
+      description: This endpoint will allow you to update the default Template
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Returns no content
+        '400':
+          description: Returns a bad request if there is no template
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '404':
+          description: Returns an error if any template do not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Returns an error if any template cannot be updated
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: putApiV1TemplateDefaultByName
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    TemplateReqViewModel:
+      required:
+      - body
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        body: {}
+      additionalProperties: false
+    TemplateResViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        body: {}
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

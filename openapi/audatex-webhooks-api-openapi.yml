@@ -1,0 +1,546 @@
+openapi: 3.2.0
+info:
+  title: Audatex Webhooks API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Webhooks across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Webhooks
+paths:
+  /api/v1/Webhooks:
+    get:
+      tags:
+      - Webhooks
+      summary: Gets all Webhooks
+      description: This API returns all the Webhook entities
+      responses:
+        '200':
+          description: Returns collection of webhooks
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookResViewModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookResViewModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookResViewModel'
+        '400':
+          description: Returns an error if collection of webhook cannot be retrieved
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV1Webhooks
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Webhooks
+      summary: Creates a new Webhook
+      description: This API creates a new Webhook
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/WebhookReqViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookReqViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/WebhookReqViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/WebhookReqViewModel'
+      responses:
+        '201':
+          description: Successfully created the new Webhook
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+        '400':
+          description: Returns an error if request fails validation or if webhook cannot be created
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: postApiV1Webhooks
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Webhooks/{id}:
+    get:
+      tags:
+      - Webhooks
+      summary: Gets Webhook by Id
+      description: This API returns Webhook for given id
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns Webhook for given id
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/WebhookResViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookResViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/WebhookResViewModel'
+        '400':
+          description: Returns an error if request fails validation or if cannot retrieve webhook
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV1WebhooksById
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - Webhooks
+      summary: Deletes a Webhook
+      description: Deletes a Webhook for a given Id
+      parameters:
+      - name: id
+        in: path
+        description: Id of Webhook to delete
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Deleted the Webhook successfully
+        '400':
+          description: Returns an error if the request fails validation, e.g. Id NotFound
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: deleteApiV1WebhooksById
+      x-operation-id-source: derived
+    put:
+      tags:
+      - Webhooks
+      summary: Updates a Webhook
+      description: Updates a Webhook with given id to state given
+      parameters:
+      - name: id
+        in: path
+        description: Id of Webhook to update
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: New state of Webhook
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/WebhookUpdViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookUpdViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/WebhookUpdViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/WebhookUpdViewModel'
+      responses:
+        '200':
+          description: Successfully updated the Webhook
+        '400':
+          description: Returns an error if the request fails validation or if no matching webhook can be found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: putApiV1WebhooksById
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Webhooks/debug:
+    get:
+      tags:
+      - Webhooks
+      summary: Returns webhook debug information by imageCaptureId and optional event types
+      parameters:
+      - name: imageCaptureId
+        in: query
+        description: The source identifier (e.g., imageCaptureId)
+        schema:
+          type: string
+          format: uuid
+      - name: events
+        in: query
+        description: Optional list of event types (e.g., sent, delivered, etc.)
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Returns debug events
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookDebugEventViewModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookDebugEventViewModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookDebugEventViewModel'
+        '400':
+          description: Invalid input or downstream error
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Unexpected server error
+        '401':
+          description: Unauthorized
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '403':
+          description: Forbidden
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+      operationId: getApiV1WebhooksDebug
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    WebhookDebugEventViewModel:
+      type: object
+      properties:
+        webhookId:
+          type: string
+          format: uuid
+        eventType:
+          type:
+          - string
+          - 'null'
+        eventName:
+          type:
+          - string
+          - 'null'
+        sendDate:
+          type: string
+          format: date-time
+        result:
+          type:
+          - string
+          - 'null'
+        isSuccess:
+          type:
+          - boolean
+          - 'null'
+      additionalProperties: false
+    WebhookResViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        callbackUri:
+          type:
+          - string
+          - 'null'
+        authType:
+          $ref: '#/components/schemas/WebhookAuthType'
+        webhookEvents:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WebhookEventViewModel'
+      additionalProperties: false
+    WebhookEventType:
+      enum:
+      - ImageRequest_Expired
+      - ImageRequest_Completed
+      - ImageCollection_Estimatic_Attachment_Processed
+      - ImageCollection_Vi_No_Calculation_Processed
+      - ImageCollection_Ai_Triage_Completed
+      - ImageRequest_Deletion_Completed
+      - ImageRequest_Sent
+      - ImageRequest_Reminder
+      - Communication_Delivered
+      - Communication_Undelivered
+      - ImageRequest_Opened
+      - ImageRequest_Delivered
+      - ImageRequest_Undelivered
+      - Ping_Sent
+      type: string
+    WebhookAuthType:
+      enum:
+      - None
+      - Basic
+      - OAuth2
+      type: string
+    AuthenticationViewModel:
+      required:
+      - type
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/WebhookAuthType'
+        username:
+          type:
+          - string
+          - 'null'
+          description: username for Basic authentication. Required when authentication type is Basic.
+        password:
+          type:
+          - string
+          - 'null'
+          description: password for Basic authentication. Required when authentication type is Basic.
+        client_id:
+          type:
+          - string
+          - 'null'
+          description: client_id for OAuth2 authentication. Required when authentication type is OAuth2.
+        client_secret:
+          type:
+          - string
+          - 'null'
+          description: client_secret for OAuth2 authentication. Required when authentication type is OAuth2.
+        authenticationUri:
+          type:
+          - string
+          - 'null'
+          description: Uri of the authentication server to retrieve OAuth2 tokens. Required when authentication type is OAuth2.
+        scope:
+          type:
+          - string
+          - 'null'
+          description: 'This value will be sent as scope property when retrieveng the OAuth2 token. It is Optional but it is only
+
+            admitted if authentication type is OAuth2.'
+      additionalProperties: false
+    WebhookUpdViewModel:
+      required:
+      - authentication
+      - callbackUri
+      - id
+      - webhookEvents
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        callbackUri:
+          minLength: 1
+          type: string
+        authentication:
+          $ref: '#/components/schemas/AuthenticationViewModel'
+        webhookEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEventType'
+      additionalProperties: false
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    WebhookEventViewModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    WebhookReqViewModel:
+      required:
+      - authentication
+      - callbackUri
+      - webhookEvents
+      type: object
+      properties:
+        callbackUri:
+          minLength: 1
+          type: string
+        authentication:
+          $ref: '#/components/schemas/AuthenticationViewModel'
+        webhookEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookEventType'
+          description: Ids for WebhookEvents this webhook is subscribing to
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

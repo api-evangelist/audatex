@@ -1,0 +1,393 @@
+openapi: 3.2.0
+info:
+  title: Audatex AI Triage API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged AiTriage across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: AiTriage
+paths:
+  /api/v2/AiTriage:
+    post:
+      tags:
+      - AiTriage
+      summary: POST AI Triage v2 request
+      description: This endpoint will allow you to request a AI Triage
+      parameters:
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/AiTriageReqV2VM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiTriageReqV2VM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AiTriageReqV2VM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AiTriageReqV2VM'
+      responses:
+        '202':
+          description: Returns an accepted response. The CalculationId returned, can be used in subsequent GET requests for aiTriage.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+        '400':
+          description: Returns an error if the request fails validation or if the imageCapture cannot be found or if the imageCapture status is not yet complete
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '404':
+          description: Returns an error if the image request id is not found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: postApiV2AiTriage
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/AiTriage/{imageCaptureId}/{calculationId}:
+    get:
+      tags:
+      - AiTriage
+      summary: GET an AI Triage v2 Request
+      description: This endpoint will allow you to get the details of a AI Triage
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: calculationId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a response with the details of an AI Triage
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/AiTriageRespVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AiTriageRespVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AiTriageRespVM'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '400':
+          description: Returns an error if the request fails validation
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV2AiTriageByImageCaptureIdByCalculationId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    AiTriageReqV2VM:
+      required:
+      - countryCode
+      - imageCaptureId
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        countryCode:
+          $ref: '#/components/schemas/Country'
+        codes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AiTriageCode'
+          description: List of AI Triage codes
+        clientReferenceID:
+          maxLength: 250
+          minLength: 1
+          type:
+          - string
+          - 'null'
+          description: Data sent by external system as cross reference
+      additionalProperties: false
+    AiTriageCode:
+      enum:
+      - FRAUD_CHECK
+      - TOTAL_LOSS
+      - TOW_TRUCK
+      - DAMAGE_SEVERITY
+      - IMAGE_METADATA
+      - AREA_SEVERITY
+      type: string
+    Country:
+      enum:
+      - UK
+      - ZA
+      - US
+      - CA
+      - FR
+      - IE
+      - RO
+      - PL
+      - CH
+      - AD
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BW
+      - BR
+      - BG
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CZ
+      - DK
+      - DO
+      - EC
+      - SV
+      - EE
+      - FI
+      - GF
+      - DE
+      - GR
+      - GP
+      - GT
+      - HN
+      - HU
+      - IS
+      - IN
+      - ID
+      - IL
+      - IT
+      - JP
+      - KR
+      - KW
+      - LV
+      - LT
+      - LU
+      - MY
+      - MT
+      - MQ
+      - MX
+      - MD
+      - ME
+      - MA
+      - NA
+      - NL
+      - NC
+      - NZ
+      - NI
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PT
+      - PR
+      - MK
+      - RU
+      - RE
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ES
+      - SE
+      - TW
+      - TR
+      - UA
+      - AE
+      - GB
+      - VE
+      type: string
+    AiTriageRespVM:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+          description: Status message
+        totalLoss:
+          $ref: '#/components/schemas/TotalLossRespVM'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorViewModel'
+          description: Error messages
+      additionalProperties: false
+    ViErrorViewModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorPropertyViewModel'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    ViErrorPropertyViewModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    TotalLossRespVM:
+      type: object
+      properties:
+        probability:
+          type:
+          - string
+          - 'null'
+          description: The probability of a correct estimate
+        response:
+          type:
+          - string
+          - 'null'
+          description: The value of the estimate
+      additionalProperties: false
+    CalculationSelfViewModel:
+      type: object
+      properties:
+        calculationId:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

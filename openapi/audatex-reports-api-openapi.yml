@@ -1,0 +1,108 @@
+openapi: 3.2.0
+info:
+  title: Audatex Reports API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Reports across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Reports
+paths:
+  /api/v1/Reports/{format}/IntelligentDamageDetection/{imageCaptureId}/{commandId}/{language}:
+    get:
+      tags:
+      - Reports
+      summary: GET a Report of a VI case translated to the selected language, in the format…
+      description: This endpoint will allow you to get a Intelligent Damage Detection report
+      parameters:
+      - name: imageCaptureId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: commandId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: language
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a response with a VI report.
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+            text/json:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV1ReportsByFormatIntelligentDamageDetectionByImageCaptureIdByCommandIdByLanguage
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

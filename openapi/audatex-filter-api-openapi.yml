@@ -1,0 +1,204 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: AudaConnect Filter API
+  description: 'AudaConnect. You can use this Swagger page to test the API. You will need to authenticate either at the top of the page for multiple scopes or clicking on the authentication status image on each operation. You will need to use your supplied Client Application ID during when selecting scopes. AudaConnect API Build Version: 2.25.26048.2'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: Filter
+paths:
+  /api/users/me/filters:
+    get:
+      tags:
+      - Filter
+      summary: Get all filters for the currently logged in user
+      operationId: Filter_GetUserFiltersById
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Filters.FiltersForSession'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Filters.FiltersForSession'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Filters.FiltersForSession'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Filters.FiltersForSession'
+      security:
+      - oauth2:
+        - Assessment.MainIndex
+  /api/filters/{id}:
+    get:
+      tags:
+      - Filter
+      summary: Get a specific filter
+      operationId: Filter_Get
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the filter.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Filters.Filter'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Filters.Filter'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Filters.Filter'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Filters.Filter'
+      security:
+      - oauth2:
+        - Assessment.MainIndex
+  /api/filters/{id}/count:
+    get:
+      tags:
+      - Filter
+      summary: Get the number of jobs and unread jobs in the specified filter available to the…
+      operationId: Filter_GetFilterCount
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the filter.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - Assessment.MainIndex
+components:
+  schemas:
+    AudaAPI.Models.Filters.Filter:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        Name:
+          type: string
+        Description:
+          type: string
+        Notes:
+          type: string
+        KeyField:
+          type: string
+        DisplayKeyField:
+          type: string
+        FilterType:
+          type: string
+        ParentId:
+          format: uuid
+          type: string
+        Parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Filters.FilterParameter'
+    AudaAPI.Models.Filters.ExtraParameter:
+      type: object
+      properties:
+        DisplayName:
+          type: string
+        Id:
+          format: uuid
+          type: string
+        FilterType:
+          type: string
+        Options:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Filters.ExtraParameterOption'
+        ParameterName:
+          type: string
+        ParameterType:
+          type: string
+    AudaAPI.Models.Filters.ExtraParameterOption:
+      type: object
+      properties:
+        Description:
+          type: string
+        Value:
+          type: string
+    AudaAPI.Models.Filters.FiltersForSession:
+      type: object
+      properties:
+        Filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Filters.Filter'
+        ExtraParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Filters.ExtraParameter'
+    AudaAPI.Models.Filters.FilterParameter:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        ParameterType:
+          type: string
+        Description:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

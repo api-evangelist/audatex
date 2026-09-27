@@ -1,0 +1,248 @@
+openapi: 3.2.0
+info:
+  title: Audatex Ping Event API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged PingEvent across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: PingEvent
+paths:
+  /api/v1/PingEvent:
+    post:
+      tags:
+      - PingEvent
+      summary: Creates a ping
+      description: This API will allow you to create a ping
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PingModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PingModel'
+        '400':
+          description: Returns an error if region fails validation
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Returns an error if the user is not authorized
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '403':
+          description: Returns an error if the user has not the permissions needed
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '429':
+          description: Returns an error if the rate limit has been exceeded
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: postApiV1PingEvent
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/PingEvent/{pingId}:
+    get:
+      tags:
+      - PingEvent
+      summary: Gets details about a ping
+      description: This API will allow you to get details about a ping
+      parameters:
+      - name: pingId
+        in: path
+        description: The id of the ping
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns details of the ping
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/PingResponse'
+        '400':
+          description: Returns an error if the ping fails validation
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Returns an error if the user is not authorized
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '403':
+          description: Returns an error if the user has not the permissions needed
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '404':
+          description: Returns an error if the pingId does not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: getApiV1PingEventByPingId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    PingModel:
+      type: object
+      properties:
+        pingId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    PingStatus:
+      enum:
+      - Failure
+      - Success
+      type: string
+    PingResult:
+      type: object
+      properties:
+        webhookId:
+          type: string
+          format: uuid
+        callbackUri:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/PingStatus'
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    PingResponse:
+      type: object
+      properties:
+        pingId:
+          type: string
+          format: uuid
+        pingResults:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PingResult'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

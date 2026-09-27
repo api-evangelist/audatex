@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: 'EAPI GIC Integration API '
+  title: EAPI GIC Integration API
   description: ''
   contact:
     name: Audatex
@@ -11,12 +11,18 @@ info:
   version: '1.0'
 servers:
 - url: /TestGICapi
+security:
+- oauth2:
+  - readAccess
+  - writeAccess
+tags:
+- name: GICIntegration
 paths:
   /api/v1/GICIntegration/{workAssignmentID}:
     post:
       tags:
       - GICIntegration
-      summary: 'Example GIC Integration Response (QA workAssignmentID - 290240018 , DEMO workAssignmentID - 332614611) '
+      summary: Example GIC Integration Response (QA workAssignmentID - 290240018 , DEMO…
       parameters:
       - name: workAssignmentID
         in: path
@@ -30,6 +36,8 @@ paths:
       responses:
         '200':
           description: Success
+      operationId: postApiV1GICIntegrationByWorkAssignmentID
+      x-operation-id-source: derived
   /api/v1/getM31EventAcks:
     post:
       tags:
@@ -38,20 +46,8 @@ paths:
       responses:
         '200':
           description: Success
-  /api/Version:
-    get:
-      tags:
-      - Version
-      parameters:
-      - name: api-version
-        in: query
-        description: The requested API version
-        required: true
-        schema:
-          type: string
-      responses:
-        '200':
-          description: Success
+      operationId: postApiV1GetM31EventAcks
+      x-operation-id-source: derived
 components:
   securitySchemes:
     oauth2:
@@ -62,7 +58,3 @@ components:
           tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
           scopes:
             b2b.fnol.api: Audatex Assignment API Access
-security:
-- oauth2:
-  - readAccess
-  - writeAccess

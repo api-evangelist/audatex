@@ -1,0 +1,681 @@
+openapi: 3.2.0
+info:
+  title: Audatex Parts Order API
+  version: v1
+  description: 'Operations tagged PartsOrder across 2 of this provider''s published API definitions: audatex-audaconnect-api-openapi-original.json, audatex-audaconnect-bms-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI
+tags:
+- name: PartsOrder
+paths:
+  /api/parts/prices:
+    post:
+      tags:
+      - PartsOrder
+      summary: Get price for parts from a supplier
+      operationId: PartsOrder_GetPartsPrice
+      parameters:
+      - name: supplierId
+        in: query
+        description: The unique SupplierID of the part Supplier.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: supplierRepairerReference
+        in: query
+        description: Supplier reference to the repairer
+        required: true
+        schema:
+          type: string
+      - name: vehicleBrand
+        in: query
+        description: The brand code for the vehicle manufacturer
+        required: true
+        schema:
+          type: string
+      - name: assessmentId
+        in: query
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsPriceResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsPriceResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsPriceResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsPriceResult'
+      security:
+      - oauth2:
+        - Parts.GetParts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+          text/json:
+            schema:
+              type: array
+              items:
+                type: string
+          application/xml:
+            schema:
+              type: array
+              items:
+                type: string
+          text/xml:
+            schema:
+              type: array
+              items:
+                type: string
+        description: ids the suppliers part ids
+        required: true
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/parts/orders/{id}:
+    get:
+      tags:
+      - PartsOrder
+      summary: Get details for a specific parts order
+      operationId: PartsOrder_GetPartOrder
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the parts order.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - Parts.GetParts
+    post:
+      tags:
+      - PartsOrder
+      summary: Update a specified parts order
+      operationId: PartsOrder_OrderUpdate
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the parts order.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+      security:
+      - oauth2:
+        - Parts.UpdateParts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+        description: Values to update the existing parts order.
+        required: true
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/parts/orders/upload:
+    post:
+      tags:
+      - PartsOrder
+      summary: Upload a parts order
+      operationId: PartsOrder_OrderUpload
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+      security:
+      - oauth2:
+        - Parts.UpdateParts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+        required: true
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/parts/orders/{id}/status:
+    post:
+      tags:
+      - PartsOrder
+      summary: Update the parts order status
+      operationId: postApiPartsOrdersByIdStatus
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the parts order.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: status
+        in: query
+        description: The status of the parts order.
+        required: true
+        schema:
+          type: string
+          enum:
+          - Pending
+          - Received
+          - Fulfilled
+          - Returned
+          - Complete
+          - Cancelled
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsResult'
+      security:
+      - oauth2:
+        - Parts.UpdateParts
+      x-operation-id-source: normalized
+      x-operation-id-original: PartsOrder_OrderUpdate
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/parts/orders/{id}/part/{partId}/{status}:
+    post:
+      tags:
+      - PartsOrder
+      summary: Change the status of a part in a given order
+      operationId: PartsOrder_UpdatePartStatus
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the parts order.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: partId
+        in: path
+        description: The unique ID of the part.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: status
+        in: path
+        description: The new part status.
+        required: true
+        schema:
+          type: string
+          enum:
+          - Pending
+          - Ordered
+          - Received
+          - Returned
+          - Cancelled
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - Parts.UpdateParts
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /v1/bmsapi/partsorders/{partsorderid}:
+    get:
+      tags:
+      - PartsOrder
+      summary: Get information about an order in the inpart system
+      description: Get information about an order in the inpart system.
+      operationId: PartsOrder_GetPartsOrders
+      parameters:
+      - name: partsorderid
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Parts.PartsOrder'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Parts.PartsOrder'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Parts.PartsOrder'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Parts.PartsOrder'
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing parts order
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.PartsOrders
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI
+components:
+  schemas:
+    AudaAPI.Models.Parts.Zone99Part:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        PartNumber:
+          type: string
+        Quantity:
+          format: int32
+          type: integer
+        CalculationId:
+          format: uuid
+          type: string
+    AudaAPI.Models.Parts.SupplierPartPrice:
+      type: object
+      properties:
+        SupplierID:
+          format: int32
+          type: integer
+        Description:
+          type: string
+        PartNumber:
+          type: string
+        NonOEPartNumber:
+          type: string
+          readOnly: true
+        Status:
+          type: string
+        Availability:
+          format: int32
+          type: integer
+        Quantity:
+          format: int32
+          type: integer
+        Price:
+          format: double
+          type: number
+    AudaAPI.Models.Parts.Part:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        Description:
+          type: string
+        PartNumber:
+          type: string
+        OeNumber:
+          type: string
+        AftermarketPartNumber:
+          type: string
+        Manufacturer:
+          type: string
+        ManufType:
+          enum:
+          - OE
+          - NonOE
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        Quantity:
+          format: int32
+          type: integer
+        UnitCost:
+          format: double
+          type: number
+        TotalCost:
+          format: double
+          type: number
+        Status:
+          enum:
+          - Pending
+          - Ordered
+          - Received
+          - Returned
+          - Cancelled
+          type: string
+    AudaAPI.Models.Parts.Model:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        ManufacturerName:
+          type: string
+        ModelName:
+          type: string
+    AudaAPI.Models.Parts.PartsOrder:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        CompanyId:
+          format: uuid
+          type: string
+        SiteId:
+          type: string
+        Status:
+          enum:
+          - Pending
+          - Received
+          - Fulfilled
+          - Returned
+          - Complete
+          - Cancelled
+          type: string
+        ReferenceNumber:
+          type: string
+        ExternalOrderId:
+          type: string
+        SupplierId:
+          type: string
+        AssessmentId:
+          format: uuid
+          type: string
+        ChargePercentage:
+          format: double
+          type: number
+        OrderedBy:
+          type: string
+        Comment:
+          type: string
+        DeliveryTo:
+          type: string
+        DeliveredBy:
+          type: string
+        DeliveryDate:
+          format: date-time
+          type: string
+        Vehicle:
+          $ref: '#/components/schemas/AudaAPI.Models.Parts.Vehicle'
+        Model:
+          $ref: '#/components/schemas/AudaAPI.Models.Parts.Model'
+        Calculations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Parts.Calculation'
+        TlaQuoteId:
+          format: int32
+          type: integer
+        InvoiceNumber:
+          type: string
+        WIP:
+          type: string
+    AudaAPI.Models.Parts.PartsResult:
+      type: object
+      properties:
+        Order:
+          $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+        Status:
+          enum:
+          - Ok
+          - Failed
+          - GeneralError
+          type: string
+        Error:
+          type: string
+    AudaAPI.Models.Parts.PartsPriceResult:
+      type: object
+      properties:
+        Prices:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Parts.SupplierPartPrice'
+        Status:
+          enum:
+          - Ok
+          - Failed
+          - GeneralError
+          type: string
+        Error:
+          type: string
+    AudaAPI.Models.Parts.Calculation:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        CalculationDate:
+          format: date-time
+          type: string
+        GrandTotalIncludingVat:
+          format: double
+          type: number
+        GrandTotalExcludingVat:
+          format: double
+          type: number
+        Parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Parts.Part'
+        Zone99Parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Parts.Zone99Part'
+    AudaAPI.Models.Parts.Vehicle:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        Vin:
+          type: string
+        Registration:
+          type: string
+        MonthOfRegistration:
+          format: int32
+          type: integer
+        YearOfRegistration:
+          format: int32
+          type: integer
+        BodyColour:
+          type: string
+        Odometer:
+          format: int32
+          type: integer
+    AudaAPI.BMSAPI.DTO.Parts.Part:
+      type: object
+      properties:
+        OEPartNumber:
+          type: string
+        OrderedPartNumber:
+          type: string
+        Quantity:
+          format: int32
+          type: integer
+        Status:
+          enum:
+          - New
+          - Confirmed
+          - Delivered
+          - ReturnAccepted
+          - Cancelled
+          - Dispatched
+          - ReturnRequested
+          - ReturnRejected
+          type: string
+        RepairerPrice:
+          format: double
+          type: number
+        InsurerPrice:
+          format: double
+          type: number
+        DeliveryDate:
+          format: date-time
+          type: string
+    AudaAPI.BMSAPI.DTO.Parts.PartsOrder:
+      type: object
+      properties:
+        AssessmentId:
+          format: uuid
+          type: string
+        SupplierName:
+          type: string
+        PartsOrderId:
+          format: uuid
+          type: string
+        OrderReference:
+          type: string
+        Status:
+          enum:
+          - New
+          - Confirmed
+          - Dispatched
+          - ReturnAccepted
+          - Delivered
+          - Cancelled
+          - ReturnRequested
+          - ReturnRejected
+          type: string
+        DeliveryDate:
+          format: date-time
+          type: string
+        Parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Parts.Part'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant
+x-refined-from:
+- audatex-audaconnect-api-openapi-original.json
+- audatex-audaconnect-bms-api-openapi-original.json

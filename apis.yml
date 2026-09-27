@@ -42,177 +42,2100 @@ created: '2025-01-01'
 modified: '2026-09-17'
 specificationVersion: '0.23'
 apis:
-  - aid: audatex:audatex-audaconnect-api
-    name: Audatex AudaConnect API
-    description: |
-      The AudaConnect WebAPI (Audatex UK) enables third-party software developers to access, query and update the Audatex platform: assessments (search, create shell, import/export AxFormat, PDF reports, calculations, images, mails), vehicle lookup by VRN/VIN and CAP valuation, parts prices and orders, suppliers, users, sites and work providers, total-loss-avoidance quotes, and topic-based notification subscriptions (poll or push). Swagger 2.0, 93 operations, OAuth 2.0 with 18 scopes.
-    humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
-    baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
-    tags:
-    - Assessment
-    - Claims
-    - Insurance
-    - Repair
-    - Vehicle Data
-    - Parts
-    - Notification
-    tags_raw:
-    - Assessments
-    - Claims
-    - Insurance
-    - Repair
-    - Vehicle Data
-    - Parts
-    - Notifications
-    properties:
-    - type: Documentation
-      url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
-    - type: APIReference
-      url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
-    - type: OpenAPI
-      url: openapi/audatex-audaconnect-api-openapi.yml
-    - type: Authentication
-      url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
-    - type: GettingStarted
-      url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
-    - type: DeveloperPortal
-      url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
-    - type: Sandbox
-      url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
-    - type: Webhooks
-      url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
-    - type: Overlay
-      url: overlays/audatex-audaconnect-api-overlay.yaml
-  - aid: audatex:audatex-audaconnect-bms-api
-    name: Audatex AudaConnect BMS API
-    description: |
-      Audatex services for Bodyshop Management Systems (BMS): lets a BMS get and update assessment-related data — resolve assessment IDs by originator and number, fetch and import assessment exports in AXFORMAT (JSON or XML), retrieve assessment images, update part prices and part numbers, look up parts orders, and subscribe a site, company or user to notification topics and poll for notifications. Swagger 2.0, 25 operations, OAuth 2.0 implicit grant with BMS.* scopes.
-    humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
-    baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI
-    tags:
-    - Assessment
-    - Bodyshop Management
-    - Parts
-    - Repair
-    - Notification
-    tags_raw:
-    - Assessments
-    - Bodyshop Management
-    - Parts
-    - Repair
-    - Notifications
-    properties:
-    - type: Documentation
-      url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
-    - type: OpenAPI
-      url: openapi/audatex-audaconnect-bms-api-openapi.yml
-    - type: Authentication
-      url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
-    - type: Sandbox
-      url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
-    - type: Overlay
-      url: overlays/audatex-audaconnect-bms-api-overlay.yaml
-  - aid: audatex:audatex-api-gateway
-    name: Audatex API Gateway (Intelligent Vehicle Inspection)
-    description: |
-      The Audatex.APIGateway exposes Solera's guided image capture and intelligent vehicle inspection services: send image-capture requests by SMS, link or QR code, upload images, audio and video, run AI Triage, VI damaged-parts and VI calculation requests, fetch damage-detection reports, create claims, assessments, jobs, templates, reminders and intelligent offers, search repairers, and register webhooks for 14 event types. OpenAPI 3.0.1, 75 operations, JWT Bearer authorization. Published from Audatex's pre-production acceptance-test (PAT) host.
-    humanURL: https://services-pat.auda-target.com/APIGateway/swagger/index.html
-    baseURL: https://services-pat.auda-target.com/APIGateway
-    tags:
-    - Vehicle Inspection
-    - Image Capture
-    - Claims
-    - AI Triage
-    - Webhook
-    tags_raw:
-    - Vehicle Inspection
-    - Image Capture
-    - Claims
-    - AI Triage
-    - Webhooks
-    properties:
-    - type: Documentation
-      url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
-    - type: APIReference
-      url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
-    - type: OpenAPI
-      url: openapi/audatex-api-gateway-openapi.yml
-    - type: Webhooks
-      url: asyncapi/audatex-webhooks.yml
-    - type: Overlay
-      url: overlays/audatex-api-gateway-overlay.yaml
-  - aid: audatex:audatex-gic-api
-    name: Audatex GIC API
-    description: |
-      The Audatex EAPI GIC (Global Integration Component) Integration API is the North American claims-integration surface used to post GIC integration responses for a work assignment and to acknowledge M31 events. OpenAPI 3.0.1, 3 operations, OAuth 2.0 password grant against the Solera/Audatex identity server (dispatch-login) with the b2b.fnol.api scope. Only the demo/test instance is publicly documented.
-    humanURL: https://api-demo.audatex.com/TestGICapi/docs/index.html
-    baseURL: https://api-demo.audatex.com/TestGICapi
-    tags:
-    - Claims
-    - GIC
-    - Insurance
-    - Integration
-    tags_raw:
-    - Claims
-    - GIC
-    - Insurance
-    - Integration
-    properties:
-    - type: Documentation
-      url: https://api-demo.audatex.com/TestGICapi/docs/index.html
-    - type: OpenAPI
-      url: openapi/audatex-gic-integration-api-openapi.yml
-    - type: Sandbox
-      url: https://api-demo.audatex.com/TestGICapi/docs/index.html
-    - type: Overlay
-      url: overlays/audatex-gic-integration-api-overlay.yaml
-  - aid: audatex:audatex-dashboard-assignment-api
-    name: Solera Dashboard Assignment API
-    description: |
-      The Solera Dashboard Assignment API (Audatex North America) is the FNOL assignment integration surface behind the Solera claims dashboard. The publicly served OpenAPI 3.0.1 document describes only the versioned /api/Version probe; assignment operations require the b2b.fnol.api scope from the dispatch-login identity server and are documented to onboarded partners. Only the demo/test instance is publicly documented.
-    humanURL: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
-    baseURL: https://api-demo.audatex.com/TestAssignmentapi
-    tags:
-    - Claims
-    - FNOL
-    - Insurance
-    - Integration
-    tags_raw:
-    - Claims
-    - FNOL
-    - Insurance
-    - Integration
-    properties:
-    - type: Documentation
-      url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
-    - type: OpenAPI
-      url: openapi/audatex-dashboard-assignment-api-openapi.yml
-    - type: Sandbox
-      url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
-    - type: Overlay
-      url: overlays/audatex-dashboard-assignment-api-overlay.yaml
-  - aid: audatex:solera-api-gateway
-    name: Solera API Gateway (North America)
-    description: |
-      The Solera Integrations Public API portal for North America lists the Audatex/Solera claims services available to integrators, including the ClaimImage document-return API, with Swagger documentation for each service. The portal root redirects unauthenticated visitors to a Solera | Audatex login, so the service catalog and per-service Swagger documents are customer-gated; the ClaimImage Return API guide is served as a public PDF.
-    humanURL: https://na.api.solera.com/
-    baseURL: https://na.api.solera.com
-    tags:
-    - Claims
-    - Documents
-    - Insurance
-    - Solera
-    tags_raw:
-    - Claims
-    - Documents
-    - Insurance
-    - Solera
-    properties:
-    - type: Documentation
-      url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
-    - type: Login
-      url: https://na.api.solera.com/Login
+- aid: audatex:solera-api-gateway
+  name: Solera API Gateway (North America)
+  description: >
+    The Solera Integrations Public API portal for North America lists the Audatex/Solera claims services
+    available to integrators, including the ClaimImage document-return API, with Swagger documentation
+    for each service. The portal root redirects unauthenticated visitors to a Solera | Audatex login,
+    so the service catalog and per-service Swagger documents are customer-gated; the ClaimImage Return
+    API guide is served as a public PDF.
+  humanURL: https://na.api.solera.com/
+  baseURL: https://na.api.solera.com
+  tags:
+  - Claims
+  - Documents
+  - Insurance
+  - Solera
+  tags_raw:
+  - Claims
+  - Documents
+  - Insurance
+  - Solera
+  properties:
+  - type: Documentation
+    url: https://na.api.solera.com/files/ClaimImage%20Return%20API.pdf
+  - type: Login
+    url: https://na.api.solera.com/Login
+- aid: audatex:audatex-aitriage-api
+  name: Audatex AI Triage API
+  description: The AiTriage API from Audatex — 2 operation(s) for aitriage.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - AiTriage
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-aitriage-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-assessment-api
+  name: Audatex Assessment API
+  description: The Assessment API from Audatex — 26 operation(s) for assessment.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Assessment
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-assessment-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-assessmentexport-api
+  name: Audatex Assessment Export API
+  description: The AssessmentExport API from Audatex — 1 operation(s) for assessmentexport.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - AssessmentExport
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-assessmentexport-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-assessmentimport-api
+  name: Audatex Assessment Import API
+  description: The AssessmentImport API from Audatex — 2 operation(s) for assessmentimport.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - AssessmentImport
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-assessmentimport-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-assessmentreport-api
+  name: Audatex Assessment Report API
+  description: The AssessmentReport API from Audatex — 2 operation(s) for assessmentreport.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - AssessmentReport
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-assessmentreport-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-audio-api
+  name: Audatex Audio API
+  description: The Audio API from Audatex — 2 operation(s) for audio.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Audio
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-audio-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-bms-api
+  name: Audatex BMS API
+  description: The BMS API from Audatex — 1 operation(s) for bms.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - BMS
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-bms-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-calculation-api
+  name: Audatex Calculation API
+  description: The Calculation API from Audatex — 2 operation(s) for calculation.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Calculation
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-calculation-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-claim-api
+  name: Audatex Claim API
+  description: The Claim API from Audatex — 3 operation(s) for claim.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Claim
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-claim-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-claimrepairers-api
+  name: Audatex Claim Repairers API
+  description: The ClaimRepairers API from Audatex — 1 operation(s) for claimrepairers.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - ClaimRepairers
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-claimrepairers-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-clientconfiguration-api
+  name: Audatex Client Configuration API
+  description: The ClientConfiguration API from Audatex — 1 operation(s) for clientconfiguration.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - ClientConfiguration
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-clientconfiguration-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-company-api
+  name: Audatex Company API
+  description: The Company API from Audatex — 2 operation(s) for company.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Company
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-company-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-event-api
+  name: Audatex Event API
+  description: The Event API from Audatex — 10 operation(s) for event.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Event
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-event-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-filter-api
+  name: Audatex Filter API
+  description: The Filter API from Audatex — 3 operation(s) for filter.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Filter
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-filter-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-fraudcheck-api
+  name: Audatex Fraud Check API
+  description: The FraudCheck API from Audatex — 1 operation(s) for fraudcheck.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - FraudCheck
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-fraudcheck-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-gicintegration-api
+  name: Audatex GIC Integration API
+  description: The GICIntegration API from Audatex — 2 operation(s) for gicintegration.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - GICIntegration
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-gicintegration-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-heroimage-api
+  name: Audatex Hero Image API
+  description: The HeroImage API from Audatex — 1 operation(s) for heroimage.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - HeroImage
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-heroimage-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-history-api
+  name: Audatex History API
+  description: The History API from Audatex — 1 operation(s) for history.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - History
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-history-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-image-api
+  name: Audatex Image API
+  description: The Image API from Audatex — 6 operation(s) for image.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Image
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-image-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-imageattachment-api
+  name: Audatex Image Attachment API
+  description: The ImageAttachment API from Audatex — 2 operation(s) for imageattachment.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - ImageAttachment
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-imageattachment-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-imagecapture-api
+  name: Audatex Image Capture API
+  description: The ImageCapture API from Audatex — 9 operation(s) for imagecapture.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - ImageCapture
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-imagecapture-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-imagecaptureexternal-api
+  name: Audatex Image Capture External API
+  description: The ImageCaptureExternal API from Audatex — 10 operation(s) for imagecaptureexternal.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - ImageCaptureExternal
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-imagecaptureexternal-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-internaldata-api
+  name: Audatex Internal Data API
+  description: The InternalData API from Audatex — 5 operation(s) for internaldata.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - InternalData
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-internaldata-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-introspection-api
+  name: Audatex Introspection API
+  description: The Introspection API from Audatex — 4 operation(s) for introspection.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Introspection
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-introspection-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-job-api
+  name: Audatex Job API
+  description: The Job API from Audatex — 3 operation(s) for job.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Job
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-job-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-logmanagement-api
+  name: Audatex Log Management API
+  description: The LogManagement API from Audatex — 1 operation(s) for logmanagement.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - LogManagement
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-logmanagement-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-notification-api
+  name: Audatex Notification API
+  description: The Notification API from Audatex — 6 operation(s) for notification.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Notification
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-notification-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-offer-api
+  name: Audatex Offer API
+  description: The Offer API from Audatex — 3 operation(s) for offer.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Offer
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-offer-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-partsorder-api
+  name: Audatex Parts Order API
+  description: The PartsOrder API from Audatex — 6 operation(s) for partsorder.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - PartsOrder
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-partsorder-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-pingevent-api
+  name: Audatex Ping Event API
+  description: The PingEvent API from Audatex — 2 operation(s) for pingevent.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - PingEvent
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-pingevent-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-reminder-api
+  name: Audatex Reminder API
+  description: The Reminder API from Audatex — 2 operation(s) for reminder.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Reminder
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-reminder-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-repairer-api
+  name: Audatex Repairer API
+  description: The Repairer API from Audatex — 1 operation(s) for repairer.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Repairer
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-repairer-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-repairers-api
+  name: Audatex Repairers API
+  description: The Repairers API from Audatex — 1 operation(s) for repairers.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Repairers
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-repairers-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-reports-api
+  name: Audatex Reports API
+  description: The Reports API from Audatex — 1 operation(s) for reports.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-reports-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-supplier-api
+  name: Audatex Supplier API
+  description: The Supplier API from Audatex — 6 operation(s) for supplier.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Supplier
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-supplier-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-template-api
+  name: Audatex Template API
+  description: The Template API from Audatex — 5 operation(s) for template.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Template
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-template-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-terminal-api
+  name: Audatex Terminal API
+  description: The Terminal API from Audatex — 3 operation(s) for terminal.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Terminal
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-terminal-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-totalloss-api
+  name: Audatex Total Loss API
+  description: The TotalLoss API from Audatex — 4 operation(s) for totalloss.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - TotalLoss
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-totalloss-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-user-api
+  name: Audatex User API
+  description: The User API from Audatex — 4 operation(s) for user.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-user-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-vass-api
+  name: Audatex Vass API
+  description: The Vass API from Audatex — 2 operation(s) for vass.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Vass
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-vass-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-vehicle-api
+  name: Audatex Vehicle API
+  description: The Vehicle API from Audatex — 6 operation(s) for vehicle.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Vehicle
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-vehicle-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-version-api
+  name: Audatex Version API
+  description: The Version API from Audatex — 1 operation(s) for version.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Version
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-version-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-vidamagedparts-api
+  name: Audatex Vi Damaged Parts API
+  description: The ViDamagedParts API from Audatex — 2 operation(s) for vidamagedparts.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - ViDamagedParts
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-vidamagedparts-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-video-api
+  name: Audatex Video API
+  description: The Video API from Audatex — 2 operation(s) for video.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Video
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-video-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-vifullcalculation-api
+  name: Audatex Vi Full Calculation API
+  description: The ViFullCalculation API from Audatex — 2 operation(s) for vifullcalculation.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - ViFullCalculation
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-vifullcalculation-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-vinocalculation-api
+  name: Audatex Vi No Calculation API
+  description: The ViNoCalculation API from Audatex — 5 operation(s) for vinocalculation.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - ViNoCalculation
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-vinocalculation-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-webhooks-api
+  name: Audatex Webhooks API
+  description: The Webhooks API from Audatex — 3 operation(s) for webhooks.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-workprovider-api
+  name: Audatex Workprovider API
+  description: The Workprovider API from Audatex — 2 operation(s) for workprovider.
+  humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  tags:
+  - Workprovider
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-workprovider-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+- aid: audatex:audatex-reference-data-api
+  name: Audatex Reference Data API
+  description: The Reference Data API from Audatex — 12 operation(s) for reference data.
+  humanURL: https://na.api.solera.com/
+  baseURL: https://na.api.solera.com
+  tags:
+  - Reference Data
+  properties:
+  - type: OpenAPI
+    url: openapi/audatex-reference-data-api-openapi.yml
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: APIReference
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+  - type: Authentication
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: GettingStarted
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register
+  - type: DeveloperPortal
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.WebAPI/
+  - type: Webhooks
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/Help/Topic/NotificationTopics
+  - type: Documentation
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+  - type: Sandbox
+    url: https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/
+  - type: Documentation
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: APIReference
+    url: https://services-pat.auda-target.com/APIGateway/swagger/index.html
+  - type: Webhooks
+    url: asyncapi/audatex-webhooks.yml
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestGICapi/docs/index.html
+  - type: Documentation
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
+  - type: Sandbox
+    url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
 common:
+  - type: Overlay
+    url: overlays/audatex-audaconnect-api-overlay.yaml
+  - type: Overlay
+    url: overlays/audatex-audaconnect-bms-api-overlay.yaml
+  - type: Overlay
+    url: overlays/audatex-api-gateway-overlay.yaml
+  - type: Overlay
+    url: overlays/audatex-gic-integration-api-overlay.yaml
+  - type: Overlay
+    url: overlays/audatex-dashboard-assignment-api-overlay.yaml
   - type: Website
     url: https://audatex.co.uk/
   - type: ParentCompany

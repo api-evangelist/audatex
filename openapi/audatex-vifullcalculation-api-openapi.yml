@@ -1,0 +1,278 @@
+openapi: 3.2.0
+info:
+  title: Audatex Vi Full Calculation API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged ViFullCalculation across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: ViFullCalculation
+paths:
+  /api/v1/ViFullCalculation:
+    post:
+      tags:
+      - ViFullCalculation
+      summary: POST Full VI Calculation request
+      description: This endpoint will allow you to request a Full VI Calculation
+      parameters:
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ViFullCalculationReqVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViFullCalculationReqVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ViFullCalculationReqVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ViFullCalculationReqVM'
+      responses:
+        '202':
+          description: Returns an accepted response. The CalculationId returned, can be used in subsequent GET requests for viFullCalculation.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '400':
+          description: Returns an error if the request fails validation or if the imageCapture cannot be found or if the imageCapture status is not yet complete
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: postApiV1ViFullCalculation
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/ViFullCalculation/{imageCaptureId}/{calculationId}:
+    get:
+      tags:
+      - ViFullCalculation
+      summary: GET a Full VI Calculation response
+      description: This endpoint will allow you to get the details of Full VI Calculation
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: calculationId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a response with the details of a Full VI Calculation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ViFullCalculationRespVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViFullCalculationRespVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ViFullCalculationRespVM'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '400':
+          description: Returns an error if the request fails validation
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV1ViFullCalculationByImageCaptureIdByCalculationId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    ViFullCalculationReqVM:
+      required:
+      - countryCode
+      - imageCaptureId
+      - sourceSystem
+      - sourceSystemKey
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        sourceSystemKey:
+          maxLength: 250
+          minLength: 1
+          type: string
+          description: Data sent by external system as cross reference
+        sourceSystem:
+          $ref: '#/components/schemas/EstimatingSourceSystem'
+        includeContours:
+          type: boolean
+          description: 'Include damage contours in the result data
+
+            This will default to false'
+        countryCode:
+          $ref: '#/components/schemas/Country'
+      additionalProperties: false
+    ViFullCalculationRespVM:
+      type: object
+      properties:
+        calculationId:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Country:
+      enum:
+      - UK
+      - ZA
+      - US
+      - CA
+      - FR
+      - IE
+      - RO
+      - PL
+      - CH
+      - AD
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BW
+      - BR
+      - BG
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CZ
+      - DK
+      - DO
+      - EC
+      - SV
+      - EE
+      - FI
+      - GF
+      - DE
+      - GR
+      - GP
+      - GT
+      - HN
+      - HU
+      - IS
+      - IN
+      - ID
+      - IL
+      - IT
+      - JP
+      - KR
+      - KW
+      - LV
+      - LT
+      - LU
+      - MY
+      - MT
+      - MQ
+      - MX
+      - MD
+      - ME
+      - MA
+      - NA
+      - NL
+      - NC
+      - NZ
+      - NI
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PT
+      - PR
+      - MK
+      - RU
+      - RE
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ES
+      - SE
+      - TW
+      - TR
+      - UA
+      - AE
+      - GB
+      - VE
+      type: string
+    EstimatingSourceSystem:
+      enum:
+      - AEG
+      - ADXE
+      - Qapter
+      type: string
+    CalculationSelfViewModel:
+      type: object
+      properties:
+        calculationId:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

@@ -1,0 +1,455 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: AudaConnect Notification API
+  description: 'AudaConnect. You can use this Swagger page to test the API. You will need to authenticate either at the top of the page for multiple scopes or clicking on the authentication status image on each operation. You will need to use your supplied Client Application ID during when selecting scopes. AudaConnect API Build Version: 2.25.26048.2'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: Notification
+paths:
+  /api/notifications/{subscriptionId}:
+    get:
+      tags:
+      - Notification
+      summary: Get Notifications for this subscription
+      description: 'Get all waiting notifications. Providing a subcription ID will return notifications only for that subscription,
+
+        omitting it will return all notifications across all subscriptions. Will fetch a maximum of 100 messages
+
+        per call.'
+      operationId: Notification_GetNotifications
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: If provided, gets notifications only for that subscription.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.NotificationMessage'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.NotificationMessage'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.NotificationMessage'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.NotificationMessage'
+        '404':
+          description: Non existing subscription
+        '500':
+          description: Internal server error
+      security:
+      - oauth2:
+        - System.Notifications
+  /api/notifications/topics:
+    get:
+      tags:
+      - Notification
+      summary: Get all topics that can be subscribed to
+      operationId: Notification_GetTopics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.Topic'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.Topic'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.Topic'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.Topic'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2:
+        - System.Notifications
+  /api/notifications/subscriptions:
+    get:
+      tags:
+      - Notification
+      summary: Get all active subscriptions
+      operationId: Notification_GetSubscriptions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.Subscription'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.Subscription'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.Subscription'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.Notification.Subscription'
+        '500':
+          description: Internal server error
+      security:
+      - oauth2:
+        - System.Notifications
+    post:
+      tags:
+      - Notification
+      summary: Create a new subscription to the specified topic
+      operationId: Notification_Subscribe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionResponse'
+        '400':
+          description: Topic format is not valid
+        '404':
+          description: Non existing topic
+        '409':
+          description: Already subscribed
+        '500':
+          description: Internal server error
+      security:
+      - oauth2:
+        - System.Notifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.SubscribeData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.SubscribeData'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.SubscribeData'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.SubscribeData'
+        description: Subscription Details
+        required: true
+  /api/notifications/pushsubscriptions:
+    post:
+      tags:
+      - Notification
+      summary: Create a new push subscription to the specified topic.
+      operationId: Notification_PushSubscribe
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionResponse'
+        '400':
+          description: Topic format is not valid
+        '404':
+          description: Non existing topic
+        '409':
+          description: Already subscribed
+        '500':
+          description: Internal server error
+      security:
+      - oauth2:
+        - System.PushNotifications
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.SubscribeDataWithPush'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.SubscribeDataWithPush'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.SubscribeDataWithPush'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.SubscribeDataWithPush'
+        description: Subscription Details
+        required: true
+  /api/notifications/subscriptions/{id}:
+    delete:
+      tags:
+      - Notification
+      summary: Delete a subscription
+      operationId: Notification_Unsubscribe
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the subscription to be deleted.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Non existing subscription
+        '500':
+          description: Internal server error
+      security:
+      - oauth2:
+        - System.Notifications
+  /api/notifications/raise:
+    post:
+      tags:
+      - Notification
+      operationId: Notification_RaiseNotification
+      responses:
+        '204':
+          description: No Content
+      security:
+      - oauth2:
+        - Parts.UpdateParts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.RaiseNotification'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.RaiseNotification'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.RaiseNotification'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.WebAPI.Models.RaiseNotification'
+        required: true
+      summary: Notification raise notification
+      x-summary-source: derived
+components:
+  schemas:
+    AudaAPI.Models.Notification.Topic:
+      type: object
+      properties:
+        TopicCode:
+          type: string
+        Description:
+          type: string
+    AudaAPI.Models.Notification.NotificationResource:
+      type: object
+      properties:
+        ResourceType:
+          type: string
+        ResourceId:
+          format: uuid
+          type: string
+    AudaAPI.Models.Notification.NotificationMessage:
+      type: object
+      properties:
+        NotificationId:
+          format: uuid
+          type: string
+        SubscriptionId:
+          format: uuid
+          type: string
+        EventType:
+          type: string
+        Topic:
+          type: string
+        Message:
+          type: string
+        CompanyCode:
+          type: string
+        SiteId:
+          type: string
+        CreatedAt:
+          format: date-time
+          type: string
+        Parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Notification.NotificationParameter'
+        Resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Notification.NotificationResource'
+    AudaAPI.Models.Notification.SubscriptionResponse:
+      required:
+      - SubscriptionId
+      type: object
+      properties:
+        SubscriptionId:
+          format: uuid
+          type: string
+    AudaAPI.WebAPI.Models.SubscribeData:
+      type: object
+      properties:
+        TopicCode:
+          type: string
+    AudaAPI.WebAPI.Models.PushDetails:
+      type: object
+      properties:
+        URL:
+          type: string
+        Format:
+          enum:
+          - Uninitialised
+          - XML
+          - JSON
+          type: string
+        AuthEnabled:
+          type: boolean
+        AuthScheme:
+          type: string
+        AuthParameter:
+          type: string
+    AudaAPI.Models.Notification.NotificationParameter:
+      type: object
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+    AudaAPI.WebAPI.Models.SubscribeDataWithPush:
+      type: object
+      properties:
+        TopicCode:
+          type: string
+        Push:
+          $ref: '#/components/schemas/AudaAPI.WebAPI.Models.PushDetails'
+    AudaAPI.Models.Notification.Subscription:
+      type: object
+      properties:
+        SubscriptionId:
+          format: uuid
+          type: string
+        TopicCode:
+          type: string
+        CreatedAt:
+          format: date-time
+          type: string
+        Push:
+          $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionPush'
+    AudaAPI.Models.Notification.SubscriptionPush:
+      type: object
+      properties:
+        URL:
+          type: string
+        Format:
+          enum:
+          - Uninitialised
+          - XML
+          - JSON
+          type: string
+        AuthEnabled:
+          type: boolean
+        AuthScheme:
+          type: string
+        AuthParameter:
+          type: string
+    AudaAPI.WebAPI.Models.RaiseNotification:
+      type: object
+      properties:
+        Id:
+          format: int64
+          type: integer
+        CustomerId:
+          format: int32
+          type: integer
+        SiteId:
+          format: int32
+          type: integer
+        Type:
+          enum:
+          - Order
+          - Quote
+          type: string
+        Action:
+          enum:
+          - Create
+          - Update
+          type: string
+        AssessmentId:
+          format: uuid
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

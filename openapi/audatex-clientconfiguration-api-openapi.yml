@@ -1,0 +1,221 @@
+openapi: 3.2.0
+info:
+  title: Audatex Client Configuration API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged ClientConfiguration across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: ClientConfiguration
+paths:
+  /api/v1/ClientConfiguration:
+    post:
+      tags:
+      - ClientConfiguration
+      summary: Add a Client Configuration associated to the EntityId
+      description: ''
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ClientConfigurationReqViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientConfigurationReqViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ClientConfigurationReqViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ClientConfigurationReqViewModel'
+      responses:
+        '201':
+          description: Returns a created response
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '403':
+          description: Returns an error if the user has not the permissions needed
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: postApiV1ClientConfiguration
+      x-operation-id-source: derived
+    get:
+      tags:
+      - ClientConfiguration
+      summary: Get the Client Configuration associated to the EntityId
+      description: This endpoint will allow you to get the Client Configuration associated to the EntityId
+      responses:
+        '200':
+          description: Returns the Client Configuration
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ClientConfigurationResViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientConfigurationResViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ClientConfigurationResViewModel'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '403':
+          description: Returns an error if the user has not the permissions needed
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '409':
+          description: Returns an error if there is conflicting information
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: getApiV1ClientConfiguration
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    ClientConfigurationResViewModel:
+      type: object
+      properties:
+        dataExpirationMonths:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ClientConfigurationReqViewModel:
+      required:
+      - dataExpirationMonths
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        dataExpirationMonths:
+          maximum: 36
+          minimum: 1
+          type: integer
+          format: int32
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

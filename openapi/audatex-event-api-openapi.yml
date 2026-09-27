@@ -1,0 +1,648 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Audatex services for BMS Systems Event API
+  description: 'Allows a BMS system to get and update assessment related data. You can use this Swagger page to test the API. You will need to authenticate by clicking on the authentication status image on each operation. You will need to grant access to the BMS.Basic scope and supply valid Audatex credentials when prompted. The ''see more at'' link below contains a lot more information on how you can setup authentication for your application. BMS API Build Version: 2.25.26162.1'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI
+tags:
+- name: Event
+paths:
+  /v1/bmsapi/topics:
+    get:
+      tags:
+      - Event
+      summary: Get all topics Sites or Companies can subscribe to
+      description: Get all topics Sites or Companies can subscribe to.
+      operationId: Event_GetTopics
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/site/subscriptions:
+    get:
+      tags:
+      - Event
+      summary: Get all subscriptions for my site
+      description: Get all subscriptions for my site.
+      operationId: Event_SiteSubscriptionsGet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+        '204':
+          description: OK - No subscriptions were found
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+    post:
+      tags:
+      - Event
+      summary: Subscribe my site to a Topic using the Topic code
+      description: Subscribe my site to a Topic using the Topic code. Only SubscriptionID may be populated in the response please ignore the other obsolete values.
+      operationId: Event_SiteSubscribe
+      parameters:
+      - name: topicCode
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+        '400':
+          description: Topic format is not valid
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing topic
+        '409':
+          description: Already subscribed
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/site/subscriptions/{subscriptionId}:
+    delete:
+      tags:
+      - Event
+      summary: Delete a subscription for my site
+      description: Delete a subscription for my site.
+      operationId: Event_SiteUnsubscribe
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing subscription
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/site/subscriptions/{subscriptionId}/notifications:
+    get:
+      tags:
+      - Event
+      summary: Poll this method to get notifications for a subscription, e.g. every 5 minutes
+      description: 'Poll this method to get notifications for a subscription, e.g. every 5 minutes. . Note: the ResourceURIs Array is obsolete and may no longer be populated'
+      operationId: Event_SiteNotificationsGet
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing subscription
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/company/subscriptions:
+    get:
+      tags:
+      - Event
+      summary: Get all subscriptions for my company
+      description: Get all subscriptions for my company.
+      operationId: Event_CompanySubscriptionsGet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+        '204':
+          description: OK - No subscriptions were found
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+    post:
+      tags:
+      - Event
+      summary: Subscribe my company to a topic using the topic code
+      description: Subscribe my company to a topic using the topic code. Only SubscriptionID may be populated in the response please ignore the other obsolete values.
+      operationId: Event_CompanySubscribe
+      parameters:
+      - name: topicCode
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+        '400':
+          description: Topic format is not valid
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing topic
+        '409':
+          description: Already subscribed
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/company/subscriptions/{subscriptionId}:
+    delete:
+      tags:
+      - Event
+      summary: Delete a subscription from my company
+      description: Delete a subscription from my company.
+      operationId: Event_CompanyUnsubscribe
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing subscription
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/company/subscriptions/{subscriptionId}/notifications:
+    get:
+      tags:
+      - Event
+      summary: Poll this method to get notifications for a subscription, e.g. every 5 minutes
+      description: 'Poll this method to get notifications for a subscription, e.g. every 5 minutes. Note: the ResourceURIs Array is obsolete and may no longer be populated'
+      operationId: Event_CompanyNotificationsGet
+      parameters:
+      - name: subscriptionId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing subscription
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/user/subscriptions:
+    get:
+      tags:
+      - Event
+      summary: Get all me personal subscriptions
+      description: Get all subscriptions for my user.
+      operationId: Event_UserSubscriptionsGet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Subscription'
+        '204':
+          description: OK - No subscriptions were found
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+    post:
+      tags:
+      - Event
+      summary: Subscribe my user to a Topic using the Topic code
+      description: Subscribe my user to a Topic using the Topic code. Only SubscriptionID may be populated in the response please ignore the other obsolete values.
+      operationId: Event_UserSubscribe
+      parameters:
+      - name: topicCode
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionObsolete'
+        '400':
+          description: Topic format is not valid
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing topic
+        '409':
+          description: Already subscribed
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/user/subscriptions/{subscriptionId}:
+    delete:
+      tags:
+      - Event
+      summary: Delete a subscription for my user
+      description: Delete a subscription for my user.
+      operationId: Event_UserUnsubscribe
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing subscription
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+  /v1/bmsapi/user/subscriptions/{subscriptionId}/notifications:
+    get:
+      tags:
+      - Event
+      summary: Poll this method to get notifications for a subscription, e.g. every 5 minutes
+      description: 'Poll this method to get notifications for a subscription, e.g. every 5 minutes. . Note: the ResourceURIs Array is obsolete and may no longer be populated'
+      operationId: Event_UserNotificationsGet
+      parameters:
+      - name: subscriptionId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationMessage'
+        '401':
+          description: Invalid or missing authentication token
+        '403':
+          description: Insufficient permissions for this resource
+        '404':
+          description: Non existing subscription
+        '500':
+          description: The server has failed to process the request
+      security:
+      - oauth2:
+        - BMS.Basic
+components:
+  schemas:
+    AudaAPI.BMSAPI.DTO.SubscriptionPush:
+      type: object
+      properties:
+        URL:
+          type: string
+        Format:
+          enum:
+          - Uninitialised
+          - XML
+          - JSON
+          type: string
+        AuthEnabled:
+          type: boolean
+        AuthScheme:
+          type: string
+        AuthParameter:
+          type: string
+    AudaAPI.BMSAPI.DTO.NotificationParameter:
+      type: object
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+    AudaAPI.BMSAPI.DTO.Subscription:
+      type: object
+      properties:
+        SubscriptionId:
+          format: uuid
+          type: string
+        Topic:
+          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+        CreatedAt:
+          format: date-time
+          type: string
+        Push:
+          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionPush'
+    AudaAPI.BMSAPI.DTO.NotificationResource:
+      type: object
+      properties:
+        ResourceType:
+          type: string
+        ResourceId:
+          format: uuid
+          type: string
+    AudaAPI.BMSAPI.DTO.NotificationMessage:
+      type: object
+      properties:
+        NotificationId:
+          format: uuid
+          type: string
+        SubscriptionId:
+          format: uuid
+          type: string
+        EventType:
+          type: string
+        Topic:
+          type: string
+        Message:
+          type: string
+        CompanyCode:
+          type: string
+        SiteId:
+          type: string
+        CreatedAt:
+          format: date-time
+          type: string
+        Parameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationParameter'
+        Resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationResource'
+    AudaAPI.BMSAPI.DTO.Topic:
+      type: object
+      properties:
+        TopicCode:
+          type: string
+        Description:
+          type: string
+    AudaAPI.BMSAPI.DTO.SubscriptionObsolete:
+      type: object
+      properties:
+        SubscriptionId:
+          format: uuid
+          type: string
+        Topic:
+          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+        CreatedAt:
+          format: date-time
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            BMS.Basic: Basic access to assessment data for your BMS application
+            BMS.Extended: Extened access to assessment data for your BMS application
+            BMS.Parts: Access to BMS Parts Apis
+            BMS.PartsOrders: Access to BMS Parts Orders Apis
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

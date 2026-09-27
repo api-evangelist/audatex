@@ -1,0 +1,772 @@
+openapi: 3.2.0
+info:
+  title: Audatex Vi No Calculation API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged ViNoCalculation across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: ViNoCalculation
+paths:
+  /api/v1/ViNoCalculation:
+    post:
+      tags:
+      - ViNoCalculation
+      summary: POST VI Calculation request
+      description: This endpoint will allow you to request a VI Calculation
+      parameters:
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ViNoCalculationReqVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViNoCalculationReqVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ViNoCalculationReqVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ViNoCalculationReqVM'
+      responses:
+        '202':
+          description: Returns an accepted response. The CalculationId returned, can be used in subsequent GET requests for viNoCalculation.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '400':
+          description: Returns an error if the request fails validation or if the imageCapture cannot be found or if the imageCapture status is not yet complete
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: postApiV1ViNoCalculation
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/ViNoCalculation/{imageCaptureId}/{calculationId}:
+    get:
+      tags:
+      - ViNoCalculation
+      summary: GET a VI Calculation request
+      description: This endpoint will allow you to get the details of a VI Calculation
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: calculationId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a response with the details of a VI Calculation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ViNoCalculationRespVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViNoCalculationRespVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ViNoCalculationRespVM'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '400':
+          description: Returns an error if the request fails validation
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV1ViNoCalculationByImageCaptureIdByCalculationId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/ViNoCalculation/{imageCaptureId}/{calculationId}/images/{imageId}/{format}:
+    get:
+      tags:
+      - ViNoCalculation
+      summary: GET an image of a VI Calculation request, with contours
+      description: This endpoint will allow you to get an image of a VI Calculation request, with contours
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: calculationId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: format
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          default: binary
+      - name: contourThickness
+        in: query
+        description: ''
+        schema:
+          type: integer
+          format: int32
+          default: 3
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a response with the image of a VI Calculation with contours
+        '204':
+          description: Returns no content
+        '400':
+          description: Returns an error if the request fails validation
+        '401':
+          description: Returns an error if the user is not authorised
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: getApiV1ViNoCalculationByImageCaptureIdByCalculationIdImagesByImageIdByFormat
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ViNoCalculation:
+    post:
+      tags:
+      - ViNoCalculation
+      summary: POST VI Calculation V2 request
+      description: This endpoint will allow you to request a VI Calculation V2
+      parameters:
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ViNoCalculationV2ReqVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ViNoCalculationV2ReqVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ViNoCalculationV2ReqVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ViNoCalculationV2ReqVM'
+      responses:
+        '202':
+          description: Returns an accepted response. The CalculationId returned, can be used in subsequent GET requests for viNoCalculation V2.
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CalculationSelfViewModel'
+        '400':
+          description: Returns an error if the request fails validation or if the imageCapture cannot be found or if the imageCapture status is not yet complete
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: postApiV2ViNoCalculation
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ViNoCalculation/{imageCaptureId}/{calculationId}:
+    get:
+      tags:
+      - ViNoCalculation
+      summary: GET a VI Calculation V2 request
+      description: This endpoint will allow you to get the details of a VI Calculation V2
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: calculationId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a response with the details of a VI Calculation V2
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ViNoCalculationV2RespVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ViNoCalculationV2RespVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ViNoCalculationV2RespVM'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: getApiV2ViNoCalculationByImageCaptureIdByCalculationId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    ViCalculationDamageRespVM:
+      type: object
+      properties:
+        damageId:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+        probability:
+          type: number
+          format: double
+        part:
+          $ref: '#/components/schemas/ViCalculationPartRespVM'
+        dimensions:
+          $ref: '#/components/schemas/ViCalculationDimensionRespVM'
+        foundInImages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViCalculationIdWithContoursRespVM'
+      additionalProperties: false
+    ViCalculationDimensionRespVM:
+      type: object
+      properties:
+        areaInCmSq:
+          type:
+          - number
+          - 'null'
+          format: double
+        widthInCm:
+          type:
+          - number
+          - 'null'
+          format: double
+        lengthInCm:
+          type:
+          - number
+          - 'null'
+          format: double
+        relativeSize:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ViNoCalculationReqVM:
+      required:
+      - countryCode
+      - imageCaptureId
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        enhancedVerification:
+          type: boolean
+          description: 'EnhancedVerification required
+
+            This will default to false'
+        includeContours:
+          type: boolean
+          description: 'Include damage contours in the result data
+
+            This will default to false'
+        countryCode:
+          $ref: '#/components/schemas/Country'
+      additionalProperties: false
+    ViDamagedPartsPartsRespVM:
+      type: object
+      properties:
+        standardGuideNumber:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        genericPartName:
+          type:
+          - string
+          - 'null'
+        objectDetectionLabels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+        positions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+        relatedImageIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        position:
+          $ref: '#/components/schemas/ViDamagedPartsPositionRespVM'
+      additionalProperties: false
+    ViDamagedPartsValueRespVM:
+      type: object
+      properties:
+        damagedPartsGroupid:
+          type: string
+          format: uuid
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+        damagedPartsGroup:
+          type:
+          - string
+          - 'null'
+        side:
+          type:
+          - string
+          - 'null'
+        parts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViDamagedPartsPartsRespVM'
+      additionalProperties: false
+    ViCalculationPartRespVM:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        side:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ViCalculationIdWithContoursRespVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        damageContour:
+          type:
+          - array
+          - 'null'
+          items:
+            type: array
+            items:
+              type: number
+              format: double
+      additionalProperties: false
+    Country:
+      enum:
+      - UK
+      - ZA
+      - US
+      - CA
+      - FR
+      - IE
+      - RO
+      - PL
+      - CH
+      - AD
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BW
+      - BR
+      - BG
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CZ
+      - DK
+      - DO
+      - EC
+      - SV
+      - EE
+      - FI
+      - GF
+      - DE
+      - GR
+      - GP
+      - GT
+      - HN
+      - HU
+      - IS
+      - IN
+      - ID
+      - IL
+      - IT
+      - JP
+      - KR
+      - KW
+      - LV
+      - LT
+      - LU
+      - MY
+      - MT
+      - MQ
+      - MX
+      - MD
+      - ME
+      - MA
+      - NA
+      - NL
+      - NC
+      - NZ
+      - NI
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PT
+      - PR
+      - MK
+      - RU
+      - RE
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ES
+      - SE
+      - TW
+      - TR
+      - UA
+      - AE
+      - GB
+      - VE
+      type: string
+    ViNoCalculationV2RespVM:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorViewModel'
+        damagedParts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViDamagedPartsValueRespVM'
+        damages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViCalculationV2DamageRespVM'
+      additionalProperties: false
+    ViErrorViewModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorPropertyViewModel'
+      additionalProperties: false
+    CalculationSelfViewModel:
+      type: object
+      properties:
+        calculationId:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    ViNoCalculationV2ReqVM:
+      required:
+      - countryCode
+      - imageCaptureId
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        includeContours:
+          type: boolean
+          description: 'Include damage contours in the result data
+
+            This will default to false'
+        includeDamagedParts:
+          type: boolean
+          description: 'Include damaged parts in the result data
+
+            This will default to false'
+        countryCode:
+          $ref: '#/components/schemas/Country'
+      additionalProperties: false
+    ViDamagedPartsPositionRespVM:
+      type: object
+      properties:
+        code:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ViNoCalculationRespVM:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorViewModel'
+        damages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViCalculationDamageRespVM'
+      additionalProperties: false
+    ViCalculationV2DamageRespVM:
+      type: object
+      properties:
+        damageId:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+        probability:
+          type: number
+          format: double
+        relativeSize:
+          type:
+          - number
+          - 'null'
+          format: double
+        part:
+          $ref: '#/components/schemas/ViCalculationPartRespVM'
+        foundInImages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViCalculationIdWithContoursRespVM'
+      additionalProperties: false
+    ViErrorPropertyViewModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

@@ -1,0 +1,215 @@
+openapi: 3.2.0
+info:
+  title: Audatex Hero Image API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged HeroImage across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: HeroImage
+paths:
+  /api/v1/HeroImage:
+    post:
+      tags:
+      - HeroImage
+      summary: Uploads a Hero Image
+      description: This endpoint will allow a hero image to be uploaded
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/HeroImageVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HeroImageVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/HeroImageVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/HeroImageVM'
+        required: true
+      responses:
+        '201':
+          description: Returns a created response with the imageId
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorized
+      operationId: postApiV1HeroImage
+      x-operation-id-source: derived
+    get:
+      tags:
+      - HeroImage
+      summary: Retrieves a list of Hero Images
+      description: This endpoint will allow user to retrieve a ist of images that can override the hero images on pages
+      responses:
+        '200':
+          description: Returns an OK response with the list of images
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HeroImageModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HeroImageModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HeroImageModel'
+        '400':
+          description: Returns an error if the request fails
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorized
+      operationId: getApiV1HeroImage
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    HeroImageModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        filename:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        height:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        width:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deleteAfter:
+          type:
+          - string
+          - 'null'
+          format: date-time
+      additionalProperties: false
+    HeroImageVM:
+      required:
+      - base64EncodedImage
+      type: object
+      properties:
+        usageType:
+          $ref: '#/components/schemas/ImageUsageType'
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+          description: The file name of the image
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the image
+      additionalProperties: false
+    ImageUsageType:
+      enum:
+      - Regular
+      - Hero
+      - Logo
+      type: string
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

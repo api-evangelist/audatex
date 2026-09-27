@@ -1,16 +1,22 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Solera Dashboard Assignment API
+  title: EAPI GIC Integration Version API
   description: ''
   contact:
-    name: Solera
-    url: http://www.audatex.us/product.asp?pageid=zContact_us
+    name: Audatex
+    email: https://www.audatex.us/product.asp?pageid=zContact_us
   license:
-    name: '@SoleraNorth America, Inc. All rights reserved'
-    url: http://www.audatex.us/
+    name: '@Audatex North America, Inc. All rights reserved'
+    url: https://www.audatex.us/
   version: '1.0'
 servers:
-- url: /TestAssignmentapi
+- url: /TestGICapi
+security:
+- oauth2:
+  - readAccess
+  - writeAccess
+tags:
+- name: Version
 paths:
   /api/Version:
     get:
@@ -26,6 +32,10 @@ paths:
       responses:
         '200':
           description: Success
+      summary: Get api version
+      x-summary-source: derived
+      operationId: getApiVersion
+      x-operation-id-source: derived
 components:
   securitySchemes:
     oauth2:
@@ -36,7 +46,3 @@ components:
           tokenUrl: https://dispatch-login-demo.audatex.com/connect/token
           scopes:
             b2b.fnol.api: Audatex Assignment API Access
-security:
-- oauth2:
-  - readAccess
-  - writeAccess

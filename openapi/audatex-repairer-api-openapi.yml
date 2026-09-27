@@ -1,0 +1,261 @@
+openapi: 3.2.0
+info:
+  title: Audatex Repairer API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Repairer across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Repairer
+paths:
+  /api/v1/Repairer/Get:
+    get:
+      tags:
+      - Repairer
+      summary: Get the details of a repairer by repairerId
+      description: The details returned about the repairer are controlled via the OAuth2 scopes.
+      parameters:
+      - name: repairerId
+        in: query
+        description: The id of the repairer
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns the repairer details
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RepairerResponseVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepairerResponseVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RepairerResponseVM'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      deprecated: true
+      operationId: getApiV1RepairerGet
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    RepairerSchemeResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SelfWithAddressResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        line1:
+          type:
+          - string
+          - 'null'
+        line2:
+          type:
+          - string
+          - 'null'
+        line3:
+          type:
+          - string
+          - 'null'
+        line4:
+          type:
+          - string
+          - 'null'
+        line5:
+          type:
+          - string
+          - 'null'
+        line6:
+          type:
+          - string
+          - 'null'
+        country:
+          type:
+          - string
+          - 'null'
+        latitude:
+          type:
+          - number
+          - 'null'
+          format: double
+        longitude:
+          type:
+          - number
+          - 'null'
+          format: double
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RepairerCustomFieldResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+        values:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    RepairerResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        internalId:
+          type:
+          - string
+          - 'null'
+        addressDetails:
+          $ref: '#/components/schemas/SelfWithAddressResponseVM'
+        emailAddress:
+          type:
+          - string
+          - 'null'
+        telephoneNumber:
+          type:
+          - string
+          - 'null'
+        aliases:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        rates:
+          $ref: '#/components/schemas/RepairerRatesResponseVM'
+        schemes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RepairerSchemeResponseVM'
+        customFields:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RepairerCustomFieldResponseVM'
+      additionalProperties: false
+    RepairerRatesResponseVM:
+      type: object
+      properties:
+        labourRate:
+          type:
+          - number
+          - 'null'
+          format: double
+        paintRate:
+          type:
+          - number
+          - 'null'
+          format: double
+        paintIndex:
+          type:
+          - number
+          - 'null'
+          format: double
+        overallDiscount:
+          type:
+          - number
+          - 'null'
+          format: double
+        partsDiscountPcnt:
+          type:
+          - number
+          - 'null'
+          format: double
+        sundryPartsPcnt:
+          type:
+          - number
+          - 'null'
+          format: double
+        pearlescentPcnt:
+          type:
+          - number
+          - 'null'
+          format: double
+        corrosionProtectionMat:
+          type:
+          - number
+          - 'null'
+          format: double
+        fixedPricePaintMat:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

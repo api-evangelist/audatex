@@ -1,0 +1,274 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: AudaConnect User API
+  description: 'AudaConnect. You can use this Swagger page to test the API. You will need to authenticate either at the top of the page for multiple scopes or clicking on the authentication status image on each operation. You will need to use your supplied Client Application ID during when selecting scopes. AudaConnect API Build Version: 2.25.26048.2'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: User
+paths:
+  /api/users/{id}:
+    get:
+      tags:
+      - User
+      summary: Get information about a specified user.
+      operationId: User_Get
+      parameters:
+      - name: id
+        in: path
+        description: A guid or 'me'.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User Returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.UserExtended'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.UserExtended'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.UserExtended'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.UserExtended'
+        '400':
+          description: The input data is invalid or not understood
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.WebAPI.Models.ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.WebAPI.Models.ErrorResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.WebAPI.Models.ErrorResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.WebAPI.Models.ErrorResponse'
+        '404':
+          description: Resource does not exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.WebAPI.Models.ErrorResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.WebAPI.Models.ErrorResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.WebAPI.Models.ErrorResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.WebAPI.Models.ErrorResponse'
+      security:
+      - oauth2:
+        - ReferenceData.Company
+  /api/users/HasAccessPermission:
+    get:
+      tags:
+      - User
+      summary: To find if user have access to application specified
+      operationId: User_HasAccessPermission
+      parameters:
+      - name: applicationId
+        in: query
+        description: OBID of application
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+            application/xml:
+              schema:
+                type: boolean
+            text/xml:
+              schema:
+                type: boolean
+      security:
+      - oauth2:
+        - ReferenceData.Company
+  /api/users:
+    get:
+      tags:
+      - User
+      summary: Gets a list of all users associated with the company to which the currently…
+      operationId: User_GetUsers
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.User'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.User'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.User'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.User'
+      security:
+      - oauth2:
+        - ReferenceData.Company
+  /api/companies/{companyCode}/users:
+    get:
+      tags:
+      - User
+      summary: Gets a list of users for the specified company
+      operationId: User_GetUsersForCompany
+      parameters:
+      - name: companyCode
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.User'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.User'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.User'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.User'
+      security:
+      - oauth2:
+        - ReferenceData.SystemAdmin
+components:
+  schemas:
+    AudaAPI.Models.UserExtended:
+      type: object
+      properties:
+        TerminalId:
+          type: string
+        SiteId:
+          type: string
+        Id:
+          format: uuid
+          type: string
+        LoginName:
+          type: string
+        CompanyCode:
+          type: string
+        CreationDate:
+          format: date-time
+          type: string
+        Description:
+          type: string
+        EMail:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        IsOnline:
+          type: boolean
+        LastActivityDate:
+          format: date-time
+          type: string
+        Status:
+          type: string
+    AudaAPI.WebAPI.Models.ErrorResponse:
+      type: object
+      properties:
+        Message:
+          type: string
+    AudaAPI.Models.User:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        LoginName:
+          type: string
+        CompanyCode:
+          type: string
+        CreationDate:
+          format: date-time
+          type: string
+        Description:
+          type: string
+        EMail:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        IsOnline:
+          type: boolean
+        LastActivityDate:
+          format: date-time
+          type: string
+        Status:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

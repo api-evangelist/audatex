@@ -1,0 +1,364 @@
+openapi: 3.2.0
+info:
+  title: Audatex Reminder API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Reminder across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Reminder
+paths:
+  /api/v1/Reminder:
+    post:
+      tags:
+      - Reminder
+      summary: Create a reminder message
+      description: This API will allow you to create a reminder message
+      requestBody:
+        description: The reminder input
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ReminderReqViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReminderReqViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ReminderReqViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ReminderReqViewModel'
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+        '400':
+          description: Returns an error if the request fails validation or if n image request fails to create
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '403':
+          description: Returns an error if the user has not the permissions needed
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: postApiV1Reminder
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Reminder/{reminderId}:
+    get:
+      tags:
+      - Reminder
+      summary: Gets details about a reminder message
+      description: This API will allow you to get details about a reminder message
+      parameters:
+      - name: reminderId
+        in: path
+        description: The id of the reminder message
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns details of the reminder message
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ImageCaptureCommunicationResVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageCaptureCommunicationResVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ImageCaptureCommunicationResVM'
+        '400':
+          description: Returns an error if the reminder fails validation
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '401':
+          description: Returns an error if the user is not authorised
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '403':
+          description: Returns an error if the user has not the permissions needed
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '404':
+          description: Returns an error if the reminder message does not exist
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      operationId: getApiV1ReminderByReminderId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    CommunicationStatus:
+      enum:
+      - Sent
+      - Delivered
+      - Undelivered
+      - Error
+      - Unknown
+      type: string
+    ImageCaptureStatusType:
+      enum:
+      - Pending
+      - Expired
+      - Completed
+      type: string
+    ImageCaptureCommunicationResVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        recipient:
+          $ref: '#/components/schemas/ImageCaptureRecipientVM'
+        message:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        deliveryStatus:
+          $ref: '#/components/schemas/CommunicationStatus'
+        dateSent:
+          $ref: '#/components/schemas/ImageCaptureDateViewModel'
+        enableLineTypeIntelligence:
+          type: boolean
+        template:
+          type:
+          - string
+          - 'null'
+        variables:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        reminders:
+          $ref: '#/components/schemas/ReminderConfigModel'
+      additionalProperties: false
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageCaptureRecipientVM:
+      required:
+      - dialingCode
+      - mobileNumber
+      type: object
+      properties:
+        dialingCode:
+          maxLength: 5
+          minLength: 1
+          type: string
+          description: Dialing code for mobile number. Format +XX
+        mobileNumber:
+          maxLength: 11
+          minLength: 8
+          type: string
+          description: The Mobile number where Image capture SMS will be sent.
+        lineType:
+          type:
+          - string
+          - 'null'
+          description: The LineType of the mobile number.
+      additionalProperties: false
+    ReminderConfigModel:
+      type: object
+      properties:
+        delays:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+        reminderMessage:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageCaptureDateViewModel:
+      type: object
+      properties:
+        utc:
+          type: string
+          format: date-time
+        local:
+          type: string
+          format: date-time
+      additionalProperties: false
+    CommunicationType:
+      enum:
+      - SMS
+      - Whatsapp
+      type: string
+    ReminderReqViewModel:
+      required:
+      - from
+      - recipient
+      - type
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/ImageCaptureRecipientVM'
+        from:
+          minLength: 1
+          type: string
+        message:
+          maxLength: 800
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+        imageRequestId:
+          type: string
+          format: uuid
+        enableLineTypeIntelligence:
+          type: boolean
+        template:
+          type:
+          - string
+          - 'null'
+        variables:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

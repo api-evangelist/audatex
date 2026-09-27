@@ -1,0 +1,53 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: Audatex services for Systems BMS API
+  description: 'Allows a BMS system to get and update assessment related data. You can use this Swagger page to test the API. You will need to authenticate by clicking on the authentication status image on each operation. You will need to grant access to the BMS.Basic scope and supply valid Audatex credentials when prompted. The ''see more at'' link below contains a lot more information on how you can setup authentication for your application. BMS API Build Version: 2.25.26162.1'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI
+tags:
+- name: BMS
+paths:
+  /v1/bmsapi/whoami:
+    get:
+      tags:
+      - BMS
+      summary: Use this endpoint to prove you are authenticated
+      description: This endpoint is a helper and only returns who you are authenticated as.
+      operationId: BMS_WhoAmI
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+            text/xml:
+              schema:
+                type: string
+      security:
+      - oauth2:
+        - BMS.Basic
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            BMS.Basic: Basic access to assessment data for your BMS application
+            BMS.Extended: Extened access to assessment data for your BMS application
+            BMS.Parts: Access to BMS Parts Apis
+            BMS.PartsOrders: Access to BMS Parts Orders Apis
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant

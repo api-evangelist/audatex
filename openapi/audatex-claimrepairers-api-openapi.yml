@@ -1,0 +1,290 @@
+openapi: 3.2.0
+info:
+  title: Audatex Claim Repairers API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged ClaimRepairers across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: ClaimRepairers
+paths:
+  /api/v1/ClaimRepairers:
+    post:
+      tags:
+      - ClaimRepairers
+      summary: Creates a claim then returns list of Repairers that can service the claim
+      description: This endpoints creates a claim and returns a list of Repairers that can service the claim.
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ClaimRepairersReqViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClaimRepairersReqViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ClaimRepairersReqViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ClaimRepairersReqViewModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClaimRepairerRespViewModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClaimRepairerRespViewModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClaimRepairerRespViewModel'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '201':
+          description: Returns a created response
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: postApiV1ClaimRepairers
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    RAMCustomField:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VehicleViewModel:
+      required:
+      - make
+      - model
+      - monthRegistered
+      - registration
+      - year
+      type: object
+      properties:
+        registration:
+          minLength: 1
+          type: string
+        make:
+          minLength: 1
+          type: string
+        model:
+          minLength: 1
+          type: string
+        monthRegistered:
+          maximum: 12
+          minimum: 1
+          type: integer
+          format: int32
+        year:
+          maximum: 9999
+          minimum: 1901
+          type: integer
+          format: int32
+      additionalProperties: false
+    ClaimRepairersReqViewModel:
+      required:
+      - claim
+      - insured
+      - numberOfResultsPerScheme
+      - vehicle
+      - vehicleLocation
+      type: object
+      properties:
+        claim:
+          $ref: '#/components/schemas/ClaimRepairersClaimViewModel'
+        vehicle:
+          $ref: '#/components/schemas/VehicleViewModel'
+        vehicleLocation:
+          $ref: '#/components/schemas/LocationViewModel'
+        insured:
+          $ref: '#/components/schemas/InsuredViewModel'
+        numberOfResultsPerScheme:
+          maximum: 4294967295
+          minimum: 1
+          type: integer
+          format: int32
+      additionalProperties: false
+    RamGenericData:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ClaimRepairersClaimViewModel:
+      required:
+      - claimNumber
+      - clientKey
+      - incidentDateTimeUTC
+      - policyNumber
+      type: object
+      properties:
+        clientKey:
+          type: string
+          format: uuid
+        claimNumber:
+          minLength: 1
+          type: string
+        policyNumber:
+          minLength: 1
+          type: string
+        incidentDateTimeUTC:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    LocationViewModel:
+      required:
+      - latitude
+      - longitude
+      type: object
+      properties:
+        latitude:
+          maximum: 90
+          minimum: -90
+          type: number
+          format: double
+        longitude:
+          maximum: 180
+          minimum: -180
+          type: number
+          format: double
+      additionalProperties: false
+    InsuredViewModel:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      additionalProperties: false
+    ClaimRepairerRespViewModel:
+      type: object
+      properties:
+        rank:
+          type: integer
+          format: int32
+        repairerName:
+          type:
+          - string
+          - 'null'
+        repairerId:
+          type: string
+          format: uuid
+        clientRepairerId:
+          type: integer
+          format: int32
+        terminalId:
+          type:
+          - string
+          - 'null'
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        customFields:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RAMCustomField'
+        distance:
+          $ref: '#/components/schemas/RamGenericData'
+        duration:
+          $ref: '#/components/schemas/RamGenericData'
+        ncrPerformance:
+          type:
+          - number
+          - 'null'
+          format: double
+        priority:
+          type: boolean
+        isWarranty:
+          type: boolean
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

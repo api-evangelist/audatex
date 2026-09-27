@@ -1,0 +1,567 @@
+openapi: 3.2.0
+info:
+  title: Audatex Vehicle API
+  version: '1.0'
+  description: 'Operations tagged Vehicle across 3 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-audaconnect-api-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: Vehicle
+paths:
+  /api/v1/Vehicle/Get:
+    get:
+      tags:
+      - Vehicle
+      summary: Get details of a vehicle by vehicleId
+      description: The details return about the vehicle are controlled via the OAuth2 scopes.
+      parameters:
+      - name: vehicleId
+        in: query
+        description: The id of the vehicle
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns the vehicle details
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VehicleResponseVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleResponseVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VehicleResponseVM'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorised
+      deprecated: true
+      security:
+      - Bearer: []
+      - Bearer: []
+      operationId: getApiV1VehicleGet
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/vehicle/vrn/{vehicleRegistration}:
+    get:
+      tags:
+      - Vehicle
+      summary: 'Returns Vehicle Information Note: the registration number must be 3 or more…'
+      operationId: Vehicle_GetVIwithVRN
+      parameters:
+      - name: vehicleRegistration
+        in: path
+        description: A vehicle registration.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleClassicDataResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleClassicDataResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleClassicDataResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleClassicDataResult'
+      security:
+      - oauth2:
+        - Vehicle.Lookup
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/vehicle/vin/{vinumber}:
+    get:
+      tags:
+      - Vehicle
+      summary: Returns Vehicle Information using VIN Plus - UK
+      operationId: Vehicle_GetViWithVinPlus
+      parameters:
+      - name: vinumber
+        in: path
+        description: A valid VIN
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDataResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDataResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDataResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDataResult'
+      security:
+      - oauth2:
+        - Vehicle.Lookup
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/vehicle/vin/{vinumber}/detailed:
+    get:
+      tags:
+      - Vehicle
+      summary: Returns Detailed Vehicle Information using VIN Plus
+      operationId: Vehicle_GetDetailedVIwithVinPlus
+      parameters:
+      - name: vinumber
+        in: path
+        description: A valid VIN
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDetailResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDetailResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDetailResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDetailResult'
+      security:
+      - oauth2:
+        - Vehicle.LookupDetailed
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/vehicle/vin/{vinumber}/paintcode:
+    get:
+      tags:
+      - Vehicle
+      summary: Returns PaintCode Details using VIN Plus - UK
+      operationId: Vehicle_GetPaintCodewithVin
+      parameters:
+      - name: vinumber
+        in: path
+        description: A valid VIN.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehiclePaintCodeResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehiclePaintCodeResult'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehiclePaintCodeResult'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehiclePaintCodeResult'
+      security:
+      - oauth2:
+        - Vehicle.Lookup
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/vehicle/valuation:
+    post:
+      tags:
+      - Vehicle
+      summary: Returns the CAP valuation for the specified registration and mileage
+      operationId: Vehicle_GetValuation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleValuationResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleValuationResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleValuationResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleValuationResponse'
+      security:
+      - oauth2:
+        - Vehicle.Valuation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleValuationRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleValuationRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleValuationRequest'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleValuationRequest'
+        required: true
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+components:
+  schemas:
+    SupplementaryResponseVM:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        probability:
+          type: number
+          format: double
+        part:
+          $ref: '#/components/schemas/PartResponseVM'
+        dimensions:
+          $ref: '#/components/schemas/DimensionResponseVM'
+        foundInImages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    PartResponseVM:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        side:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SelfModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        communicationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        communicationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    ImageRequestResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        dateCreated:
+          type: string
+          format: date-time
+        dateCompleted:
+          type: string
+          format: date-time
+        status:
+          type:
+          - string
+          - 'null'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    VehicleDetailResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        vin:
+          type:
+          - string
+          - 'null'
+        licencePlate:
+          type:
+          - string
+          - 'null'
+        make:
+          type:
+          - string
+          - 'null'
+        model:
+          type:
+          - string
+          - 'null'
+        manufacturedYear:
+          type:
+          - string
+          - 'null'
+        mileage:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ValueUnitResponseVM:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        unit:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      additionalProperties: false
+    VehicleResponseVM:
+      type: object
+      properties:
+        vehicle:
+          $ref: '#/components/schemas/VehicleDetailResponseVM'
+        supplementary:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SupplementaryResponseVM'
+          description: The supplementary information associated with the vehicle
+        imageRequest:
+          $ref: '#/components/schemas/ImageRequestResponseVM'
+      additionalProperties: false
+      description: Vehicle Response view model for the Get request
+    WarningModel:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DimensionResponseVM:
+      type: object
+      properties:
+        area:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+        width:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+        length:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+      additionalProperties: false
+    AudaAPI.Models.Vehicles.VehicleData:
+      type: object
+      properties:
+        VIN:
+          type: string
+        Manufacturer:
+          type: string
+        Model:
+          type: string
+        PaintDescription:
+          type: string
+        PaintType:
+          type: string
+        PaintCode:
+          type: string
+        VehicleType:
+          type: string
+    AudaAPI.Models.Vehicles.VehiclePaintCodeResult:
+      type: object
+      properties:
+        ReturnCode:
+          type: string
+        ReturnMessage:
+          type: string
+        VIN:
+          type: string
+        PaintCode:
+          type: string
+        PaintCodeFound:
+          type: boolean
+    AudaAPI.Models.Vehicles.VehicleClassicData:
+      type: object
+      properties:
+        VIN:
+          type: string
+        Manufacturer:
+          type: string
+        Model:
+          type: string
+        Colour:
+          type: string
+        BodyStyle:
+          type: string
+        EngineSize:
+          type: string
+        FuelType:
+          type: string
+        Transmission:
+          type: string
+        DateFirstRegistered:
+          type: string
+        VehicleType:
+          type: string
+        VRN:
+          type: string
+    AudaAPI.Models.Vehicles.VehicleDataResult:
+      type: object
+      properties:
+        ReturnCode:
+          type: string
+        ReturnMessage:
+          type: string
+        Vehicle:
+          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleData'
+    AudaAPI.Models.Vehicles.VehicleValuationRequest:
+      type: object
+      properties:
+        Registration:
+          type: string
+        Mileage:
+          format: int32
+          type: integer
+    AudaAPI.Models.Vehicles.VehicleValuationResponse:
+      type: object
+      properties:
+        Valuation:
+          format: double
+          type: number
+    AudaAPI.Models.Vehicles.VehicleClassicDataResult:
+      type: object
+      properties:
+        ReturnCode:
+          type: string
+        ReturnMessage:
+          type: string
+        Vehicle:
+          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleClassicData'
+    AudaAPI.Models.Vehicles.VehicleDetail:
+      type: object
+      properties:
+        VIN:
+          type: string
+        Manufacturer:
+          type: string
+        Model:
+          type: string
+        SubModel:
+          type: string
+        PaintCode:
+          type: string
+        EngineType:
+          type: string
+        GearBox:
+          type: string
+        ModelOptions:
+          type: array
+          items:
+            type: string
+    AudaAPI.Models.Vehicles.VehicleDetailResult:
+      type: object
+      properties:
+        SearchStatus:
+          enum:
+          - Failed
+          - OK
+          type: string
+        ReturnMessage:
+          type: string
+        Vehicle:
+          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDetail'
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-audaconnect-api-openapi-original.json
+- audatex-api-gateway-openapi.yml

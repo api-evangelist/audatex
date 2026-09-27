@@ -1,0 +1,193 @@
+openapi: 3.2.0
+info:
+  title: Audatex Introspection API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Introspection across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Introspection
+paths:
+  /api/Introspection/Dependencies:
+    get:
+      tags:
+      - Introspection
+      responses:
+        '200':
+          description: Success
+      summary: Get api introspection dependencies
+      x-summary-source: derived
+      operationId: getApiIntrospectionDependencies
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/Introspection/AppDetails:
+    get:
+      tags:
+      - Introspection
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AppDetail'
+      summary: Get api introspection app details
+      x-summary-source: derived
+      operationId: getApiIntrospectionAppDetails
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/Introspection/ErrorCodes:
+    get:
+      tags:
+      - Introspection
+      parameters:
+      - name: culture
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: string
+      summary: Get api introspection error codes
+      x-summary-source: derived
+      operationId: getApiIntrospectionErrorCodes
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/Introspection/Events:
+    get:
+      tags:
+      - Introspection
+      parameters:
+      - name: culture
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  additionalProperties:
+                    type: string
+      summary: Get api introspection events
+      x-summary-source: derived
+      operationId: getApiIntrospectionEvents
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    Scope:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        displayName:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    AppDetail:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        assemblyVersion:
+          type:
+          - string
+          - 'null'
+        fileVersion:
+          type:
+          - string
+          - 'null'
+        productVersion:
+          type:
+          - string
+          - 'null'
+        applicationType:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        productAlignment:
+          $ref: '#/components/schemas/ProductAlignment'
+        domainAlignment:
+          $ref: '#/components/schemas/DomainAlignment'
+        scopes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Scope'
+      additionalProperties: false
+    ProductAlignment:
+      type: object
+      properties:
+        vertical:
+          type:
+          - string
+          - 'null'
+        productCategory:
+          type:
+          - string
+          - 'null'
+        product:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DomainAlignment:
+      type: object
+      properties:
+        domainContext:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

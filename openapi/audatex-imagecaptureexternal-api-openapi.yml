@@ -1,0 +1,1246 @@
+openapi: 3.2.0
+info:
+  title: Audatex Image Capture External API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged ImageCaptureExternal across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: ImageCaptureExternal
+paths:
+  /api/v1/ImageCaptureExternal:
+    post:
+      tags:
+      - ImageCaptureExternal
+      summary: Allows you to upload images from an external image capture solution
+      description: This endpoint allows you to upload images from an external image capture solution
+      parameters:
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ICExternalReqVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ICExternalReqVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ICExternalReqVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ICExternalReqVM'
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: postApiV1ImageCaptureExternal
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/ImageCaptureExternal/{imageCaptureId}:
+    get:
+      tags:
+      - ImageCaptureExternal
+      summary: Gets details about an external image capture
+      description: This API will allow you to get details of an image capture
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: The id of the image capture
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '200':
+          description: Returns details of the image capture
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ICExternalRespVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalRespVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalRespVM'
+        '401':
+          description: Returns an error if the user is not authorised
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: getApiV1ImageCaptureExternalByImageCaptureId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ImageCaptureExternal/Open:
+    post:
+      tags:
+      - ImageCaptureExternal
+      summary: Create a new image capture external v2
+      description: This API will allow you to create a new image capture external
+      parameters:
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The image capture external input
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ICExternalV2ReqVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ICExternalV2ReqVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ICExternalV2ReqVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ICExternalV2ReqVM'
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+        '400':
+          description: Returns an error if the request fails validation or if n image capture external fails to create
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorized
+      operationId: postApiV2ImageCaptureExternalOpen
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ImageCaptureExternal/{imageRequestId}/Complete:
+    put:
+      tags:
+      - ImageCaptureExternal
+      summary: Complete the image capture external v2
+      description: This API will allow you to complete the image capture external
+      parameters:
+      - name: imageRequestId
+        in: path
+        description: The image capture external input
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a created response
+        '400':
+          description: Returns an error if the request fails validation or if n image capture external fails to create
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+        '404':
+          description: Returns an error if image capture external is not found
+      operationId: putApiV2ImageCaptureExternalByImageRequestIdComplete
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ImageCaptureExternal/{imageCaptureId}:
+    get:
+      tags:
+      - ImageCaptureExternal
+      summary: Gets details about an external image capture v2
+      description: This API will allow you to get details of an external image capture v2
+      parameters:
+      - name: imageCaptureId
+        in: path
+        description: The id of the image capture
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '200':
+          description: Returns details of the image capture
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ICExternalV2RespVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalV2RespVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalV2RespVM'
+        '401':
+          description: Returns an error if the user is not authorised
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: getApiV2ImageCaptureExternalByImageCaptureId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ImageCaptureExternal/{imageRequestId}/Images:
+    post:
+      tags:
+      - ImageCaptureExternal
+      summary: Upload images info via image capture external v2
+      description: This API will allow you to upload new images info via capture external
+      parameters:
+      - name: imageRequestId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: The image capture external input
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/ICExternalV2ImageInfoReqVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ICExternalV2ImageInfoReqVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ICExternalV2ImageInfoReqVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ICExternalV2ImageInfoReqVM'
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+        '400':
+          description: Returns an error if the request fails validation or if n image capture external fails to create
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: postApiV2ImageCaptureExternalByImageRequestIdImages
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ImageCaptureExternal/{imageRequestId}/Images/{imageId}/{format}:
+    get:
+      tags:
+      - ImageCaptureExternal
+      summary: Get image by imageId
+      parameters:
+      - name: imageId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageRequestId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: format
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          default: binary
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+            text/json:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '400':
+          description: Returns an error if the request fails validation or if image fails to fetch
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: getApiV2ImageCaptureExternalByImageRequestIdImagesByImageIdByFormat
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ImageCaptureExternal/{imageRequestId}/Images/{imageId}:
+    put:
+      tags:
+      - ImageCaptureExternal
+      summary: This endpoint will allow you to upload an image associate them with an imageId
+      parameters:
+      - name: imageRequestId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '404':
+          description: Returns an error if the ImageId does not exists
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: putApiV2ImageCaptureExternalByImageRequestIdImagesByImageId
+      x-operation-id-source: derived
+    delete:
+      tags:
+      - ImageCaptureExternal
+      summary: Delete an image by imageId
+      description: This API will allow you to delete an image
+      parameters:
+      - name: imageRequestId
+        in: path
+        description: The id of the image
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageId
+        in: path
+        description: The id of the image
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Returns an error if the request fails validation or if the given imageId does not exist
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '200':
+          description: Returns an Ok response saying the image has been deleted
+        '401':
+          description: Returns an error if the user is not authorised
+      operationId: deleteApiV2ImageCaptureExternalByImageRequestIdImagesByImageId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ImageCaptureExternal/{imageRequestId}/Images/{imageId}/binary:
+    put:
+      tags:
+      - ImageCaptureExternal
+      summary: This endpoint will allow you to upload an image associate them with an imageId
+      parameters:
+      - name: imageRequestId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageId
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ICExternalSelfVM'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '404':
+          description: Returns an error if the ImageId does not exists
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: putApiV2ImageCaptureExternalByImageRequestIdImagesByImageIdBinary
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v2/ImageCaptureExternal/{imageRequestId}/Images/{imageId}/base64:
+    put:
+      tags:
+      - ImageCaptureExternal
+      parameters:
+      - name: imageRequestId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Data-Region
+        in: header
+        description: Enter the region for the image capture to be stored. Example format 'solera-uk'
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json-patch+json:
+            schema:
+              type: string
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Server Error
+      summary: Replace api image capture external by image request id images by image id base64
+      x-summary-source: derived
+      operationId: putApiV2ImageCaptureExternalByImageRequestIdImagesByImageIdBase64
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    ICExternalReqVM:
+      required:
+      - clientReferenceId
+      - images
+      type: object
+      properties:
+        clientReferenceId:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Customer unique reference Id
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ICExternalImageVM'
+          description: Images associated with this ImageRequest
+        jobId:
+          type:
+          - string
+          - 'null'
+          description: Job for the Image Capture to be linked with
+          format: uuid
+      additionalProperties: false
+    ImageCaptureAssetIdentifierResVM:
+      type: object
+      properties:
+        identifier:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ImageCaptureAssetPropertyRespVM'
+      additionalProperties: false
+    ICExternalV2ImageInfoReqVM:
+      required:
+      - type
+      type: object
+      properties:
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+        type:
+          $ref: '#/components/schemas/ImageType'
+      additionalProperties: false
+    ICExternalV2ReqVM:
+      required:
+      - clientReferenceId
+      type: object
+      properties:
+        clientReferenceId:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Customer unique reference Id
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
+        collectionId:
+          type:
+          - string
+          - 'null'
+          description: Image CollectionId
+          format: uuid
+        jobId:
+          type:
+          - string
+          - 'null'
+          description: Job for this ImageRequest to be linked with
+          format: uuid
+        expiryDate:
+          maximum: 30
+          minimum: 1
+          type:
+          - integer
+          - 'null'
+          format: int32
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ICExternalV2ImageInfoReqVM'
+          description: List of images information to be initialized
+      additionalProperties: false
+    Tag:
+      enum:
+      - wheel
+      - front
+      - rear
+      - left
+      - right
+      - interior
+      - mileage
+      - vin
+      - centre
+      - roof
+      - window
+      - library
+      - digitalSignature
+      - wideAngle
+      - selfPortrait
+      - fullView
+      - closeUp
+      type: string
+    ICExternalImageRespVM:
+      type: object
+      properties:
+        imageId:
+          type: string
+          format: uuid
+        image:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+        clientReferenceImageId:
+          type:
+          - string
+          - 'null'
+          description: Reference id setting by the client for this particular image
+      additionalProperties: false
+    ICExternalRespVM:
+      type: object
+      properties:
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ICExternalImageRespVM'
+        clientReferenceId:
+          type:
+          - string
+          - 'null'
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        jobId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
+    ICExternalV2RespVM:
+      type: object
+      properties:
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ExternalImageRequestV2Images'
+        clientReferenceId:
+          type:
+          - string
+          - 'null'
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        jobId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
+    ICExternalSelfVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        error:
+          $ref: '#/components/schemas/ErrorModel'
+      additionalProperties: false
+    ExternalImageRequestV2Images:
+      type: object
+      properties:
+        imageId:
+          type: string
+          format: uuid
+        filename:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ImageCaptureAssetIdentifierReqVM:
+      required:
+      - identifier
+      - value
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/AssetIdentifier'
+        value:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Value against the identifier
+        assetProperties:
+          $ref: '#/components/schemas/AssetPropertiesReqVM'
+      additionalProperties: false
+    SelfModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        communicationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        communicationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    AssetPropertiesReqVM:
+      required:
+      - axManufacturer
+      - axModel
+      - axModelOptions
+      - axSubModel
+      - bodyType
+      - make
+      - model
+      - year
+      type: object
+      properties:
+        make:
+          minLength: 1
+          type: string
+        model:
+          minLength: 1
+          type: string
+        year:
+          minLength: 1
+          type: string
+        bodyType:
+          minLength: 1
+          type: string
+        axManufacturer:
+          minLength: 1
+          type: string
+        axModel:
+          minLength: 1
+          type: string
+        axSubModel:
+          minLength: 1
+          type: string
+        axModelOptions:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    AssetIdentifier:
+      enum:
+      - VIN
+      type: string
+    WarningModel:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageCaptureStatusType:
+      enum:
+      - Pending
+      - Expired
+      - Completed
+      type: string
+    ICExternalImageVM:
+      required:
+      - base64EncodedImage
+      type: object
+      properties:
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+          description: Tags associated with this Image
+        clientReferenceImageId:
+          type:
+          - string
+          - 'null'
+          description: Reference id setting by the client for this particular image
+      additionalProperties: false
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        isNoError:
+          type: boolean
+          readOnly: true
+        isCreated:
+          type: boolean
+          readOnly: true
+        isAccepted:
+          type: boolean
+          readOnly: true
+        isInternalError:
+          type: boolean
+          readOnly: true
+        isBadRequest:
+          type: boolean
+          readOnly: true
+        isNotFoundError:
+          type: boolean
+          readOnly: true
+        isUnauthorizedCodeError:
+          type: boolean
+          readOnly: true
+        isBadGatewayError:
+          type: boolean
+          readOnly: true
+        getHttpCode:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    ImageCaptureAssetPropertyRespVM:
+      type: object
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageType:
+      enum:
+      - Png
+      - Jpeg
+      - Svg
+      type: string
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

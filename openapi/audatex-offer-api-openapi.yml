@@ -1,0 +1,1423 @@
+openapi: 3.2.0
+info:
+  title: Audatex Offer API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Offer across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Offer
+paths:
+  /api/v1/Offer:
+    post:
+      tags:
+      - Offer
+      summary: Create a new Intelligent Offer request
+      description: This API will allow you to create a new Intelligent Offer request
+      requestBody:
+        description: The Intelligent Offer input
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/OfferRequestViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferRequestViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OfferRequestViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/OfferRequestViewModel'
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorized
+      operationId: postApiV1Offer
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Offer/{offerId}:
+    get:
+      tags:
+      - Offer
+      summary: Get details about an Intelligent Offer request
+      description: This API will allow you to get details of an Intelligent Offer request
+      parameters:
+      - name: offerId
+        in: path
+        description: The id of the Intelligent Offer request
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns details of the Intelligent Offer request
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OfferResponseViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferResponseViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OfferResponseViewModel'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '404':
+          description: Returns an error if the Intelligent Offer request is not found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Sorry, an unexpected error has occurred
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '401':
+          description: Returns an error if the user is not authorized
+      operationId: getApiV1OfferByOfferId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Offer/Query/{offerId}:
+    get:
+      tags:
+      - Offer
+      summary: Gets only some information about an Intelligent Offer
+      description: This API will allow you to get some information of an Intelligent Offer (GIC-5348)
+      parameters:
+      - name: offerId
+        in: path
+        description: The id of the Intelligent Offer
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: fieldsSet
+        in: query
+        schema:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferQueryField'
+      - name: fields
+        in: query
+        schema:
+          type: string
+      - name: defaultFieldNames
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: fieldNames
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '404':
+          description: Returns an error if the Intelligent Offer is not found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '200':
+          description: Returns some information of the Intelligent Offer
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OfferQueryModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferQueryModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OfferQueryModel'
+        '401':
+          description: Returns an error if the user is not authorized
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: getApiV1OfferQueryByOfferId
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Offer
+      summary: Gets only some information about an Intelligent Offer (POST version)
+      description: This API will allow you to get some information of an Intelligent Offer using POST (GIC-5348)
+      parameters:
+      - name: offerId
+        in: path
+        description: The id of the Intelligent Offer
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: The query parameters required of the Intelligent Offer
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/OfferQueryReqViewModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfferQueryReqViewModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/OfferQueryReqViewModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/OfferQueryReqViewModel'
+      responses:
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ValidationProblemDetails'
+        '404':
+          description: Returns an error if the Intelligent Offer is not found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '200':
+          description: Returns some information of the Intelligent Offer
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/OfferQueryModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OfferQueryModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/OfferQueryModel'
+        '401':
+          description: Returns an error if the user is not authorized
+        '500':
+          description: Sorry, an unexpected error has occurred
+      operationId: postApiV1OfferQueryByOfferId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    ValidationProblemDetails:
+      type: object
+      properties:
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    ImageCaptureStylingModel:
+      type: object
+      properties:
+        logoId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        logo:
+          type:
+          - string
+          - 'null'
+          format: byte
+        primaryHex:
+          type:
+          - string
+          - 'null'
+        secondaryHex:
+          type:
+          - string
+          - 'null'
+        buttonHex:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageCaptureCommunicationVM:
+      required:
+      - from
+      - recipient
+      - type
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/ImageCaptureRecipientVM'
+        from:
+          maxLength: 150
+          minLength: 1
+          type: string
+          description: The name of the sender
+        message:
+          maxLength: 300
+          type:
+          - string
+          - 'null'
+          description: The message to be sent in SMS. The API will substitute {IC_URL} for the image request link and {IC_PIN} for the image request pin.
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+        shortUrl:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+          description: The short Url for the image capture link
+        enableLineTypeIntelligence:
+          type: boolean
+          description: 'Enable the line type intelligence, it means when there is a communication,
+
+            we validate the line type of the phone number.'
+        template:
+          type:
+          - string
+          - 'null'
+        variables:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        reminders:
+          $ref: '#/components/schemas/ReminderConfigModel'
+      additionalProperties: false
+    OfferQueryModel:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        status:
+          type:
+          - string
+          - 'null'
+        offerStatus:
+          type:
+          - string
+          - 'null'
+        deliveryStatus:
+          type:
+          - string
+          - 'null'
+        dateSent:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isLinkOpened:
+          type:
+          - boolean
+          - 'null'
+        expiryDays:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        link:
+          type:
+          - string
+          - 'null'
+        clientReferenceId:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RequestCountry:
+      enum:
+      - DZ
+      - AO
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BR
+      - BN
+      - BG
+      - KH
+      - CA
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CY
+      - CZ
+      - DK
+      - EE
+      - FI
+      - FR
+      - GE
+      - DE
+      - GR
+      - HK
+      - HU
+      - IN
+      - ID
+      - IE
+      - IL
+      - IT
+      - JP
+      - KZ
+      - KE
+      - KR
+      - KW
+      - LA
+      - LV
+      - LB
+      - LT
+      - LU
+      - MK
+      - MY
+      - MT
+      - MU
+      - MX
+      - MD
+      - ME
+      - MA
+      - MM
+      - NL
+      - NZ
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PH
+      - PL
+      - PT
+      - PR
+      - QA
+      - RO
+      - RU
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ZA
+      - ES
+      - LK
+      - SE
+      - CH
+      - TW
+      - TH
+      - TN
+      - TR
+      - UA
+      - AE
+      - GB
+      - US
+      - UY
+      - VE
+      - VN
+      type: string
+    OfferPageModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        page:
+          type:
+          - string
+          - 'null'
+        pageTitle:
+          type:
+          - string
+          - 'null'
+        pageText:
+          type:
+          - string
+          - 'null'
+        heroImageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        isImageRequired:
+          type: boolean
+        minimumImages:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        maximumImages:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        displayOrder:
+          type: integer
+          format: int32
+        surveySchema: {}
+        acknowledgeText:
+          type:
+          - string
+          - 'null'
+        isOnlyDamagePhotoRequired:
+          type: boolean
+        isMultiplePictureEnable:
+          type: boolean
+        initialDamageTitle:
+          type:
+          - string
+          - 'null'
+        initialDamageText:
+          type:
+          - string
+          - 'null'
+        photosDamageTitle:
+          type:
+          - string
+          - 'null'
+        photosDamageText:
+          type:
+          - string
+          - 'null'
+        completeDamageTitle:
+          type:
+          - string
+          - 'null'
+        completeDamageText:
+          type:
+          - string
+          - 'null'
+        isVideoRequired:
+          type: boolean
+        pointOfImpact: {}
+        disableGalleryUpload:
+          type: boolean
+        units:
+          type:
+          - string
+          - 'null'
+        validateVin:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        isAudioRequired:
+          type: boolean
+      additionalProperties: false
+    OfferUserInputModel:
+      type: object
+      properties:
+        userInputId:
+          type: string
+          format: uuid
+        property:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        propertyValue: {}
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    OfferQueryReqViewModel:
+      type: object
+      properties:
+        fieldsSet:
+          uniqueItems: true
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OfferQueryField'
+        fields:
+          type:
+          - string
+          - 'null'
+        defaultFieldNames:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          readOnly: true
+        fieldNames:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          readOnly: true
+      additionalProperties: false
+    OfferRequestViewModel:
+      required:
+      - clientReferenceId
+      - linkExpiryDays
+      - offer
+      - timeZone
+      type: object
+      properties:
+        clientReferenceId:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Customer unique reference Id
+        linkExpiryDays:
+          maximum: 30
+          minimum: 1
+          type: integer
+          description: Set the time in days that the image request link will expire in (1-30 days)
+          format: int32
+        language:
+          type:
+          - string
+          - 'null'
+          description: Set the language for the image request UI. Optionally supply the culture code (RFC 4646), e.g. 'en-US'; defaults to 'en-GB' if not provided.
+        country:
+          $ref: '#/components/schemas/RequestCountry'
+        timeZone:
+          $ref: '#/components/schemas/TimeZone'
+        termsAndConditionsUrl:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+          description: Set the Terms and Conditions Url (max 500 characters)
+        settings:
+          description: Settings configuration using JToken (same format as ImageCapture V2)
+        offer:
+          $ref: '#/components/schemas/OfferDetailsViewModel'
+        communication:
+          $ref: '#/components/schemas/ImageCaptureCommunicationVM'
+        styling:
+          $ref: '#/components/schemas/ImageCaptureStylingVM'
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
+      additionalProperties: false
+      description: ViewModel for Intelligent Offer request creation (GIC-4020)
+    OfferResponseViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        clientReferenceId:
+          type:
+          - string
+          - 'null'
+        link:
+          type:
+          - string
+          - 'null'
+        linkExpiryDays:
+          type: integer
+          format: int32
+        isLinkOpened:
+          type: boolean
+        language:
+          type:
+          - string
+          - 'null'
+        country:
+          $ref: '#/components/schemas/RequestCountry'
+        timeZone:
+          $ref: '#/components/schemas/ImageCaptureTimeZoneModel'
+        originatingRegion:
+          type:
+          - string
+          - 'null'
+        termsAndConditionsUrl:
+          type:
+          - string
+          - 'null'
+        imageRequestJsonSettings: {}
+        offer:
+          $ref: '#/components/schemas/OfferDetailsModel'
+        styling:
+          $ref: '#/components/schemas/ImageCaptureStylingModel'
+        assetIdentifierType:
+          type:
+          - string
+          - 'null'
+        assetValue:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        accessCode:
+          type:
+          - string
+          - 'null'
+        pin:
+          type:
+          - string
+          - 'null'
+        disableGalleryUpload:
+          type: boolean
+        enableVin:
+          type: boolean
+        disableLink:
+          type: boolean
+        lastVisitedPage:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OfferImageModel'
+        userInputs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OfferUserInputModel'
+        pageConfiguration:
+          $ref: '#/components/schemas/OfferPageConfigurationModel'
+        asset:
+          $ref: '#/components/schemas/OfferAssetModel'
+        settings: {}
+        offerStatus:
+          type:
+          - string
+          - 'null'
+        dateCreated:
+          $ref: '#/components/schemas/ImageCaptureDateViewModel'
+        dateOpened:
+          $ref: '#/components/schemas/ImageCaptureDateViewModel'
+        dateCompleted:
+          $ref: '#/components/schemas/ImageCaptureDateViewModel'
+        communications:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OfferCommunicationResViewModel'
+          description: Communications sent for this offer with full delivery status information
+      additionalProperties: false
+      description: 'ViewModel for Intelligent Offer response.
+
+        Extends the base model with properly typed ViewModels for nested objects.'
+    ImageCaptureStylingVM:
+      required:
+      - buttonHex
+      - primaryHex
+      - secondaryHex
+      type: object
+      properties:
+        logoId:
+          type:
+          - string
+          - 'null'
+          description: LogoId for entity logo mapping
+          format: uuid
+        logo:
+          type:
+          - string
+          - 'null'
+          description: Logo to be used when rendering the image capture on the UI. This must be 250KB or less of .png format data.
+          format: byte
+        primaryHex:
+          minLength: 1
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          type: string
+          description: 'Primary Hex colour of the format #000000. Used for header background.'
+        secondaryHex:
+          minLength: 1
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          type: string
+          description: 'Secondary Hex colour of the format #000000. Used for header border and submit button'
+        buttonHex:
+          minLength: 1
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          type: string
+          description: 'Button Hex colour of the format #000000. Used for the primary buttons'
+      additionalProperties: false
+    OfferImageSelfModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    TimeZone:
+      enum:
+      - Dateline_Standard_Time
+      - Hawaiian_Standard_Time
+      - Alaskan_Standard_Time
+      - Pacific_Standard_Time
+      - Pacific_Standard_Time_Mexico
+      - Mountain_Standard_Time
+      - Mountain_Standard_Time_Mexico
+      - US_Mountain_Standard_Time
+      - Canada_Central_Standard_Time
+      - Central_America_Standard_Time
+      - Central_Standard_Time
+      - Central_Standard_Time_Mexico
+      - Eastern_Standard_Time
+      - SA_Pacific_Standard_Time
+      - US_Eastern_Standard_Time
+      - Atlantic_Standard_Time
+      - Central_Brazilian_Standard_Time
+      - Pacific_SA_Standard_Time
+      - SA_Western_Standard_Time
+      - Venezuela_Standard_Time
+      - Paraguay_Standard_Time
+      - Newfoundland_Standard_Time
+      - E_South_America_Standard_Time
+      - Greenland_Standard_Time
+      - Montevideo_Standard_Time
+      - SA_Eastern_Standard_Time
+      - Argentina_Standard_Time
+      - Mid_Atlantic_Standard_Time
+      - Azores_Standard_Time
+      - Cabo_Verde_Standard_Time
+      - GMT_Standard_Time
+      - Greenwich_Standard_Time
+      - Morocco_Standard_Time
+      - UTC
+      - Central_Europe_Standard_Time
+      - Central_European_Standard_Time
+      - Romance_Standard_Time
+      - W_Central_Africa_Standard_Time
+      - W_Europe_Standard_Time
+      - Namibia_Standard_Time
+      - E_Europe_Standard_Time
+      - Egypt_Standard_Time
+      - FLE_Standard_Time
+      - GTB_Standard_Time
+      - Israel_Standard_Time
+      - Jordan_Standard_Time
+      - Middle_East_Standard_Time
+      - South_Africa_Standard_Time
+      - Syria_Standard_Time
+      - Turkey_Standard_Time
+      - Arab_Standard_Time
+      - Arabic_Standard_Time
+      - E_Africa_Standard_Time
+      - Kaliningrad_Standard_Time
+      - Russian_Standard_Time
+      - Iran_Standard_Time
+      - Arabian_Standard_Time
+      - Azerbaijan_Standard_Time
+      - Caucasus_Standard_Time
+      - Afghanistan_Standard_Time
+      - Georgian_Standard_Time
+      - Mauritius_Standard_Time
+      - Ekaterinburg_Standard_Time
+      - West_Asia_Standard_Time
+      - India_Standard_Time
+      - Sri_Lanka_Standard_Time
+      - Nepal_Standard_Time
+      - Pakistan_Standard_Time
+      - Central_Asia_Standard_Time
+      - N_Central_Asia_Standard_Time
+      - Myanmar_Standard_Time
+      - Bangladesh_Standard_Time
+      - North_Asia_Standard_Time
+      - SE_Asia_Standard_Time
+      - China_Standard_Time
+      - North_Asia_East_Standard_Time
+      - Singapore_Standard_Time
+      - Taipei_Standard_Time
+      - W_Australia_Standard_Time
+      - Ulaanbaatar_Standard_Time
+      - Korea_Standard_Time
+      - Tokyo_Standard_Time
+      - Yakutsk_Standard_Time
+      - AUS_Central_Standard_Time
+      - Central_Australia_Standard_Time
+      - AUS_Eastern_Standard_Time
+      - E_Australia_Standard_Time
+      - Tasmania_Standard_Time
+      - Vladivostok_Standard_Time
+      - West_Pacific_Standard_Time
+      - Central_Pacific_Standard_Time
+      - Magadan_Standard_Time
+      - Fiji_Standard_Time
+      - New_Zealand_Standard_Time
+      - Tonga_Standard_Time
+      - Samoa_Standard_Time
+      type: string
+    ImageCaptureRecipientVM:
+      required:
+      - dialingCode
+      - mobileNumber
+      type: object
+      properties:
+        dialingCode:
+          maxLength: 5
+          minLength: 1
+          type: string
+          description: Dialing code for mobile number. Format +XX
+        mobileNumber:
+          maxLength: 11
+          minLength: 8
+          type: string
+          description: The Mobile number where Image capture SMS will be sent.
+        lineType:
+          type:
+          - string
+          - 'null'
+          description: The LineType of the mobile number.
+      additionalProperties: false
+    VehicleOfferViewModel:
+      required:
+      - make
+      - model
+      type: object
+      properties:
+        make:
+          minLength: 1
+          type: string
+          description: Vehicle make (required)
+        model:
+          minLength: 1
+          type: string
+          description: Vehicle model (required)
+      additionalProperties: false
+      description: Vehicle information for Offer
+    OfferDetailsModel:
+      required:
+      - currency
+      - offerAmount
+      - vehicle
+      type: object
+      properties:
+        currency:
+          maxLength: 3
+          minLength: 1
+          type: string
+        offerAmount:
+          minLength: 1
+          type: string
+        repairs:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        vehicle:
+          $ref: '#/components/schemas/VehicleOfferModel'
+        customFields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    ReminderConfigModel:
+      type: object
+      properties:
+        delays:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+        reminderMessage:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    OfferImageModel:
+      type: object
+      properties:
+        page:
+          type:
+          - string
+          - 'null'
+        imageRequestPageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        image:
+          $ref: '#/components/schemas/OfferImageSelfModel'
+      additionalProperties: false
+    ImageCaptureTimeZoneModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        offset:
+          type: integer
+          format: int32
+      additionalProperties: false
+    SelfModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        communicationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        communicationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    OfferAssetModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        identifier:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OfferAssetPropertyModel'
+      additionalProperties: false
+    ImageCaptureAssetIdentifierReqVM:
+      required:
+      - identifier
+      - value
+      type: object
+      properties:
+        identifier:
+          $ref: '#/components/schemas/AssetIdentifier'
+        value:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Value against the identifier
+        assetProperties:
+          $ref: '#/components/schemas/AssetPropertiesReqVM'
+      additionalProperties: false
+    OfferQueryField:
+      enum:
+      - Id
+      - Status
+      - OfferStatus
+      - DeliveryStatus
+      - DateSent
+      - IsLinkOpened
+      - ExpiryDays
+      - Link
+      - ClientReferenceId
+      type: string
+    VehicleOfferModel:
+      required:
+      - make
+      - model
+      type: object
+      properties:
+        make:
+          minLength: 1
+          type: string
+        model:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    OfferDetailsViewModel:
+      required:
+      - currency
+      - offerAmount
+      - vehicle
+      type: object
+      properties:
+        currency:
+          maxLength: 3
+          minLength: 1
+          type: string
+          description: Currency code (e.g., USD, EUR, GBP)
+        offerAmount:
+          minLength: 1
+          type: string
+          description: Offer amount as string to preserve decimal formatting
+        repairs:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Repairs details (key-value pairs)
+        vehicle:
+          $ref: '#/components/schemas/VehicleOfferViewModel'
+        customFields:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+          description: Custom fields (key-value pairs)
+      additionalProperties: false
+      description: ViewModel for Offer details in Intelligent Offer request
+    AssetPropertiesReqVM:
+      required:
+      - axManufacturer
+      - axModel
+      - axModelOptions
+      - axSubModel
+      - bodyType
+      - make
+      - model
+      - year
+      type: object
+      properties:
+        make:
+          minLength: 1
+          type: string
+        model:
+          minLength: 1
+          type: string
+        year:
+          minLength: 1
+          type: string
+        bodyType:
+          minLength: 1
+          type: string
+        axManufacturer:
+          minLength: 1
+          type: string
+        axModel:
+          minLength: 1
+          type: string
+        axSubModel:
+          minLength: 1
+          type: string
+        axModelOptions:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    AssetIdentifier:
+      enum:
+      - VIN
+      type: string
+    WarningModel:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageCaptureDateViewModel:
+      type: object
+      properties:
+        utc:
+          type: string
+          format: date-time
+        local:
+          type: string
+          format: date-time
+      additionalProperties: false
+    CommunicationType:
+      enum:
+      - SMS
+      - Whatsapp
+      type: string
+    CommunicationStatus:
+      enum:
+      - Sent
+      - Delivered
+      - Undelivered
+      - Error
+      - Unknown
+      type: string
+    OfferCommunicationResViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        recipient:
+          $ref: '#/components/schemas/ImageCaptureRecipientVM'
+        message:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        deliveryStatus:
+          $ref: '#/components/schemas/CommunicationStatus'
+        dateSent:
+          $ref: '#/components/schemas/ImageCaptureDateViewModel'
+        enableLineTypeIntelligence:
+          type: boolean
+        template:
+          type:
+          - string
+          - 'null'
+        variables:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+      description: 'ViewModel for communication response data in Offer.
+
+        Matches the structure of ImageCaptureCommunicationResVM for API consistency.'
+    ImageCaptureStatusType:
+      enum:
+      - Pending
+      - Expired
+      - Completed
+      type: string
+    OfferPageConfigurationModel:
+      type: object
+      properties:
+        pages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OfferPageModel'
+      additionalProperties: false
+    OfferAssetPropertyModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        property:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

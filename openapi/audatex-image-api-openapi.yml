@@ -1,0 +1,694 @@
+openapi: 3.2.0
+info:
+  title: Audatex Image API
+  version: '1.0'
+  description: 'Operations tagged Image across 3 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-audaconnect-api-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: Image
+paths:
+  /api/v1/Image/Post:
+    post:
+      tags:
+      - Image
+      summary: Add images to an assessmentId
+      description: This endpoint will allow you to add images to an assessment
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/AssessmentImageRequestVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentImageRequestVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AssessmentImageRequestVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AssessmentImageRequestVM'
+        required: true
+      responses:
+        '201':
+          description: Returns a created response
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfModel'
+        '400':
+          description: Returns an error if the request fails validation or if the assessmentId does not exist
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Sorry, an unexpected error has occurred
+        '401':
+          description: Returns an error if the user is not authorised
+      deprecated: true
+      security:
+      - Bearer: []
+      - Bearer: []
+      operationId: postApiV1ImagePost
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Image/Logo:
+    get:
+      tags:
+      - Image
+      summary: Retrieves a list of logo Images
+      description: This endpoint will allow a logo image to be getted
+      responses:
+        '200':
+          description: Returns an OK response with the list of images
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogoImageRespModel'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogoImageRespModel'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LogoImageRespModel'
+        '400':
+          description: Returns an error if the request fails
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorized
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      security:
+      - Bearer: []
+      - Bearer: []
+      operationId: getApiV1ImageLogo
+      x-operation-id-source: derived
+    post:
+      tags:
+      - Image
+      summary: Uploads a Logo Image
+      description: This endpoint will allow a logo image to be uploaded
+      requestBody:
+        description: ''
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/LogoImageVM'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogoImageVM'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/LogoImageVM'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/LogoImageVM'
+        required: true
+      responses:
+        '201':
+          description: Returns a created response with the imageId
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/SelfViewModel'
+        '400':
+          description: Returns an error if the request fails validation
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '401':
+          description: Returns an error if the user is not authorized
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Server Error
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+      security:
+      - Bearer: []
+      - Bearer: []
+      operationId: postApiV1ImageLogo
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/assessments/{id}/images:
+    get:
+      tags:
+      - Image
+      summary: Get a list of images associated with the specified assessment
+      operationId: Image_GetImageHeaders
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the assessment.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+      security:
+      - oauth2:
+        - Assessment.Detail+ImageAccess
+    post:
+      tags:
+      - Image
+      summary: Post a new image to a specific assessment
+      operationId: Image_AddImage
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID for the assessment.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+      security:
+      - oauth2:
+        - Assessment.ImageAdmin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.ImageData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.ImageData'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.ImageData'
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AudaAPI.Models.ImageData'
+        description: Image data to be posted.
+        required: true
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/assessments/{assessmentId}/images/{imageId}:
+    get:
+      tags:
+      - Image
+      summary: Get a specific image header for a given assessment
+      operationId: Image_GetImageHeader
+      parameters:
+      - name: assessmentId
+        in: path
+        description: The unique ID of the assessment.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: imageId
+        in: path
+        description: The unique ID of the image.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+      security:
+      - oauth2:
+        - Assessment.Detail+ImageAccess
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/assessments/{id}/images/{sequence}:
+    get:
+      tags:
+      - Image
+      summary: Get an image header for a given assessment and sequence number
+      operationId: Image_GetImageHeaderBySequence
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the assessment.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: sequence
+        in: path
+        description: The sequence number of the image.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AudaAPI.Models.ImageHeader'
+      security:
+      - oauth2:
+        - Assessment.Detail+ImageAccess
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+  /api/images/{id}:
+    get:
+      tags:
+      - Image
+      summary: Get the binary image (JPEG format) for the specified image
+      operationId: Image_GetImageData
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the image.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - Assessment.Detail+ImageAccess
+    servers:
+    - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+components:
+  schemas:
+    ImageRequestVM:
+      required:
+      - base64EncodedImage
+      - type
+      type: object
+      properties:
+        usageType:
+          $ref: '#/components/schemas/ImageUsageType'
+        type:
+          $ref: '#/components/schemas/ImageType'
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+          description: The file name of the image
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the image
+      additionalProperties: false
+    LogoImageRespModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        filename:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        height:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        width:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        deleteAfter:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ImageUsageType:
+      enum:
+      - Regular
+      - Hero
+      - Logo
+      type: string
+    SelfModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        communicationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        communicationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageType:
+      enum:
+      - Png
+      - Jpeg
+      - Svg
+      type: string
+    AssessmentImageRequestVM:
+      required:
+      - assessmentId
+      - images
+      type: object
+      properties:
+        assessmentId:
+          type: string
+          description: The assessmentId to add the images to
+          format: uuid
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageRequestVM'
+          description: The list of images
+      additionalProperties: false
+    WarningModel:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    LogoImageVM:
+      required:
+      - base64EncodedImage
+      type: object
+      properties:
+        usageType:
+          $ref: '#/components/schemas/ImageUsageType'
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+          description: The file name of the image
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the image
+      additionalProperties: false
+    AudaAPI.Models.ImageData:
+      type: object
+      properties:
+        DisplayOrder:
+          format: int32
+          type: integer
+        JPEGData:
+          format: byte
+          type: string
+    AudaAPI.Models.ImageHeader:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        CreatedDate:
+          format: date-time
+          type: string
+        DisplayOrder:
+          format: int32
+          type: integer
+        SequenceNumber:
+          format: int32
+          type: integer
+        Comments:
+          type: string
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-audaconnect-api-openapi-original.json
+- audatex-api-gateway-openapi.yml

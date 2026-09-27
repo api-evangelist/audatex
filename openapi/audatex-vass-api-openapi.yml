@@ -1,0 +1,533 @@
+openapi: 3.2.0
+info:
+  title: Audatex Vass API
+  version: V1
+  contact:
+    name: Solera Development Team
+    url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
+    email: development@solera.com
+  license:
+    name: License
+    url: https://www.solera.com/legal/
+  termsOfService: https://www.solera.com/legal/
+  description: 'Operations tagged Vass across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: /APIGateway
+security:
+- Bearer: []
+- Bearer: []
+tags:
+- name: Vass
+paths:
+  /api/v1/Vass:
+    post:
+      tags:
+      - Vass
+      summary: Creates a new Video Assessment instance
+      description: This endpoint proxies a POST request to the external Video Assessment Service
+      requestBody:
+        description: The video assessment creation request payload
+        content:
+          application/json-patch+json:
+            schema:
+              $ref: '#/components/schemas/VideoAssessmentModel'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideoAssessmentModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/VideoAssessmentModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/VideoAssessmentModel'
+      responses:
+        '201':
+          description: Successfully created the assessment
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VassCreateResponseM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VassCreateResponseM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VassCreateResponseM'
+        '400':
+          description: Validation error
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Unexpected error from downstream service
+      operationId: postApiV1Vass
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+  /api/v1/Vass/{vassId}:
+    get:
+      tags:
+      - Vass
+      summary: Get an existing Video Assessment instance details by ID
+      description: This endpoint proxies a GET request to the external Video Assessment Service
+      parameters:
+      - name: vassId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Successfully retrieved the assessment
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VassInstanceDetailsM'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VassInstanceDetailsM'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VassInstanceDetailsM'
+        '400':
+          description: Validation error
+          content:
+            text/plain:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+            text/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: string
+        '500':
+          description: Unexpected error from downstream service
+      operationId: getApiV1VassByVassId
+      x-operation-id-source: derived
+    servers:
+    - url: /APIGateway
+components:
+  schemas:
+    VassResponseCommunicationM:
+      required:
+      - from
+      - message
+      - recipient
+      - type
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/ResponseCommunicationRecipientM'
+        from:
+          minLength: 1
+          type: string
+        message:
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+      additionalProperties: false
+    ResponseCommunicationRecipientM:
+      required:
+      - dialingCode
+      - mobileNumber
+      type: object
+      properties:
+        dialingCode:
+          maxLength: 5
+          minLength: 1
+          type: string
+        mobileNumber:
+          maxLength: 11
+          minLength: 8
+          type: string
+        lineType:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VassImageM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        data:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VassCreateResponseM:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    TimeZone:
+      enum:
+      - Dateline_Standard_Time
+      - Hawaiian_Standard_Time
+      - Alaskan_Standard_Time
+      - Pacific_Standard_Time
+      - Pacific_Standard_Time_Mexico
+      - Mountain_Standard_Time
+      - Mountain_Standard_Time_Mexico
+      - US_Mountain_Standard_Time
+      - Canada_Central_Standard_Time
+      - Central_America_Standard_Time
+      - Central_Standard_Time
+      - Central_Standard_Time_Mexico
+      - Eastern_Standard_Time
+      - SA_Pacific_Standard_Time
+      - US_Eastern_Standard_Time
+      - Atlantic_Standard_Time
+      - Central_Brazilian_Standard_Time
+      - Pacific_SA_Standard_Time
+      - SA_Western_Standard_Time
+      - Venezuela_Standard_Time
+      - Paraguay_Standard_Time
+      - Newfoundland_Standard_Time
+      - E_South_America_Standard_Time
+      - Greenland_Standard_Time
+      - Montevideo_Standard_Time
+      - SA_Eastern_Standard_Time
+      - Argentina_Standard_Time
+      - Mid_Atlantic_Standard_Time
+      - Azores_Standard_Time
+      - Cabo_Verde_Standard_Time
+      - GMT_Standard_Time
+      - Greenwich_Standard_Time
+      - Morocco_Standard_Time
+      - UTC
+      - Central_Europe_Standard_Time
+      - Central_European_Standard_Time
+      - Romance_Standard_Time
+      - W_Central_Africa_Standard_Time
+      - W_Europe_Standard_Time
+      - Namibia_Standard_Time
+      - E_Europe_Standard_Time
+      - Egypt_Standard_Time
+      - FLE_Standard_Time
+      - GTB_Standard_Time
+      - Israel_Standard_Time
+      - Jordan_Standard_Time
+      - Middle_East_Standard_Time
+      - South_Africa_Standard_Time
+      - Syria_Standard_Time
+      - Turkey_Standard_Time
+      - Arab_Standard_Time
+      - Arabic_Standard_Time
+      - E_Africa_Standard_Time
+      - Kaliningrad_Standard_Time
+      - Russian_Standard_Time
+      - Iran_Standard_Time
+      - Arabian_Standard_Time
+      - Azerbaijan_Standard_Time
+      - Caucasus_Standard_Time
+      - Afghanistan_Standard_Time
+      - Georgian_Standard_Time
+      - Mauritius_Standard_Time
+      - Ekaterinburg_Standard_Time
+      - West_Asia_Standard_Time
+      - India_Standard_Time
+      - Sri_Lanka_Standard_Time
+      - Nepal_Standard_Time
+      - Pakistan_Standard_Time
+      - Central_Asia_Standard_Time
+      - N_Central_Asia_Standard_Time
+      - Myanmar_Standard_Time
+      - Bangladesh_Standard_Time
+      - North_Asia_Standard_Time
+      - SE_Asia_Standard_Time
+      - China_Standard_Time
+      - North_Asia_East_Standard_Time
+      - Singapore_Standard_Time
+      - Taipei_Standard_Time
+      - W_Australia_Standard_Time
+      - Ulaanbaatar_Standard_Time
+      - Korea_Standard_Time
+      - Tokyo_Standard_Time
+      - Yakutsk_Standard_Time
+      - AUS_Central_Standard_Time
+      - Central_Australia_Standard_Time
+      - AUS_Eastern_Standard_Time
+      - E_Australia_Standard_Time
+      - Tasmania_Standard_Time
+      - Vladivostok_Standard_Time
+      - West_Pacific_Standard_Time
+      - Central_Pacific_Standard_Time
+      - Magadan_Standard_Time
+      - Fiji_Standard_Time
+      - New_Zealand_Standard_Time
+      - Tonga_Standard_Time
+      - Samoa_Standard_Time
+      type: string
+    VideoAssessmentModel:
+      required:
+      - country
+      - linkExpiryDays
+      - timeZone
+      type: object
+      properties:
+        linkExpiryDays:
+          maximum: 7
+          minimum: 1
+          type: integer
+          format: int32
+        language:
+          type:
+          - string
+          - 'null'
+        timeZone:
+          $ref: '#/components/schemas/TimeZone'
+        settings: {}
+        country:
+          $ref: '#/components/schemas/RequestCountry'
+        communication:
+          $ref: '#/components/schemas/VassResponseCommunicationM'
+      additionalProperties: false
+    RequestCountry:
+      enum:
+      - DZ
+      - AO
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BR
+      - BN
+      - BG
+      - KH
+      - CA
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CY
+      - CZ
+      - DK
+      - EE
+      - FI
+      - FR
+      - GE
+      - DE
+      - GR
+      - HK
+      - HU
+      - IN
+      - ID
+      - IE
+      - IL
+      - IT
+      - JP
+      - KZ
+      - KE
+      - KR
+      - KW
+      - LA
+      - LV
+      - LB
+      - LT
+      - LU
+      - MK
+      - MY
+      - MT
+      - MU
+      - MX
+      - MD
+      - ME
+      - MA
+      - MM
+      - NL
+      - NZ
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PH
+      - PL
+      - PT
+      - PR
+      - QA
+      - RO
+      - RU
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ZA
+      - ES
+      - LK
+      - SE
+      - CH
+      - TW
+      - TH
+      - TN
+      - TR
+      - UA
+      - AE
+      - GB
+      - US
+      - UY
+      - VE
+      - VN
+      type: string
+    ResponseCommunicationM:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        dateSent:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        errorMessage:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VassVideoM:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VassInstanceDetailsM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        assessorLink:
+          type:
+          - string
+          - 'null'
+        surveyorLink:
+          type:
+          - string
+          - 'null'
+        dateCreated:
+          $ref: '#/components/schemas/VassInstantM'
+        dateCompleted:
+          $ref: '#/components/schemas/VassInstantM'
+        status:
+          type:
+          - string
+          - 'null'
+        linkExpiryDays:
+          type: integer
+          format: int32
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VassImageM'
+        videos:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VassVideoM'
+        language:
+          type:
+          - string
+          - 'null'
+        originatingRegion:
+          type:
+          - string
+          - 'null'
+        timeZone:
+          $ref: '#/components/schemas/VassTimeZoneM'
+        country:
+          $ref: '#/components/schemas/RequestCountry'
+        responseCommunication:
+          $ref: '#/components/schemas/ResponseCommunicationM'
+      additionalProperties: false
+    CommunicationType:
+      enum:
+      - SMS
+      - Whatsapp
+      type: string
+    VassInstantM:
+      type: object
+      properties:
+        utc:
+          type: string
+          format: date-time
+        local:
+          type: string
+          format: date-time
+      additionalProperties: false
+    VassTimeZoneM:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        offset:
+          type: integer
+          format: int32
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
+      name: Authorization
+      in: header
+x-refined-from:
+- audatex-api-gateway-openapi-original.json
+- audatex-api-gateway-openapi.yml

@@ -1,0 +1,123 @@
+openapi: 3.2.0
+info:
+  version: v1
+  title: AudaConnect Assessment Report API
+  description: 'AudaConnect. You can use this Swagger page to test the API. You will need to authenticate either at the top of the page for multiple scopes or clicking on the authentication status image on each operation. You will need to use your supplied Client Application ID during when selecting scopes. AudaConnect API Build Version: 2.25.26048.2'
+  contact:
+    name: Audatex UK
+    url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
+    email: servicedesk@audatex.co.uk
+servers:
+- url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
+tags:
+- name: AssessmentReport
+paths:
+  /api/assessments/{id}/report:
+    get:
+      tags:
+      - AssessmentReport
+      summary: Gets a PDF report for an assessment.
+      operationId: AssessmentReport_Get
+      parameters:
+      - name: id
+        in: path
+        description: The unique ID of the assessment.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: reportCode
+        in: query
+        description: 'The report definition code. Call GET /api/reports for a list of available values.
+
+          Defaults to "MOBILEFULL" if no report code specified.'
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+            text/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: object
+            text/xml:
+              schema:
+                type: object
+      security:
+      - oauth2:
+        - Assessment.Detail+ImageAccess
+  /api/reports:
+    get:
+      tags:
+      - AssessmentReport
+      summary: Get a list of report definitions for the GET /api/assessments/{id}/report…
+      operationId: AssessmentReport_GetReportDefinitions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Audatex.NextGen.Services.AssessmentReporting.Interface.v1.DataContracts.ReportDefinition'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Audatex.NextGen.Services.AssessmentReporting.Interface.v1.DataContracts.ReportDefinition'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Audatex.NextGen.Services.AssessmentReporting.Interface.v1.DataContracts.ReportDefinition'
+            text/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Audatex.NextGen.Services.AssessmentReporting.Interface.v1.DataContracts.ReportDefinition'
+      security:
+      - oauth2:
+        - Assessment.Detail+ImageAccess
+components:
+  schemas:
+    Audatex.NextGen.Services.AssessmentReporting.Interface.v1.DataContracts.ReportDefinition:
+      type: object
+      properties:
+        Description:
+          type: string
+        ReportCode:
+          type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          scopes:
+            System.Notifications: Create subscriptions and poll for notifications
+            System.PushNotifications: Create subscriptions and receive push notifications
+            Assessment.MainIndex: ''
+            Assessment.Detail+ImageAccess: ''
+            Assessment.ImageAdmin: ''
+            Assessment.EditAssessmentAdminData: ''
+            Assessment.MailReport: Creates a PDF for a mail.
+            Parts.GetParts: ''
+            Parts.UpdateParts: ''
+            Manage.Suppliers: ''
+            ReferenceData.My: Read access to your basic info e.g. email, user name
+            ReferenceData.Company: Read access to basic info on your company
+            ReferenceData.System: ''
+            ReferenceData.SystemAdmin: ''
+            TLA.CreateQuote: Create Total Loss Avoidance quotes
+            Vehicle.Lookup: ''
+            Vehicle.LookupDetailed: ''
+            Vehicle.Valuation: Perform CAP valuations
+          authorizationUrl: https://audaconnect.ax-aee.co.uk/AudaAPI.Portal/Oauth20
+      description: OAuth2 Implicit Grant
