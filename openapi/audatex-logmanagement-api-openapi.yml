@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex Log Management API
-  version: V1
+  title: Audatex.APIGateway Log Management API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged LogManagement across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -62,19 +61,8 @@ paths:
       x-summary-source: derived
       operationId: putApiLogManagement
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
-    LogLevelResponse:
-      type: object
-      properties:
-        logLevel:
-          $ref: '#/components/schemas/LogLevel'
-        until:
-          type: string
-          format: date-time
-      additionalProperties: false
     LogLevel:
       enum:
       - Trace
@@ -85,6 +73,15 @@ components:
       - Critical
       - None
       type: string
+    LogLevelResponse:
+      type: object
+      properties:
+        logLevel:
+          $ref: '#/components/schemas/LogLevel'
+        until:
+          type: string
+          format: date-time
+      additionalProperties: false
     LogElevationRequest:
       type: object
       properties:
@@ -100,6 +97,3 @@ components:
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml

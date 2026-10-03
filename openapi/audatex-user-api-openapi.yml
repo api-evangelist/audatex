@@ -181,6 +181,11 @@ paths:
         - ReferenceData.SystemAdmin
 components:
   schemas:
+    AudaAPI.WebAPI.Models.ErrorResponse:
+      type: object
+      properties:
+        Message:
+          type: string
     AudaAPI.Models.UserExtended:
       type: object
       properties:
@@ -212,11 +217,6 @@ components:
           format: date-time
           type: string
         Status:
-          type: string
-    AudaAPI.WebAPI.Models.ErrorResponse:
-      type: object
-      properties:
-        Message:
           type: string
     AudaAPI.Models.User:
       type: object

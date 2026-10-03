@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex Image Capture External API
-  version: V1
+  title: Audatex.APIGateway Image Capture External API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged ImageCaptureExternal across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -84,8 +83,6 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: postApiV1ImageCaptureExternal
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/ImageCaptureExternal/{imageCaptureId}:
     get:
       tags:
@@ -143,8 +140,6 @@ paths:
           description: Sorry, an unexpected error has occurred
       operationId: getApiV1ImageCaptureExternalByImageCaptureId
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/ImageCaptureExternal/Open:
     post:
       tags:
@@ -210,8 +205,6 @@ paths:
           description: Returns an error if the user is not authorized
       operationId: postApiV2ImageCaptureExternalOpen
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/ImageCaptureExternal/{imageRequestId}/Complete:
     put:
       tags:
@@ -261,8 +254,6 @@ paths:
           description: Returns an error if image capture external is not found
       operationId: putApiV2ImageCaptureExternalByImageRequestIdComplete
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/ImageCaptureExternal/{imageCaptureId}:
     get:
       tags:
@@ -320,8 +311,6 @@ paths:
           description: Sorry, an unexpected error has occurred
       operationId: getApiV2ImageCaptureExternalByImageCaptureId
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/ImageCaptureExternal/{imageRequestId}/Images:
     post:
       tags:
@@ -394,8 +383,6 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: postApiV2ImageCaptureExternalByImageRequestIdImages
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/ImageCaptureExternal/{imageRequestId}/Images/{imageId}/{format}:
     get:
       tags:
@@ -465,8 +452,6 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: getApiV2ImageCaptureExternalByImageRequestIdImagesByImageIdByFormat
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/ImageCaptureExternal/{imageRequestId}/Images/{imageId}:
     put:
       tags:
@@ -613,8 +598,6 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: deleteApiV2ImageCaptureExternalByImageRequestIdImagesByImageId
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/ImageCaptureExternal/{imageRequestId}/Images/{imageId}/binary:
     put:
       tags:
@@ -706,8 +689,6 @@ paths:
           description: Sorry, an unexpected error has occurred
       operationId: putApiV2ImageCaptureExternalByImageRequestIdImagesByImageIdBinary
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/ImageCaptureExternal/{imageRequestId}/Images/{imageId}/base64:
     put:
       tags:
@@ -790,64 +771,110 @@ paths:
       x-summary-source: derived
       operationId: putApiV2ImageCaptureExternalByImageRequestIdImagesByImageIdBase64
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
-    ICExternalReqVM:
-      required:
-      - clientReferenceId
-      - images
+    ICExternalSelfVM:
       type: object
       properties:
-        clientReferenceId:
-          maxLength: 255
-          minLength: 1
+        id:
           type: string
-          description: Customer unique reference Id
-        asset:
-          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/ICExternalImageVM'
-          description: Images associated with this ImageRequest
-        jobId:
-          type:
-          - string
-          - 'null'
-          description: Job for the Image Capture to be linked with
           format: uuid
-      additionalProperties: false
-    ImageCaptureAssetIdentifierResVM:
-      type: object
-      properties:
-        identifier:
+        self:
           type:
           - string
           - 'null'
-        value:
-          type:
-          - string
-          - 'null'
-        properties:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ImageCaptureAssetPropertyRespVM'
+        error:
+          $ref: '#/components/schemas/ErrorModel'
       additionalProperties: false
-    ICExternalV2ImageInfoReqVM:
-      required:
-      - type
+    ExternalImageRequestV2Images:
       type: object
       properties:
+        imageId:
+          type: string
+          format: uuid
         filename:
-          maxLength: 200
           type:
           - string
           - 'null'
         description:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    Tag:
+      enum:
+      - wheel
+      - front
+      - rear
+      - left
+      - right
+      - interior
+      - mileage
+      - vin
+      - centre
+      - roof
+      - window
+      - library
+      - digitalSignature
+      - wideAngle
+      - selfPortrait
+      - fullView
+      - closeUp
+      type: string
+    AssetPropertiesReqVM:
+      required:
+      - axManufacturer
+      - axModel
+      - axModelOptions
+      - axSubModel
+      - bodyType
+      - make
+      - model
+      - year
+      type: object
+      properties:
+        make:
+          minLength: 1
+          type: string
+        model:
+          minLength: 1
+          type: string
+        year:
+          minLength: 1
+          type: string
+        bodyType:
+          minLength: 1
+          type: string
+        axManufacturer:
+          minLength: 1
+          type: string
+        axModel:
+          minLength: 1
+          type: string
+        axSubModel:
+          minLength: 1
+          type: string
+        axModelOptions:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ICExternalImageRespVM:
+      type: object
+      properties:
+        imageId:
+          type: string
+          format: uuid
+        image:
           type:
           - string
           - 'null'
@@ -857,8 +884,23 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/Tag'
-        type:
-          $ref: '#/components/schemas/ImageType'
+        clientReferenceImageId:
+          type:
+          - string
+          - 'null'
+          description: Reference id setting by the client for this particular image
+      additionalProperties: false
+    ImageCaptureAssetPropertyRespVM:
+      type: object
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ICExternalV2ReqVM:
       required:
@@ -899,131 +941,13 @@ components:
             $ref: '#/components/schemas/ICExternalV2ImageInfoReqVM'
           description: List of images information to be initialized
       additionalProperties: false
-    Tag:
-      enum:
-      - wheel
-      - front
-      - rear
-      - left
-      - right
-      - interior
-      - mileage
-      - vin
-      - centre
-      - roof
-      - window
-      - library
-      - digitalSignature
-      - wideAngle
-      - selfPortrait
-      - fullView
-      - closeUp
-      type: string
-    ICExternalImageRespVM:
+    WarningModel:
       type: object
       properties:
-        imageId:
-          type: string
-          format: uuid
-        image:
+        message:
           type:
           - string
           - 'null'
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Tag'
-        clientReferenceImageId:
-          type:
-          - string
-          - 'null'
-          description: Reference id setting by the client for this particular image
-      additionalProperties: false
-    ICExternalRespVM:
-      type: object
-      properties:
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ICExternalImageRespVM'
-        clientReferenceId:
-          type:
-          - string
-          - 'null'
-        asset:
-          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
-        status:
-          $ref: '#/components/schemas/ImageCaptureStatusType'
-        jobId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      additionalProperties: false
-    ICExternalV2RespVM:
-      type: object
-      properties:
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ExternalImageRequestV2Images'
-        clientReferenceId:
-          type:
-          - string
-          - 'null'
-        asset:
-          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
-        status:
-          $ref: '#/components/schemas/ImageCaptureStatusType'
-        jobId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      additionalProperties: false
-    ICExternalSelfVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-        error:
-          $ref: '#/components/schemas/ErrorModel'
-      additionalProperties: false
-    ExternalImageRequestV2Images:
-      type: object
-      properties:
-        imageId:
-          type: string
-          format: uuid
-        filename:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          type:
-          - string
-          - 'null'
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
       additionalProperties: false
     ImageCaptureAssetIdentifierReqVM:
       required:
@@ -1041,117 +965,34 @@ components:
         assetProperties:
           $ref: '#/components/schemas/AssetPropertiesReqVM'
       additionalProperties: false
-    SelfModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-        communicationId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        warnings:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WarningModel'
-        communicationErrors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WarningModel'
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SelfModel'
-      additionalProperties: false
-    AssetPropertiesReqVM:
-      required:
-      - axManufacturer
-      - axModel
-      - axModelOptions
-      - axSubModel
-      - bodyType
-      - make
-      - model
-      - year
-      type: object
-      properties:
-        make:
-          minLength: 1
-          type: string
-        model:
-          minLength: 1
-          type: string
-        year:
-          minLength: 1
-          type: string
-        bodyType:
-          minLength: 1
-          type: string
-        axManufacturer:
-          minLength: 1
-          type: string
-        axModel:
-          minLength: 1
-          type: string
-        axSubModel:
-          minLength: 1
-          type: string
-        axModelOptions:
-          minLength: 1
-          type: string
-      additionalProperties: false
     AssetIdentifier:
       enum:
       - VIN
       type: string
-    WarningModel:
+    ImageCaptureAssetIdentifierResVM:
       type: object
       properties:
-        message:
+        identifier:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    ImageCaptureStatusType:
-      enum:
-      - Pending
-      - Expired
-      - Completed
-      type: string
-    ICExternalImageVM:
-      required:
-      - base64EncodedImage
-      type: object
-      properties:
-        base64EncodedImage:
-          minLength: 1
-          type: string
-          description: The image data as a Base64 encoded string
-        tags:
+        value:
+          type:
+          - string
+          - 'null'
+        properties:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/Tag'
-          description: Tags associated with this Image
-        clientReferenceImageId:
-          type:
-          - string
-          - 'null'
-          description: Reference id setting by the client for this particular image
+            $ref: '#/components/schemas/ImageCaptureAssetPropertyRespVM'
       additionalProperties: false
+    ImageType:
+      enum:
+      - Png
+      - Jpeg
+      - Svg
+      type: string
     ErrorModel:
       type: object
       properties:
@@ -1192,24 +1033,28 @@ components:
           format: int32
           readOnly: true
       additionalProperties: false
-    ImageCaptureAssetPropertyRespVM:
+    ICExternalImageVM:
+      required:
+      - base64EncodedImage
       type: object
       properties:
-        key:
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+          description: Tags associated with this Image
+        clientReferenceImageId:
           type:
           - string
           - 'null'
-        value:
-          type:
-          - string
-          - 'null'
+          description: Reference id setting by the client for this particular image
       additionalProperties: false
-    ImageType:
-      enum:
-      - Png
-      - Jpeg
-      - Svg
-      type: string
     ProblemDetails:
       type: object
       properties:
@@ -1235,12 +1080,143 @@ components:
           - string
           - 'null'
       additionalProperties: {}
+    SelfModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        communicationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        communicationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    ICExternalReqVM:
+      required:
+      - clientReferenceId
+      - images
+      type: object
+      properties:
+        clientReferenceId:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Customer unique reference Id
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ICExternalImageVM'
+          description: Images associated with this ImageRequest
+        jobId:
+          type:
+          - string
+          - 'null'
+          description: Job for the Image Capture to be linked with
+          format: uuid
+      additionalProperties: false
+    ICExternalV2ImageInfoReqVM:
+      required:
+      - type
+      type: object
+      properties:
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+        type:
+          $ref: '#/components/schemas/ImageType'
+      additionalProperties: false
+    ICExternalRespVM:
+      type: object
+      properties:
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ICExternalImageRespVM'
+        clientReferenceId:
+          type:
+          - string
+          - 'null'
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        jobId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
+    ImageCaptureStatusType:
+      enum:
+      - Pending
+      - Expired
+      - Completed
+      type: string
+    ICExternalV2RespVM:
+      type: object
+      properties:
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ExternalImageRequestV2Images'
+        clientReferenceId:
+          type:
+          - string
+          - 'null'
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        jobId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
   securitySchemes:
     Bearer:
       type: apiKey
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml

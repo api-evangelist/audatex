@@ -261,31 +261,6 @@ paths:
         - Manage.Suppliers
 components:
   schemas:
-    AudaAPI.Models.Suppliers.RegisteredSupplier:
-      type: object
-      properties:
-        ErpId:
-          type: string
-        Status:
-          enum:
-          - OrderingAllowed
-          - OrderingNotAllowed
-          type: string
-        Id:
-          type: string
-        SiteId:
-          type: string
-        Reference:
-          type: string
-        Name:
-          type: string
-    AudaAPI.Models.Suppliers.Supplier:
-      type: object
-      properties:
-        Reference:
-          type: string
-        Name:
-          type: string
     AudaAPI.Models.Suppliers.SupplierDetails:
       type: object
       properties:
@@ -312,6 +287,31 @@ components:
         PrimaryContactEmail:
           type: string
         VATNumber:
+          type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+    AudaAPI.Models.Suppliers.Supplier:
+      type: object
+      properties:
+        Reference:
+          type: string
+        Name:
+          type: string
+    AudaAPI.Models.Suppliers.RegisteredSupplier:
+      type: object
+      properties:
+        ErpId:
+          type: string
+        Status:
+          enum:
+          - OrderingAllowed
+          - OrderingNotAllowed
+          type: string
+        Id:
+          type: string
+        SiteId:
           type: string
         Reference:
           type: string

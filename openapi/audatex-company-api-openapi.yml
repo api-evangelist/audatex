@@ -81,24 +81,6 @@ paths:
       x-operation-id-original: Company_Get
 components:
   schemas:
-    AudaAPI.Models.Address:
-      type: object
-      properties:
-        ID:
-          format: uuid
-          type: string
-        AddressLine1:
-          type: string
-        AddressLine2:
-          type: string
-        AddressLine3:
-          type: string
-        AddressLine4:
-          type: string
-        AddressLine5:
-          type: string
-        PostCode:
-          type: string
     AudaAPI.Models.Company:
       type: object
       properties:
@@ -169,6 +151,24 @@ components:
         TelOther:
           type: string
         Fax:
+          type: string
+    AudaAPI.Models.Address:
+      type: object
+      properties:
+        ID:
+          format: uuid
+          type: string
+        AddressLine1:
+          type: string
+        AddressLine2:
+          type: string
+        AddressLine3:
+          type: string
+        AddressLine4:
+          type: string
+        AddressLine5:
+          type: string
+        PostCode:
           type: string
   securitySchemes:
     oauth2:

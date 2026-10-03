@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex Vass API
-  version: V1
+  title: Audatex.APIGateway Vass API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged Vass across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -75,8 +74,6 @@ paths:
           description: Unexpected error from downstream service
       operationId: postApiV1Vass
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/Vass/{vassId}:
     get:
       tags:
@@ -125,29 +122,8 @@ paths:
           description: Unexpected error from downstream service
       operationId: getApiV1VassByVassId
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
-    VassResponseCommunicationM:
-      required:
-      - from
-      - message
-      - recipient
-      - type
-      type: object
-      properties:
-        recipient:
-          $ref: '#/components/schemas/ResponseCommunicationRecipientM'
-        from:
-          minLength: 1
-          type: string
-        message:
-          minLength: 1
-          type: string
-        type:
-          $ref: '#/components/schemas/CommunicationType'
-      additionalProperties: false
     ResponseCommunicationRecipientM:
       required:
       - dialingCode
@@ -167,6 +143,23 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    VassVideoM:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    CommunicationType:
+      enum:
+      - SMS
+      - Whatsapp
+      type: string
     VassImageM:
       type: object
       properties:
@@ -188,18 +181,108 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    VassCreateResponseM:
+    VassInstantM:
       type: object
       properties:
-        id:
-          type:
-          - string
-          - 'null'
-        self:
-          type:
-          - string
-          - 'null'
+        utc:
+          type: string
+          format: date-time
+        local:
+          type: string
+          format: date-time
       additionalProperties: false
+    RequestCountry:
+      enum:
+      - DZ
+      - AO
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BR
+      - BN
+      - BG
+      - KH
+      - CA
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CY
+      - CZ
+      - DK
+      - EE
+      - FI
+      - FR
+      - GE
+      - DE
+      - GR
+      - HK
+      - HU
+      - IN
+      - ID
+      - IE
+      - IL
+      - IT
+      - JP
+      - KZ
+      - KE
+      - KR
+      - KW
+      - LA
+      - LV
+      - LB
+      - LT
+      - LU
+      - MK
+      - MY
+      - MT
+      - MU
+      - MX
+      - MD
+      - ME
+      - MA
+      - MM
+      - NL
+      - NZ
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PH
+      - PL
+      - PT
+      - PR
+      - QA
+      - RO
+      - RU
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ZA
+      - ES
+      - LK
+      - SE
+      - CH
+      - TW
+      - TH
+      - TN
+      - TR
+      - UA
+      - AE
+      - GB
+      - US
+      - UY
+      - VE
+      - VN
+      type: string
     TimeZone:
       enum:
       - Dateline_Standard_Time
@@ -299,6 +382,54 @@ components:
       - Tonga_Standard_Time
       - Samoa_Standard_Time
       type: string
+    ResponseCommunicationM:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        dateSent:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        errorMessage:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VassCreateResponseM:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VassResponseCommunicationM:
+      required:
+      - from
+      - message
+      - recipient
+      - type
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/ResponseCommunicationRecipientM'
+        from:
+          minLength: 1
+          type: string
+        message:
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+      additionalProperties: false
     VideoAssessmentModel:
       required:
       - country
@@ -322,127 +453,6 @@ components:
           $ref: '#/components/schemas/RequestCountry'
         communication:
           $ref: '#/components/schemas/VassResponseCommunicationM'
-      additionalProperties: false
-    RequestCountry:
-      enum:
-      - DZ
-      - AO
-      - AR
-      - AU
-      - AT
-      - AZ
-      - BH
-      - BY
-      - BE
-      - BA
-      - BR
-      - BN
-      - BG
-      - KH
-      - CA
-      - CL
-      - CN
-      - CO
-      - CR
-      - HR
-      - CY
-      - CZ
-      - DK
-      - EE
-      - FI
-      - FR
-      - GE
-      - DE
-      - GR
-      - HK
-      - HU
-      - IN
-      - ID
-      - IE
-      - IL
-      - IT
-      - JP
-      - KZ
-      - KE
-      - KR
-      - KW
-      - LA
-      - LV
-      - LB
-      - LT
-      - LU
-      - MK
-      - MY
-      - MT
-      - MU
-      - MX
-      - MD
-      - ME
-      - MA
-      - MM
-      - NL
-      - NZ
-      - 'NO'
-      - OM
-      - PA
-      - PE
-      - PH
-      - PL
-      - PT
-      - PR
-      - QA
-      - RO
-      - RU
-      - SA
-      - RS
-      - SG
-      - SK
-      - SI
-      - ZA
-      - ES
-      - LK
-      - SE
-      - CH
-      - TW
-      - TH
-      - TN
-      - TR
-      - UA
-      - AE
-      - GB
-      - US
-      - UY
-      - VE
-      - VN
-      type: string
-    ResponseCommunicationM:
-      type: object
-      properties:
-        status:
-          type:
-          - string
-          - 'null'
-        dateSent:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        errorMessage:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    VassVideoM:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        self:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     VassInstanceDetailsM:
       type: object
@@ -496,21 +506,6 @@ components:
         responseCommunication:
           $ref: '#/components/schemas/ResponseCommunicationM'
       additionalProperties: false
-    CommunicationType:
-      enum:
-      - SMS
-      - Whatsapp
-      type: string
-    VassInstantM:
-      type: object
-      properties:
-        utc:
-          type: string
-          format: date-time
-        local:
-          type: string
-          format: date-time
-      additionalProperties: false
     VassTimeZoneM:
       type: object
       properties:
@@ -528,6 +523,3 @@ components:
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml

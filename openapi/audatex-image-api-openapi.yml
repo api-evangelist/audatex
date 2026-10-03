@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Audatex Image API
   version: '1.0'
-  description: 'Operations tagged Image across 3 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-audaconnect-api-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Image across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-audaconnect-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /APIGateway
 - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
@@ -491,6 +491,110 @@ components:
           - 'null'
           description: Description of the image
       additionalProperties: false
+    WarningModel:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageUsageType:
+      enum:
+      - Regular
+      - Hero
+      - Logo
+      type: string
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    SelfModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        communicationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        communicationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    ImageType:
+      enum:
+      - Png
+      - Jpeg
+      - Svg
+      type: string
+    AssessmentImageRequestVM:
+      required:
+      - assessmentId
+      - images
+      type: object
+      properties:
+        assessmentId:
+          type: string
+          description: The assessmentId to add the images to
+          format: uuid
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageRequestVM'
+          description: The list of images
+      additionalProperties: false
+    LogoImageVM:
+      required:
+      - base64EncodedImage
+      type: object
+      properties:
+        usageType:
+          $ref: '#/components/schemas/ImageUsageType'
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+          description: The file name of the image
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the image
+      additionalProperties: false
     LogoImageRespModel:
       type: object
       properties:
@@ -527,119 +631,6 @@ components:
           type: string
           format: date-time
       additionalProperties: false
-    ImageUsageType:
-      enum:
-      - Regular
-      - Hero
-      - Logo
-      type: string
-    SelfModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-        communicationId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        warnings:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WarningModel'
-        communicationErrors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WarningModel'
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SelfModel'
-      additionalProperties: false
-    SelfViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ImageType:
-      enum:
-      - Png
-      - Jpeg
-      - Svg
-      type: string
-    AssessmentImageRequestVM:
-      required:
-      - assessmentId
-      - images
-      type: object
-      properties:
-        assessmentId:
-          type: string
-          description: The assessmentId to add the images to
-          format: uuid
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImageRequestVM'
-          description: The list of images
-      additionalProperties: false
-    WarningModel:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    LogoImageVM:
-      required:
-      - base64EncodedImage
-      type: object
-      properties:
-        usageType:
-          $ref: '#/components/schemas/ImageUsageType'
-        base64EncodedImage:
-          minLength: 1
-          type: string
-          description: The image data as a Base64 encoded string
-        filename:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-          description: The file name of the image
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the image
-      additionalProperties: false
-    AudaAPI.Models.ImageData:
-      type: object
-      properties:
-        DisplayOrder:
-          format: int32
-          type: integer
-        JPEGData:
-          format: byte
-          type: string
     AudaAPI.Models.ImageHeader:
       type: object
       properties:
@@ -656,6 +647,15 @@ components:
           format: int32
           type: integer
         Comments:
+          type: string
+    AudaAPI.Models.ImageData:
+      type: object
+      properties:
+        DisplayOrder:
+          format: int32
+          type: integer
+        JPEGData:
+          format: byte
           type: string
   securitySchemes:
     Bearer:
@@ -691,4 +691,3 @@ components:
 x-refined-from:
 - audatex-api-gateway-openapi-original.json
 - audatex-audaconnect-api-openapi-original.json
-- audatex-api-gateway-openapi.yml

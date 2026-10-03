@@ -168,12 +168,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AudaAPI.WebAPI.Models.TLA.UpdateQuote:
+    AudaAPI.WebAPI.Models.TLA.RequestQuote:
       type: object
       properties:
-        TlaQuoteId:
-          format: int32
-          type: integer
         AssessmentId:
           format: uuid
           type: string
@@ -183,9 +180,12 @@ components:
         PreAccidentValuation:
           format: double
           type: number
-    AudaAPI.WebAPI.Models.TLA.RequestQuote:
+    AudaAPI.WebAPI.Models.TLA.UpdateQuote:
       type: object
       properties:
+        TlaQuoteId:
+          format: int32
+          type: integer
         AssessmentId:
           format: uuid
           type: string

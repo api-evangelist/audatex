@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex Vi Damaged Parts API
-  version: V1
+  title: Audatex.APIGateway Vi Damaged Parts API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged ViDamagedParts across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -77,8 +76,6 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: postApiV1ViDamagedParts
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/ViDamagedParts/{imageCaptureId}/{calculationId}:
     get:
       tags:
@@ -137,103 +134,8 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: getApiV1ViDamagedPartsByImageCaptureIdByCalculationId
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
-    ViDamagedPartsReqVM:
-      required:
-      - countryCode
-      - imageCaptureId
-      type: object
-      properties:
-        imageCaptureId:
-          type: string
-          description: The imageCaptureId
-          format: uuid
-        countryCode:
-          $ref: '#/components/schemas/Country'
-      additionalProperties: false
-    ViDamagedPartsPartsRespVM:
-      type: object
-      properties:
-        standardGuideNumber:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        genericPartName:
-          type:
-          - string
-          - 'null'
-        objectDetectionLabels:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        p:
-          type:
-          - number
-          - 'null'
-          format: double
-        positions:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-            format: int32
-        relatedImageIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: uuid
-        position:
-          $ref: '#/components/schemas/ViDamagedPartsPositionRespVM'
-      additionalProperties: false
-    ViDamagedPartsValueRespVM:
-      type: object
-      properties:
-        damagedPartsGroupid:
-          type: string
-          format: uuid
-        p:
-          type:
-          - number
-          - 'null'
-          format: double
-        damagedPartsGroup:
-          type:
-          - string
-          - 'null'
-        side:
-          type:
-          - string
-          - 'null'
-        parts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ViDamagedPartsPartsRespVM'
-      additionalProperties: false
-    ViDamagedPartsPositionRespVM:
-      type: object
-      properties:
-        code:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        p:
-          type:
-          - number
-          - 'null'
-          format: double
-      additionalProperties: false
     Country:
       enum:
       - UK
@@ -340,6 +242,114 @@ components:
           items:
             $ref: '#/components/schemas/ViErrorPropertyViewModel'
       additionalProperties: false
+    ViErrorPropertyViewModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ViDamagedPartsPartsRespVM:
+      type: object
+      properties:
+        standardGuideNumber:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        genericPartName:
+          type:
+          - string
+          - 'null'
+        objectDetectionLabels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+        positions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+        relatedImageIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        position:
+          $ref: '#/components/schemas/ViDamagedPartsPositionRespVM'
+      additionalProperties: false
+    CalculationSelfViewModel:
+      type: object
+      properties:
+        calculationId:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ViDamagedPartsReqVM:
+      required:
+      - countryCode
+      - imageCaptureId
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        countryCode:
+          $ref: '#/components/schemas/Country'
+      additionalProperties: false
+    ViDamagedPartsValueRespVM:
+      type: object
+      properties:
+        damagedPartsGroupid:
+          type: string
+          format: uuid
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+        damagedPartsGroup:
+          type:
+          - string
+          - 'null'
+        side:
+          type:
+          - string
+          - 'null'
+        parts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViDamagedPartsPartsRespVM'
+      additionalProperties: false
     ViDamagedPartsRespVM:
       type: object
       properties:
@@ -360,34 +370,19 @@ components:
           items:
             $ref: '#/components/schemas/ViDamagedPartsValueRespVM'
       additionalProperties: false
-    ViErrorPropertyViewModel:
+    ViDamagedPartsPositionRespVM:
       type: object
       properties:
-        name:
+        code:
           type:
-          - string
+          - integer
           - 'null'
-        value:
+          format: int32
+        p:
           type:
-          - string
+          - number
           - 'null'
-      additionalProperties: false
-    CalculationSelfViewModel:
-      type: object
-      properties:
-        calculationId:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-        warnings:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
+          format: double
       additionalProperties: false
   securitySchemes:
     Bearer:
@@ -395,6 +390,3 @@ components:
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml

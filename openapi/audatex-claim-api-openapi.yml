@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex Claim API
-  version: V1
+  title: Audatex.APIGateway Claim API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged Claim across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -68,8 +67,6 @@ paths:
       deprecated: true
       operationId: getApiV1ClaimGet
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/Claim/GetByClaimnumber:
     get:
       tags:
@@ -118,8 +115,6 @@ paths:
       deprecated: true
       operationId: getApiV1ClaimGetByClaimnumber
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/Claim/Post:
     post:
       tags:
@@ -170,91 +165,8 @@ paths:
       deprecated: true
       operationId: postApiV1ClaimPost
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
-    ClaimRespViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          description: ClaimId
-          format: uuid
-        claim:
-          $ref: '#/components/schemas/ClaimViewModel'
-        appointment:
-          $ref: '#/components/schemas/AppointmentViewModel'
-        repairer:
-          $ref: '#/components/schemas/RepairerViewModel'
-        assessments:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AssessmentViewModel'
-          description: List of associated assessments
-      additionalProperties: false
-      description: Claim Response view model for the Get request
-    ClaimReqViewModel:
-      required:
-      - claimId
-      - externalAssessmentId
-      type: object
-      properties:
-        claimId:
-          type: string
-          description: The claim Id for the assessment to be associated with
-          format: uuid
-        externalAssessmentId:
-          maxLength: 50
-          minLength: 1
-          type: string
-          description: The external assessment Id of the assessment to be created
-        assessmentNumber:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-          description: The assessment number
-        originator:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-          description: The originator Id for the assessment
-      additionalProperties: false
-      description: Claim to Allocation request View Model
-    ReservationViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Id of the reservation
-          format: uuid
-        entityId:
-          type: string
-          description: The Id of the entity that the reservation was made against
-          format: uuid
-        estimatorId:
-          type: string
-          description: The Id of the estimator that the reservation was made against
-          format: uuid
-        timeSlot:
-          $ref: '#/components/schemas/TimeSlotViewModel'
-      additionalProperties: false
-      description: Details of the reservation
-    AppointmentViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Appointment Id
-          format: uuid
-        reservation:
-          $ref: '#/components/schemas/ReservationViewModel'
-      additionalProperties: false
-      description: The appointment details
     PartyViewModel:
       type: object
       properties:
@@ -287,6 +199,35 @@ components:
           description: The type of party
       additionalProperties: false
       description: Details of a party associated with the claim
+    ClaimReqViewModel:
+      required:
+      - claimId
+      - externalAssessmentId
+      type: object
+      properties:
+        claimId:
+          type: string
+          description: The claim Id for the assessment to be associated with
+          format: uuid
+        externalAssessmentId:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: The external assessment Id of the assessment to be created
+        assessmentNumber:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+          description: The assessment number
+        originator:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+          description: The originator Id for the assessment
+      additionalProperties: false
+      description: Claim to Allocation request View Model
     RepairerViewModel:
       type: object
       properties:
@@ -311,6 +252,36 @@ components:
           description: The primar terminal Id
       additionalProperties: false
       description: The details of the allocated repairer
+    ReservationViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Id of the reservation
+          format: uuid
+        entityId:
+          type: string
+          description: The Id of the entity that the reservation was made against
+          format: uuid
+        estimatorId:
+          type: string
+          description: The Id of the estimator that the reservation was made against
+          format: uuid
+        timeSlot:
+          $ref: '#/components/schemas/TimeSlotViewModel'
+      additionalProperties: false
+      description: Details of the reservation
+    AppointmentViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Appointment Id
+          format: uuid
+        reservation:
+          $ref: '#/components/schemas/ReservationViewModel'
+      additionalProperties: false
+      description: The appointment details
     ClaimViewModel:
       type: object
       properties:
@@ -370,6 +341,28 @@ components:
           description: This will only be displayed if a time interval booking was made, e.g. "09:30"
       additionalProperties: false
       description: The details of the reservation time slot
+    ClaimRespViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ClaimId
+          format: uuid
+        claim:
+          $ref: '#/components/schemas/ClaimViewModel'
+        appointment:
+          $ref: '#/components/schemas/AppointmentViewModel'
+        repairer:
+          $ref: '#/components/schemas/RepairerViewModel'
+        assessments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AssessmentViewModel'
+          description: List of associated assessments
+      additionalProperties: false
+      description: Claim Response view model for the Get request
     AssessmentViewModel:
       type: object
       properties:
@@ -400,6 +393,3 @@ components:
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml

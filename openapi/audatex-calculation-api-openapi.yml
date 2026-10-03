@@ -88,135 +88,6 @@ paths:
         - Assessment.Detail+ImageAccess
 components:
   schemas:
-    AudaAPI.Models.PartViewModel:
-      type: object
-      properties:
-        Amount:
-          format: double
-          type: number
-        Description:
-          type: string
-        PartNumber:
-          type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        ReferenceSequence:
-          format: int32
-          type: integer
-        RepairMethod:
-          enum:
-          - Uninitialised
-          - Renew_E
-          - Renew_ET
-          - Repair_I
-          - Repair_IT
-          - Repair_IE
-          - Repair_N
-          - Repair_NE
-          - Check_P
-          - Check_PE
-          - SurfacePaint_L
-          - RepairPaint_LI
-          - RepairPaint_LI1
-          - NewPartPaint_LE
-          - CorrosionProtection_U
-          - CorrosionProtection_UE
-          - CorrosionProtection_H
-          - CorrosionProtection_HE
-          - PossibleDamage_R
-          - Specialist_S
-          - Alignment_V
-          - NewPartPaint_LE1
-          - NewPartPaint_LE2
-          - NewPartPaint_LE3
-          - RenewPartialPart_TE
-          - NewPartPaint_LE4
-          - SpotRepair_LS
-          - Dent_D
-          - Renew_EG
-          - Paint_LEE
-          - Specialist_SE
-          - Notation_LV
-          - Notation_EV
-          - Notation_EVI
-          - Renew_EO
-          - Repair_IO
-          - Repair_NO
-          - Check_PO
-          - Paint_LEO
-          - Paint_LIO
-          - Paint_LO
-          - Maintenance_M
-          - NumberDents_DM
-          - Watermark_HM
-          - Paint_LC
-          - Repair_I1
-          - Repair_I2
-          - Repair_I3
-          - Paint_NL
-          type: string
-    AudaAPI.Models.CalculationViewModel:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        CalculationDate:
-          format: date-time
-          type: string
-        ManualAdjustment:
-          type: string
-        VatRate:
-          type: string
-        VatAmount:
-          type: string
-        EstimateTotal:
-          type: string
-        GrandTotalExVat:
-          type: string
-        GrandTotalIncVat:
-          type: string
-        TotalPartsAmt:
-          type: string
-        WorkItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.CalculationLineViewModel'
-        Parts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.PartViewModel'
-    AudaAPI.Models.MarutiPaint:
-      type: object
-      properties:
-        Description:
-          type: string
-        Discountable:
-          type: boolean
-        DiscountedPaintPrice:
-          format: double
-          type: number
-        GuideNumber:
-          format: int32
-          type: integer
-        ManufCode:
-          type: string
-        PaintPrice:
-          format: double
-          type: number
-        RepairType:
-          type: string
-    AudaAPI.Models.CalculationLineViewModel:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        Detail:
-          type: string
-        Value:
-          type: string
     AudaAPI.Models.PaintCosts:
       type: object
       properties:
@@ -325,6 +196,148 @@ components:
         PrepPanelsOffCar:
           format: double
           type: number
+    AudaAPI.Models.CalculationViewModel:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        CalculationDate:
+          format: date-time
+          type: string
+        ManualAdjustment:
+          type: string
+        VatRate:
+          type: string
+        VatAmount:
+          type: string
+        EstimateTotal:
+          type: string
+        GrandTotalExVat:
+          type: string
+        GrandTotalIncVat:
+          type: string
+        TotalPartsAmt:
+          type: string
+        WorkItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.CalculationLineViewModel'
+        Parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.PartViewModel'
+    AudaAPI.Models.Part:
+      type: object
+      properties:
+        Amount:
+          format: double
+          type: number
+        ReferenceSequence:
+          format: int32
+          type: integer
+        OriginalPart:
+          $ref: '#/components/schemas/AudaAPI.Models.OriginalPart'
+        Description:
+          type: string
+        PartNumber:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        RepairMethod:
+          type: string
+    AudaAPI.Models.Extra:
+      type: object
+      properties:
+        LabourText:
+          type: string
+        Obid:
+          format: uuid
+          type: string
+        Amount:
+          format: double
+          type: number
+        AmountIndicator:
+          type: string
+        DescriptionText:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        ReferenceSequence:
+          format: int32
+          type: integer
+        RepairMethod:
+          type: string
+    AudaAPI.Models.PartViewModel:
+      type: object
+      properties:
+        Amount:
+          format: double
+          type: number
+        Description:
+          type: string
+        PartNumber:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        ReferenceSequence:
+          format: int32
+          type: integer
+        RepairMethod:
+          enum:
+          - Uninitialised
+          - Renew_E
+          - Renew_ET
+          - Repair_I
+          - Repair_IT
+          - Repair_IE
+          - Repair_N
+          - Repair_NE
+          - Check_P
+          - Check_PE
+          - SurfacePaint_L
+          - RepairPaint_LI
+          - RepairPaint_LI1
+          - NewPartPaint_LE
+          - CorrosionProtection_U
+          - CorrosionProtection_UE
+          - CorrosionProtection_H
+          - CorrosionProtection_HE
+          - PossibleDamage_R
+          - Specialist_S
+          - Alignment_V
+          - NewPartPaint_LE1
+          - NewPartPaint_LE2
+          - NewPartPaint_LE3
+          - RenewPartialPart_TE
+          - NewPartPaint_LE4
+          - SpotRepair_LS
+          - Dent_D
+          - Renew_EG
+          - Paint_LEE
+          - Specialist_SE
+          - Notation_LV
+          - Notation_EV
+          - Notation_EVI
+          - Renew_EO
+          - Repair_IO
+          - Repair_NO
+          - Check_PO
+          - Paint_LEO
+          - Paint_LIO
+          - Paint_LO
+          - Maintenance_M
+          - NumberDents_DM
+          - Watermark_HM
+          - Paint_LC
+          - Repair_I1
+          - Repair_I2
+          - Repair_I3
+          - Paint_NL
+          type: string
     AudaAPI.Models.Paint:
       type: object
       properties:
@@ -370,20 +383,6 @@ components:
           format: int32
           type: integer
         ReferenceSequence:
-          format: int32
-          type: integer
-        RepairMethod:
-          type: string
-    AudaAPI.Models.InvalidPart:
-      type: object
-      properties:
-        ErrorCode:
-          type: string
-        Description:
-          type: string
-        PartNumber:
-          type: string
-        GuideNumber:
           format: int32
           type: integer
         RepairMethod:
@@ -442,66 +441,36 @@ components:
         TotalDeductionAmt:
           format: double
           type: number
-    AudaAPI.Models.OriginalPart:
+    AudaAPI.Models.MarutiPaint:
       type: object
       properties:
-        Amount:
+        Description:
+          type: string
+        Discountable:
+          type: boolean
+        DiscountedPaintPrice:
           format: double
           type: number
+        GuideNumber:
+          format: int32
+          type: integer
+        ManufCode:
+          type: string
+        PaintPrice:
+          format: double
+          type: number
+        RepairType:
+          type: string
+    AudaAPI.Models.InvalidPart:
+      type: object
+      properties:
+        ErrorCode:
+          type: string
         Description:
           type: string
         PartNumber:
           type: string
-    AudaAPI.Models.Extra:
-      type: object
-      properties:
-        LabourText:
-          type: string
-        Obid:
-          format: uuid
-          type: string
-        Amount:
-          format: double
-          type: number
-        AmountIndicator:
-          type: string
-        DescriptionText:
-          type: string
         GuideNumber:
-          format: int32
-          type: integer
-        ReferenceSequence:
-          format: int32
-          type: integer
-        RepairMethod:
-          type: string
-    AudaAPI.Models.Labour:
-      type: object
-      properties:
-        LabourClass:
-          format: int32
-          type: integer
-        CodeText:
-          type: string
-        WUCount:
-          format: double
-          type: number
-        WUIndicator:
-          type: string
-        Obid:
-          format: uuid
-          type: string
-        Amount:
-          format: double
-          type: number
-        AmountIndicator:
-          type: string
-        DescriptionText:
-          type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        ReferenceSequence:
           format: int32
           type: integer
         RepairMethod:
@@ -587,22 +556,53 @@ components:
           $ref: '#/components/schemas/AudaAPI.Models.GeneralCosts'
         PaintCosts:
           $ref: '#/components/schemas/AudaAPI.Models.PaintCosts'
-    AudaAPI.Models.Part:
+    AudaAPI.Models.OriginalPart:
       type: object
       properties:
         Amount:
           format: double
           type: number
-        ReferenceSequence:
-          format: int32
-          type: integer
-        OriginalPart:
-          $ref: '#/components/schemas/AudaAPI.Models.OriginalPart'
         Description:
           type: string
         PartNumber:
           type: string
+    AudaAPI.Models.CalculationLineViewModel:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        Detail:
+          type: string
+        Value:
+          type: string
+    AudaAPI.Models.Labour:
+      type: object
+      properties:
+        LabourClass:
+          format: int32
+          type: integer
+        CodeText:
+          type: string
+        WUCount:
+          format: double
+          type: number
+        WUIndicator:
+          type: string
+        Obid:
+          format: uuid
+          type: string
+        Amount:
+          format: double
+          type: number
+        AmountIndicator:
+          type: string
+        DescriptionText:
+          type: string
         GuideNumber:
+          format: int32
+          type: integer
+        ReferenceSequence:
           format: int32
           type: integer
         RepairMethod:

@@ -105,6 +105,13 @@ paths:
         - Assessment.MainIndex
 components:
   schemas:
+    AudaAPI.Models.Filters.ExtraParameterOption:
+      type: object
+      properties:
+        Description:
+          type: string
+        Value:
+          type: string
     AudaAPI.Models.Filters.Filter:
       type: object
       properties:
@@ -130,6 +137,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.Models.Filters.FilterParameter'
+    AudaAPI.Models.Filters.FilterParameter:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        ParameterType:
+          type: string
+        Description:
+          type: string
     AudaAPI.Models.Filters.ExtraParameter:
       type: object
       properties:
@@ -148,13 +165,6 @@ components:
           type: string
         ParameterType:
           type: string
-    AudaAPI.Models.Filters.ExtraParameterOption:
-      type: object
-      properties:
-        Description:
-          type: string
-        Value:
-          type: string
     AudaAPI.Models.Filters.FiltersForSession:
       type: object
       properties:
@@ -166,16 +176,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.Models.Filters.ExtraParameter'
-    AudaAPI.Models.Filters.FilterParameter:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        ParameterType:
-          type: string
-        Description:
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2

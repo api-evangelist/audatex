@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex Video API
-  version: V1
+  title: Audatex.APIGateway Video API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged Video across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -158,8 +157,6 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: deleteApiV1Video
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/Video/Info:
     post:
       tags:
@@ -218,37 +215,8 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: postApiV1VideoInfo
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
-    FileModel:
-      type: object
-      properties:
-        filename:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/FileType'
-        collectionId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      additionalProperties: false
-    FileType:
-      enum:
-      - MP4
-      - AVI
-      - MOV
-      - WAV
-      type: string
     Stream:
       type: object
       properties:
@@ -278,6 +246,33 @@ components:
           type: integer
           format: int32
       additionalProperties: false
+    FileType:
+      enum:
+      - MP4
+      - AVI
+      - MOV
+      - WAV
+      type: string
+    FileModel:
+      type: object
+      properties:
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/FileType'
+        collectionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
     SelfViewModel:
       type: object
       properties:
@@ -295,6 +290,3 @@ components:
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml

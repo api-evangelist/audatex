@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Audatex Vehicle API
   version: '1.0'
-  description: 'Operations tagged Vehicle across 3 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-audaconnect-api-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Vehicle across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-audaconnect-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: /APIGateway
 - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
@@ -243,27 +243,6 @@ paths:
     - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
 components:
   schemas:
-    SupplementaryResponseVM:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        probability:
-          type: number
-          format: double
-        part:
-          $ref: '#/components/schemas/PartResponseVM'
-        dimensions:
-          $ref: '#/components/schemas/DimensionResponseVM'
-        foundInImages:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SelfModel'
-      additionalProperties: false
     PartResponseVM:
       type: object
       properties:
@@ -276,6 +255,63 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    WarningModel:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageRequestResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        dateCreated:
+          type: string
+          format: date-time
+        dateCompleted:
+          type: string
+          format: date-time
+        status:
+          type:
+          - string
+          - 'null'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    DimensionResponseVM:
+      type: object
+      properties:
+        area:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+        width:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+        length:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+      additionalProperties: false
+    VehicleResponseVM:
+      type: object
+      properties:
+        vehicle:
+          $ref: '#/components/schemas/VehicleDetailResponseVM'
+        supplementary:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SupplementaryResponseVM'
+          description: The supplementary information associated with the vehicle
+        imageRequest:
+          $ref: '#/components/schemas/ImageRequestResponseVM'
+      additionalProperties: false
+      description: Vehicle Response view model for the Get request
     SelfModel:
       type: object
       properties:
@@ -310,28 +346,38 @@ components:
           items:
             $ref: '#/components/schemas/SelfModel'
       additionalProperties: false
-    ImageRequestResponseVM:
+    SupplementaryResponseVM:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        dateCreated:
-          type: string
-          format: date-time
-        dateCompleted:
-          type: string
-          format: date-time
-        status:
+        type:
           type:
           - string
           - 'null'
-        images:
+        probability:
+          type: number
+          format: double
+        part:
+          $ref: '#/components/schemas/PartResponseVM'
+        dimensions:
+          $ref: '#/components/schemas/DimensionResponseVM'
+        foundInImages:
           type:
           - array
           - 'null'
           items:
             $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    ValueUnitResponseVM:
+      type: object
+      properties:
+        value:
+          type: number
+          format: double
+        unit:
+          type:
+          - string
+          - 'null'
+          readOnly: true
       additionalProperties: false
     VehicleDetailResponseVM:
       type: object
@@ -364,52 +410,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ValueUnitResponseVM:
-      type: object
-      properties:
-        value:
-          type: number
-          format: double
-        unit:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      additionalProperties: false
-    VehicleResponseVM:
-      type: object
-      properties:
-        vehicle:
-          $ref: '#/components/schemas/VehicleDetailResponseVM'
-        supplementary:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SupplementaryResponseVM'
-          description: The supplementary information associated with the vehicle
-        imageRequest:
-          $ref: '#/components/schemas/ImageRequestResponseVM'
-      additionalProperties: false
-      description: Vehicle Response view model for the Get request
-    WarningModel:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DimensionResponseVM:
-      type: object
-      properties:
-        area:
-          $ref: '#/components/schemas/ValueUnitResponseVM'
-        width:
-          $ref: '#/components/schemas/ValueUnitResponseVM'
-        length:
-          $ref: '#/components/schemas/ValueUnitResponseVM'
-      additionalProperties: false
     AudaAPI.Models.Vehicles.VehicleData:
       type: object
       properties:
@@ -427,19 +427,41 @@ components:
           type: string
         VehicleType:
           type: string
-    AudaAPI.Models.Vehicles.VehiclePaintCodeResult:
+    AudaAPI.Models.Vehicles.VehicleValuationRequest:
       type: object
       properties:
-        ReturnCode:
+        Registration:
           type: string
-        ReturnMessage:
-          type: string
+        Mileage:
+          format: int32
+          type: integer
+    AudaAPI.Models.Vehicles.VehicleValuationResponse:
+      type: object
+      properties:
+        Valuation:
+          format: double
+          type: number
+    AudaAPI.Models.Vehicles.VehicleDetail:
+      type: object
+      properties:
         VIN:
+          type: string
+        Manufacturer:
+          type: string
+        Model:
+          type: string
+        SubModel:
           type: string
         PaintCode:
           type: string
-        PaintCodeFound:
-          type: boolean
+        EngineType:
+          type: string
+        GearBox:
+          type: string
+        ModelOptions:
+          type: array
+          items:
+            type: string
     AudaAPI.Models.Vehicles.VehicleClassicData:
       type: object
       properties:
@@ -474,50 +496,6 @@ components:
           type: string
         Vehicle:
           $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleData'
-    AudaAPI.Models.Vehicles.VehicleValuationRequest:
-      type: object
-      properties:
-        Registration:
-          type: string
-        Mileage:
-          format: int32
-          type: integer
-    AudaAPI.Models.Vehicles.VehicleValuationResponse:
-      type: object
-      properties:
-        Valuation:
-          format: double
-          type: number
-    AudaAPI.Models.Vehicles.VehicleClassicDataResult:
-      type: object
-      properties:
-        ReturnCode:
-          type: string
-        ReturnMessage:
-          type: string
-        Vehicle:
-          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleClassicData'
-    AudaAPI.Models.Vehicles.VehicleDetail:
-      type: object
-      properties:
-        VIN:
-          type: string
-        Manufacturer:
-          type: string
-        Model:
-          type: string
-        SubModel:
-          type: string
-        PaintCode:
-          type: string
-        EngineType:
-          type: string
-        GearBox:
-          type: string
-        ModelOptions:
-          type: array
-          items:
-            type: string
     AudaAPI.Models.Vehicles.VehicleDetailResult:
       type: object
       properties:
@@ -530,6 +508,28 @@ components:
           type: string
         Vehicle:
           $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDetail'
+    AudaAPI.Models.Vehicles.VehicleClassicDataResult:
+      type: object
+      properties:
+        ReturnCode:
+          type: string
+        ReturnMessage:
+          type: string
+        Vehicle:
+          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleClassicData'
+    AudaAPI.Models.Vehicles.VehiclePaintCodeResult:
+      type: object
+      properties:
+        ReturnCode:
+          type: string
+        ReturnMessage:
+          type: string
+        VIN:
+          type: string
+        PaintCode:
+          type: string
+        PaintCodeFound:
+          type: boolean
   securitySchemes:
     Bearer:
       type: apiKey
@@ -564,4 +564,3 @@ components:
 x-refined-from:
 - audatex-api-gateway-openapi-original.json
 - audatex-audaconnect-api-openapi-original.json
-- audatex-api-gateway-openapi.yml

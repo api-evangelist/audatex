@@ -558,12 +558,24 @@ components:
           type: string
         AuthParameter:
           type: string
-    AudaAPI.BMSAPI.DTO.NotificationParameter:
+    AudaAPI.BMSAPI.DTO.NotificationResource:
       type: object
       properties:
-        Key:
+        ResourceType:
           type: string
-        Value:
+        ResourceId:
+          format: uuid
+          type: string
+    AudaAPI.BMSAPI.DTO.SubscriptionObsolete:
+      type: object
+      properties:
+        SubscriptionId:
+          format: uuid
+          type: string
+        Topic:
+          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+        CreatedAt:
+          format: date-time
           type: string
     AudaAPI.BMSAPI.DTO.Subscription:
       type: object
@@ -578,13 +590,19 @@ components:
           type: string
         Push:
           $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionPush'
-    AudaAPI.BMSAPI.DTO.NotificationResource:
+    AudaAPI.BMSAPI.DTO.Topic:
       type: object
       properties:
-        ResourceType:
+        TopicCode:
           type: string
-        ResourceId:
-          format: uuid
+        Description:
+          type: string
+    AudaAPI.BMSAPI.DTO.NotificationParameter:
+      type: object
+      properties:
+        Key:
+          type: string
+        Value:
           type: string
     AudaAPI.BMSAPI.DTO.NotificationMessage:
       type: object
@@ -616,24 +634,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationResource'
-    AudaAPI.BMSAPI.DTO.Topic:
-      type: object
-      properties:
-        TopicCode:
-          type: string
-        Description:
-          type: string
-    AudaAPI.BMSAPI.DTO.SubscriptionObsolete:
-      type: object
-      properties:
-        SubscriptionId:
-          format: uuid
-          type: string
-        Topic:
-          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
-        CreatedAt:
-          format: date-time
-          type: string
   securitySchemes:
     oauth2:
       type: oauth2

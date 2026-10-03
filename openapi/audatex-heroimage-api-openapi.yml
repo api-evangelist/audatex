@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex Hero Image API
-  version: V1
+  title: Audatex.APIGateway Hero Image API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged HeroImage across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -122,10 +121,37 @@ paths:
           description: Returns an error if the user is not authorized
       operationId: getApiV1HeroImage
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
+    HeroImageVM:
+      required:
+      - base64EncodedImage
+      type: object
+      properties:
+        usageType:
+          $ref: '#/components/schemas/ImageUsageType'
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+          description: The file name of the image
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the image
+      additionalProperties: false
+    ImageUsageType:
+      enum:
+      - Regular
+      - Hero
+      - Logo
+      type: string
     HeroImageModel:
       type: object
       properties:
@@ -164,35 +190,6 @@ components:
           - 'null'
           format: date-time
       additionalProperties: false
-    HeroImageVM:
-      required:
-      - base64EncodedImage
-      type: object
-      properties:
-        usageType:
-          $ref: '#/components/schemas/ImageUsageType'
-        base64EncodedImage:
-          minLength: 1
-          type: string
-          description: The image data as a Base64 encoded string
-        filename:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-          description: The file name of the image
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the image
-      additionalProperties: false
-    ImageUsageType:
-      enum:
-      - Regular
-      - Hero
-      - Logo
-      type: string
     SelfViewModel:
       type: object
       properties:
@@ -210,6 +207,3 @@ components:
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml

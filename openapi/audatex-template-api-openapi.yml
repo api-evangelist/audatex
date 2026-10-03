@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex Template API
-  version: V1
+  title: Audatex.APIGateway Template API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged Template across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -135,8 +134,6 @@ paths:
                 type: string
       operationId: getApiV1Template
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/Template/{id}:
     get:
       tags:
@@ -275,8 +272,6 @@ paths:
                 type: string
       operationId: putApiV1TemplateById
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/Template/{templateId}:
     delete:
       tags:
@@ -330,8 +325,6 @@ paths:
           description: Returns an error if the user is not authorized
       operationId: deleteApiV1TemplateByTemplateId
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/Template/Default:
     get:
       tags:
@@ -401,8 +394,6 @@ paths:
                 type: string
       operationId: getApiV1TemplateDefault
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v1/Template/Default/{name}:
     put:
       tags:
@@ -462,22 +453,8 @@ paths:
                 type: string
       operationId: putApiV1TemplateDefaultByName
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
-    TemplateReqViewModel:
-      required:
-      - body
-      type: object
-      properties:
-        name:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-        body: {}
-      additionalProperties: false
     TemplateResViewModel:
       type: object
       properties:
@@ -490,12 +467,21 @@ components:
           - 'null'
         body: {}
       additionalProperties: false
+    TemplateReqViewModel:
+      required:
+      - body
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+        body: {}
+      additionalProperties: false
   securitySchemes:
     Bearer:
       type: apiKey
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml

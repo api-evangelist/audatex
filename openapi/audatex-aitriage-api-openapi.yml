@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: Audatex AI Triage API
-  version: V1
+  title: Audatex.APIGateway AI Triage API
+  termsOfService: https://www.solera.com/legal/
   contact:
     name: Solera Development Team
     url: https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-2.2&tabs=visual-studio
@@ -9,8 +9,7 @@ info:
   license:
     name: License
     url: https://www.solera.com/legal/
-  termsOfService: https://www.solera.com/legal/
-  description: 'Operations tagged AiTriage across 2 of this provider''s published API definitions: audatex-api-gateway-openapi-original.json, audatex-api-gateway-openapi.yml. Each path carries the servers of the definition it was published in.'
+  version: V1
 servers:
 - url: /APIGateway
 security:
@@ -100,8 +99,6 @@ paths:
           description: Sorry, an unexpected error has occurred
       operationId: postApiV2AiTriage
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
   /api/v2/AiTriage/{imageCaptureId}/{calculationId}:
     get:
       tags:
@@ -150,46 +147,51 @@ paths:
           description: Returns an error if the user is not authorised
       operationId: getApiV2AiTriageByImageCaptureIdByCalculationId
       x-operation-id-source: derived
-    servers:
-    - url: /APIGateway
 components:
   schemas:
-    AiTriageReqV2VM:
-      required:
-      - countryCode
-      - imageCaptureId
+    AiTriageRespVM:
       type: object
       properties:
-        imageCaptureId:
-          type: string
-          description: The imageCaptureId
-          format: uuid
-        countryCode:
-          $ref: '#/components/schemas/Country'
-        codes:
+        status:
+          type:
+          - string
+          - 'null'
+          description: Status message
+        totalLoss:
+          $ref: '#/components/schemas/TotalLossRespVM'
+        errors:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/AiTriageCode'
-          description: List of AI Triage codes
-        clientReferenceID:
-          maxLength: 250
-          minLength: 1
+            $ref: '#/components/schemas/ViErrorViewModel'
+          description: Error messages
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
           type:
           - string
           - 'null'
-          description: Data sent by external system as cross reference
-      additionalProperties: false
-    AiTriageCode:
-      enum:
-      - FRAUD_CHECK
-      - TOTAL_LOSS
-      - TOW_TRUCK
-      - DAMAGE_SEVERITY
-      - IMAGE_METADATA
-      - AREA_SEVERITY
-      type: string
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Country:
       enum:
       - UK
@@ -278,23 +280,32 @@ components:
       - GB
       - VE
       type: string
-    AiTriageRespVM:
+    AiTriageReqV2VM:
+      required:
+      - countryCode
+      - imageCaptureId
       type: object
       properties:
-        status:
-          type:
-          - string
-          - 'null'
-          description: Status message
-        totalLoss:
-          $ref: '#/components/schemas/TotalLossRespVM'
-        errors:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        countryCode:
+          $ref: '#/components/schemas/Country'
+        codes:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/ViErrorViewModel'
-          description: Error messages
+            $ref: '#/components/schemas/AiTriageCode'
+          description: List of AI Triage codes
+        clientReferenceID:
+          maxLength: 250
+          minLength: 1
+          type:
+          - string
+          - 'null'
+          description: Data sent by external system as cross reference
       additionalProperties: false
     ViErrorViewModel:
       type: object
@@ -314,31 +325,6 @@ components:
           items:
             $ref: '#/components/schemas/ViErrorPropertyViewModel'
       additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
     ViErrorPropertyViewModel:
       type: object
       properties:
@@ -382,12 +368,18 @@ components:
           items:
             type: string
       additionalProperties: false
+    AiTriageCode:
+      enum:
+      - FRAUD_CHECK
+      - TOTAL_LOSS
+      - TOW_TRUCK
+      - DAMAGE_SEVERITY
+      - IMAGE_METADATA
+      - AREA_SEVERITY
+      type: string
   securitySchemes:
     Bearer:
       type: apiKey
       description: "JWT Authorization header using the Bearer scheme. \n\n Enter 'Bearer' [space] and then your token in the text input below.\n\nExample: \"Bearer 12345abcdef\""
       name: Authorization
       in: header
-x-refined-from:
-- audatex-api-gateway-openapi-original.json
-- audatex-api-gateway-openapi.yml
