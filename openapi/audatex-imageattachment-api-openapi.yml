@@ -150,6 +150,44 @@ components:
         attachmentType:
           $ref: '#/components/schemas/ImageAttachmentType'
       additionalProperties: false
+    ImageAttachmentType:
+      enum:
+      - All
+      - Owner
+      type: string
+    ErrorViewModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    OutputViewModel:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ErrorViewModel'
+        object: {}
+      additionalProperties: false
+    EstimatingSourceSystem:
+      enum:
+      - AEG
+      - ADXE
+      - Qapter
+      type: string
     Country:
       enum:
       - UK
@@ -238,12 +276,6 @@ components:
       - GB
       - VE
       type: string
-    EstimatingSourceSystem:
-      enum:
-      - AEG
-      - ADXE
-      - Qapter
-      type: string
     ImageAttachmentSelfViewModel:
       type: object
       properties:
@@ -255,38 +287,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    OutputViewModel:
-      type: object
-      properties:
-        status:
-          type:
-          - string
-          - 'null'
-        errors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ErrorViewModel'
-        object: {}
-      additionalProperties: false
-    ErrorViewModel:
-      type: object
-      properties:
-        code:
-          type:
-          - string
-          - 'null'
-        message:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ImageAttachmentType:
-      enum:
-      - All
-      - Owner
-      type: string
     ImageAttachmentRespVM:
       type: object
       properties:

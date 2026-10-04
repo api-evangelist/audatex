@@ -217,6 +217,33 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    FileType:
+      enum:
+      - MP4
+      - AVI
+      - MOV
+      - WAV
+      type: string
+    FileModel:
+      type: object
+      properties:
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/FileType'
+        collectionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
     Stream:
       type: object
       properties:
@@ -245,33 +272,6 @@ components:
         writeTimeout:
           type: integer
           format: int32
-      additionalProperties: false
-    FileType:
-      enum:
-      - MP4
-      - AVI
-      - MOV
-      - WAV
-      type: string
-    FileModel:
-      type: object
-      properties:
-        filename:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/FileType'
-        collectionId:
-          type:
-          - string
-          - 'null'
-          format: uuid
       additionalProperties: false
     SelfViewModel:
       type: object

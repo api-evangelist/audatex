@@ -149,6 +149,65 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    TotalLossRespVM:
+      type: object
+      properties:
+        probability:
+          type:
+          - string
+          - 'null'
+          description: The probability of a correct estimate
+        response:
+          type:
+          - string
+          - 'null'
+          description: The value of the estimate
+      additionalProperties: false
+    AiTriageReqV2VM:
+      required:
+      - countryCode
+      - imageCaptureId
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        countryCode:
+          $ref: '#/components/schemas/Country'
+        codes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AiTriageCode'
+          description: List of AI Triage codes
+        clientReferenceID:
+          maxLength: 250
+          minLength: 1
+          type:
+          - string
+          - 'null'
+          description: Data sent by external system as cross reference
+      additionalProperties: false
+    ViErrorViewModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorPropertyViewModel'
+      additionalProperties: false
     AiTriageRespVM:
       type: object
       properties:
@@ -166,6 +225,27 @@ components:
           items:
             $ref: '#/components/schemas/ViErrorViewModel'
           description: Error messages
+      additionalProperties: false
+    AiTriageCode:
+      enum:
+      - FRAUD_CHECK
+      - TOTAL_LOSS
+      - TOW_TRUCK
+      - DAMAGE_SEVERITY
+      - IMAGE_METADATA
+      - AREA_SEVERITY
+      type: string
+    ViErrorPropertyViewModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ProblemDetails:
       type: object
@@ -280,77 +360,6 @@ components:
       - GB
       - VE
       type: string
-    AiTriageReqV2VM:
-      required:
-      - countryCode
-      - imageCaptureId
-      type: object
-      properties:
-        imageCaptureId:
-          type: string
-          description: The imageCaptureId
-          format: uuid
-        countryCode:
-          $ref: '#/components/schemas/Country'
-        codes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AiTriageCode'
-          description: List of AI Triage codes
-        clientReferenceID:
-          maxLength: 250
-          minLength: 1
-          type:
-          - string
-          - 'null'
-          description: Data sent by external system as cross reference
-      additionalProperties: false
-    ViErrorViewModel:
-      type: object
-      properties:
-        code:
-          type:
-          - string
-          - 'null'
-        message:
-          type:
-          - string
-          - 'null'
-        properties:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ViErrorPropertyViewModel'
-      additionalProperties: false
-    ViErrorPropertyViewModel:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    TotalLossRespVM:
-      type: object
-      properties:
-        probability:
-          type:
-          - string
-          - 'null'
-          description: The probability of a correct estimate
-        response:
-          type:
-          - string
-          - 'null'
-          description: The value of the estimate
-      additionalProperties: false
     CalculationSelfViewModel:
       type: object
       properties:
@@ -368,15 +377,6 @@ components:
           items:
             type: string
       additionalProperties: false
-    AiTriageCode:
-      enum:
-      - FRAUD_CHECK
-      - TOTAL_LOSS
-      - TOW_TRUCK
-      - DAMAGE_SEVERITY
-      - IMAGE_METADATA
-      - AREA_SEVERITY
-      type: string
   securitySchemes:
     Bearer:
       type: apiKey

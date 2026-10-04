@@ -73,15 +73,6 @@ components:
       - Critical
       - None
       type: string
-    LogLevelResponse:
-      type: object
-      properties:
-        logLevel:
-          $ref: '#/components/schemas/LogLevel'
-        until:
-          type: string
-          format: date-time
-      additionalProperties: false
     LogElevationRequest:
       type: object
       properties:
@@ -90,6 +81,15 @@ components:
         duration:
           type: string
           format: date-span
+      additionalProperties: false
+    LogLevelResponse:
+      type: object
+      properties:
+        logLevel:
+          $ref: '#/components/schemas/LogLevel'
+        until:
+          type: string
+          format: date-time
       additionalProperties: false
   securitySchemes:
     Bearer:

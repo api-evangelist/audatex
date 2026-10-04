@@ -95,6 +95,1110 @@ paths:
         required: true
 components:
   schemas:
+    AudaAPI.Models.TTSLabourTotals:
+      type: object
+      properties:
+        Authorised:
+          format: double
+          type: number
+        Calculated:
+          format: double
+          type: number
+        Cost:
+          format: double
+          type: number
+        IsOpinion:
+          type: boolean
+        Opinion:
+          format: double
+          type: number
+        Overlap:
+          format: double
+          type: number
+        WrkRef:
+          format: int32
+          type: integer
+    AudaAPI.Models.Claim:
+      type: object
+      properties:
+        ReferenceName:
+          type: string
+        DateOfDecision:
+          format: date-time
+          type: string
+        DateOfAccident:
+          format: date-time
+          type: string
+        DateOfAccidentUnknown:
+          type: boolean
+        DateOfInspection:
+          format: date-time
+          type: string
+        DateBookedForRepair:
+          format: date-time
+          type: string
+        VehicleAtInspectionSite:
+          type: boolean
+        EngineerInspectionRequested:
+          type: boolean
+        ClaimNumber:
+          type: string
+        OtherReference:
+          type: string
+        PartnerNumber:
+          type: string
+        HandlingFee:
+          format: double
+          type: number
+        InsuredAmount:
+          format: double
+          type: number
+        RepairValue:
+          format: double
+          type: number
+        RepairValueTBA:
+          type: boolean
+    AudaAPI.Models.PaintCosts:
+      type: object
+      properties:
+        FixedPaintMaterialAmt:
+          format: double
+          type: number
+        FlatMaterialAmt:
+          format: double
+          type: number
+        IndexChangeAmt:
+          format: double
+          type: number
+        LabourPaintAmt:
+          format: double
+          type: number
+        MatConPrePnt:
+          format: double
+          type: number
+        MatConstMetalAmt:
+          format: double
+          type: number
+        MatConstPerSpotAmt:
+          format: double
+          type: number
+        MatConstPlasticAmt:
+          format: double
+          type: number
+        MatConstSpotAmt:
+          format: double
+          type: number
+        NewPartAmt:
+          format: double
+          type: number
+        NewPartMetalAmt:
+          format: double
+          type: number
+        NewPartPlasticLE1Amt:
+          format: double
+          type: number
+        NewPartPlasticLE2Amt:
+          format: double
+          type: number
+        NewPartPlasticLE3Amt:
+          format: double
+          type: number
+        NewPartPlasticLE4Amt:
+          format: double
+          type: number
+        PaintDiscountAmount:
+          format: double
+          type: number
+        PaintMaterialAmt:
+          format: double
+          type: number
+        PearlescentPaintAmt:
+          format: double
+          type: number
+        PrepWorkPlasticWU:
+          format: double
+          type: number
+        PrepWorkMetalWU:
+          format: double
+          type: number
+        PrepWorkMultilayerWU:
+          format: double
+          type: number
+        PrepInCaseofPrepaint:
+          format: double
+          type: number
+        RepairAmt:
+          format: double
+          type: number
+        RepairPaintMetalAmt:
+          format: double
+          type: number
+        RepairPaintPlasticAmt:
+          format: double
+          type: number
+        SpotPaintMatAmt:
+          format: double
+          type: number
+        SurfaceAmt:
+          format: double
+          type: number
+        SurfacePaintMetalAmt:
+          format: double
+          type: number
+        SurfacePaintPlasticAmt:
+          format: double
+          type: number
+        TotalPaintWU:
+          format: double
+          type: number
+        SundryCostsAmt:
+          format: double
+          type: number
+        PreparePaintSundryAmt:
+          format: double
+          type: number
+        PrepSinglePanelOffCar:
+          format: double
+          type: number
+        PreparePartsWU:
+          format: double
+          type: number
+        PrepPanelsOffCar:
+          format: double
+          type: number
+    AudaAPI.Models.PNETQPart:
+      type: object
+      properties:
+        PartAmount:
+          format: double
+          type: number
+        PartDescription:
+          type: string
+        PartMarkUpAmount:
+          format: double
+          type: number
+        PartMarkUpPcnt:
+          format: double
+          type: number
+        PartNumber:
+          type: string
+        PartQuantity:
+          format: int32
+          type: integer
+        PartType:
+          type: string
+        PartUnitPrice:
+          format: double
+          type: number
+        QuoteLineChange:
+          enum:
+          - N
+          - C
+          - I
+          - D
+          type: string
+        QuoteLineNumber:
+          format: int32
+          type: integer
+    AudaAPI.Models.MimeType:
+      type: object
+      properties:
+        Description:
+          type: string
+        Extension:
+          type: string
+        FullType:
+          type: string
+        PermitDefault:
+          type: boolean
+        SubType:
+          type: string
+        Type:
+          type: string
+    AudaAPI.Models.AssessmentTag:
+      type: object
+      properties:
+        AssessorUserName:
+          type: string
+        AuthorisingUserName:
+          type: string
+        EstimatingUserName:
+          type: string
+        RepairerUser:
+          $ref: '#/components/schemas/AudaAPI.Models.User'
+        RepairerSite:
+          $ref: '#/components/schemas/AudaAPI.Models.Site'
+        AssessorUser:
+          $ref: '#/components/schemas/AudaAPI.Models.User'
+        AuthorisingUser:
+          $ref: '#/components/schemas/AudaAPI.Models.User'
+        InsurerSite:
+          $ref: '#/components/schemas/AudaAPI.Models.Site'
+        AuthorisingSite:
+          $ref: '#/components/schemas/AudaAPI.Models.Site'
+    AudaAPI.Models.Contact:
+      type: object
+      properties:
+        ContactType:
+          type: string
+        AbleToAuthorise:
+          type: string
+        Name:
+          type: string
+        Title:
+          type: string
+        Forename:
+          type: string
+        Surname:
+          type: string
+        EMailAddress:
+          type: string
+        Line01:
+          type: string
+        Line02:
+          type: string
+        Line03:
+          type: string
+        Line04:
+          type: string
+        Line05:
+          type: string
+        PostCode:
+          type: string
+        TelHome:
+          type: string
+        TelBusiness:
+          type: string
+        TelMobile:
+          type: string
+        TelOther:
+          type: string
+        Fax:
+          type: string
+    AudaAPI.Models.Labour:
+      type: object
+      properties:
+        LabourClass:
+          format: int32
+          type: integer
+        CodeText:
+          type: string
+        WUCount:
+          format: double
+          type: number
+        WUIndicator:
+          type: string
+        Obid:
+          format: uuid
+          type: string
+        Amount:
+          format: double
+          type: number
+        AmountIndicator:
+          type: string
+        DescriptionText:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        ReferenceSequence:
+          format: int32
+          type: integer
+        RepairMethod:
+          type: string
+    AudaAPI.Models.PNETQLabour:
+      type: object
+      properties:
+        LabourAmount:
+          format: double
+          type: number
+        LabourDescription:
+          type: string
+        LabourGroup:
+          format: int32
+          type: integer
+        LabourHours:
+          format: double
+          type: number
+        LabourRate:
+          format: double
+          type: number
+        LabourType:
+          type: string
+        QuoteLineChange:
+          enum:
+          - N
+          - C
+          - I
+          - D
+          type: string
+        QuoteLineNumber:
+          format: int32
+          type: integer
+    AudaAPI.Models.GeneralCosts:
+      type: object
+      properties:
+        DeductionAdditionalAmt:
+          format: double
+          type: number
+        LabourAmt5:
+          format: double
+          type: number
+        LabourPanelMechAmt:
+          format: double
+          type: number
+        LbrAmtDecrease:
+          format: double
+          type: number
+        LbrAmtIncrease:
+          format: double
+          type: number
+        PartsAmt:
+          format: double
+          type: number
+        PartsSaving:
+          format: double
+          type: number
+        SundryPartsAmt:
+          format: double
+          type: number
+        SundryPartsPcnt:
+          format: double
+          type: number
+        TotalLabourAmt:
+          format: double
+          type: number
+        TotalPartsAmt:
+          format: double
+          type: number
+        VisualAlignmentAmt:
+          format: double
+          type: number
+        TotalAdditionalCosts:
+          format: double
+          type: number
+        TotalExtrasAmt:
+          format: double
+          type: number
+        CorrProtection01Amt:
+          format: double
+          type: number
+        OverAllDiscountAmt:
+          format: double
+          type: number
+        TotalDeductionAmt:
+          format: double
+          type: number
+    AudaAPI.Models.TTSVechPart:
+      type: object
+      properties:
+        ActionType:
+          format: int32
+          type: integer
+        ADBRef:
+          type: string
+        AltPartsNumber:
+          type: string
+        CAFTime:
+          format: double
+          type: number
+        CPTypes:
+          type: string
+        DataSource:
+          format: int32
+          type: integer
+        Description:
+          type: string
+        HasAltParts:
+          type: boolean
+        InCombinations:
+          type: string
+        IsCalculated:
+          type: boolean
+        IsCombination:
+          type: boolean
+        IsFRHanded:
+          type: boolean
+        IsHanded:
+          type: boolean
+        IsIncluded:
+          type: boolean
+        IsNonDisable:
+          type: boolean
+        IsObsOccurance:
+          type: boolean
+        IsOpinionPnl:
+          type: boolean
+        IsOpinionPrice:
+          type: boolean
+        IsOpinionTime:
+          type: boolean
+        IsPartSelected:
+          type: boolean
+        IsRepeatable:
+          type: boolean
+        IsSubMETBlend:
+          type: boolean
+        IsSubMETRepair:
+          type: boolean
+        IsSubPart:
+          type: boolean
+        PaintTime:
+          format: double
+          type: number
+        PanelSize:
+          format: double
+          type: number
+        ParentId:
+          format: int32
+          type: integer
+        PartBetterment:
+          format: double
+          type: number
+        PartBettermentPc:
+          format: double
+          type: number
+        Quantity:
+          format: int32
+          type: integer
+        SequenceId:
+          format: int32
+          type: integer
+        TPSCategory:
+          type: string
+        TPSRef:
+          type: string
+        TTSRef:
+          type: string
+        WorkType:
+          format: int32
+          type: integer
+        TTSVechPartDetail:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.TTSVechPartDetail'
+    AudaAPI.Models.PNETQSublet:
+      type: object
+      properties:
+        Invoiced:
+          type: boolean
+        QuoteLineChange:
+          enum:
+          - N
+          - C
+          - I
+          - D
+          type: string
+        QuoteLineNumber:
+          format: int32
+          type: integer
+        SubletAmount:
+          format: double
+          type: number
+        SubletAuthorityDoc:
+          format: byte
+          type: string
+        SubletAuthorityNum:
+          format: int32
+          type: integer
+        SubletDescription:
+          type: string
+        SubletManagementFlg:
+          type: string
+        SubletRepairer:
+          type: string
+        SubletRepairerAddr:
+          type: string
+        SubletRepairerPhn:
+          type: string
+        SubletType:
+          type: string
+    AudaAPI.Models.AudaHailRepair:
+      type: object
+      properties:
+        AudaHailInfo:
+          type: string
+    AudaAPI.Models.PNETQReport:
+      type: object
+      properties:
+        QuoteLineChange:
+          enum:
+          - N
+          - C
+          - I
+          - D
+          type: string
+        QuoteLineNumber:
+          format: int32
+          type: integer
+        ReportItemDescription:
+          type: string
+    AudaAPI.Models.InvalidPart:
+      type: object
+      properties:
+        ErrorCode:
+          type: string
+        Description:
+          type: string
+        PartNumber:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        RepairMethod:
+          type: string
+    AudaAPI.Models.Note:
+      type: object
+      properties:
+        Obid:
+          format: uuid
+          type: string
+        Author:
+          type: string
+        DateCreated:
+          format: date-time
+          type: string
+        Header:
+          type: string
+        Text:
+          type: string
+    AudaAPI.Models.Recovery:
+      type: object
+      properties:
+        Comments:
+          type: string
+        CompanyName:
+          type: string
+        CrashSiteRecoveryDate:
+          format: date-time
+          type: string
+        RecoveryDate:
+          format: date-time
+          type: string
+        RecoveryFromCrashSite:
+          type: boolean
+        RecoveryNeeded:
+          type: boolean
+    AudaAPI.Models.Part:
+      type: object
+      properties:
+        Amount:
+          format: double
+          type: number
+        ReferenceSequence:
+          format: int32
+          type: integer
+        OriginalPart:
+          $ref: '#/components/schemas/AudaAPI.Models.OriginalPart'
+        Description:
+          type: string
+        PartNumber:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        RepairMethod:
+          type: string
+    AudaAPI.Models.AttachmentHeader:
+      type: object
+      properties:
+        Comments:
+          type: string
+        CreationDate:
+          format: date-time
+          type: string
+        DataSize:
+          format: int32
+          type: integer
+        DeletionDate:
+          format: date-time
+          type: string
+        IsHeld:
+          type: boolean
+        IsSystemAttachment:
+          type: boolean
+        OriginalFilename:
+          type: string
+        Private:
+          type: boolean
+        SequenceNumber:
+          format: int32
+          type: integer
+        SpecAttachmentType:
+          type: string
+        UploadType:
+          enum:
+          - Uninitialised
+          - HubReceive
+          - AeUpload
+          type: string
+        MimeType:
+          $ref: '#/components/schemas/AudaAPI.Models.MimeType'
+        AeeSessionHistory:
+          $ref: '#/components/schemas/AudaAPI.Models.SessionHistory'
+        AttachmentContent:
+          $ref: '#/components/schemas/AudaAPI.Models.AttachmentContent'
+        AttachmentType:
+          $ref: '#/components/schemas/AudaAPI.Models.AttachmentType'
+    AudaAPI.Models.NetworkDestination:
+      type: object
+      properties:
+        AssignTo:
+          type: string
+        ToLocation:
+          type: string
+    AudaAPI.Models.DamageEstimate:
+      type: object
+      properties:
+        Model:
+          $ref: '#/components/schemas/AudaAPI.Models.Model'
+        AudaHailRepair:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.AudaHailRepair'
+        Repair:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Repair'
+        FrozenPart:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.FrozenPart'
+        CalculationSubType:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.CalculationSubType'
+        Rate:
+          $ref: '#/components/schemas/AudaAPI.Models.Rate'
+        ItemDepreciation:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.ItemDepreciation'
+        TTSCalc:
+          $ref: '#/components/schemas/AudaAPI.Models.TTSCalc'
+        SalvagePart:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.SalvagePart'
+        Calculation:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Calculation'
+    AudaAPI.Models.Rate:
+      type: object
+      properties:
+        LabourRate:
+          format: double
+          type: number
+        LabourRate5:
+          format: double
+          type: number
+        LabourClass1Wu:
+          format: double
+          type: number
+        LabourClass5Wu:
+          format: double
+          type: number
+        PaintRate:
+          format: double
+          type: number
+        PaintIndex:
+          format: double
+          type: number
+        PartsDiscount:
+          format: double
+          type: number
+        OverallDiscount:
+          format: double
+          type: number
+        PartsDiscountPcnt:
+          format: double
+          type: number
+        PearlescentUpliftPcnt:
+          format: double
+          type: number
+    AudaAPI.Models.SessionHistory:
+      type: object
+      properties:
+        ClientInformation:
+          type: string
+        ClientIP:
+          type: string
+        EndTime:
+          format: date-time
+          type: string
+        StartTime:
+          format: date-time
+          type: string
+        System:
+          enum:
+          - AudaEnterprise
+          - ClaimsHandler
+          - AEMobile
+          - AudaInvoice
+          - AudaFNOL
+          - AudaAudit
+          - SiteManager
+          - FakeDashboardSystem
+          - FakeStatementSystem
+          - SiteSearch
+          - AudaCapture
+          - AudaProFile
+          - AudaReset
+          - AudaSubrogation
+          - AudaMobile
+          - AudaLite
+          - AudaLiteAdministration
+          type: string
+        AeeBusRole:
+          $ref: '#/components/schemas/AudaAPI.Models.User'
+        Company:
+          $ref: '#/components/schemas/AudaAPI.Models.User'
+    AudaAPI.Models.TTSCalcTotals:
+      type: object
+      properties:
+        BLineDisc:
+          format: double
+          type: number
+        CustResp:
+          format: double
+          type: number
+        GrandIncVAT:
+          format: double
+          type: number
+        JobSubTotal:
+          format: double
+          type: number
+        JobVAT:
+          format: double
+          type: number
+        LabDisc:
+          format: double
+          type: number
+        LabDiscd:
+          format: double
+          type: number
+        MiscDisc:
+          format: double
+          type: number
+        MiscDiscd:
+          format: double
+          type: number
+        PartDisc:
+          format: double
+          type: number
+        PartDiscd:
+          format: double
+          type: number
+        TTSLabourTotals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.TTSLabourTotals'
+        TTSMiscTotals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.TTSMiscTotals'
+        TTSPMTotals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.TTSPMTotals'
+        TTSPartTotals:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.TTSPartTotals'
+    AudaAPI.Models.Parties:
+      type: object
+      properties:
+        AddressLine1:
+          type: string
+        AddressLine2:
+          type: string
+        AddressLine3:
+          type: string
+        AddressLine4:
+          type: string
+        AddressLine5:
+          type: string
+        Age:
+          format: int32
+          type: integer
+        ClaimantOccRelationship:
+          type: string
+        DamageDetails:
+          type: string
+        InjuryDetails:
+          type: string
+        LiabilityEstDamage:
+          format: double
+          type: number
+        LiabilityEstInjuryDeath:
+          format: double
+          type: number
+        OccupantName:
+          type: string
+        PartyFlag:
+          enum:
+          - Uninitialized
+          - Occupant
+          - ThirdParty
+          type: string
+        PhoneNumber:
+          type: string
+        Postcode:
+          type: string
+        PropertyType:
+          enum:
+          - Unknown
+          - Vehicle
+          - Building
+          - Farm
+          - Machine
+          type: string
+        Sequence:
+          format: int32
+          type: integer
+        Sex:
+          type: string
+    AudaAPI.Models.CurrencyDefinition:
+      type: object
+      properties:
+        Code:
+          type: string
+    AudaAPI.Models.PNETQuote:
+      type: object
+      properties:
+        AuthorisedAmount:
+          format: double
+          type: number
+        CustomerContribution:
+          format: double
+          type: number
+        Excess:
+          format: double
+          type: number
+        GST:
+          format: double
+          type: number
+        Invoiced:
+          type: boolean
+        LabourTotal:
+          format: double
+          type: number
+        PaintTotal:
+          format: double
+          type: number
+        PartMarkUpTotal:
+          format: double
+          type: number
+        PartTotal:
+          format: double
+          type: number
+        QuoteNumber:
+          type: string
+        QuoteTotal:
+          format: double
+          type: number
+        QuoteType:
+          enum:
+          - R
+          - S
+          - ADJR
+          - ADJS
+          - AUTR
+          - AUTS
+          type: string
+        SubletTotal:
+          format: double
+          type: number
+        PNETQReport:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.PNETQReport'
+        PNETQPaint:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.PNETQPaint'
+        PNETQPart:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.PNETQPart'
+        PNETQSublet:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.PNETQSublet'
+        PNETQLabour:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.PNETQLabour'
+    AudaAPI.Models.AttachmentContent:
+      type: object
+      properties:
+        CreationDate:
+          format: date-time
+          type: string
+        Data:
+          format: byte
+          type: string
+    AudaAPI.Models.Paint:
+      type: object
+      properties:
+        AreaCount:
+          format: int32
+          type: integer
+        AreaIndicator:
+          type: string
+        BettermentDeductionPcnt:
+          format: double
+          type: number
+        FixedRateAmt:
+          format: double
+          type: number
+        FixedRateIndicator:
+          type: string
+        MaterialUnitsCount:
+          format: int32
+          type: integer
+        PnlDiscnt:
+          format: double
+          type: number
+        MarutiPaint:
+          $ref: '#/components/schemas/AudaAPI.Models.MarutiPaint'
+        CodeText:
+          type: string
+        WUCount:
+          format: double
+          type: number
+        WUIndicator:
+          type: string
+        Obid:
+          format: uuid
+          type: string
+        Amount:
+          format: double
+          type: number
+        AmountIndicator:
+          type: string
+        DescriptionText:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        ReferenceSequence:
+          format: int32
+          type: integer
+        RepairMethod:
+          type: string
+    AudaAPI.Models.RVSAppliedBusChannel:
+      type: object
+      properties:
+        DateApplied:
+          format: date-time
+          type: string
+        RVSBusChannel:
+          format: uuid
+          type: string
+        AeeBusRole:
+          $ref: '#/components/schemas/AudaAPI.Models.User'
+    AudaAPI.Models.NetworkOrigin:
+      type: object
+      properties:
+        FromLocation:
+          type: string
+    AudaAPI.Models.TTSCLCContent:
+      type: object
+      properties:
+        CLCFile:
+          format: byte
+          type: string
+    AudaAPI.Models.ClientAuditResult:
+      type: object
+      properties:
+        AuditDate:
+          format: date-time
+          type: string
+        AuditDetails:
+          type: string
+        AuditState:
+          enum:
+          - Pass
+          - Warning
+          - Fail
+          type: string
+        EngineerReference:
+          type: string
+    AudaAPI.Models.CalculationSubType:
+      type: object
+      properties:
+        RepairType:
+          enum:
+          - Uninitialised
+          - Repair
+          - Renew
+          - Paint
+          - RemoveReplace
+          - CorrosionProtection
+          - Check
+          - Adjustment
+          - DentRepair
+          - Maintenance
+          - Notation
+          - PossibleDamage
+          - Specialist
+          - Watermark
+          - Other
+          type: string
+        SplitPartType:
+          type: string
+    AudaAPI.Models.Policy:
+      type: object
+      properties:
+        PolicyNumber:
+          type: string
+        ExcessValue:
+          format: double
+          type: number
+        ExcessValueTBA:
+          type: boolean
+        VATStatus:
+          type: string
+        VATPortionPayable:
+          format: double
+          type: number
+    AudaAPI.Models.LockedBy:
+      type: object
+      properties:
+        userName:
+          type: string
+        LockedOn:
+          format: date-time
+          type: string
+    AudaAPI.Models.ItemDepreciation:
+      type: object
+      properties:
+        BettermentPcnt:
+          format: int32
+          type: integer
+        Description:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        IsCustLiability:
+          type: boolean
+        IsGenerated:
+          type: boolean
+        MaterialType:
+          enum:
+          - Unknown
+          - Metal
+          - Glass
+          - Fibreglass
+          - Plastic
+          - LightMetal
+          - HighStrengthSteel
+          - Textile
+          - Unpainted
+          type: string
     AudaAPI.Models.Salvage:
       type: object
       properties:
@@ -282,29 +1386,21 @@ components:
             $ref: '#/components/schemas/AudaAPI.Models.SalvageTypeOfDamage'
         Recovery:
           $ref: '#/components/schemas/AudaAPI.Models.Recovery'
-    AudaAPI.Models.TTSMiscTotals:
+    AudaAPI.Models.PNETInvoiceItem:
       type: object
       properties:
-        IsGenerated:
-          type: boolean
-        IsOpinion:
-          type: boolean
-        PartNumber:
-          type: string
-        Price:
+        AmountInclGST:
           format: double
           type: number
-    AudaAPI.Models.RVSAppliedBusChannel:
-      type: object
-      properties:
-        DateApplied:
-          format: date-time
+        AuthorityNumber:
+          format: int32
+          type: integer
+        PNETQuoteNumber:
           type: string
-        RVSBusChannel:
-          format: uuid
-          type: string
-        AeeBusRole:
-          $ref: '#/components/schemas/AudaAPI.Models.User'
+        PNETQSublet:
+          $ref: '#/components/schemas/AudaAPI.Models.PNETQSublet'
+        PNETQuote:
+          $ref: '#/components/schemas/AudaAPI.Models.PNETQuote'
     AudaAPI.Models.Authorisation:
       type: object
       properties:
@@ -329,115 +1425,279 @@ components:
           type: string
         RepairsAuthorised:
           type: string
-    AudaAPI.Models.AudaHailRepair:
+    AudaAPI.Models.User:
       type: object
       properties:
-        AudaHailInfo:
+        Id:
+          format: uuid
           type: string
-    AudaAPI.Models.Rate:
+        LoginName:
+          type: string
+        CompanyCode:
+          type: string
+        CreationDate:
+          format: date-time
+          type: string
+        Description:
+          type: string
+        EMail:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        IsOnline:
+          type: boolean
+        LastActivityDate:
+          format: date-time
+          type: string
+        Status:
+          type: string
+    AudaAPI.Models.CountryState:
       type: object
       properties:
-        LabourRate:
+        ISOCODE:
+          type: string
+        CurrencyDefinition:
+          $ref: '#/components/schemas/AudaAPI.Models.CurrencyDefinition'
+    AudaAPI.Models.TTSMiscTotals:
+      type: object
+      properties:
+        IsGenerated:
+          type: boolean
+        IsOpinion:
+          type: boolean
+        PartNumber:
+          type: string
+        Price:
           format: double
           type: number
-        LabourRate5:
+    AudaAPI.Models.MailAssessorResponse:
+      type: object
+      properties:
+        AgreedRates:
+          type: string
+        Amount:
           format: double
           type: number
-        LabourClass1Wu:
+        DateOfNextVisit:
+          format: date-time
+          type: string
+        PreAccidentValue:
           format: double
           type: number
-        LabourClass5Wu:
+        ResponseDate:
+          format: date-time
+          type: string
+        SalvageOffer:
+          format: double
+          type: number
+        SalvageValue:
+          format: double
+          type: number
+        WorkProviderMessage:
+          $ref: '#/components/schemas/AudaAPI.Models.WorkProviderMessage'
+    AudaAPI.Models.WorkProviderMessage:
+      type: object
+      properties:
+        Code:
+          type: string
+        Description:
+          type: string
+    AudaAPI.Models.PNETQPaint:
+      type: object
+      properties:
+        PaintAmount:
+          format: double
+          type: number
+        PaintDescription:
+          type: string
+        PaintGroup:
+          format: int32
+          type: integer
+        PaintHours:
           format: double
           type: number
         PaintRate:
           format: double
           type: number
-        PaintIndex:
-          format: double
-          type: number
-        PartsDiscount:
-          format: double
-          type: number
-        OverallDiscount:
-          format: double
-          type: number
-        PartsDiscountPcnt:
-          format: double
-          type: number
-        PearlescentUpliftPcnt:
-          format: double
-          type: number
-    AudaAPI.Models.ImpactDirection:
-      type: object
-      properties:
-        ImpactStartArea:
+        PaintWorkType:
           type: string
-        ImpactEndArea:
-          type: string
-    AudaAPI.Models.TyreDepth:
-      type: object
-      properties:
-        Axle:
-          format: int32
-          type: integer
-        LeftTyre:
-          format: double
-          type: number
-        RightTyre:
-          format: double
-          type: number
-    AudaAPI.Models.Parties:
-      type: object
-      properties:
-        AddressLine1:
-          type: string
-        AddressLine2:
-          type: string
-        AddressLine3:
-          type: string
-        AddressLine4:
-          type: string
-        AddressLine5:
-          type: string
-        Age:
-          format: int32
-          type: integer
-        ClaimantOccRelationship:
-          type: string
-        DamageDetails:
-          type: string
-        InjuryDetails:
-          type: string
-        LiabilityEstDamage:
-          format: double
-          type: number
-        LiabilityEstInjuryDeath:
-          format: double
-          type: number
-        OccupantName:
-          type: string
-        PartyFlag:
+        QuoteLineChange:
           enum:
-          - Uninitialized
-          - Occupant
-          - ThirdParty
+          - N
+          - C
+          - I
+          - D
           type: string
-        PhoneNumber:
-          type: string
-        Postcode:
-          type: string
-        PropertyType:
-          enum:
-          - Unknown
-          - Vehicle
-          - Building
-          - Farm
-          - Machine
-          type: string
-        Sequence:
+        QuoteLineNumber:
           format: int32
           type: integer
-        Sex:
+    AudaAPI.Models.TTSPMTotals:
+      type: object
+      properties:
+        ActionType:
+          format: int32
+          type: integer
+        PanelSize:
+          format: double
+          type: number
+        PMCost:
+          format: double
+          type: number
+    AudaAPI.Models.MailHeader:
+      type: object
+      properties:
+        Attention:
+          type: string
+        Created:
+          format: date-time
+          type: string
+        MessageType:
+          enum:
+          - Uninitialised
+          - Standard
+          - InterimAdvice
+          - SalvageNotification
+          - InstructionForm
+          - CourtesyCarForm
+          - AuthorisationMessage
+          - AuthorityNote
+          - SalvageInstruction
+          - EngineersSalvageMessage
+          - AdministrationMessage
+          - AIDAAssignment
+          - AIDARCA
+          - AIDAInvoice
+          - MailConfirmation
+          - AgreedCostsNote
+          - AssessorResponse
+          - SupplementaryApproval
+          - PNETMail
+          - AssessmentCancallation
+          - AdministrationExtMessage
+          type: string
+        Modified:
+          format: date-time
+          type: string
+        NetworkSendCopy01:
+          type: string
+        NetworkSendCopy02:
+          type: string
+        Received:
+          format: date-time
+          type: string
+        SentDate:
+          format: date-time
+          type: string
+        Status:
+          enum:
+          - Unitialised
+          - Partial
+          - Completed
+          - Transmitted
+          - Received
+          - Viewed
+          - Printed
+          type: string
+        Subject:
+          type: string
+        PNETQuote:
+          $ref: '#/components/schemas/AudaAPI.Models.PNETQuote'
+        MailAssessorResponse:
+          $ref: '#/components/schemas/AudaAPI.Models.MailAssessorResponse'
+        MailInstructions:
+          $ref: '#/components/schemas/AudaAPI.Models.MailInstructions'
+    AudaAPI.Models.MarutiPaint:
+      type: object
+      properties:
+        Description:
+          type: string
+        Discountable:
+          type: boolean
+        DiscountedPaintPrice:
+          format: double
+          type: number
+        GuideNumber:
+          format: int32
+          type: integer
+        ManufCode:
+          type: string
+        PaintPrice:
+          format: double
+          type: number
+        RepairType:
+          type: string
+    AudaAPI.Models.TTSVechPartDetail:
+      type: object
+      properties:
+        JobAllow0:
+          format: double
+          type: number
+        JobAllow1:
+          format: double
+          type: number
+        JobAllow2:
+          format: double
+          type: number
+        JobAllow3:
+          format: double
+          type: number
+        PartPrice0:
+          format: double
+          type: number
+        PartPrice1:
+          format: double
+          type: number
+        PartPrice2:
+          format: double
+          type: number
+        PartPrice3:
+          format: double
+          type: number
+        PnlSize0:
+          format: double
+          type: number
+        PnlSize1:
+          format: double
+          type: number
+        PnlSize2:
+          format: double
+          type: number
+        PnlSize3:
+          format: double
+          type: number
+        RepairTime0:
+          format: double
+          type: number
+        RepairTime1:
+          format: double
+          type: number
+        RepairTime2:
+          format: double
+          type: number
+        RepairTime3:
+          format: double
+          type: number
+        SequenceId:
+          format: int32
+          type: integer
+    AudaAPI.Models.PNETInvoiceStatus:
+      type: object
+      properties:
+        ABN:
+          type: string
+        CompanyName:
+          type: string
+        StatusCode:
+          format: int32
+          type: integer
+        StatusCodeDescription:
+          type: string
+        StatusDescription:
+          type: string
+        TaxInvoiceDate:
+          format: date-time
           type: string
     AudaAPI.Models.Vehicle:
       type: object
@@ -517,13 +1777,28 @@ components:
           type: string
         Salvage:
           $ref: '#/components/schemas/AudaAPI.Models.Salvage'
-    AudaAPI.Models.NetworkDestination:
+    AudaAPI.Models.ImpactDirection:
       type: object
       properties:
-        AssignTo:
+        ImpactStartArea:
           type: string
-        ToLocation:
+        ImpactEndArea:
           type: string
+    AudaAPI.Models.ImageMetadata:
+      type: object
+      properties:
+        Obid:
+          format: uuid
+          type: string
+        CreatedDate:
+          format: date-time
+          type: string
+        DisplayOrder:
+          format: int32
+          type: integer
+        SequenceNumber:
+          format: int32
+          type: integer
     AudaAPI.Models.MailInstructions:
       type: object
       properties:
@@ -583,174 +1858,21 @@ components:
           type: boolean
         VehicleRegistrationMOTDoc:
           type: boolean
-    AudaAPI.Models.PNETInvoiceItem:
+    AudaAPI.Models.Location:
       type: object
       properties:
-        AmountInclGST:
-          format: double
-          type: number
-        AuthorityNumber:
-          format: int32
-          type: integer
-        PNETQuoteNumber:
-          type: string
-        PNETQSublet:
-          $ref: '#/components/schemas/AudaAPI.Models.PNETQSublet'
-        PNETQuote:
-          $ref: '#/components/schemas/AudaAPI.Models.PNETQuote'
-    AudaAPI.Models.Extra:
-      type: object
-      properties:
-        LabourText:
-          type: string
-        Obid:
-          format: uuid
-          type: string
-        Amount:
-          format: double
-          type: number
-        AmountIndicator:
-          type: string
-        DescriptionText:
-          type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        ReferenceSequence:
-          format: int32
-          type: integer
-        RepairMethod:
-          type: string
-    AudaAPI.Models.PNETQReport:
-      type: object
-      properties:
-        QuoteLineChange:
+        LocationType:
           enum:
-          - N
-          - C
-          - I
-          - D
+          - Undefined
+          - Owner
+          - Repairer
+          - Vehicle
+          - Accident
           type: string
-        QuoteLineNumber:
-          format: int32
-          type: integer
-        ReportItemDescription:
+        Name:
           type: string
-    AudaAPI.Models.CourtesyCar:
-      type: object
-      properties:
-        Comments:
+        PostCode:
           type: string
-        DateOut:
-          format: date-time
-          type: string
-        DateReturn:
-          format: date-time
-          type: string
-        DropOffLocation:
-          type: string
-        Manufacturer:
-          type: string
-        MileageIn:
-          format: int32
-          type: integer
-        MileageOut:
-          format: int32
-          type: integer
-        Model:
-          type: string
-        PickUpLocation:
-          type: string
-        Registration:
-          type: string
-        ReturnComment:
-          type: string
-        TBA:
-          type: boolean
-    AudaAPI.Models.CalculationSubType:
-      type: object
-      properties:
-        RepairType:
-          enum:
-          - Uninitialised
-          - Repair
-          - Renew
-          - Paint
-          - RemoveReplace
-          - CorrosionProtection
-          - Check
-          - Adjustment
-          - DentRepair
-          - Maintenance
-          - Notation
-          - PossibleDamage
-          - Specialist
-          - Watermark
-          - Other
-          type: string
-        SplitPartType:
-          type: string
-    AudaAPI.Models.CurrencyDefinition:
-      type: object
-      properties:
-        Code:
-          type: string
-    AudaAPI.Models.NetworkOrigin:
-      type: object
-      properties:
-        FromLocation:
-          type: string
-    AudaAPI.Models.PNETQPart:
-      type: object
-      properties:
-        PartAmount:
-          format: double
-          type: number
-        PartDescription:
-          type: string
-        PartMarkUpAmount:
-          format: double
-          type: number
-        PartMarkUpPcnt:
-          format: double
-          type: number
-        PartNumber:
-          type: string
-        PartQuantity:
-          format: int32
-          type: integer
-        PartType:
-          type: string
-        PartUnitPrice:
-          format: double
-          type: number
-        QuoteLineChange:
-          enum:
-          - N
-          - C
-          - I
-          - D
-          type: string
-        QuoteLineNumber:
-          format: int32
-          type: integer
-    AudaAPI.Models.Recovery:
-      type: object
-      properties:
-        Comments:
-          type: string
-        CompanyName:
-          type: string
-        CrashSiteRecoveryDate:
-          format: date-time
-          type: string
-        RecoveryDate:
-          format: date-time
-          type: string
-        RecoveryFromCrashSite:
-          type: boolean
-        RecoveryNeeded:
-          type: boolean
     AudaAPI.Models.Calculation:
       type: object
       properties:
@@ -832,105 +1954,62 @@ components:
           $ref: '#/components/schemas/AudaAPI.Models.GeneralCosts'
         PaintCosts:
           $ref: '#/components/schemas/AudaAPI.Models.PaintCosts'
-    AudaAPI.Models.Contact:
+    AudaAPI.Models.PNETData:
       type: object
       properties:
-        ContactType:
+        AuthorisedQuoteNumber:
           type: string
-        AbleToAuthorise:
+        AuthorisedSQuoteNumber:
           type: string
-        Name:
+        CorporateCustomer:
           type: string
-        Title:
+        ExtraQuoteInfReq:
+          type: boolean
+        PaintType:
           type: string
-        Forename:
+        QuoteRequestNumber:
           type: string
-        Surname:
+        QuoteRequestStatus:
+          enum:
+          - Uninitialised
+          - Active
+          - Responded
+          - Win
+          - Lose
+          - TotalLoss
+          - Cancelled
           type: string
-        EMailAddress:
-          type: string
-        Line01:
-          type: string
-        Line02:
-          type: string
-        Line03:
-          type: string
-        Line04:
-          type: string
-        Line05:
-          type: string
-        PostCode:
-          type: string
-        TelHome:
-          type: string
-        TelBusiness:
-          type: string
-        TelMobile:
-          type: string
-        TelOther:
-          type: string
-        Fax:
-          type: string
-    AudaAPI.Models.Labour:
-      type: object
-      properties:
-        LabourClass:
+        QuoteRequestVersionNumber:
           format: int32
           type: integer
-        CodeText:
+        QuotingMethod:
           type: string
-        WUCount:
-          format: double
-          type: number
-        WUIndicator:
-          type: string
-        Obid:
-          format: uuid
-          type: string
-        Amount:
-          format: double
-          type: number
-        AmountIndicator:
-          type: string
-        DescriptionText:
-          type: string
-        GuideNumber:
+        RepairAuthNumber:
           format: int32
           type: integer
-        ReferenceSequence:
+        SubmittedQuoteNumber:
+          type: string
+        SupplementaryAuthNumber:
           format: int32
           type: integer
-        RepairMethod:
+        SupplementaryQuoteNumber:
           type: string
-    AudaAPI.Models.Repair:
-      type: object
-      properties:
-        OperationType:
+        SupplementaryStatus:
+          enum:
+          - Uninitialised
+          - Active
+          - Responded
+          - Win
+          - Lose
+          - TotalLoss
+          - Cancelled
           type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        RepairMethod:
-          type: string
-        WorkUnits:
-          format: int32
-          type: integer
-        Price:
-          format: double
-          type: number
-        Comment:
-          type: string
-        Description:
-          type: string
-        WorkText:
-          type: string
-        BettermentPercent:
-          format: double
-          type: number
-        Mutations:
+        PNETInvoice:
+          $ref: '#/components/schemas/AudaAPI.Models.PNETInvoice'
+        PNETQuote:
           type: array
           items:
-            $ref: '#/components/schemas/AudaAPI.Models.Mutation'
+            $ref: '#/components/schemas/AudaAPI.Models.PNETQuote'
     AudaAPI.Models.Site:
       type: object
       properties:
@@ -949,835 +2028,36 @@ components:
           type: string
         ExternalCode:
           type: string
-    AudaAPI.Models.AttachmentHeader:
+    AudaAPI.Models.CourtesyCar:
       type: object
       properties:
         Comments:
           type: string
-        CreationDate:
+        DateOut:
           format: date-time
           type: string
-        DataSize:
-          format: int32
-          type: integer
-        DeletionDate:
+        DateReturn:
           format: date-time
           type: string
-        IsHeld:
-          type: boolean
-        IsSystemAttachment:
-          type: boolean
-        OriginalFilename:
+        DropOffLocation:
           type: string
-        Private:
-          type: boolean
-        SequenceNumber:
+        Manufacturer:
+          type: string
+        MileageIn:
           format: int32
           type: integer
-        SpecAttachmentType:
-          type: string
-        UploadType:
-          enum:
-          - Uninitialised
-          - HubReceive
-          - AeUpload
-          type: string
-        MimeType:
-          $ref: '#/components/schemas/AudaAPI.Models.MimeType'
-        AeeSessionHistory:
-          $ref: '#/components/schemas/AudaAPI.Models.SessionHistory'
-        AttachmentContent:
-          $ref: '#/components/schemas/AudaAPI.Models.AttachmentContent'
-        AttachmentType:
-          $ref: '#/components/schemas/AudaAPI.Models.AttachmentType'
-    AudaAPI.Models.MarutiPaint:
-      type: object
-      properties:
-        Description:
-          type: string
-        Discountable:
-          type: boolean
-        DiscountedPaintPrice:
-          format: double
-          type: number
-        GuideNumber:
+        MileageOut:
           format: int32
           type: integer
-        ManufCode:
+        Model:
           type: string
-        PaintPrice:
-          format: double
-          type: number
-        RepairType:
+        PickUpLocation:
           type: string
-    AudaAPI.Models.WorkProviderMessage:
-      type: object
-      properties:
-        Code:
+        Registration:
           type: string
-        Description:
+        ReturnComment:
           type: string
-    AudaAPI.Models.InvalidPart:
-      type: object
-      properties:
-        ErrorCode:
-          type: string
-        Description:
-          type: string
-        PartNumber:
-          type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        RepairMethod:
-          type: string
-    AudaAPI.Models.TTSLabourTotals:
-      type: object
-      properties:
-        Authorised:
-          format: double
-          type: number
-        Calculated:
-          format: double
-          type: number
-        Cost:
-          format: double
-          type: number
-        IsOpinion:
-          type: boolean
-        Opinion:
-          format: double
-          type: number
-        Overlap:
-          format: double
-          type: number
-        WrkRef:
-          format: int32
-          type: integer
-    AudaAPI.Models.SalvageTypeOfDamage:
-      type: object
-      properties:
-        TypeOfDamage:
-          enum:
-          - Uninitialised
-          - AccidentBodyshell
-          - AccidentOffside
-          - AccidentFront
-          - AccidentNearside
-          - AccidentOverturned
-          - AccidentRear
-          - TheftPilfered
-          - TheftRecovered
-          - TheftStripped
-          - TheftVandalised
-          - FireElectrical
-          - FireBurnout
-          - FireInterior
-          - FireMechanical
-          - StormBodyshell
-          - StormOffside
-          - StormFront
-          - StormMechanical
-          - StormNearside
-          - StormOverturned
-          - StormRear
-          - StormRoof
-          - FloodRiverFresh
-          - FloodSeaSaline
-          - VandalisedBodyshell
-          - VandalisedElectrical
-          - VandalisedInterior
-          - VandalisedMechanical
-          - VandalisedExterior
-          - FloodSewage
-          type: string
-    AudaAPI.Models.OriginalPart:
-      type: object
-      properties:
-        Amount:
-          format: double
-          type: number
-        Description:
-          type: string
-        PartNumber:
-          type: string
-    AudaAPI.Models.AssessmentTag:
-      type: object
-      properties:
-        AssessorUserName:
-          type: string
-        AuthorisingUserName:
-          type: string
-        EstimatingUserName:
-          type: string
-        RepairerUser:
-          $ref: '#/components/schemas/AudaAPI.Models.User'
-        RepairerSite:
-          $ref: '#/components/schemas/AudaAPI.Models.Site'
-        AssessorUser:
-          $ref: '#/components/schemas/AudaAPI.Models.User'
-        AuthorisingUser:
-          $ref: '#/components/schemas/AudaAPI.Models.User'
-        InsurerSite:
-          $ref: '#/components/schemas/AudaAPI.Models.Site'
-        AuthorisingSite:
-          $ref: '#/components/schemas/AudaAPI.Models.Site'
-    AudaAPI.Models.User:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        LoginName:
-          type: string
-        CompanyCode:
-          type: string
-        CreationDate:
-          format: date-time
-          type: string
-        Description:
-          type: string
-        EMail:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        IsOnline:
-          type: boolean
-        LastActivityDate:
-          format: date-time
-          type: string
-        Status:
-          type: string
-    AudaAPI.Models.WorkProvider:
-      type: object
-      properties:
-        ID:
-          format: uuid
-          type: string
-        Description:
-          type: string
-        Code:
-          format: int32
-          type: integer
-    AudaAPI.Models.PNETQSublet:
-      type: object
-      properties:
-        Invoiced:
-          type: boolean
-        QuoteLineChange:
-          enum:
-          - N
-          - C
-          - I
-          - D
-          type: string
-        QuoteLineNumber:
-          format: int32
-          type: integer
-        SubletAmount:
-          format: double
-          type: number
-        SubletAuthorityDoc:
-          format: byte
-          type: string
-        SubletAuthorityNum:
-          format: int32
-          type: integer
-        SubletDescription:
-          type: string
-        SubletManagementFlg:
-          type: string
-        SubletRepairer:
-          type: string
-        SubletRepairerAddr:
-          type: string
-        SubletRepairerPhn:
-          type: string
-        SubletType:
-          type: string
-    AudaAPI.Models.TTSVechPartDetail:
-      type: object
-      properties:
-        JobAllow0:
-          format: double
-          type: number
-        JobAllow1:
-          format: double
-          type: number
-        JobAllow2:
-          format: double
-          type: number
-        JobAllow3:
-          format: double
-          type: number
-        PartPrice0:
-          format: double
-          type: number
-        PartPrice1:
-          format: double
-          type: number
-        PartPrice2:
-          format: double
-          type: number
-        PartPrice3:
-          format: double
-          type: number
-        PnlSize0:
-          format: double
-          type: number
-        PnlSize1:
-          format: double
-          type: number
-        PnlSize2:
-          format: double
-          type: number
-        PnlSize3:
-          format: double
-          type: number
-        RepairTime0:
-          format: double
-          type: number
-        RepairTime1:
-          format: double
-          type: number
-        RepairTime2:
-          format: double
-          type: number
-        RepairTime3:
-          format: double
-          type: number
-        SequenceId:
-          format: int32
-          type: integer
-    AudaAPI.Models.TTSVechPart:
-      type: object
-      properties:
-        ActionType:
-          format: int32
-          type: integer
-        ADBRef:
-          type: string
-        AltPartsNumber:
-          type: string
-        CAFTime:
-          format: double
-          type: number
-        CPTypes:
-          type: string
-        DataSource:
-          format: int32
-          type: integer
-        Description:
-          type: string
-        HasAltParts:
-          type: boolean
-        InCombinations:
-          type: string
-        IsCalculated:
-          type: boolean
-        IsCombination:
-          type: boolean
-        IsFRHanded:
-          type: boolean
-        IsHanded:
-          type: boolean
-        IsIncluded:
-          type: boolean
-        IsNonDisable:
-          type: boolean
-        IsObsOccurance:
-          type: boolean
-        IsOpinionPnl:
-          type: boolean
-        IsOpinionPrice:
-          type: boolean
-        IsOpinionTime:
-          type: boolean
-        IsPartSelected:
-          type: boolean
-        IsRepeatable:
-          type: boolean
-        IsSubMETBlend:
-          type: boolean
-        IsSubMETRepair:
-          type: boolean
-        IsSubPart:
-          type: boolean
-        PaintTime:
-          format: double
-          type: number
-        PanelSize:
-          format: double
-          type: number
-        ParentId:
-          format: int32
-          type: integer
-        PartBetterment:
-          format: double
-          type: number
-        PartBettermentPc:
-          format: double
-          type: number
-        Quantity:
-          format: int32
-          type: integer
-        SequenceId:
-          format: int32
-          type: integer
-        TPSCategory:
-          type: string
-        TPSRef:
-          type: string
-        TTSRef:
-          type: string
-        WorkType:
-          format: int32
-          type: integer
-        TTSVechPartDetail:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.TTSVechPartDetail'
-    AudaAPI.Models.AttachmentType:
-      type: object
-      properties:
-        Description:
-          type: string
-        PermitDefault:
-          type: boolean
-        Type:
-          type: string
-    AudaAPI.Models.TTSCalcTotals:
-      type: object
-      properties:
-        BLineDisc:
-          format: double
-          type: number
-        CustResp:
-          format: double
-          type: number
-        GrandIncVAT:
-          format: double
-          type: number
-        JobSubTotal:
-          format: double
-          type: number
-        JobVAT:
-          format: double
-          type: number
-        LabDisc:
-          format: double
-          type: number
-        LabDiscd:
-          format: double
-          type: number
-        MiscDisc:
-          format: double
-          type: number
-        MiscDiscd:
-          format: double
-          type: number
-        PartDisc:
-          format: double
-          type: number
-        PartDiscd:
-          format: double
-          type: number
-        TTSLabourTotals:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.TTSLabourTotals'
-        TTSMiscTotals:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.TTSMiscTotals'
-        TTSPMTotals:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.TTSPMTotals'
-        TTSPartTotals:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.TTSPartTotals'
-    AudaAPI.Models.MimeType:
-      type: object
-      properties:
-        Description:
-          type: string
-        Extension:
-          type: string
-        FullType:
-          type: string
-        PermitDefault:
-          type: boolean
-        SubType:
-          type: string
-        Type:
-          type: string
-    AudaAPI.Models.FrozenPart:
-      type: object
-      properties:
-        DateFrozen:
-          format: date-time
-          type: string
-        Freeze:
-          type: boolean
-        AmountFrozen:
-          format: double
-          type: number
-        AmountLastCalculated:
-          format: double
-          type: number
-        Description:
-          type: string
-        PartNumber:
-          type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        RepairMethod:
-          type: string
-    AudaAPI.Models.LockedBy:
-      type: object
-      properties:
-        userName:
-          type: string
-        LockedOn:
-          format: date-time
-          type: string
-    AudaAPI.Models.GeneralCosts:
-      type: object
-      properties:
-        DeductionAdditionalAmt:
-          format: double
-          type: number
-        LabourAmt5:
-          format: double
-          type: number
-        LabourPanelMechAmt:
-          format: double
-          type: number
-        LbrAmtDecrease:
-          format: double
-          type: number
-        LbrAmtIncrease:
-          format: double
-          type: number
-        PartsAmt:
-          format: double
-          type: number
-        PartsSaving:
-          format: double
-          type: number
-        SundryPartsAmt:
-          format: double
-          type: number
-        SundryPartsPcnt:
-          format: double
-          type: number
-        TotalLabourAmt:
-          format: double
-          type: number
-        TotalPartsAmt:
-          format: double
-          type: number
-        VisualAlignmentAmt:
-          format: double
-          type: number
-        TotalAdditionalCosts:
-          format: double
-          type: number
-        TotalExtrasAmt:
-          format: double
-          type: number
-        CorrProtection01Amt:
-          format: double
-          type: number
-        OverAllDiscountAmt:
-          format: double
-          type: number
-        TotalDeductionAmt:
-          format: double
-          type: number
-    AudaAPI.Models.Model:
-      type: object
-      properties:
-        ModelType:
-          type: string
-        VehicleType:
-          type: string
-        ManufacturerName:
-          type: string
-        ModelName:
-          type: string
-        ManufactureCode:
-          type: string
-        ModelCode:
-          type: string
-        SubModelCode:
-          type: string
-        EngineCode:
-          type: string
-        DoorsCode:
-          type: string
-        PaintCodes:
-          type: string
-        DateCode:
-          type: string
-        ModelOptions:
-          type: array
-          items:
-            type: string
-    AudaAPI.Models.SessionHistory:
-      type: object
-      properties:
-        ClientInformation:
-          type: string
-        ClientIP:
-          type: string
-        EndTime:
-          format: date-time
-          type: string
-        StartTime:
-          format: date-time
-          type: string
-        System:
-          enum:
-          - AudaEnterprise
-          - ClaimsHandler
-          - AEMobile
-          - AudaInvoice
-          - AudaFNOL
-          - AudaAudit
-          - SiteManager
-          - FakeDashboardSystem
-          - FakeStatementSystem
-          - SiteSearch
-          - AudaCapture
-          - AudaProFile
-          - AudaReset
-          - AudaSubrogation
-          - AudaMobile
-          - AudaLite
-          - AudaLiteAdministration
-          type: string
-        AeeBusRole:
-          $ref: '#/components/schemas/AudaAPI.Models.User'
-        Company:
-          $ref: '#/components/schemas/AudaAPI.Models.User'
-    AudaAPI.Models.PaintCosts:
-      type: object
-      properties:
-        FixedPaintMaterialAmt:
-          format: double
-          type: number
-        FlatMaterialAmt:
-          format: double
-          type: number
-        IndexChangeAmt:
-          format: double
-          type: number
-        LabourPaintAmt:
-          format: double
-          type: number
-        MatConPrePnt:
-          format: double
-          type: number
-        MatConstMetalAmt:
-          format: double
-          type: number
-        MatConstPerSpotAmt:
-          format: double
-          type: number
-        MatConstPlasticAmt:
-          format: double
-          type: number
-        MatConstSpotAmt:
-          format: double
-          type: number
-        NewPartAmt:
-          format: double
-          type: number
-        NewPartMetalAmt:
-          format: double
-          type: number
-        NewPartPlasticLE1Amt:
-          format: double
-          type: number
-        NewPartPlasticLE2Amt:
-          format: double
-          type: number
-        NewPartPlasticLE3Amt:
-          format: double
-          type: number
-        NewPartPlasticLE4Amt:
-          format: double
-          type: number
-        PaintDiscountAmount:
-          format: double
-          type: number
-        PaintMaterialAmt:
-          format: double
-          type: number
-        PearlescentPaintAmt:
-          format: double
-          type: number
-        PrepWorkPlasticWU:
-          format: double
-          type: number
-        PrepWorkMetalWU:
-          format: double
-          type: number
-        PrepWorkMultilayerWU:
-          format: double
-          type: number
-        PrepInCaseofPrepaint:
-          format: double
-          type: number
-        RepairAmt:
-          format: double
-          type: number
-        RepairPaintMetalAmt:
-          format: double
-          type: number
-        RepairPaintPlasticAmt:
-          format: double
-          type: number
-        SpotPaintMatAmt:
-          format: double
-          type: number
-        SurfaceAmt:
-          format: double
-          type: number
-        SurfacePaintMetalAmt:
-          format: double
-          type: number
-        SurfacePaintPlasticAmt:
-          format: double
-          type: number
-        TotalPaintWU:
-          format: double
-          type: number
-        SundryCostsAmt:
-          format: double
-          type: number
-        PreparePaintSundryAmt:
-          format: double
-          type: number
-        PrepSinglePanelOffCar:
-          format: double
-          type: number
-        PreparePartsWU:
-          format: double
-          type: number
-        PrepPanelsOffCar:
-          format: double
-          type: number
-    AudaAPI.Models.Part:
-      type: object
-      properties:
-        Amount:
-          format: double
-          type: number
-        ReferenceSequence:
-          format: int32
-          type: integer
-        OriginalPart:
-          $ref: '#/components/schemas/AudaAPI.Models.OriginalPart'
-        Description:
-          type: string
-        PartNumber:
-          type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        RepairMethod:
-          type: string
-    AudaAPI.Models.Mutation:
-      type: object
-      properties:
-        Code:
-          type: string
-        Value:
-          type: string
-    AudaAPI.Models.Address:
-      type: object
-      properties:
-        ID:
-          format: uuid
-          type: string
-        AddressLine1:
-          type: string
-        AddressLine2:
-          type: string
-        AddressLine3:
-          type: string
-        AddressLine4:
-          type: string
-        AddressLine5:
-          type: string
-        PostCode:
-          type: string
-    AudaAPI.Models.TTSPartTotals:
-      type: object
-      properties:
-        Calculated:
-          format: double
-          type: number
-        Discount:
-          format: double
-          type: number
-        FinalCost:
-          format: double
-          type: number
-        IsOpinion:
-          type: boolean
-        Opinion:
-          format: double
-          type: number
-        PartType:
-          format: int32
-          type: integer
-    AudaAPI.Models.Claim:
-      type: object
-      properties:
-        ReferenceName:
-          type: string
-        DateOfDecision:
-          format: date-time
-          type: string
-        DateOfAccident:
-          format: date-time
-          type: string
-        DateOfAccidentUnknown:
-          type: boolean
-        DateOfInspection:
-          format: date-time
-          type: string
-        DateBookedForRepair:
-          format: date-time
-          type: string
-        VehicleAtInspectionSite:
-          type: boolean
-        EngineerInspectionRequested:
-          type: boolean
-        ClaimNumber:
-          type: string
-        OtherReference:
-          type: string
-        PartnerNumber:
-          type: string
-        HandlingFee:
-          format: double
-          type: number
-        InsuredAmount:
-          format: double
-          type: number
-        RepairValue:
-          format: double
-          type: number
-        RepairValueTBA:
+        TBA:
           type: boolean
     AudaAPI.Models.TTSCalc:
       type: object
@@ -1830,83 +2110,80 @@ components:
             $ref: '#/components/schemas/AudaAPI.Models.TTSVechPart'
         TTSCalcTotals:
           $ref: '#/components/schemas/AudaAPI.Models.TTSCalcTotals'
-    AudaAPI.Models.ImageMetadata:
+    AudaAPI.Models.OriginalPart:
       type: object
       properties:
-        Obid:
-          format: uuid
-          type: string
-        CreatedDate:
-          format: date-time
-          type: string
-        DisplayOrder:
-          format: int32
-          type: integer
-        SequenceNumber:
-          format: int32
-          type: integer
-    AudaAPI.Models.PNETInvoiceStatus:
-      type: object
-      properties:
-        ABN:
-          type: string
-        CompanyName:
-          type: string
-        StatusCode:
-          format: int32
-          type: integer
-        StatusCodeDescription:
-          type: string
-        StatusDescription:
-          type: string
-        TaxInvoiceDate:
-          format: date-time
-          type: string
-    AudaAPI.Models.TTSPMTotals:
-      type: object
-      properties:
-        ActionType:
-          format: int32
-          type: integer
-        PanelSize:
+        Amount:
           format: double
           type: number
-        PMCost:
-          format: double
-          type: number
-    AudaAPI.Models.TTSCLCContent:
-      type: object
-      properties:
-        CLCFile:
-          format: byte
-          type: string
-    AudaAPI.Models.ItemDepreciation:
-      type: object
-      properties:
-        BettermentPcnt:
-          format: int32
-          type: integer
         Description:
+          type: string
+        PartNumber:
+          type: string
+    AudaAPI.Models.FrozenPart:
+      type: object
+      properties:
+        DateFrozen:
+          format: date-time
+          type: string
+        Freeze:
+          type: boolean
+        AmountFrozen:
+          format: double
+          type: number
+        AmountLastCalculated:
+          format: double
+          type: number
+        Description:
+          type: string
+        PartNumber:
           type: string
         GuideNumber:
           format: int32
           type: integer
-        IsCustLiability:
-          type: boolean
-        IsGenerated:
-          type: boolean
-        MaterialType:
-          enum:
-          - Unknown
-          - Metal
-          - Glass
-          - Fibreglass
-          - Plastic
-          - LightMetal
-          - HighStrengthSteel
-          - Textile
-          - Unpainted
+        RepairMethod:
           type: string
+    AudaAPI.Models.TyreDepth:
+      type: object
+      properties:
+        Axle:
+          format: int32
+          type: integer
+        LeftTyre:
+          format: double
+          type: number
+        RightTyre:
+          format: double
+          type: number
+    AudaAPI.Models.Model:
+      type: object
+      properties:
+        ModelType:
+          type: string
+        VehicleType:
+          type: string
+        ManufacturerName:
+          type: string
+        ModelName:
+          type: string
+        ManufactureCode:
+          type: string
+        ModelCode:
+          type: string
+        SubModelCode:
+          type: string
+        EngineCode:
+          type: string
+        DoorsCode:
+          type: string
+        PaintCodes:
+          type: string
+        DateCode:
+          type: string
+        ModelOptions:
+          type: array
+          items:
+            type: string
     AudaAPI.Models.SalvagePart:
       type: object
       properties:
@@ -2000,290 +2277,77 @@ components:
           type: string
         SupplierTextCode:
           type: string
-    AudaAPI.Models.AssessmentView:
+    AudaAPI.Models.SalvageTypeOfDamage:
       type: object
       properties:
-        Obid:
-          format: uuid
-          type: string
-        UserId:
-          format: uuid
-          type: string
-        LockedBy:
-          $ref: '#/components/schemas/AudaAPI.Models.LockedBy'
-        SnapshotId:
-          format: uuid
-          type: string
-        AssessmentNumber:
-          type: string
-        AssessmentType:
-          enum:
-          - Audatex
-          - Thatcham
-          - Standard
-          - Manual
-          - Glass
-          - Industrial
-          type: string
-        Created:
-          format: date-time
-          type: string
-        CreationDate:
-          format: date-time
-          type: string
-        CreatorSiteId:
-          type: string
-        CustomerNumber:
-          type: string
-        LastUpdatedBy:
-          type: string
-        LastUpdatedDate:
-          format: date-time
-          type: string
-        LightEstMenuId:
-          format: uuid
-          type: string
-        Originator:
-          type: string
-        State:
-          type: string
-        TransmissionFlag:
-          format: int32
-          type: integer
-        UnRead:
-          type: boolean
-        UserStatus:
-          type: string
-        VersionAssessment:
-          format: int32
-          type: integer
-        VoucherGenerated:
-          type: boolean
-        WAN:
-          type: string
-        WorkstationVersion:
-          type: string
-        RVSAppliedBusChannel:
-          $ref: '#/components/schemas/AudaAPI.Models.RVSAppliedBusChannel'
-        CurrencyDefinition:
-          $ref: '#/components/schemas/AudaAPI.Models.CurrencyDefinition'
-        ClientAuditResult:
-          $ref: '#/components/schemas/AudaAPI.Models.ClientAuditResult'
-        Vehicle:
-          $ref: '#/components/schemas/AudaAPI.Models.Vehicle'
-        Claim:
-          $ref: '#/components/schemas/AudaAPI.Models.Claim'
-        DamageEstimate:
-          $ref: '#/components/schemas/AudaAPI.Models.DamageEstimate'
-        Text:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Note'
-        LocalNotes:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Note'
-        ImageMetadata:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.ImageMetadata'
-        TTSCLCContent:
-          $ref: '#/components/schemas/AudaAPI.Models.TTSCLCContent'
-        NetworkOrigin:
-          $ref: '#/components/schemas/AudaAPI.Models.NetworkOrigin'
-        AssessmentTag:
-          $ref: '#/components/schemas/AudaAPI.Models.AssessmentTag'
-        WorkProvider:
-          $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
-        CountryState:
-          $ref: '#/components/schemas/AudaAPI.Models.CountryState'
-        NetworkDestination:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.NetworkDestination'
-        PriceList:
-          $ref: '#/components/schemas/AudaAPI.Models.PartSupplier'
-        Contacts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Contact'
-        Authorisation:
-          $ref: '#/components/schemas/AudaAPI.Models.Authorisation'
-        AttachmentHeader:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.AttachmentHeader'
-        PNETData:
-          $ref: '#/components/schemas/AudaAPI.Models.PNETData'
-        MailHeader:
-          $ref: '#/components/schemas/AudaAPI.Models.MailHeader'
-        IndiaClaim:
-          $ref: '#/components/schemas/AudaAPI.Models.IndiaClaim'
-        CourtesyCar:
-          $ref: '#/components/schemas/AudaAPI.Models.CourtesyCar'
-        Policy:
-          $ref: '#/components/schemas/AudaAPI.Models.Policy'
-        ImageData:
-          type: array
-          items:
-            format: uuid
-            type: string
-        Locations:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Location'
-    AudaAPI.Models.PNETData:
-      type: object
-      properties:
-        AuthorisedQuoteNumber:
-          type: string
-        AuthorisedSQuoteNumber:
-          type: string
-        CorporateCustomer:
-          type: string
-        ExtraQuoteInfReq:
-          type: boolean
-        PaintType:
-          type: string
-        QuoteRequestNumber:
-          type: string
-        QuoteRequestStatus:
+        TypeOfDamage:
           enum:
           - Uninitialised
-          - Active
-          - Responded
-          - Win
-          - Lose
-          - TotalLoss
-          - Cancelled
+          - AccidentBodyshell
+          - AccidentOffside
+          - AccidentFront
+          - AccidentNearside
+          - AccidentOverturned
+          - AccidentRear
+          - TheftPilfered
+          - TheftRecovered
+          - TheftStripped
+          - TheftVandalised
+          - FireElectrical
+          - FireBurnout
+          - FireInterior
+          - FireMechanical
+          - StormBodyshell
+          - StormOffside
+          - StormFront
+          - StormMechanical
+          - StormNearside
+          - StormOverturned
+          - StormRear
+          - StormRoof
+          - FloodRiverFresh
+          - FloodSeaSaline
+          - VandalisedBodyshell
+          - VandalisedElectrical
+          - VandalisedInterior
+          - VandalisedMechanical
+          - VandalisedExterior
+          - FloodSewage
           type: string
-        QuoteRequestVersionNumber:
-          format: int32
-          type: integer
-        QuotingMethod:
-          type: string
-        RepairAuthNumber:
-          format: int32
-          type: integer
-        SubmittedQuoteNumber:
-          type: string
-        SupplementaryAuthNumber:
-          format: int32
-          type: integer
-        SupplementaryQuoteNumber:
-          type: string
-        SupplementaryStatus:
-          enum:
-          - Uninitialised
-          - Active
-          - Responded
-          - Win
-          - Lose
-          - TotalLoss
-          - Cancelled
-          type: string
-        PNETInvoice:
-          $ref: '#/components/schemas/AudaAPI.Models.PNETInvoice'
-        PNETQuote:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.PNETQuote'
-    AudaAPI.Models.PNETQuote:
+    AudaAPI.Models.PNETInvoice:
       type: object
       properties:
-        AuthorisedAmount:
+        CollectedContribution:
           format: double
           type: number
-        CustomerContribution:
-          format: double
-          type: number
-        Excess:
+        CollectedExcess:
           format: double
           type: number
         GST:
           format: double
           type: number
-        Invoiced:
+        TaxInvoiceNumber:
+          type: string
+        TotalAmountExGST:
+          format: double
+          type: number
+        TotalAmountInclGST:
+          format: double
+          type: number
+        PNETInvoiceItem:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.PNETInvoiceItem'
+        PNETInvoiceStatus:
+          $ref: '#/components/schemas/AudaAPI.Models.PNETInvoiceStatus'
+    AudaAPI.Models.AttachmentType:
+      type: object
+      properties:
+        Description:
+          type: string
+        PermitDefault:
           type: boolean
-        LabourTotal:
-          format: double
-          type: number
-        PaintTotal:
-          format: double
-          type: number
-        PartMarkUpTotal:
-          format: double
-          type: number
-        PartTotal:
-          format: double
-          type: number
-        QuoteNumber:
-          type: string
-        QuoteTotal:
-          format: double
-          type: number
-        QuoteType:
-          enum:
-          - R
-          - S
-          - ADJR
-          - ADJS
-          - AUTR
-          - AUTS
-          type: string
-        SubletTotal:
-          format: double
-          type: number
-        PNETQReport:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.PNETQReport'
-        PNETQPaint:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.PNETQPaint'
-        PNETQPart:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.PNETQPart'
-        PNETQSublet:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.PNETQSublet'
-        PNETQLabour:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.PNETQLabour'
-    AudaAPI.Models.Location:
-      type: object
-      properties:
-        LocationType:
-          enum:
-          - Undefined
-          - Owner
-          - Repairer
-          - Vehicle
-          - Accident
-          type: string
-        Name:
-          type: string
-        PostCode:
-          type: string
-    AudaAPI.Models.CountryState:
-      type: object
-      properties:
-        ISOCODE:
-          type: string
-        CurrencyDefinition:
-          $ref: '#/components/schemas/AudaAPI.Models.CurrencyDefinition'
-    AudaAPI.Models.AttachmentContent:
-      type: object
-      properties:
-        CreationDate:
-          format: date-time
-          type: string
-        Data:
-          format: byte
+        Type:
           type: string
     AudaAPI.Models.PartSupplier:
       type: object
@@ -2309,55 +2373,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.Models.AlternativePriceList'
-    AudaAPI.Models.Paint:
-      type: object
-      properties:
-        AreaCount:
-          format: int32
-          type: integer
-        AreaIndicator:
-          type: string
-        BettermentDeductionPcnt:
-          format: double
-          type: number
-        FixedRateAmt:
-          format: double
-          type: number
-        FixedRateIndicator:
-          type: string
-        MaterialUnitsCount:
-          format: int32
-          type: integer
-        PnlDiscnt:
-          format: double
-          type: number
-        MarutiPaint:
-          $ref: '#/components/schemas/AudaAPI.Models.MarutiPaint'
-        CodeText:
-          type: string
-        WUCount:
-          format: double
-          type: number
-        WUIndicator:
-          type: string
-        Obid:
-          format: uuid
-          type: string
-        Amount:
-          format: double
-          type: number
-        AmountIndicator:
-          type: string
-        DescriptionText:
-          type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        ReferenceSequence:
-          format: int32
-          type: integer
-        RepairMethod:
-          type: string
     AudaAPI.Models.IndiaClaim:
       type: object
       properties:
@@ -2544,6 +2559,74 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.Models.Parties'
+    AudaAPI.Models.Address:
+      type: object
+      properties:
+        ID:
+          format: uuid
+          type: string
+        AddressLine1:
+          type: string
+        AddressLine2:
+          type: string
+        AddressLine3:
+          type: string
+        AddressLine4:
+          type: string
+        AddressLine5:
+          type: string
+        PostCode:
+          type: string
+    AudaAPI.Models.Mutation:
+      type: object
+      properties:
+        Code:
+          type: string
+        Value:
+          type: string
+    AudaAPI.Models.Extra:
+      type: object
+      properties:
+        LabourText:
+          type: string
+        Obid:
+          format: uuid
+          type: string
+        Amount:
+          format: double
+          type: number
+        AmountIndicator:
+          type: string
+        DescriptionText:
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
+        ReferenceSequence:
+          format: int32
+          type: integer
+        RepairMethod:
+          type: string
+    AudaAPI.Models.TTSPartTotals:
+      type: object
+      properties:
+        Calculated:
+          format: double
+          type: number
+        Discount:
+          format: double
+          type: number
+        FinalCost:
+          format: double
+          type: number
+        IsOpinion:
+          type: boolean
+        Opinion:
+          format: double
+          type: number
+        PartType:
+          format: int32
+          type: integer
     AudaAPI.Models.AlternativePriceList:
       type: object
       properties:
@@ -2557,261 +2640,178 @@ components:
           type: number
         Reference:
           type: string
-    AudaAPI.Models.PNETQLabour:
+    AudaAPI.Models.WorkProvider:
       type: object
       properties:
-        LabourAmount:
-          format: double
-          type: number
-        LabourDescription:
+        ID:
+          format: uuid
           type: string
-        LabourGroup:
+        Description:
+          type: string
+        Code:
           format: int32
           type: integer
-        LabourHours:
-          format: double
-          type: number
-        LabourRate:
-          format: double
-          type: number
-        LabourType:
+    AudaAPI.Models.Repair:
+      type: object
+      properties:
+        OperationType:
           type: string
-        QuoteLineChange:
-          enum:
-          - N
-          - C
-          - I
-          - D
-          type: string
-        QuoteLineNumber:
+        GuideNumber:
           format: int32
           type: integer
-    AudaAPI.Models.DamageEstimate:
-      type: object
-      properties:
-        Model:
-          $ref: '#/components/schemas/AudaAPI.Models.Model'
-        AudaHailRepair:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.AudaHailRepair'
-        Repair:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Repair'
-        FrozenPart:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.FrozenPart'
-        CalculationSubType:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.CalculationSubType'
-        Rate:
-          $ref: '#/components/schemas/AudaAPI.Models.Rate'
-        ItemDepreciation:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.ItemDepreciation'
-        TTSCalc:
-          $ref: '#/components/schemas/AudaAPI.Models.TTSCalc'
-        SalvagePart:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.SalvagePart'
-        Calculation:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Calculation'
-    AudaAPI.Models.PNETQPaint:
-      type: object
-      properties:
-        PaintAmount:
-          format: double
-          type: number
-        PaintDescription:
+        RepairMethod:
           type: string
-        PaintGroup:
+        WorkUnits:
           format: int32
           type: integer
-        PaintHours:
+        Price:
           format: double
           type: number
-        PaintRate:
+        Comment:
+          type: string
+        Description:
+          type: string
+        WorkText:
+          type: string
+        BettermentPercent:
           format: double
           type: number
-        PaintWorkType:
-          type: string
-        QuoteLineChange:
-          enum:
-          - N
-          - C
-          - I
-          - D
-          type: string
-        QuoteLineNumber:
-          format: int32
-          type: integer
-    AudaAPI.Models.ClientAuditResult:
-      type: object
-      properties:
-        AuditDate:
-          format: date-time
-          type: string
-        AuditDetails:
-          type: string
-        AuditState:
-          enum:
-          - Pass
-          - Warning
-          - Fail
-          type: string
-        EngineerReference:
-          type: string
-    AudaAPI.Models.Policy:
-      type: object
-      properties:
-        PolicyNumber:
-          type: string
-        ExcessValue:
-          format: double
-          type: number
-        ExcessValueTBA:
-          type: boolean
-        VATStatus:
-          type: string
-        VATPortionPayable:
-          format: double
-          type: number
-    AudaAPI.Models.MailHeader:
-      type: object
-      properties:
-        Attention:
-          type: string
-        Created:
-          format: date-time
-          type: string
-        MessageType:
-          enum:
-          - Uninitialised
-          - Standard
-          - InterimAdvice
-          - SalvageNotification
-          - InstructionForm
-          - CourtesyCarForm
-          - AuthorisationMessage
-          - AuthorityNote
-          - SalvageInstruction
-          - EngineersSalvageMessage
-          - AdministrationMessage
-          - AIDAAssignment
-          - AIDARCA
-          - AIDAInvoice
-          - MailConfirmation
-          - AgreedCostsNote
-          - AssessorResponse
-          - SupplementaryApproval
-          - PNETMail
-          - AssessmentCancallation
-          - AdministrationExtMessage
-          type: string
-        Modified:
-          format: date-time
-          type: string
-        NetworkSendCopy01:
-          type: string
-        NetworkSendCopy02:
-          type: string
-        Received:
-          format: date-time
-          type: string
-        SentDate:
-          format: date-time
-          type: string
-        Status:
-          enum:
-          - Unitialised
-          - Partial
-          - Completed
-          - Transmitted
-          - Received
-          - Viewed
-          - Printed
-          type: string
-        Subject:
-          type: string
-        PNETQuote:
-          $ref: '#/components/schemas/AudaAPI.Models.PNETQuote'
-        MailAssessorResponse:
-          $ref: '#/components/schemas/AudaAPI.Models.MailAssessorResponse'
-        MailInstructions:
-          $ref: '#/components/schemas/AudaAPI.Models.MailInstructions'
-    AudaAPI.Models.PNETInvoice:
-      type: object
-      properties:
-        CollectedContribution:
-          format: double
-          type: number
-        CollectedExcess:
-          format: double
-          type: number
-        GST:
-          format: double
-          type: number
-        TaxInvoiceNumber:
-          type: string
-        TotalAmountExGST:
-          format: double
-          type: number
-        TotalAmountInclGST:
-          format: double
-          type: number
-        PNETInvoiceItem:
+        Mutations:
           type: array
           items:
-            $ref: '#/components/schemas/AudaAPI.Models.PNETInvoiceItem'
-        PNETInvoiceStatus:
-          $ref: '#/components/schemas/AudaAPI.Models.PNETInvoiceStatus'
-    AudaAPI.Models.Note:
+            $ref: '#/components/schemas/AudaAPI.Models.Mutation'
+    AudaAPI.Models.AssessmentView:
       type: object
       properties:
         Obid:
           format: uuid
           type: string
-        Author:
+        UserId:
+          format: uuid
           type: string
-        DateCreated:
+        LockedBy:
+          $ref: '#/components/schemas/AudaAPI.Models.LockedBy'
+        SnapshotId:
+          format: uuid
+          type: string
+        AssessmentNumber:
+          type: string
+        AssessmentType:
+          enum:
+          - Audatex
+          - Thatcham
+          - Standard
+          - Manual
+          - Glass
+          - Industrial
+          type: string
+        Created:
           format: date-time
           type: string
-        Header:
+        CreationDate:
+          format: date-time
           type: string
+        CreatorSiteId:
+          type: string
+        CustomerNumber:
+          type: string
+        LastUpdatedBy:
+          type: string
+        LastUpdatedDate:
+          format: date-time
+          type: string
+        LightEstMenuId:
+          format: uuid
+          type: string
+        Originator:
+          type: string
+        State:
+          type: string
+        TransmissionFlag:
+          format: int32
+          type: integer
+        UnRead:
+          type: boolean
+        UserStatus:
+          type: string
+        VersionAssessment:
+          format: int32
+          type: integer
+        VoucherGenerated:
+          type: boolean
+        WAN:
+          type: string
+        WorkstationVersion:
+          type: string
+        RVSAppliedBusChannel:
+          $ref: '#/components/schemas/AudaAPI.Models.RVSAppliedBusChannel'
+        CurrencyDefinition:
+          $ref: '#/components/schemas/AudaAPI.Models.CurrencyDefinition'
+        ClientAuditResult:
+          $ref: '#/components/schemas/AudaAPI.Models.ClientAuditResult'
+        Vehicle:
+          $ref: '#/components/schemas/AudaAPI.Models.Vehicle'
+        Claim:
+          $ref: '#/components/schemas/AudaAPI.Models.Claim'
+        DamageEstimate:
+          $ref: '#/components/schemas/AudaAPI.Models.DamageEstimate'
         Text:
-          type: string
-    AudaAPI.Models.MailAssessorResponse:
-      type: object
-      properties:
-        AgreedRates:
-          type: string
-        Amount:
-          format: double
-          type: number
-        DateOfNextVisit:
-          format: date-time
-          type: string
-        PreAccidentValue:
-          format: double
-          type: number
-        ResponseDate:
-          format: date-time
-          type: string
-        SalvageOffer:
-          format: double
-          type: number
-        SalvageValue:
-          format: double
-          type: number
-        WorkProviderMessage:
-          $ref: '#/components/schemas/AudaAPI.Models.WorkProviderMessage'
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Note'
+        LocalNotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Note'
+        ImageMetadata:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.ImageMetadata'
+        TTSCLCContent:
+          $ref: '#/components/schemas/AudaAPI.Models.TTSCLCContent'
+        NetworkOrigin:
+          $ref: '#/components/schemas/AudaAPI.Models.NetworkOrigin'
+        AssessmentTag:
+          $ref: '#/components/schemas/AudaAPI.Models.AssessmentTag'
+        WorkProvider:
+          $ref: '#/components/schemas/AudaAPI.Models.WorkProvider'
+        CountryState:
+          $ref: '#/components/schemas/AudaAPI.Models.CountryState'
+        NetworkDestination:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.NetworkDestination'
+        PriceList:
+          $ref: '#/components/schemas/AudaAPI.Models.PartSupplier'
+        Contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Contact'
+        Authorisation:
+          $ref: '#/components/schemas/AudaAPI.Models.Authorisation'
+        AttachmentHeader:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.AttachmentHeader'
+        PNETData:
+          $ref: '#/components/schemas/AudaAPI.Models.PNETData'
+        MailHeader:
+          $ref: '#/components/schemas/AudaAPI.Models.MailHeader'
+        IndiaClaim:
+          $ref: '#/components/schemas/AudaAPI.Models.IndiaClaim'
+        CourtesyCar:
+          $ref: '#/components/schemas/AudaAPI.Models.CourtesyCar'
+        Policy:
+          $ref: '#/components/schemas/AudaAPI.Models.Policy'
+        ImageData:
+          type: array
+          items:
+            format: uuid
+            type: string
+        Locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Location'
   securitySchemes:
     oauth2:
       type: oauth2

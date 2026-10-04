@@ -315,6 +315,107 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ViCalculationDamageRespVM:
+      type: object
+      properties:
+        damageId:
+          type: string
+          format: uuid
+        type:
+          type:
+          - string
+          - 'null'
+        probability:
+          type: number
+          format: double
+        part:
+          $ref: '#/components/schemas/ViCalculationPartRespVM'
+        dimensions:
+          $ref: '#/components/schemas/ViCalculationDimensionRespVM'
+        foundInImages:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViCalculationIdWithContoursRespVM'
+      additionalProperties: false
+    ViDamagedPartsPartsRespVM:
+      type: object
+      properties:
+        standardGuideNumber:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        genericPartName:
+          type:
+          - string
+          - 'null'
+        objectDetectionLabels:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+        positions:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+        relatedImageIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        position:
+          $ref: '#/components/schemas/ViDamagedPartsPositionRespVM'
+      additionalProperties: false
+    ViDamagedPartsPositionRespVM:
+      type: object
+      properties:
+        code:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        p:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    ViNoCalculationReqVM:
+      required:
+      - countryCode
+      - imageCaptureId
+      type: object
+      properties:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        enhancedVerification:
+          type: boolean
+          description: 'EnhancedVerification required
+
+            This will default to false'
+        includeContours:
+          type: boolean
+          description: 'Include damage contours in the result data
+
+            This will default to false'
+        countryCode:
+          $ref: '#/components/schemas/Country'
+      additionalProperties: false
     ViCalculationDimensionRespVM:
       type: object
       properties:
@@ -338,6 +439,36 @@ components:
           - number
           - 'null'
           format: double
+      additionalProperties: false
+    ViErrorViewModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorPropertyViewModel'
+      additionalProperties: false
+    ViErrorPropertyViewModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ProblemDetails:
       type: object
@@ -364,29 +495,44 @@ components:
           - string
           - 'null'
       additionalProperties: {}
-    ViCalculationDamageRespVM:
+    ViNoCalculationV2ReqVM:
+      required:
+      - countryCode
+      - imageCaptureId
       type: object
       properties:
-        damageId:
+        imageCaptureId:
+          type: string
+          description: The imageCaptureId
+          format: uuid
+        includeContours:
+          type: boolean
+          description: 'Include damage contours in the result data
+
+            This will default to false'
+        includeDamagedParts:
+          type: boolean
+          description: 'Include damaged parts in the result data
+
+            This will default to false'
+        countryCode:
+          $ref: '#/components/schemas/Country'
+      additionalProperties: false
+    ViCalculationIdWithContoursRespVM:
+      type: object
+      properties:
+        id:
           type: string
           format: uuid
-        type:
-          type:
-          - string
-          - 'null'
-        probability:
-          type: number
-          format: double
-        part:
-          $ref: '#/components/schemas/ViCalculationPartRespVM'
-        dimensions:
-          $ref: '#/components/schemas/ViCalculationDimensionRespVM'
-        foundInImages:
+        damageContour:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/ViCalculationIdWithContoursRespVM'
+            type: array
+            items:
+              type: number
+              format: double
       additionalProperties: false
     Country:
       enum:
@@ -476,166 +622,25 @@ components:
       - GB
       - VE
       type: string
-    ViNoCalculationV2ReqVM:
-      required:
-      - countryCode
-      - imageCaptureId
+    ViNoCalculationRespVM:
       type: object
       properties:
-        imageCaptureId:
-          type: string
-          description: The imageCaptureId
-          format: uuid
-        includeContours:
-          type: boolean
-          description: 'Include damage contours in the result data
-
-            This will default to false'
-        includeDamagedParts:
-          type: boolean
-          description: 'Include damaged parts in the result data
-
-            This will default to false'
-        countryCode:
-          $ref: '#/components/schemas/Country'
-      additionalProperties: false
-    ViCalculationPartRespVM:
-      type: object
-      properties:
-        name:
+        status:
           type:
           - string
           - 'null'
-        side:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ViErrorViewModel:
-      type: object
-      properties:
-        code:
-          type:
-          - string
-          - 'null'
-        message:
-          type:
-          - string
-          - 'null'
-        properties:
+        errors:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/ViErrorPropertyViewModel'
-      additionalProperties: false
-    ViErrorPropertyViewModel:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ViDamagedPartsPartsRespVM:
-      type: object
-      properties:
-        standardGuideNumber:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        genericPartName:
-          type:
-          - string
-          - 'null'
-        objectDetectionLabels:
+            $ref: '#/components/schemas/ViErrorViewModel'
+        damages:
           type:
           - array
           - 'null'
           items:
-            type: string
-        p:
-          type:
-          - number
-          - 'null'
-          format: double
-        positions:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-            format: int32
-        relatedImageIds:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-            format: uuid
-        position:
-          $ref: '#/components/schemas/ViDamagedPartsPositionRespVM'
-      additionalProperties: false
-    CalculationSelfViewModel:
-      type: object
-      properties:
-        calculationId:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-        warnings:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      additionalProperties: false
-    ViNoCalculationReqVM:
-      required:
-      - countryCode
-      - imageCaptureId
-      type: object
-      properties:
-        imageCaptureId:
-          type: string
-          description: The imageCaptureId
-          format: uuid
-        enhancedVerification:
-          type: boolean
-          description: 'EnhancedVerification required
-
-            This will default to false'
-        includeContours:
-          type: boolean
-          description: 'Include damage contours in the result data
-
-            This will default to false'
-        countryCode:
-          $ref: '#/components/schemas/Country'
-      additionalProperties: false
-    ViCalculationIdWithContoursRespVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        damageContour:
-          type:
-          - array
-          - 'null'
-          items:
-            type: array
-            items:
-              type: number
-              format: double
+            $ref: '#/components/schemas/ViCalculationDamageRespVM'
       additionalProperties: false
     ViCalculationV2DamageRespVM:
       type: object
@@ -690,6 +695,35 @@ components:
           items:
             $ref: '#/components/schemas/ViDamagedPartsPartsRespVM'
       additionalProperties: false
+    CalculationSelfViewModel:
+      type: object
+      properties:
+        calculationId:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ViCalculationPartRespVM:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        side:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     ViNoCalculationV2RespVM:
       type: object
       properties:
@@ -715,40 +749,6 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/ViCalculationV2DamageRespVM'
-      additionalProperties: false
-    ViNoCalculationRespVM:
-      type: object
-      properties:
-        status:
-          type:
-          - string
-          - 'null'
-        errors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ViErrorViewModel'
-        damages:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ViCalculationDamageRespVM'
-      additionalProperties: false
-    ViDamagedPartsPositionRespVM:
-      type: object
-      properties:
-        code:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        p:
-          type:
-          - number
-          - 'null'
-          format: double
       additionalProperties: false
   securitySchemes:
     Bearer:

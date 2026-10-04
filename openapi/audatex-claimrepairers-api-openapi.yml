@@ -80,47 +80,20 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ProblemDetails:
+    RAMCustomField:
       type: object
       properties:
-        type:
+        fieldId:
+          type: string
+          format: uuid
+        name:
           type:
           - string
           - 'null'
-        title:
+        value:
           type:
           - string
           - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    LocationViewModel:
-      required:
-      - latitude
-      - longitude
-      type: object
-      properties:
-        latitude:
-          maximum: 90
-          minimum: -90
-          type: number
-          format: double
-        longitude:
-          maximum: 180
-          minimum: -180
-          type: number
-          format: double
       additionalProperties: false
     VehicleViewModel:
       required:
@@ -174,26 +147,67 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    ClaimRepairersClaimViewModel:
+    LocationViewModel:
       required:
-      - claimNumber
-      - clientKey
-      - incidentDateTimeUTC
-      - policyNumber
+      - latitude
+      - longitude
       type: object
       properties:
-        clientKey:
+        latitude:
+          maximum: 90
+          minimum: -90
+          type: number
+          format: double
+        longitude:
+          maximum: 180
+          minimum: -180
+          type: number
+          format: double
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    InsuredViewModel:
+      required:
+      - name
+      type: object
+      properties:
+        name:
           type: string
-          format: uuid
-        claimNumber:
-          minLength: 1
-          type: string
-        policyNumber:
-          minLength: 1
-          type: string
-        incidentDateTimeUTC:
-          type: string
-          format: date-time
+      additionalProperties: false
+    RamGenericData:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     ClaimRepairerRespViewModel:
       type: object
@@ -241,40 +255,26 @@ components:
         isWarranty:
           type: boolean
       additionalProperties: false
-    InsuredViewModel:
+    ClaimRepairersClaimViewModel:
       required:
-      - name
+      - claimNumber
+      - clientKey
+      - incidentDateTimeUTC
+      - policyNumber
       type: object
       properties:
-        name:
-          type: string
-      additionalProperties: false
-    RAMCustomField:
-      type: object
-      properties:
-        fieldId:
+        clientKey:
           type: string
           format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    RamGenericData:
-      type: object
-      properties:
-        text:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
+        claimNumber:
+          minLength: 1
+          type: string
+        policyNumber:
+          minLength: 1
+          type: string
+        incidentDateTimeUTC:
+          type: string
+          format: date-time
       additionalProperties: false
   securitySchemes:
     Bearer:

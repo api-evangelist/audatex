@@ -105,6 +105,45 @@ paths:
         - Assessment.MainIndex
 components:
   schemas:
+    AudaAPI.Models.Filters.ExtraParameter:
+      type: object
+      properties:
+        DisplayName:
+          type: string
+        Id:
+          format: uuid
+          type: string
+        FilterType:
+          type: string
+        Options:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Filters.ExtraParameterOption'
+        ParameterName:
+          type: string
+        ParameterType:
+          type: string
+    AudaAPI.Models.Filters.FiltersForSession:
+      type: object
+      properties:
+        Filters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Filters.Filter'
+        ExtraParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Filters.ExtraParameter'
+    AudaAPI.Models.Filters.FilterParameter:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        ParameterType:
+          type: string
+        Description:
+          type: string
     AudaAPI.Models.Filters.ExtraParameterOption:
       type: object
       properties:
@@ -137,45 +176,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.Models.Filters.FilterParameter'
-    AudaAPI.Models.Filters.FilterParameter:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        ParameterType:
-          type: string
-        Description:
-          type: string
-    AudaAPI.Models.Filters.ExtraParameter:
-      type: object
-      properties:
-        DisplayName:
-          type: string
-        Id:
-          format: uuid
-          type: string
-        FilterType:
-          type: string
-        Options:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Filters.ExtraParameterOption'
-        ParameterName:
-          type: string
-        ParameterType:
-          type: string
-    AudaAPI.Models.Filters.FiltersForSession:
-      type: object
-      properties:
-        Filters:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Filters.Filter'
-        ExtraParameters:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Filters.ExtraParameter'
   securitySchemes:
     oauth2:
       type: oauth2

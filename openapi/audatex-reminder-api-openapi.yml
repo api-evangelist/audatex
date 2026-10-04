@@ -193,120 +193,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    CommunicationType:
-      enum:
-      - SMS
-      - Whatsapp
-      type: string
-    ReminderConfigModel:
-      type: object
-      properties:
-        delays:
-          type:
-          - array
-          - 'null'
-          items:
-            type: integer
-            format: int32
-        reminderMessage:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    CommunicationStatus:
-      enum:
-      - Sent
-      - Delivered
-      - Undelivered
-      - Error
-      - Unknown
-      type: string
-    ImageCaptureDateViewModel:
-      type: object
-      properties:
-        utc:
-          type: string
-          format: date-time
-        local:
-          type: string
-          format: date-time
-      additionalProperties: false
-    SelfViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ImageCaptureStatusType:
-      enum:
-      - Pending
-      - Expired
-      - Completed
-      type: string
-    ImageCaptureRecipientVM:
-      required:
-      - dialingCode
-      - mobileNumber
-      type: object
-      properties:
-        dialingCode:
-          maxLength: 5
-          minLength: 1
-          type: string
-          description: Dialing code for mobile number. Format +XX
-        mobileNumber:
-          maxLength: 11
-          minLength: 8
-          type: string
-          description: The Mobile number where Image capture SMS will be sent.
-        lineType:
-          type:
-          - string
-          - 'null'
-          description: The LineType of the mobile number.
-      additionalProperties: false
-    ReminderReqViewModel:
-      required:
-      - from
-      - recipient
-      - type
-      type: object
-      properties:
-        recipient:
-          $ref: '#/components/schemas/ImageCaptureRecipientVM'
-        from:
-          minLength: 1
-          type: string
-        message:
-          maxLength: 800
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/CommunicationType'
-        imageRequestId:
-          type: string
-          format: uuid
-        enableLineTypeIntelligence:
-          type: boolean
-        template:
-          type:
-          - string
-          - 'null'
-        variables:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-      additionalProperties: false
     ImageCaptureCommunicationResVM:
       type: object
       properties:
@@ -347,6 +233,120 @@ components:
             - 'null'
         reminders:
           $ref: '#/components/schemas/ReminderConfigModel'
+      additionalProperties: false
+    ImageCaptureRecipientVM:
+      required:
+      - dialingCode
+      - mobileNumber
+      type: object
+      properties:
+        dialingCode:
+          maxLength: 5
+          minLength: 1
+          type: string
+          description: Dialing code for mobile number. Format +XX
+        mobileNumber:
+          maxLength: 11
+          minLength: 8
+          type: string
+          description: The Mobile number where Image capture SMS will be sent.
+        lineType:
+          type:
+          - string
+          - 'null'
+          description: The LineType of the mobile number.
+      additionalProperties: false
+    ImageCaptureStatusType:
+      enum:
+      - Pending
+      - Expired
+      - Completed
+      type: string
+    ReminderConfigModel:
+      type: object
+      properties:
+        delays:
+          type:
+          - array
+          - 'null'
+          items:
+            type: integer
+            format: int32
+        reminderMessage:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ReminderReqViewModel:
+      required:
+      - from
+      - recipient
+      - type
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/ImageCaptureRecipientVM'
+        from:
+          minLength: 1
+          type: string
+        message:
+          maxLength: 800
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+        imageRequestId:
+          type: string
+          format: uuid
+        enableLineTypeIntelligence:
+          type: boolean
+        template:
+          type:
+          - string
+          - 'null'
+        variables:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+      additionalProperties: false
+    CommunicationType:
+      enum:
+      - SMS
+      - Whatsapp
+      type: string
+    ImageCaptureDateViewModel:
+      type: object
+      properties:
+        utc:
+          type: string
+          format: date-time
+        local:
+          type: string
+          format: date-time
+      additionalProperties: false
+    CommunicationStatus:
+      enum:
+      - Sent
+      - Delivered
+      - Undelivered
+      - Error
+      - Unknown
+      type: string
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
   securitySchemes:
     Bearer:

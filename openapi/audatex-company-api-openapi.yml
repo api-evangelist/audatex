@@ -81,20 +81,24 @@ paths:
       x-operation-id-original: Company_Get
 components:
   schemas:
-    AudaAPI.Models.Company:
+    AudaAPI.Models.Address:
       type: object
       properties:
-        Id:
+        ID:
           format: uuid
           type: string
-        CompanyCode:
+        AddressLine1:
           type: string
-        Description:
+        AddressLine2:
           type: string
-        Status:
+        AddressLine3:
           type: string
-        Site:
-          $ref: '#/components/schemas/AudaAPI.Models.Site'
+        AddressLine4:
+          type: string
+        AddressLine5:
+          type: string
+        PostCode:
+          type: string
     AudaAPI.Models.Site:
       type: object
       properties:
@@ -113,6 +117,20 @@ components:
           type: string
         ExternalCode:
           type: string
+    AudaAPI.Models.Company:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        CompanyCode:
+          type: string
+        Description:
+          type: string
+        Status:
+          type: string
+        Site:
+          $ref: '#/components/schemas/AudaAPI.Models.Site'
     AudaAPI.Models.Contact:
       type: object
       properties:
@@ -151,24 +169,6 @@ components:
         TelOther:
           type: string
         Fax:
-          type: string
-    AudaAPI.Models.Address:
-      type: object
-      properties:
-        ID:
-          format: uuid
-          type: string
-        AddressLine1:
-          type: string
-        AddressLine2:
-          type: string
-        AddressLine3:
-          type: string
-        AddressLine4:
-          type: string
-        AddressLine5:
-          type: string
-        PostCode:
           type: string
   securitySchemes:
     oauth2:

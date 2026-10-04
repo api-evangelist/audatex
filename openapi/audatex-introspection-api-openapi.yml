@@ -94,6 +94,22 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Scope:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        displayName:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     AppDetail:
       type: object
       properties:
@@ -153,22 +169,6 @@ components:
       type: object
       properties:
         domainContext:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    Scope:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        displayName:
-          type:
-          - string
-          - 'null'
-        description:
           type:
           - string
           - 'null'

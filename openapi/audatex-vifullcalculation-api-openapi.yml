@@ -144,6 +144,12 @@ components:
         countryCode:
           $ref: '#/components/schemas/Country'
       additionalProperties: false
+    EstimatingSourceSystem:
+      enum:
+      - AEG
+      - ADXE
+      - Qapter
+      type: string
     Country:
       enum:
       - UK
@@ -231,12 +237,6 @@ components:
       - AE
       - GB
       - VE
-      type: string
-    EstimatingSourceSystem:
-      enum:
-      - AEG
-      - ADXE
-      - Qapter
       type: string
     CalculationSelfViewModel:
       type: object

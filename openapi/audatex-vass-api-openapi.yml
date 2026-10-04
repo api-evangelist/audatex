@@ -124,62 +124,100 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ResponseCommunicationRecipientM:
-      required:
-      - dialingCode
-      - mobileNumber
-      type: object
-      properties:
-        dialingCode:
-          maxLength: 5
-          minLength: 1
-          type: string
-        mobileNumber:
-          maxLength: 11
-          minLength: 8
-          type: string
-        lineType:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    VassVideoM:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        self:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    CommunicationType:
-      enum:
-      - SMS
-      - Whatsapp
-      type: string
-    VassImageM:
+    VassInstanceDetailsM:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        self:
+        assessorLink:
           type:
           - string
           - 'null'
-        tags:
+        surveyorLink:
+          type:
+          - string
+          - 'null'
+        dateCreated:
+          $ref: '#/components/schemas/VassInstantM'
+        dateCompleted:
+          $ref: '#/components/schemas/VassInstantM'
+        status:
+          type:
+          - string
+          - 'null'
+        linkExpiryDays:
+          type: integer
+          format: int32
+        images:
           type:
           - array
           - 'null'
           items:
-            type: string
-        data:
+            $ref: '#/components/schemas/VassImageM'
+        videos:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/VassVideoM'
+        language:
           type:
           - string
           - 'null'
+        originatingRegion:
+          type:
+          - string
+          - 'null'
+        timeZone:
+          $ref: '#/components/schemas/VassTimeZoneM'
+        country:
+          $ref: '#/components/schemas/RequestCountry'
+        responseCommunication:
+          $ref: '#/components/schemas/ResponseCommunicationM'
+      additionalProperties: false
+    VassResponseCommunicationM:
+      required:
+      - from
+      - message
+      - recipient
+      - type
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/ResponseCommunicationRecipientM'
+        from:
+          minLength: 1
+          type: string
+        message:
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+      additionalProperties: false
+    VideoAssessmentModel:
+      required:
+      - country
+      - linkExpiryDays
+      - timeZone
+      type: object
+      properties:
+        linkExpiryDays:
+          maximum: 7
+          minimum: 1
+          type: integer
+          format: int32
+        language:
+          type:
+          - string
+          - 'null'
+        timeZone:
+          $ref: '#/components/schemas/TimeZone'
+        settings: {}
+        country:
+          $ref: '#/components/schemas/RequestCountry'
+        communication:
+          $ref: '#/components/schemas/VassResponseCommunicationM'
       additionalProperties: false
     VassInstantM:
       type: object
@@ -283,6 +321,62 @@ components:
       - VE
       - VN
       type: string
+    VassTimeZoneM:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        offset:
+          type: integer
+          format: int32
+      additionalProperties: false
+    VassImageM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        data:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ResponseCommunicationRecipientM:
+      required:
+      - dialingCode
+      - mobileNumber
+      type: object
+      properties:
+        dialingCode:
+          maxLength: 5
+          minLength: 1
+          type: string
+        mobileNumber:
+          maxLength: 11
+          minLength: 8
+          type: string
+        lineType:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    CommunicationType:
+      enum:
+      - SMS
+      - Whatsapp
+      type: string
     TimeZone:
       enum:
       - Dateline_Standard_Time
@@ -382,6 +476,18 @@ components:
       - Tonga_Standard_Time
       - Samoa_Standard_Time
       type: string
+    VassVideoM:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     ResponseCommunicationM:
       type: object
       properties:
@@ -410,112 +516,6 @@ components:
           type:
           - string
           - 'null'
-      additionalProperties: false
-    VassResponseCommunicationM:
-      required:
-      - from
-      - message
-      - recipient
-      - type
-      type: object
-      properties:
-        recipient:
-          $ref: '#/components/schemas/ResponseCommunicationRecipientM'
-        from:
-          minLength: 1
-          type: string
-        message:
-          minLength: 1
-          type: string
-        type:
-          $ref: '#/components/schemas/CommunicationType'
-      additionalProperties: false
-    VideoAssessmentModel:
-      required:
-      - country
-      - linkExpiryDays
-      - timeZone
-      type: object
-      properties:
-        linkExpiryDays:
-          maximum: 7
-          minimum: 1
-          type: integer
-          format: int32
-        language:
-          type:
-          - string
-          - 'null'
-        timeZone:
-          $ref: '#/components/schemas/TimeZone'
-        settings: {}
-        country:
-          $ref: '#/components/schemas/RequestCountry'
-        communication:
-          $ref: '#/components/schemas/VassResponseCommunicationM'
-      additionalProperties: false
-    VassInstanceDetailsM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        assessorLink:
-          type:
-          - string
-          - 'null'
-        surveyorLink:
-          type:
-          - string
-          - 'null'
-        dateCreated:
-          $ref: '#/components/schemas/VassInstantM'
-        dateCompleted:
-          $ref: '#/components/schemas/VassInstantM'
-        status:
-          type:
-          - string
-          - 'null'
-        linkExpiryDays:
-          type: integer
-          format: int32
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VassImageM'
-        videos:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/VassVideoM'
-        language:
-          type:
-          - string
-          - 'null'
-        originatingRegion:
-          type:
-          - string
-          - 'null'
-        timeZone:
-          $ref: '#/components/schemas/VassTimeZoneM'
-        country:
-          $ref: '#/components/schemas/RequestCountry'
-        responseCommunication:
-          $ref: '#/components/schemas/ResponseCommunicationM'
-      additionalProperties: false
-    VassTimeZoneM:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        offset:
-          type: integer
-          format: int32
       additionalProperties: false
   securitySchemes:
     Bearer:

@@ -445,17 +445,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    JobResViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     JobReqViewModel:
       type: object
       properties:
@@ -464,6 +453,17 @@ components:
           format: uuid
         name:
           maxLength: 50
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    JobResViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
           type:
           - string
           - 'null'

@@ -123,29 +123,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    HeroImageVM:
-      required:
-      - base64EncodedImage
-      type: object
-      properties:
-        usageType:
-          $ref: '#/components/schemas/ImageUsageType'
-        base64EncodedImage:
-          minLength: 1
-          type: string
-          description: The image data as a Base64 encoded string
-        filename:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-          description: The file name of the image
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the image
-      additionalProperties: false
     ImageUsageType:
       enum:
       - Regular
@@ -189,6 +166,29 @@ components:
           - string
           - 'null'
           format: date-time
+      additionalProperties: false
+    HeroImageVM:
+      required:
+      - base64EncodedImage
+      type: object
+      properties:
+        usageType:
+          $ref: '#/components/schemas/ImageUsageType'
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+          description: The file name of the image
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the image
       additionalProperties: false
     SelfViewModel:
       type: object

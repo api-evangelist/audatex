@@ -181,10 +181,33 @@ paths:
         - ReferenceData.SystemAdmin
 components:
   schemas:
-    AudaAPI.WebAPI.Models.ErrorResponse:
+    AudaAPI.Models.User:
       type: object
       properties:
-        Message:
+        Id:
+          format: uuid
+          type: string
+        LoginName:
+          type: string
+        CompanyCode:
+          type: string
+        CreationDate:
+          format: date-time
+          type: string
+        Description:
+          type: string
+        EMail:
+          type: string
+        FirstName:
+          type: string
+        LastName:
+          type: string
+        IsOnline:
+          type: boolean
+        LastActivityDate:
+          format: date-time
+          type: string
+        Status:
           type: string
     AudaAPI.Models.UserExtended:
       type: object
@@ -218,33 +241,10 @@ components:
           type: string
         Status:
           type: string
-    AudaAPI.Models.User:
+    AudaAPI.WebAPI.Models.ErrorResponse:
       type: object
       properties:
-        Id:
-          format: uuid
-          type: string
-        LoginName:
-          type: string
-        CompanyCode:
-          type: string
-        CreationDate:
-          format: date-time
-          type: string
-        Description:
-          type: string
-        EMail:
-          type: string
-        FirstName:
-          type: string
-        LastName:
-          type: string
-        IsOnline:
-          type: boolean
-        LastActivityDate:
-          format: date-time
-          type: string
-        Status:
+        Message:
           type: string
   securitySchemes:
     oauth2:

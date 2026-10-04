@@ -72,54 +72,50 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SelfWithAddressResponseVM:
+    RepairerResponseVM:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        line1:
+        name:
           type:
           - string
           - 'null'
-        line2:
+        internalId:
           type:
           - string
           - 'null'
-        line3:
+        addressDetails:
+          $ref: '#/components/schemas/SelfWithAddressResponseVM'
+        emailAddress:
           type:
           - string
           - 'null'
-        line4:
+        telephoneNumber:
           type:
           - string
           - 'null'
-        line5:
+        aliases:
           type:
-          - string
+          - array
           - 'null'
-        line6:
+          items:
+            type: string
+        rates:
+          $ref: '#/components/schemas/RepairerRatesResponseVM'
+        schemes:
           type:
-          - string
+          - array
           - 'null'
-        country:
+          items:
+            $ref: '#/components/schemas/RepairerSchemeResponseVM'
+        customFields:
           type:
-          - string
+          - array
           - 'null'
-        latitude:
-          type:
-          - number
-          - 'null'
-          format: double
-        longitude:
-          type:
-          - number
-          - 'null'
-          format: double
-        self:
-          type:
-          - string
-          - 'null'
+          items:
+            $ref: '#/components/schemas/RepairerCustomFieldResponseVM'
       additionalProperties: false
     RepairerRatesResponseVM:
       type: object
@@ -202,50 +198,54 @@ components:
           items:
             type: string
       additionalProperties: false
-    RepairerResponseVM:
+    SelfWithAddressResponseVM:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        name:
+        line1:
           type:
           - string
           - 'null'
-        internalId:
+        line2:
           type:
           - string
           - 'null'
-        addressDetails:
-          $ref: '#/components/schemas/SelfWithAddressResponseVM'
-        emailAddress:
+        line3:
           type:
           - string
           - 'null'
-        telephoneNumber:
+        line4:
           type:
           - string
           - 'null'
-        aliases:
+        line5:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            type: string
-        rates:
-          $ref: '#/components/schemas/RepairerRatesResponseVM'
-        schemes:
+        line6:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/RepairerSchemeResponseVM'
-        customFields:
+        country:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/RepairerCustomFieldResponseVM'
+        latitude:
+          type:
+          - number
+          - 'null'
+          format: double
+        longitude:
+          type:
+          - number
+          - 'null'
+          format: double
+        self:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
   securitySchemes:
     Bearer:

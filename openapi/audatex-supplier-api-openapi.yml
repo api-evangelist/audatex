@@ -292,13 +292,6 @@ components:
           type: string
         Name:
           type: string
-    AudaAPI.Models.Suppliers.Supplier:
-      type: object
-      properties:
-        Reference:
-          type: string
-        Name:
-          type: string
     AudaAPI.Models.Suppliers.RegisteredSupplier:
       type: object
       properties:
@@ -313,6 +306,13 @@ components:
           type: string
         SiteId:
           type: string
+        Reference:
+          type: string
+        Name:
+          type: string
+    AudaAPI.Models.Suppliers.Supplier:
+      type: object
+      properties:
         Reference:
           type: string
         Name:

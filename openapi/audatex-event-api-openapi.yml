@@ -541,31 +541,6 @@ paths:
         - BMS.Basic
 components:
   schemas:
-    AudaAPI.BMSAPI.DTO.SubscriptionPush:
-      type: object
-      properties:
-        URL:
-          type: string
-        Format:
-          enum:
-          - Uninitialised
-          - XML
-          - JSON
-          type: string
-        AuthEnabled:
-          type: boolean
-        AuthScheme:
-          type: string
-        AuthParameter:
-          type: string
-    AudaAPI.BMSAPI.DTO.NotificationResource:
-      type: object
-      properties:
-        ResourceType:
-          type: string
-        ResourceId:
-          format: uuid
-          type: string
     AudaAPI.BMSAPI.DTO.SubscriptionObsolete:
       type: object
       properties:
@@ -590,19 +565,22 @@ components:
           type: string
         Push:
           $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionPush'
-    AudaAPI.BMSAPI.DTO.Topic:
+    AudaAPI.BMSAPI.DTO.SubscriptionPush:
       type: object
       properties:
-        TopicCode:
+        URL:
           type: string
-        Description:
+        Format:
+          enum:
+          - Uninitialised
+          - XML
+          - JSON
           type: string
-    AudaAPI.BMSAPI.DTO.NotificationParameter:
-      type: object
-      properties:
-        Key:
+        AuthEnabled:
+          type: boolean
+        AuthScheme:
           type: string
-        Value:
+        AuthParameter:
           type: string
     AudaAPI.BMSAPI.DTO.NotificationMessage:
       type: object
@@ -634,6 +612,28 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationResource'
+    AudaAPI.BMSAPI.DTO.NotificationResource:
+      type: object
+      properties:
+        ResourceType:
+          type: string
+        ResourceId:
+          format: uuid
+          type: string
+    AudaAPI.BMSAPI.DTO.NotificationParameter:
+      type: object
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
+    AudaAPI.BMSAPI.DTO.Topic:
+      type: object
+      properties:
+        TopicCode:
+          type: string
+        Description:
+          type: string
   securitySchemes:
     oauth2:
       type: oauth2

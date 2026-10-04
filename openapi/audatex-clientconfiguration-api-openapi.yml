@@ -186,6 +186,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ClientConfigurationResViewModel:
+      type: object
+      properties:
+        dataExpirationMonths:
+          type: integer
+          format: int32
+      additionalProperties: false
     ClientConfigurationReqViewModel:
       required:
       - dataExpirationMonths
@@ -197,13 +204,6 @@ components:
         dataExpirationMonths:
           maximum: 36
           minimum: 1
-          type: integer
-          format: int32
-      additionalProperties: false
-    ClientConfigurationResViewModel:
-      type: object
-      properties:
-        dataExpirationMonths:
           type: integer
           format: int32
       additionalProperties: false

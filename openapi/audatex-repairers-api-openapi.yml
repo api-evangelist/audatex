@@ -69,6 +69,31 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     Country:
       enum:
       - UK
@@ -157,6 +182,29 @@ components:
       - GB
       - VE
       type: string
+    RepairerRespVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        countryCode:
+          type:
+          - string
+          - 'null'
+        address:
+          $ref: '#/components/schemas/AddressResponseVM'
+        aliases:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
     AddressResponseVM:
       type: object
       properties:
@@ -204,54 +252,6 @@ components:
           - number
           - 'null'
           format: double
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    RepairerRespVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        countryCode:
-          type:
-          - string
-          - 'null'
-        address:
-          $ref: '#/components/schemas/AddressResponseVM'
-        aliases:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
       additionalProperties: false
   securitySchemes:
     Bearer:

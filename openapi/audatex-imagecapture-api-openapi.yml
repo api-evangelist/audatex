@@ -828,6 +828,89 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ImageCaptureCommunicationResVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        recipient:
+          $ref: '#/components/schemas/ImageCaptureRecipientVM'
+        message:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        deliveryStatus:
+          $ref: '#/components/schemas/CommunicationStatus'
+        dateSent:
+          $ref: '#/components/schemas/ImageCaptureDateViewModel'
+        enableLineTypeIntelligence:
+          type: boolean
+        template:
+          type:
+          - string
+          - 'null'
+        variables:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        reminders:
+          $ref: '#/components/schemas/ReminderConfigModel'
+      additionalProperties: false
+    ImageCaptureUsingTemplateCommunicationVM:
+      required:
+      - recipient
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/ImageCaptureRecipientVM'
+        from:
+          maxLength: 150
+          type:
+          - string
+          - 'null'
+          description: The name of the sender
+        message:
+          maxLength: 300
+          type:
+          - string
+          - 'null'
+          description: The message to be sent in SMS. The API will substitute {IC_URL} for the image request link and {IC_PIN} for the image request pin.
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+        shortUrl:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+          description: The short Url for the image capture link
+        template:
+          type:
+          - string
+          - 'null'
+        variables:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        reminders:
+          $ref: '#/components/schemas/ReminderConfigModel'
+      additionalProperties: false
     ImageCaptureResCommunicationVM:
       type: object
       properties:
@@ -849,16 +932,114 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    BubbleModel:
+    WarningModel:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-        name:
+        message:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    AssetPropertiesReqVM:
+      required:
+      - axManufacturer
+      - axModel
+      - axModelOptions
+      - axSubModel
+      - bodyType
+      - make
+      - model
+      - year
+      type: object
+      properties:
+        make:
+          minLength: 1
+          type: string
+        model:
+          minLength: 1
+          type: string
+        year:
+          minLength: 1
+          type: string
+        bodyType:
+          minLength: 1
+          type: string
+        axManufacturer:
+          minLength: 1
+          type: string
+        axModel:
+          minLength: 1
+          type: string
+        axSubModel:
+          minLength: 1
+          type: string
+        axModelOptions:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ImageCaptureUsingTemplateReqViewModel:
+      required:
+      - templateName
+      type: object
+      properties:
+        linkExpiryDays:
+          maximum: 30
+          minimum: 1
+          type:
+          - integer
+          - 'null'
+          description: Set the time in days that the image request link will expire in.
+          format: int32
+        language:
+          type:
+          - string
+          - 'null'
+          description: Set the language for the image capture UI. Optional; if not provided, defaults to "en-GB".
+        timeZone:
+          $ref: '#/components/schemas/TimeZone'
+        styling:
+          $ref: '#/components/schemas/ImageCaptureStylingVM'
+        pageConfiguration:
+          $ref: '#/components/schemas/ImageCapturePageConfigurationVM'
+        clientReferenceId:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Customer unique reference Id
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
+        communication:
+          $ref: '#/components/schemas/ImageCaptureUsingTemplateCommunicationVM'
+        disableGalleryUpload:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to set if a user can upload images from their gallery on their mobile device
+        termsAndConditionsUrl:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+          description: Set the Terms and Conditions Url, a default will display if null
+        settings:
+          description: Settings configuration for image capture
+        enableVin:
+          type:
+          - boolean
+          - 'null'
+          description: "Enable the vin validation, it means when a vin number is sent, the global vin is \ncalled, if this property is false, the endpoint is not called to get the car\nidentification."
+        disableLink:
+          type:
+          - boolean
+          - 'null'
+          description: Flag to indicate whether a user is allowed to send links other than the GIC link.
+        country:
+          $ref: '#/components/schemas/RequestCountry'
+        templateName:
+          minLength: 1
+          type: string
+          description: get templates by template name
       additionalProperties: false
     RequestCountry:
       enum:
@@ -952,294 +1133,6 @@ components:
       - VE
       - VN
       type: string
-    QueryField:
-      enum:
-      - Id
-      - Status
-      - IsLinkOpened
-      - ExpiryDays
-      - DeliveryStatus
-      - DateSent
-      - RemindersSent
-      - Link
-      - ClientReferenceId
-      - VIN
-      - QRLink
-      type: string
-    ImageCaptureQueryResViewModel:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        status:
-          $ref: '#/components/schemas/ImageCaptureStatusType'
-        deliveryStatus:
-          type:
-          - string
-          - 'null'
-        dateSent:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        isLinkOpened:
-          type:
-          - boolean
-          - 'null'
-        expiryDays:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        remindersSent:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        link:
-          type:
-          - string
-          - 'null'
-        clientReferenceId:
-          type:
-          - string
-          - 'null'
-        vin:
-          type:
-          - string
-          - 'null'
-        qrLink:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ImageCaptureStylingVM:
-      required:
-      - buttonHex
-      - primaryHex
-      - secondaryHex
-      type: object
-      properties:
-        logoId:
-          type:
-          - string
-          - 'null'
-          description: LogoId for entity logo mapping
-          format: uuid
-        logo:
-          type:
-          - string
-          - 'null'
-          description: Logo to be used when rendering the image capture on the UI. This must be 250KB or less of .png format data.
-          format: byte
-        primaryHex:
-          minLength: 1
-          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
-          type: string
-          description: 'Primary Hex colour of the format #000000. Used for header background.'
-        secondaryHex:
-          minLength: 1
-          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
-          type: string
-          description: 'Secondary Hex colour of the format #000000. Used for header border and submit button'
-        buttonHex:
-          minLength: 1
-          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
-          type: string
-          description: 'Button Hex colour of the format #000000. Used for the primary buttons'
-      additionalProperties: false
-    ImageCaptureDateViewModel:
-      type: object
-      properties:
-        utc:
-          type: string
-          format: date-time
-        local:
-          type: string
-          format: date-time
-      additionalProperties: false
-    ImageCaptureUsingTemplateReqViewModel:
-      required:
-      - templateName
-      type: object
-      properties:
-        linkExpiryDays:
-          maximum: 30
-          minimum: 1
-          type:
-          - integer
-          - 'null'
-          description: Set the time in days that the image request link will expire in.
-          format: int32
-        language:
-          type:
-          - string
-          - 'null'
-          description: Set the language for the image capture UI. Optional; if not provided, defaults to "en-GB".
-        timeZone:
-          $ref: '#/components/schemas/TimeZone'
-        styling:
-          $ref: '#/components/schemas/ImageCaptureStylingVM'
-        pageConfiguration:
-          $ref: '#/components/schemas/ImageCapturePageConfigurationVM'
-        clientReferenceId:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-          description: Customer unique reference Id
-        asset:
-          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
-        communication:
-          $ref: '#/components/schemas/ImageCaptureUsingTemplateCommunicationVM'
-        disableGalleryUpload:
-          type:
-          - boolean
-          - 'null'
-          description: Flag to set if a user can upload images from their gallery on their mobile device
-        termsAndConditionsUrl:
-          maxLength: 500
-          type:
-          - string
-          - 'null'
-          description: Set the Terms and Conditions Url, a default will display if null
-        settings:
-          description: Settings configuration for image capture
-        enableVin:
-          type:
-          - boolean
-          - 'null'
-          description: "Enable the vin validation, it means when a vin number is sent, the global vin is \ncalled, if this property is false, the endpoint is not called to get the car\nidentification."
-        disableLink:
-          type:
-          - boolean
-          - 'null'
-          description: Flag to indicate whether a user is allowed to send links other than the GIC link.
-        country:
-          $ref: '#/components/schemas/RequestCountry'
-        templateName:
-          minLength: 1
-          type: string
-          description: get templates by template name
-      additionalProperties: false
-    ImageCaptureSelfViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-        responseCommunication:
-          $ref: '#/components/schemas/ImageCaptureResCommunicationVM'
-        error:
-          $ref: '#/components/schemas/ErrorModel'
-        warnings:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WarningModel'
-      additionalProperties: false
-    Tag:
-      enum:
-      - wheel
-      - front
-      - rear
-      - left
-      - right
-      - interior
-      - mileage
-      - vin
-      - centre
-      - roof
-      - window
-      - library
-      - digitalSignature
-      - wideAngle
-      - selfPortrait
-      - fullView
-      - closeUp
-      type: string
-    AssetPropertiesReqVM:
-      required:
-      - axManufacturer
-      - axModel
-      - axModelOptions
-      - axSubModel
-      - bodyType
-      - make
-      - model
-      - year
-      type: object
-      properties:
-        make:
-          minLength: 1
-          type: string
-        model:
-          minLength: 1
-          type: string
-        year:
-          minLength: 1
-          type: string
-        bodyType:
-          minLength: 1
-          type: string
-        axManufacturer:
-          minLength: 1
-          type: string
-        axModel:
-          minLength: 1
-          type: string
-        axSubModel:
-          minLength: 1
-          type: string
-        axModelOptions:
-          minLength: 1
-          type: string
-      additionalProperties: false
-    ImageCaptureCustomerSurveyRatingResVM:
-      type: object
-      properties:
-        starRating:
-          type: integer
-          format: int32
-        comment:
-          type:
-          - string
-          - 'null'
-        bubbles:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/BubbleModel'
-      additionalProperties: false
-    ImageCaptureCustomerCommentResVM:
-      type: object
-      properties:
-        comment:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ImageCaptureAssetPropertyRespVM:
-      type: object
-      properties:
-        key:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     ImageCapturePageVM:
       required:
       - displayOrder
@@ -1404,121 +1297,77 @@ components:
           type: boolean
           description: If set to true then audio is required for this page
       additionalProperties: false
-    ImageCaptureCommunicationResVM:
+    ImageCaptureCustomerCommentResVM:
+      type: object
+      properties:
+        comment:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageCaptureCustomerSurveyRatingResVM:
+      type: object
+      properties:
+        starRating:
+          type: integer
+          format: int32
+        comment:
+          type:
+          - string
+          - 'null'
+        bubbles:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BubbleModel'
+      additionalProperties: false
+    ImageCaptureAudiosResVM:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        recipient:
-          $ref: '#/components/schemas/ImageCaptureRecipientVM'
-        message:
-          type:
-          - string
-          - 'null'
-        from:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/CommunicationType'
-        status:
-          $ref: '#/components/schemas/ImageCaptureStatusType'
-        deliveryStatus:
-          $ref: '#/components/schemas/CommunicationStatus'
-        dateSent:
-          $ref: '#/components/schemas/ImageCaptureDateViewModel'
-        enableLineTypeIntelligence:
-          type: boolean
-        template:
-          type:
-          - string
-          - 'null'
-        variables:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-        reminders:
-          $ref: '#/components/schemas/ReminderConfigModel'
-      additionalProperties: false
-    ImageCaptureReqViewModel:
-      required:
-      - linkExpiryDays
-      - pageConfiguration
-      - timeZone
-      type: object
-      properties:
-        linkExpiryDays:
-          maximum: 30
-          minimum: 1
-          type: integer
-          description: Set the time in days that the image request link will expire in.
-          format: int32
-        language:
-          type:
-          - string
-          - 'null'
-          description: Set the language for the image capture UI. Optionally supply the culture code (RFC 4646), e.g. 'en-US'; defaults to 'en-GB' if not provided.
-        timeZone:
-          $ref: '#/components/schemas/TimeZone'
-        styling:
-          $ref: '#/components/schemas/ImageCaptureStylingVM'
-        pageConfiguration:
-          $ref: '#/components/schemas/ImageCapturePageConfigurationVM'
-        clientReferenceId:
-          maxLength: 255
-          type:
-          - string
-          - 'null'
-          description: Customer unique reference Id
-        asset:
-          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
-        communication:
-          $ref: '#/components/schemas/ImageCaptureCommunicationVM'
-        disableGalleryUpload:
-          type: boolean
-          description: Flag to set if a user can upload images from their gallery on their mobile device
-        termsAndConditionsUrl:
-          maxLength: 500
-          type:
-          - string
-          - 'null'
-          description: Set the Terms and Conditions Url, a default will display if null
-        settings:
-          description: Settings configuration for image capture
-        enableVin:
-          type: boolean
-          description: "Enable the vin validation, it means when a vin number is sent, the global vin is \ncalled, if this property is false, the endpoint is not called to get the car\nidentification."
-        disableLink:
-          type: boolean
-          description: Flag to indicate whether a user is allowed to send links other than the GIC link.
-        country:
-          $ref: '#/components/schemas/RequestCountry'
-        templateName:
-          type:
-          - string
-          - 'null'
-          description: get templates by template name
-        jobId:
-          type:
-          - string
-          - 'null'
-          description: Job for the Image Capture to be linked with
+        pageId:
+          type: string
           format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        url:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
-    CommunicationType:
-      enum:
-      - SMS
-      - Whatsapp
-      type: string
-    WarningModel:
+    ImageCaptureTimeZoneVM:
       type: object
       properties:
-        message:
+        name:
+          type:
+          - string
+          - 'null'
+        offset:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ImageCaptureDateViewModel:
+      type: object
+      properties:
+        utc:
+          type: string
+          format: date-time
+        local:
+          type: string
+          format: date-time
+      additionalProperties: false
+    BubbleModel:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
           type:
           - string
           - 'null'
@@ -1531,53 +1380,40 @@ components:
       - Error
       - Unknown
       type: string
-    ImageCaptureCommunicationVM:
+    ImageCaptureStylingVM:
       required:
-      - from
-      - recipient
-      - type
+      - buttonHex
+      - primaryHex
+      - secondaryHex
       type: object
       properties:
-        recipient:
-          $ref: '#/components/schemas/ImageCaptureRecipientVM'
-        from:
-          maxLength: 150
+        logoId:
+          type:
+          - string
+          - 'null'
+          description: LogoId for entity logo mapping
+          format: uuid
+        logo:
+          type:
+          - string
+          - 'null'
+          description: Logo to be used when rendering the image capture on the UI. This must be 250KB or less of .png format data.
+          format: byte
+        primaryHex:
           minLength: 1
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
           type: string
-          description: The name of the sender
-        message:
-          maxLength: 300
-          type:
-          - string
-          - 'null'
-          description: The message to be sent in SMS. The API will substitute {IC_URL} for the image request link and {IC_PIN} for the image request pin.
-        type:
-          $ref: '#/components/schemas/CommunicationType'
-        shortUrl:
-          maxLength: 50
-          type:
-          - string
-          - 'null'
-          description: The short Url for the image capture link
-        enableLineTypeIntelligence:
-          type: boolean
-          description: 'Enable the line type intelligence, it means when there is a communication,
-
-            we validate the line type of the phone number.'
-        template:
-          type:
-          - string
-          - 'null'
-        variables:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-        reminders:
-          $ref: '#/components/schemas/ReminderConfigModel'
+          description: 'Primary Hex colour of the format #000000. Used for header background.'
+        secondaryHex:
+          minLength: 1
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          type: string
+          description: 'Secondary Hex colour of the format #000000. Used for header border and submit button'
+        buttonHex:
+          minLength: 1
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          type: string
+          description: 'Button Hex colour of the format #000000. Used for the primary buttons'
       additionalProperties: false
     ImageCaptureAssetIdentifierReqVM:
       required:
@@ -1599,23 +1435,80 @@ components:
       enum:
       - VIN
       type: string
-    ImageCaptureAssetIdentifierResVM:
+    Quality:
+      enum:
+      - Ok
+      - TooBlurry
+      - TooDark
+      - TooBright
+      type: string
+    ImageCaptureVideosResVM:
       type: object
       properties:
-        identifier:
+        id:
+          type: string
+          format: uuid
+        pageId:
+          type: string
+          format: uuid
+        name:
           type:
           - string
           - 'null'
-        value:
+        url:
           type:
           - string
           - 'null'
-        properties:
+      additionalProperties: false
+    ImageCaptureQueryResViewModel:
+      type: object
+      properties:
+        id:
           type:
-          - array
+          - string
           - 'null'
-          items:
-            $ref: '#/components/schemas/ImageCaptureAssetPropertyRespVM'
+          format: uuid
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        deliveryStatus:
+          type:
+          - string
+          - 'null'
+        dateSent:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        isLinkOpened:
+          type:
+          - boolean
+          - 'null'
+        expiryDays:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        remindersSent:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        link:
+          type:
+          - string
+          - 'null'
+        clientReferenceId:
+          type:
+          - string
+          - 'null'
+        vin:
+          type:
+          - string
+          - 'null'
+        qrLink:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     QueryReqViewModel:
       type: object
@@ -1668,333 +1561,29 @@ components:
           - 'null'
           description: The LineType of the mobile number.
       additionalProperties: false
-    ErrorModel:
+    ImageCaptureStatusType:
+      enum:
+      - Pending
+      - Expired
+      - Completed
+      type: string
+    ImageCaptureAssetIdentifierResVM:
       type: object
       properties:
-        code:
+        identifier:
           type:
           - string
           - 'null'
-        message:
+        value:
           type:
           - string
           - 'null'
-        isNoError:
-          type: boolean
-          readOnly: true
-        isCreated:
-          type: boolean
-          readOnly: true
-        isAccepted:
-          type: boolean
-          readOnly: true
-        isInternalError:
-          type: boolean
-          readOnly: true
-        isBadRequest:
-          type: boolean
-          readOnly: true
-        isNotFoundError:
-          type: boolean
-          readOnly: true
-        isUnauthorizedCodeError:
-          type: boolean
-          readOnly: true
-        isBadGatewayError:
-          type: boolean
-          readOnly: true
-        getHttpCode:
-          type: integer
-          format: int32
-          readOnly: true
-      additionalProperties: false
-    ImageCaptureImageResVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        externalImageId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        pageType:
-          $ref: '#/components/schemas/PageType'
-        tags:
+        properties:
           type:
           - array
           - 'null'
           items:
-            $ref: '#/components/schemas/Tag'
-        isFromLibrary:
-          type: boolean
-          readOnly: true
-        pageId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        quality:
-          $ref: '#/components/schemas/Quality'
-        data:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ScaleTo:
-      enum:
-      - NoScale
-      - OneMP
-      - TwoMP
-      - FiveMP
-      - TenMP
-      type: string
-    ImageCaptureVideosResVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        pageId:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ImageCaptureUserInputResVM:
-      type: object
-      properties:
-        userInputId:
-          type: string
-          format: uuid
-        property:
-          type:
-          - string
-          - 'null'
-        unit:
-          type:
-          - string
-          - 'null'
-        propertyValue: {}
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      additionalProperties: false
-    PageType:
-      enum:
-      - FrontLeft
-      - FrontRight
-      - RearRight
-      - RearLeft
-      - Mileage
-      - VIN
-      - AdHoc
-      - Front
-      - SideLeft
-      - SideRight
-      - Rear
-      - CloseUp
-      - LicenseGeneric
-      - FrontInterior
-      - RearInterior
-      - PoliceReport
-      - RegistrationDocument
-      - Generic
-      - LicenseUAE
-      - Wheels
-      - Blank
-      - ConfirmVehicle
-      - DamagePhotos
-      - Keys
-      - Survey
-      - DigitalSignature
-      - CloseFrontLeft
-      - CloseFrontRight
-      - CloseRearRight
-      - CloseRearLeft
-      - CloseFront
-      - CloseSideLeft
-      - CloseSideRight
-      - CloseRear
-      - FrontWindscreen
-      - RearWindscreen
-      - LicensePlate
-      - VideoUpload
-      - PointOfImpact
-      - DamageCloseUps
-      - Audio
-      - SelfPortrait
-      type: string
-    ImageCaptureTimeZoneVM:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        offset:
-          type: integer
-          format: int32
-      additionalProperties: false
-    Quality:
-      enum:
-      - Ok
-      - TooBlurry
-      - TooDark
-      - TooBright
-      type: string
-    TimeZone:
-      enum:
-      - Dateline_Standard_Time
-      - Hawaiian_Standard_Time
-      - Alaskan_Standard_Time
-      - Pacific_Standard_Time
-      - Pacific_Standard_Time_Mexico
-      - Mountain_Standard_Time
-      - Mountain_Standard_Time_Mexico
-      - US_Mountain_Standard_Time
-      - Canada_Central_Standard_Time
-      - Central_America_Standard_Time
-      - Central_Standard_Time
-      - Central_Standard_Time_Mexico
-      - Eastern_Standard_Time
-      - SA_Pacific_Standard_Time
-      - US_Eastern_Standard_Time
-      - Atlantic_Standard_Time
-      - Central_Brazilian_Standard_Time
-      - Pacific_SA_Standard_Time
-      - SA_Western_Standard_Time
-      - Venezuela_Standard_Time
-      - Paraguay_Standard_Time
-      - Newfoundland_Standard_Time
-      - E_South_America_Standard_Time
-      - Greenland_Standard_Time
-      - Montevideo_Standard_Time
-      - SA_Eastern_Standard_Time
-      - Argentina_Standard_Time
-      - Mid_Atlantic_Standard_Time
-      - Azores_Standard_Time
-      - Cabo_Verde_Standard_Time
-      - GMT_Standard_Time
-      - Greenwich_Standard_Time
-      - Morocco_Standard_Time
-      - UTC
-      - Central_Europe_Standard_Time
-      - Central_European_Standard_Time
-      - Romance_Standard_Time
-      - W_Central_Africa_Standard_Time
-      - W_Europe_Standard_Time
-      - Namibia_Standard_Time
-      - E_Europe_Standard_Time
-      - Egypt_Standard_Time
-      - FLE_Standard_Time
-      - GTB_Standard_Time
-      - Israel_Standard_Time
-      - Jordan_Standard_Time
-      - Middle_East_Standard_Time
-      - South_Africa_Standard_Time
-      - Syria_Standard_Time
-      - Turkey_Standard_Time
-      - Arab_Standard_Time
-      - Arabic_Standard_Time
-      - E_Africa_Standard_Time
-      - Kaliningrad_Standard_Time
-      - Russian_Standard_Time
-      - Iran_Standard_Time
-      - Arabian_Standard_Time
-      - Azerbaijan_Standard_Time
-      - Caucasus_Standard_Time
-      - Afghanistan_Standard_Time
-      - Georgian_Standard_Time
-      - Mauritius_Standard_Time
-      - Ekaterinburg_Standard_Time
-      - West_Asia_Standard_Time
-      - India_Standard_Time
-      - Sri_Lanka_Standard_Time
-      - Nepal_Standard_Time
-      - Pakistan_Standard_Time
-      - Central_Asia_Standard_Time
-      - N_Central_Asia_Standard_Time
-      - Myanmar_Standard_Time
-      - Bangladesh_Standard_Time
-      - North_Asia_Standard_Time
-      - SE_Asia_Standard_Time
-      - China_Standard_Time
-      - North_Asia_East_Standard_Time
-      - Singapore_Standard_Time
-      - Taipei_Standard_Time
-      - W_Australia_Standard_Time
-      - Ulaanbaatar_Standard_Time
-      - Korea_Standard_Time
-      - Tokyo_Standard_Time
-      - Yakutsk_Standard_Time
-      - AUS_Central_Standard_Time
-      - Central_Australia_Standard_Time
-      - AUS_Eastern_Standard_Time
-      - E_Australia_Standard_Time
-      - Tasmania_Standard_Time
-      - Vladivostok_Standard_Time
-      - West_Pacific_Standard_Time
-      - Central_Pacific_Standard_Time
-      - Magadan_Standard_Time
-      - Fiji_Standard_Time
-      - New_Zealand_Standard_Time
-      - Tonga_Standard_Time
-      - Samoa_Standard_Time
-      type: string
-    ValidationProblemDetails:
-      type: object
-      properties:
-        errors:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type: array
-            items:
-              type: string
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    ImageCapturePageConfigurationVM:
-      required:
-      - pages
-      type: object
-      properties:
-        pages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImageCapturePageVM'
-          description: List of pages that are to be displayed as part of the image request
+            $ref: '#/components/schemas/ImageCaptureAssetPropertyRespVM'
       additionalProperties: false
     ImageCaptureResViewModel:
       type: object
@@ -2113,6 +1702,152 @@ components:
           - 'null'
           format: int32
       additionalProperties: false
+    ValidationProblemDetails:
+      type: object
+      properties:
+        errors:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: array
+            items:
+              type: string
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    CommunicationType:
+      enum:
+      - SMS
+      - Whatsapp
+      type: string
+    ImageCaptureSelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        responseCommunication:
+          $ref: '#/components/schemas/ImageCaptureResCommunicationVM'
+        error:
+          $ref: '#/components/schemas/ErrorModel'
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+      additionalProperties: false
+    QueryField:
+      enum:
+      - Id
+      - Status
+      - IsLinkOpened
+      - ExpiryDays
+      - DeliveryStatus
+      - DateSent
+      - RemindersSent
+      - Link
+      - ClientReferenceId
+      - VIN
+      - QRLink
+      type: string
+    ScaleTo:
+      enum:
+      - NoScale
+      - OneMP
+      - TwoMP
+      - FiveMP
+      - TenMP
+      type: string
+    ImageCaptureReqViewModel:
+      required:
+      - linkExpiryDays
+      - pageConfiguration
+      - timeZone
+      type: object
+      properties:
+        linkExpiryDays:
+          maximum: 30
+          minimum: 1
+          type: integer
+          description: Set the time in days that the image request link will expire in.
+          format: int32
+        language:
+          type:
+          - string
+          - 'null'
+          description: Set the language for the image capture UI. Optionally supply the culture code (RFC 4646), e.g. 'en-US'; defaults to 'en-GB' if not provided.
+        timeZone:
+          $ref: '#/components/schemas/TimeZone'
+        styling:
+          $ref: '#/components/schemas/ImageCaptureStylingVM'
+        pageConfiguration:
+          $ref: '#/components/schemas/ImageCapturePageConfigurationVM'
+        clientReferenceId:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Customer unique reference Id
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
+        communication:
+          $ref: '#/components/schemas/ImageCaptureCommunicationVM'
+        disableGalleryUpload:
+          type: boolean
+          description: Flag to set if a user can upload images from their gallery on their mobile device
+        termsAndConditionsUrl:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+          description: Set the Terms and Conditions Url, a default will display if null
+        settings:
+          description: Settings configuration for image capture
+        enableVin:
+          type: boolean
+          description: "Enable the vin validation, it means when a vin number is sent, the global vin is \ncalled, if this property is false, the endpoint is not called to get the car\nidentification."
+        disableLink:
+          type: boolean
+          description: Flag to indicate whether a user is allowed to send links other than the GIC link.
+        country:
+          $ref: '#/components/schemas/RequestCountry'
+        templateName:
+          type:
+          - string
+          - 'null'
+          description: get templates by template name
+        jobId:
+          type:
+          - string
+          - 'null'
+          description: Job for the Image Capture to be linked with
+          format: uuid
+      additionalProperties: false
     ReminderConfigModel:
       type: object
       properties:
@@ -2128,42 +1863,19 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ImageCaptureAudiosResVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        pageId:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        url:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ImageCaptureStatusType:
-      enum:
-      - Pending
-      - Expired
-      - Completed
-      type: string
-    ImageCaptureUsingTemplateCommunicationVM:
+    ImageCaptureCommunicationVM:
       required:
+      - from
       - recipient
+      - type
       type: object
       properties:
         recipient:
           $ref: '#/components/schemas/ImageCaptureRecipientVM'
         from:
           maxLength: 150
-          type:
-          - string
-          - 'null'
+          minLength: 1
+          type: string
           description: The name of the sender
         message:
           maxLength: 300
@@ -2179,6 +1891,11 @@ components:
           - string
           - 'null'
           description: The short Url for the image capture link
+        enableLineTypeIntelligence:
+          type: boolean
+          description: 'Enable the line type intelligence, it means when there is a communication,
+
+            we validate the line type of the phone number.'
         template:
           type:
           - string
@@ -2194,6 +1911,289 @@ components:
         reminders:
           $ref: '#/components/schemas/ReminderConfigModel'
       additionalProperties: false
+    Tag:
+      enum:
+      - wheel
+      - front
+      - rear
+      - left
+      - right
+      - interior
+      - mileage
+      - vin
+      - centre
+      - roof
+      - window
+      - library
+      - digitalSignature
+      - wideAngle
+      - selfPortrait
+      - fullView
+      - closeUp
+      type: string
+    ImageCaptureUserInputResVM:
+      type: object
+      properties:
+        userInputId:
+          type: string
+          format: uuid
+        property:
+          type:
+          - string
+          - 'null'
+        unit:
+          type:
+          - string
+          - 'null'
+        propertyValue: {}
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        isNoError:
+          type: boolean
+          readOnly: true
+        isCreated:
+          type: boolean
+          readOnly: true
+        isAccepted:
+          type: boolean
+          readOnly: true
+        isInternalError:
+          type: boolean
+          readOnly: true
+        isBadRequest:
+          type: boolean
+          readOnly: true
+        isNotFoundError:
+          type: boolean
+          readOnly: true
+        isUnauthorizedCodeError:
+          type: boolean
+          readOnly: true
+        isBadGatewayError:
+          type: boolean
+          readOnly: true
+        getHttpCode:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    TimeZone:
+      enum:
+      - Dateline_Standard_Time
+      - Hawaiian_Standard_Time
+      - Alaskan_Standard_Time
+      - Pacific_Standard_Time
+      - Pacific_Standard_Time_Mexico
+      - Mountain_Standard_Time
+      - Mountain_Standard_Time_Mexico
+      - US_Mountain_Standard_Time
+      - Canada_Central_Standard_Time
+      - Central_America_Standard_Time
+      - Central_Standard_Time
+      - Central_Standard_Time_Mexico
+      - Eastern_Standard_Time
+      - SA_Pacific_Standard_Time
+      - US_Eastern_Standard_Time
+      - Atlantic_Standard_Time
+      - Central_Brazilian_Standard_Time
+      - Pacific_SA_Standard_Time
+      - SA_Western_Standard_Time
+      - Venezuela_Standard_Time
+      - Paraguay_Standard_Time
+      - Newfoundland_Standard_Time
+      - E_South_America_Standard_Time
+      - Greenland_Standard_Time
+      - Montevideo_Standard_Time
+      - SA_Eastern_Standard_Time
+      - Argentina_Standard_Time
+      - Mid_Atlantic_Standard_Time
+      - Azores_Standard_Time
+      - Cabo_Verde_Standard_Time
+      - GMT_Standard_Time
+      - Greenwich_Standard_Time
+      - Morocco_Standard_Time
+      - UTC
+      - Central_Europe_Standard_Time
+      - Central_European_Standard_Time
+      - Romance_Standard_Time
+      - W_Central_Africa_Standard_Time
+      - W_Europe_Standard_Time
+      - Namibia_Standard_Time
+      - E_Europe_Standard_Time
+      - Egypt_Standard_Time
+      - FLE_Standard_Time
+      - GTB_Standard_Time
+      - Israel_Standard_Time
+      - Jordan_Standard_Time
+      - Middle_East_Standard_Time
+      - South_Africa_Standard_Time
+      - Syria_Standard_Time
+      - Turkey_Standard_Time
+      - Arab_Standard_Time
+      - Arabic_Standard_Time
+      - E_Africa_Standard_Time
+      - Kaliningrad_Standard_Time
+      - Russian_Standard_Time
+      - Iran_Standard_Time
+      - Arabian_Standard_Time
+      - Azerbaijan_Standard_Time
+      - Caucasus_Standard_Time
+      - Afghanistan_Standard_Time
+      - Georgian_Standard_Time
+      - Mauritius_Standard_Time
+      - Ekaterinburg_Standard_Time
+      - West_Asia_Standard_Time
+      - India_Standard_Time
+      - Sri_Lanka_Standard_Time
+      - Nepal_Standard_Time
+      - Pakistan_Standard_Time
+      - Central_Asia_Standard_Time
+      - N_Central_Asia_Standard_Time
+      - Myanmar_Standard_Time
+      - Bangladesh_Standard_Time
+      - North_Asia_Standard_Time
+      - SE_Asia_Standard_Time
+      - China_Standard_Time
+      - North_Asia_East_Standard_Time
+      - Singapore_Standard_Time
+      - Taipei_Standard_Time
+      - W_Australia_Standard_Time
+      - Ulaanbaatar_Standard_Time
+      - Korea_Standard_Time
+      - Tokyo_Standard_Time
+      - Yakutsk_Standard_Time
+      - AUS_Central_Standard_Time
+      - Central_Australia_Standard_Time
+      - AUS_Eastern_Standard_Time
+      - E_Australia_Standard_Time
+      - Tasmania_Standard_Time
+      - Vladivostok_Standard_Time
+      - West_Pacific_Standard_Time
+      - Central_Pacific_Standard_Time
+      - Magadan_Standard_Time
+      - Fiji_Standard_Time
+      - New_Zealand_Standard_Time
+      - Tonga_Standard_Time
+      - Samoa_Standard_Time
+      type: string
+    ImageCaptureImageResVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        externalImageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        pageType:
+          $ref: '#/components/schemas/PageType'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+        isFromLibrary:
+          type: boolean
+          readOnly: true
+        pageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        quality:
+          $ref: '#/components/schemas/Quality'
+        data:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageCaptureAssetPropertyRespVM:
+      type: object
+      properties:
+        key:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ImageCapturePageConfigurationVM:
+      required:
+      - pages
+      type: object
+      properties:
+        pages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageCapturePageVM'
+          description: List of pages that are to be displayed as part of the image request
+      additionalProperties: false
+    PageType:
+      enum:
+      - FrontLeft
+      - FrontRight
+      - RearRight
+      - RearLeft
+      - Mileage
+      - VIN
+      - AdHoc
+      - Front
+      - SideLeft
+      - SideRight
+      - Rear
+      - CloseUp
+      - LicenseGeneric
+      - FrontInterior
+      - RearInterior
+      - PoliceReport
+      - RegistrationDocument
+      - Generic
+      - LicenseUAE
+      - Wheels
+      - Blank
+      - ConfirmVehicle
+      - DamagePhotos
+      - Keys
+      - Survey
+      - DigitalSignature
+      - CloseFrontLeft
+      - CloseFrontRight
+      - CloseRearRight
+      - CloseRearLeft
+      - CloseFront
+      - CloseSideLeft
+      - CloseSideRight
+      - CloseRear
+      - FrontWindscreen
+      - RearWindscreen
+      - LicensePlate
+      - VideoUpload
+      - PointOfImpact
+      - DamageCloseUps
+      - Audio
+      - SelfPortrait
+      type: string
   securitySchemes:
     Bearer:
       type: apiKey

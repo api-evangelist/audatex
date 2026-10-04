@@ -167,38 +167,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PartyViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Id of the party
-          format: uuid
-        addressId:
-          type:
-          - string
-          - 'null'
-          description: The address Id if one has been associated with the party
-          format: uuid
-        vehicleId:
-          type:
-          - string
-          - 'null'
-          description: The vehicle Id if one has been associated with the party
-          format: uuid
-        vehicleLocationId:
-          type:
-          - string
-          - 'null'
-          description: The vehicle address / location if one has been associated with the vehicle
-          format: uuid
-        partyType:
-          type:
-          - string
-          - 'null'
-          description: The type of party
-      additionalProperties: false
-      description: Details of a party associated with the claim
     ClaimReqViewModel:
       required:
       - claimId
@@ -252,63 +220,6 @@ components:
           description: The primar terminal Id
       additionalProperties: false
       description: The details of the allocated repairer
-    ReservationViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The Id of the reservation
-          format: uuid
-        entityId:
-          type: string
-          description: The Id of the entity that the reservation was made against
-          format: uuid
-        estimatorId:
-          type: string
-          description: The Id of the estimator that the reservation was made against
-          format: uuid
-        timeSlot:
-          $ref: '#/components/schemas/TimeSlotViewModel'
-      additionalProperties: false
-      description: Details of the reservation
-    AppointmentViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Appointment Id
-          format: uuid
-        reservation:
-          $ref: '#/components/schemas/ReservationViewModel'
-      additionalProperties: false
-      description: The appointment details
-    ClaimViewModel:
-      type: object
-      properties:
-        claimNumber:
-          type:
-          - string
-          - 'null'
-          description: Claim number
-        uniqueClientkey:
-          type:
-          - string
-          - 'null'
-          description: Unique client key
-        policyNumber:
-          type:
-          - string
-          - 'null'
-          description: Policy number against the claim
-        parties:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PartyViewModel'
-          description: List of parties if any exist against the claim
-      additionalProperties: false
-      description: The claim details
     TimeSlotViewModel:
       type: object
       properties:
@@ -341,6 +252,95 @@ components:
           description: This will only be displayed if a time interval booking was made, e.g. "09:30"
       additionalProperties: false
       description: The details of the reservation time slot
+    PartyViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Id of the party
+          format: uuid
+        addressId:
+          type:
+          - string
+          - 'null'
+          description: The address Id if one has been associated with the party
+          format: uuid
+        vehicleId:
+          type:
+          - string
+          - 'null'
+          description: The vehicle Id if one has been associated with the party
+          format: uuid
+        vehicleLocationId:
+          type:
+          - string
+          - 'null'
+          description: The vehicle address / location if one has been associated with the vehicle
+          format: uuid
+        partyType:
+          type:
+          - string
+          - 'null'
+          description: The type of party
+      additionalProperties: false
+      description: Details of a party associated with the claim
+    ClaimViewModel:
+      type: object
+      properties:
+        claimNumber:
+          type:
+          - string
+          - 'null'
+          description: Claim number
+        uniqueClientkey:
+          type:
+          - string
+          - 'null'
+          description: Unique client key
+        policyNumber:
+          type:
+          - string
+          - 'null'
+          description: Policy number against the claim
+        parties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PartyViewModel'
+          description: List of parties if any exist against the claim
+      additionalProperties: false
+      description: The claim details
+    AppointmentViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Appointment Id
+          format: uuid
+        reservation:
+          $ref: '#/components/schemas/ReservationViewModel'
+      additionalProperties: false
+      description: The appointment details
+    ReservationViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The Id of the reservation
+          format: uuid
+        entityId:
+          type: string
+          description: The Id of the entity that the reservation was made against
+          format: uuid
+        estimatorId:
+          type: string
+          description: The Id of the estimator that the reservation was made against
+          format: uuid
+        timeSlot:
+          $ref: '#/components/schemas/TimeSlotViewModel'
+      additionalProperties: false
+      description: Details of the reservation
     ClaimRespViewModel:
       type: object
       properties:

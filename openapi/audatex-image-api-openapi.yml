@@ -465,57 +465,6 @@ paths:
     - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
 components:
   schemas:
-    ImageRequestVM:
-      required:
-      - base64EncodedImage
-      - type
-      type: object
-      properties:
-        usageType:
-          $ref: '#/components/schemas/ImageUsageType'
-        type:
-          $ref: '#/components/schemas/ImageType'
-        base64EncodedImage:
-          minLength: 1
-          type: string
-          description: The image data as a Base64 encoded string
-        filename:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-          description: The file name of the image
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the image
-      additionalProperties: false
-    WarningModel:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ImageUsageType:
-      enum:
-      - Regular
-      - Hero
-      - Logo
-      type: string
-    SelfViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     SelfModel:
       type: object
       properties:
@@ -550,11 +499,51 @@ components:
           items:
             $ref: '#/components/schemas/SelfModel'
       additionalProperties: false
+    WarningModel:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     ImageType:
       enum:
       - Png
       - Jpeg
       - Svg
+      type: string
+    ImageRequestVM:
+      required:
+      - base64EncodedImage
+      - type
+      type: object
+      properties:
+        usageType:
+          $ref: '#/components/schemas/ImageUsageType'
+        type:
+          $ref: '#/components/schemas/ImageType'
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+          description: The file name of the image
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the image
+      additionalProperties: false
+    ImageUsageType:
+      enum:
+      - Regular
+      - Hero
+      - Logo
       type: string
     AssessmentImageRequestVM:
       required:
@@ -571,29 +560,6 @@ components:
           items:
             $ref: '#/components/schemas/ImageRequestVM'
           description: The list of images
-      additionalProperties: false
-    LogoImageVM:
-      required:
-      - base64EncodedImage
-      type: object
-      properties:
-        usageType:
-          $ref: '#/components/schemas/ImageUsageType'
-        base64EncodedImage:
-          minLength: 1
-          type: string
-          description: The image data as a Base64 encoded string
-        filename:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-          description: The file name of the image
-        description:
-          type:
-          - string
-          - 'null'
-          description: Description of the image
       additionalProperties: false
     LogoImageRespModel:
       type: object
@@ -630,6 +596,40 @@ components:
         deleteAfter:
           type: string
           format: date-time
+      additionalProperties: false
+    LogoImageVM:
+      required:
+      - base64EncodedImage
+      type: object
+      properties:
+        usageType:
+          $ref: '#/components/schemas/ImageUsageType'
+        base64EncodedImage:
+          minLength: 1
+          type: string
+          description: The image data as a Base64 encoded string
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+          description: The file name of the image
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description of the image
+      additionalProperties: false
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     AudaAPI.Models.ImageHeader:
       type: object
