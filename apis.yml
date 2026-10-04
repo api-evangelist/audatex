@@ -73,6 +73,8 @@ apis:
   humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
   baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
   tags:
+  - AI Triage
+  tags_raw:
   - AiTriage
   properties:
   - type: OpenAPI
@@ -157,6 +159,8 @@ apis:
   humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
   baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
   tags:
+  - Assessment Export
+  tags_raw:
   - AssessmentExport
   properties:
   - type: OpenAPI
@@ -493,6 +497,8 @@ apis:
   humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
   baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
   tags:
+  - Client Configuration
+  tags_raw:
   - ClientConfiguration
   properties:
   - type: OpenAPI
@@ -913,6 +919,8 @@ apis:
   humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
   baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
   tags:
+  - Image Capture
+  tags_raw:
   - ImageCapture
   properties:
   - type: OpenAPI
@@ -1123,6 +1131,8 @@ apis:
   humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
   baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
   tags:
+  - Log Management
+  tags_raw:
   - LogManagement
   properties:
   - type: OpenAPI
@@ -1543,6 +1553,8 @@ apis:
   humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
   baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
   tags:
+  - Templates
+  tags_raw:
   - Template
   properties:
   - type: OpenAPI
@@ -1753,6 +1765,8 @@ apis:
   humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
   baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
   tags:
+  - Vehicles
+  tags_raw:
   - Vehicle
   properties:
   - type: OpenAPI
@@ -2005,6 +2019,8 @@ apis:
   humanURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help
   baseURL: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
@@ -2126,6 +2142,9 @@ apis:
   - type: Sandbox
     url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
 common:
+  - type: CapabilityMap
+    url: capabilities/audatex-capability-edges.yml
+    name: Audatex Business Capability Map
   - type: Overlay
     url: overlays/audatex-audaconnect-api-overlay.yaml
   - type: Overlay
