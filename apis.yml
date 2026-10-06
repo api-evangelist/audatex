@@ -39,7 +39,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/audatex/refs/heads/main/apis.yml
 created: '2025-01-01'
-modified: '2026-09-17'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: audatex:solera-api-gateway
@@ -2142,6 +2142,8 @@ apis:
   - type: Sandbox
     url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
 common:
+  - url: https://audatex.co.uk/feed/
+    type: BlogRSS
   - type: CapabilityMap
     url: capabilities/audatex-capability-edges.yml
     name: Audatex Business Capability Map
