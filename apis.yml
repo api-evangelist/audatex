@@ -2142,6 +2142,8 @@ apis:
   - type: Sandbox
     url: https://api-demo.audatex.com/TestAssignmentapi/docs/index.html
 common:
+  - type: FinOps
+    url: finops/audatex-finops.yml
   - url: https://audatex.co.uk/feed/
     type: BlogRSS
   - type: CapabilityMap
