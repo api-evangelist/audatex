@@ -4,7 +4,7 @@ method: generated
 name: Import and export an assessment in AxFormat
 description: Find or create an AudaConnect assessment from an AxFormat document, read it back, export it, and render a PDF report.
 api: openapi/audatex-audaconnect-api-openapi.yml
-operations: [Assessment_Search, AssessmentImport_ImportAssessmentV2, Assessment_GetSummary, Assessment_GetAssessment, AssessmentExport_ExportAssessment, AssessmentReport_GetReportDefinitions, AssessmentReport_Get]
+operations: [getApiAssessmentsVrnByRegistration, AssessmentImport_ImportAssessmentV2, Assessment_GetSummary, Assessment_GetAssessment, AssessmentExport_ExportAssessment, AssessmentReport_GetReportDefinitions, AssessmentReport_Get]
 source: >-
   Grounded in openapi/audatex-audaconnect-api-openapi.yml (Swagger 2.0, verbatim from
   https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/swagger/docs/v1); auth per
