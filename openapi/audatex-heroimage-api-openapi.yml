@@ -123,12 +123,17 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ImageUsageType:
-      enum:
-      - Regular
-      - Hero
-      - Logo
-      type: string
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     HeroImageModel:
       type: object
       properties:
@@ -167,6 +172,12 @@ components:
           - 'null'
           format: date-time
       additionalProperties: false
+    ImageUsageType:
+      enum:
+      - Regular
+      - Hero
+      - Logo
+      type: string
     HeroImageVM:
       required:
       - base64EncodedImage
@@ -189,17 +200,6 @@ components:
           - string
           - 'null'
           description: Description of the image
-      additionalProperties: false
-    SelfViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
   securitySchemes:
     Bearer:

@@ -465,6 +465,12 @@ paths:
     - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
 components:
   schemas:
+    ImageType:
+      enum:
+      - Png
+      - Jpeg
+      - Svg
+      type: string
     SelfModel:
       type: object
       properties:
@@ -499,6 +505,17 @@ components:
           items:
             $ref: '#/components/schemas/SelfModel'
       additionalProperties: false
+    SelfViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     WarningModel:
       type: object
       properties:
@@ -507,12 +524,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ImageType:
-      enum:
-      - Png
-      - Jpeg
-      - Svg
-      type: string
     ImageRequestVM:
       required:
       - base64EncodedImage
@@ -538,28 +549,6 @@ components:
           - string
           - 'null'
           description: Description of the image
-      additionalProperties: false
-    ImageUsageType:
-      enum:
-      - Regular
-      - Hero
-      - Logo
-      type: string
-    AssessmentImageRequestVM:
-      required:
-      - assessmentId
-      - images
-      type: object
-      properties:
-        assessmentId:
-          type: string
-          description: The assessmentId to add the images to
-          format: uuid
-        images:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImageRequestVM'
-          description: The list of images
       additionalProperties: false
     LogoImageRespModel:
       type: object
@@ -597,6 +586,28 @@ components:
           type: string
           format: date-time
       additionalProperties: false
+    ImageUsageType:
+      enum:
+      - Regular
+      - Hero
+      - Logo
+      type: string
+    AssessmentImageRequestVM:
+      required:
+      - assessmentId
+      - images
+      type: object
+      properties:
+        assessmentId:
+          type: string
+          description: The assessmentId to add the images to
+          format: uuid
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageRequestVM'
+          description: The list of images
+      additionalProperties: false
     LogoImageVM:
       required:
       - base64EncodedImage
@@ -620,17 +631,15 @@ components:
           - 'null'
           description: Description of the image
       additionalProperties: false
-    SelfViewModel:
+    AudaAPI.Models.ImageData:
       type: object
       properties:
-        id:
+        DisplayOrder:
+          format: int32
+          type: integer
+        JPEGData:
+          format: byte
           type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     AudaAPI.Models.ImageHeader:
       type: object
       properties:
@@ -647,15 +656,6 @@ components:
           format: int32
           type: integer
         Comments:
-          type: string
-    AudaAPI.Models.ImageData:
-      type: object
-      properties:
-        DisplayOrder:
-          format: int32
-          type: integer
-        JPEGData:
-          format: byte
           type: string
   securitySchemes:
     Bearer:

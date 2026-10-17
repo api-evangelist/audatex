@@ -72,111 +72,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RepairerResponseVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        internalId:
-          type:
-          - string
-          - 'null'
-        addressDetails:
-          $ref: '#/components/schemas/SelfWithAddressResponseVM'
-        emailAddress:
-          type:
-          - string
-          - 'null'
-        telephoneNumber:
-          type:
-          - string
-          - 'null'
-        aliases:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-        rates:
-          $ref: '#/components/schemas/RepairerRatesResponseVM'
-        schemes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RepairerSchemeResponseVM'
-        customFields:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/RepairerCustomFieldResponseVM'
-      additionalProperties: false
-    RepairerRatesResponseVM:
-      type: object
-      properties:
-        labourRate:
-          type:
-          - number
-          - 'null'
-          format: double
-        paintRate:
-          type:
-          - number
-          - 'null'
-          format: double
-        paintIndex:
-          type:
-          - number
-          - 'null'
-          format: double
-        overallDiscount:
-          type:
-          - number
-          - 'null'
-          format: double
-        partsDiscountPcnt:
-          type:
-          - number
-          - 'null'
-          format: double
-        sundryPartsPcnt:
-          type:
-          - number
-          - 'null'
-          format: double
-        pearlescentPcnt:
-          type:
-          - number
-          - 'null'
-          format: double
-        corrosionProtectionMat:
-          type:
-          - number
-          - 'null'
-          format: double
-        fixedPricePaintMat:
-          type:
-          - number
-          - 'null'
-          format: double
-      additionalProperties: false
-    RepairerSchemeResponseVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
     RepairerCustomFieldResponseVM:
       type: object
       properties:
@@ -243,6 +138,111 @@ components:
           - 'null'
           format: double
         self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    RepairerRatesResponseVM:
+      type: object
+      properties:
+        labourRate:
+          type:
+          - number
+          - 'null'
+          format: double
+        paintRate:
+          type:
+          - number
+          - 'null'
+          format: double
+        paintIndex:
+          type:
+          - number
+          - 'null'
+          format: double
+        overallDiscount:
+          type:
+          - number
+          - 'null'
+          format: double
+        partsDiscountPcnt:
+          type:
+          - number
+          - 'null'
+          format: double
+        sundryPartsPcnt:
+          type:
+          - number
+          - 'null'
+          format: double
+        pearlescentPcnt:
+          type:
+          - number
+          - 'null'
+          format: double
+        corrosionProtectionMat:
+          type:
+          - number
+          - 'null'
+          format: double
+        fixedPricePaintMat:
+          type:
+          - number
+          - 'null'
+          format: double
+      additionalProperties: false
+    RepairerResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        internalId:
+          type:
+          - string
+          - 'null'
+        addressDetails:
+          $ref: '#/components/schemas/SelfWithAddressResponseVM'
+        emailAddress:
+          type:
+          - string
+          - 'null'
+        telephoneNumber:
+          type:
+          - string
+          - 'null'
+        aliases:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        rates:
+          $ref: '#/components/schemas/RepairerRatesResponseVM'
+        schemes:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RepairerSchemeResponseVM'
+        customFields:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RepairerCustomFieldResponseVM'
+      additionalProperties: false
+    RepairerSchemeResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
           type:
           - string
           - 'null'

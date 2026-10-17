@@ -269,13 +269,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    FileType:
-      enum:
-      - MP4
-      - AVI
-      - MOV
-      - WAV
-      type: string
     FileModel:
       type: object
       properties:
@@ -336,6 +329,13 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    FileType:
+      enum:
+      - MP4
+      - AVI
+      - MOV
+      - WAV
+      type: string
   securitySchemes:
     Bearer:
       type: apiKey

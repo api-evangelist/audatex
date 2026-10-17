@@ -243,6 +243,37 @@ paths:
     - url: https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI
 components:
   schemas:
+    VehicleDetailResponseVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        vin:
+          type:
+          - string
+          - 'null'
+        licencePlate:
+          type:
+          - string
+          - 'null'
+        make:
+          type:
+          - string
+          - 'null'
+        model:
+          type:
+          - string
+          - 'null'
+        manufacturedYear:
+          type:
+          - string
+          - 'null'
+        mileage:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     ImageRequestResponseVM:
       type: object
       properties:
@@ -266,22 +297,6 @@ components:
           items:
             $ref: '#/components/schemas/SelfModel'
       additionalProperties: false
-    VehicleResponseVM:
-      type: object
-      properties:
-        vehicle:
-          $ref: '#/components/schemas/VehicleDetailResponseVM'
-        supplementary:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SupplementaryResponseVM'
-          description: The supplementary information associated with the vehicle
-        imageRequest:
-          $ref: '#/components/schemas/ImageRequestResponseVM'
-      additionalProperties: false
-      description: Vehicle Response view model for the Get request
     SelfModel:
       type: object
       properties:
@@ -316,6 +331,16 @@ components:
           items:
             $ref: '#/components/schemas/SelfModel'
       additionalProperties: false
+    DimensionResponseVM:
+      type: object
+      properties:
+        area:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+        width:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+        length:
+          $ref: '#/components/schemas/ValueUnitResponseVM'
+      additionalProperties: false
     WarningModel:
       type: object
       properties:
@@ -324,6 +349,22 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    VehicleResponseVM:
+      type: object
+      properties:
+        vehicle:
+          $ref: '#/components/schemas/VehicleDetailResponseVM'
+        supplementary:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SupplementaryResponseVM'
+          description: The supplementary information associated with the vehicle
+        imageRequest:
+          $ref: '#/components/schemas/ImageRequestResponseVM'
+      additionalProperties: false
+      description: Vehicle Response view model for the Get request
     PartResponseVM:
       type: object
       properties:
@@ -336,46 +377,17 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    VehicleDetailResponseVM:
+    ValueUnitResponseVM:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        vin:
+        value:
+          type: number
+          format: double
+        unit:
           type:
           - string
           - 'null'
-        licencePlate:
-          type:
-          - string
-          - 'null'
-        make:
-          type:
-          - string
-          - 'null'
-        model:
-          type:
-          - string
-          - 'null'
-        manufacturedYear:
-          type:
-          - string
-          - 'null'
-        mileage:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DimensionResponseVM:
-      type: object
-      properties:
-        area:
-          $ref: '#/components/schemas/ValueUnitResponseVM'
-        width:
-          $ref: '#/components/schemas/ValueUnitResponseVM'
-        length:
-          $ref: '#/components/schemas/ValueUnitResponseVM'
+          readOnly: true
       additionalProperties: false
     SupplementaryResponseVM:
       type: object
@@ -398,26 +410,12 @@ components:
           items:
             $ref: '#/components/schemas/SelfModel'
       additionalProperties: false
-    ValueUnitResponseVM:
+    AudaAPI.Models.Vehicles.VehicleValuationResponse:
       type: object
       properties:
-        value:
-          type: number
+        Valuation:
           format: double
-        unit:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      additionalProperties: false
-    AudaAPI.Models.Vehicles.VehicleValuationRequest:
-      type: object
-      properties:
-        Registration:
-          type: string
-        Mileage:
-          format: int32
-          type: integer
+          type: number
     AudaAPI.Models.Vehicles.VehiclePaintCodeResult:
       type: object
       properties:
@@ -431,18 +429,6 @@ components:
           type: string
         PaintCodeFound:
           type: boolean
-    AudaAPI.Models.Vehicles.VehicleDetailResult:
-      type: object
-      properties:
-        SearchStatus:
-          enum:
-          - Failed
-          - OK
-          type: string
-        ReturnMessage:
-          type: string
-        Vehicle:
-          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDetail'
     AudaAPI.Models.Vehicles.VehicleClassicDataResult:
       type: object
       properties:
@@ -452,27 +438,23 @@ components:
           type: string
         Vehicle:
           $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleClassicData'
-    AudaAPI.Models.Vehicles.VehicleDetail:
+    AudaAPI.Models.Vehicles.VehicleValuationRequest:
       type: object
       properties:
-        VIN:
+        Registration:
           type: string
-        Manufacturer:
+        Mileage:
+          format: int32
+          type: integer
+    AudaAPI.Models.Vehicles.VehicleDataResult:
+      type: object
+      properties:
+        ReturnCode:
           type: string
-        Model:
+        ReturnMessage:
           type: string
-        SubModel:
-          type: string
-        PaintCode:
-          type: string
-        EngineType:
-          type: string
-        GearBox:
-          type: string
-        ModelOptions:
-          type: array
-          items:
-            type: string
+        Vehicle:
+          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleData'
     AudaAPI.Models.Vehicles.VehicleClassicData:
       type: object
       properties:
@@ -498,21 +480,27 @@ components:
           type: string
         VRN:
           type: string
-    AudaAPI.Models.Vehicles.VehicleValuationResponse:
+    AudaAPI.Models.Vehicles.VehicleDetail:
       type: object
       properties:
-        Valuation:
-          format: double
-          type: number
-    AudaAPI.Models.Vehicles.VehicleDataResult:
-      type: object
-      properties:
-        ReturnCode:
+        VIN:
           type: string
-        ReturnMessage:
+        Manufacturer:
           type: string
-        Vehicle:
-          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleData'
+        Model:
+          type: string
+        SubModel:
+          type: string
+        PaintCode:
+          type: string
+        EngineType:
+          type: string
+        GearBox:
+          type: string
+        ModelOptions:
+          type: array
+          items:
+            type: string
     AudaAPI.Models.Vehicles.VehicleData:
       type: object
       properties:
@@ -530,6 +518,18 @@ components:
           type: string
         VehicleType:
           type: string
+    AudaAPI.Models.Vehicles.VehicleDetailResult:
+      type: object
+      properties:
+        SearchStatus:
+          enum:
+          - Failed
+          - OK
+          type: string
+        ReturnMessage:
+          type: string
+        Vehicle:
+          $ref: '#/components/schemas/AudaAPI.Models.Vehicles.VehicleDetail'
   securitySchemes:
     Bearer:
       type: apiKey

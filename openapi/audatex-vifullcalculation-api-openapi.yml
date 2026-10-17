@@ -144,6 +144,13 @@ components:
         countryCode:
           $ref: '#/components/schemas/Country'
       additionalProperties: false
+    ViFullCalculationRespVM:
+      type: object
+      properties:
+        calculationId:
+          type: string
+          format: uuid
+      additionalProperties: false
     EstimatingSourceSystem:
       enum:
       - AEG
@@ -254,13 +261,6 @@ components:
           - 'null'
           items:
             type: string
-      additionalProperties: false
-    ViFullCalculationRespVM:
-      type: object
-      properties:
-        calculationId:
-          type: string
-          format: uuid
       additionalProperties: false
   securitySchemes:
     Bearer:

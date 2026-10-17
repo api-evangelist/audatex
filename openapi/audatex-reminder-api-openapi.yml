@@ -193,69 +193,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ImageCaptureCommunicationResVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        recipient:
-          $ref: '#/components/schemas/ImageCaptureRecipientVM'
-        message:
-          type:
-          - string
-          - 'null'
-        from:
-          type:
-          - string
-          - 'null'
-        type:
-          $ref: '#/components/schemas/CommunicationType'
-        status:
-          $ref: '#/components/schemas/ImageCaptureStatusType'
-        deliveryStatus:
-          $ref: '#/components/schemas/CommunicationStatus'
-        dateSent:
-          $ref: '#/components/schemas/ImageCaptureDateViewModel'
-        enableLineTypeIntelligence:
-          type: boolean
-        template:
-          type:
-          - string
-          - 'null'
-        variables:
-          type:
-          - object
-          - 'null'
-          additionalProperties:
-            type:
-            - string
-            - 'null'
-        reminders:
-          $ref: '#/components/schemas/ReminderConfigModel'
-      additionalProperties: false
-    ImageCaptureRecipientVM:
-      required:
-      - dialingCode
-      - mobileNumber
-      type: object
-      properties:
-        dialingCode:
-          maxLength: 5
-          minLength: 1
-          type: string
-          description: Dialing code for mobile number. Format +XX
-        mobileNumber:
-          maxLength: 11
-          minLength: 8
-          type: string
-          description: The Mobile number where Image capture SMS will be sent.
-        lineType:
-          type:
-          - string
-          - 'null'
-          description: The LineType of the mobile number.
-      additionalProperties: false
     ImageCaptureStatusType:
       enum:
       - Pending
@@ -314,20 +251,27 @@ components:
             - string
             - 'null'
       additionalProperties: false
-    CommunicationType:
-      enum:
-      - SMS
-      - Whatsapp
-      type: string
-    ImageCaptureDateViewModel:
+    ImageCaptureRecipientVM:
+      required:
+      - dialingCode
+      - mobileNumber
       type: object
       properties:
-        utc:
+        dialingCode:
+          maxLength: 5
+          minLength: 1
           type: string
-          format: date-time
-        local:
+          description: Dialing code for mobile number. Format +XX
+        mobileNumber:
+          maxLength: 11
+          minLength: 8
           type: string
-          format: date-time
+          description: The Mobile number where Image capture SMS will be sent.
+        lineType:
+          type:
+          - string
+          - 'null'
+          description: The LineType of the mobile number.
       additionalProperties: false
     CommunicationStatus:
       enum:
@@ -347,6 +291,62 @@ components:
           type:
           - string
           - 'null'
+      additionalProperties: false
+    CommunicationType:
+      enum:
+      - SMS
+      - Whatsapp
+      type: string
+    ImageCaptureDateViewModel:
+      type: object
+      properties:
+        utc:
+          type: string
+          format: date-time
+        local:
+          type: string
+          format: date-time
+      additionalProperties: false
+    ImageCaptureCommunicationResVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        recipient:
+          $ref: '#/components/schemas/ImageCaptureRecipientVM'
+        message:
+          type:
+          - string
+          - 'null'
+        from:
+          type:
+          - string
+          - 'null'
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        deliveryStatus:
+          $ref: '#/components/schemas/CommunicationStatus'
+        dateSent:
+          $ref: '#/components/schemas/ImageCaptureDateViewModel'
+        enableLineTypeIntelligence:
+          type: boolean
+        template:
+          type:
+          - string
+          - 'null'
+        variables:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        reminders:
+          $ref: '#/components/schemas/ReminderConfigModel'
       additionalProperties: false
   securitySchemes:
     Bearer:

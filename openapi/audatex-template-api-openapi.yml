@@ -455,18 +455,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    TemplateResViewModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type:
-          - string
-          - 'null'
-        body: {}
-      additionalProperties: false
     TemplateReqViewModel:
       required:
       - body
@@ -474,6 +462,18 @@ components:
       properties:
         name:
           maxLength: 50
+          type:
+          - string
+          - 'null'
+        body: {}
+      additionalProperties: false
+    TemplateResViewModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
           type:
           - string
           - 'null'

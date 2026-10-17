@@ -124,6 +124,47 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    VassInstantM:
+      type: object
+      properties:
+        utc:
+          type: string
+          format: date-time
+        local:
+          type: string
+          format: date-time
+      additionalProperties: false
+    VassVideoM:
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VassResponseCommunicationM:
+      required:
+      - from
+      - message
+      - recipient
+      - type
+      type: object
+      properties:
+        recipient:
+          $ref: '#/components/schemas/ResponseCommunicationRecipientM'
+        from:
+          minLength: 1
+          type: string
+        message:
+          minLength: 1
+          type: string
+        type:
+          $ref: '#/components/schemas/CommunicationType'
+      additionalProperties: false
     VassInstanceDetailsM:
       type: object
       properties:
@@ -176,24 +217,45 @@ components:
         responseCommunication:
           $ref: '#/components/schemas/ResponseCommunicationM'
       additionalProperties: false
-    VassResponseCommunicationM:
-      required:
-      - from
-      - message
-      - recipient
-      - type
+    VassCreateResponseM:
       type: object
       properties:
-        recipient:
-          $ref: '#/components/schemas/ResponseCommunicationRecipientM'
-        from:
-          minLength: 1
-          type: string
-        message:
-          minLength: 1
-          type: string
-        type:
-          $ref: '#/components/schemas/CommunicationType'
+        id:
+          type:
+          - string
+          - 'null'
+        self:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    VassTimeZoneM:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        offset:
+          type: integer
+          format: int32
+      additionalProperties: false
+    ResponseCommunicationM:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        dateSent:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        errorMessage:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     VideoAssessmentModel:
       required:
@@ -219,119 +281,11 @@ components:
         communication:
           $ref: '#/components/schemas/VassResponseCommunicationM'
       additionalProperties: false
-    VassInstantM:
-      type: object
-      properties:
-        utc:
-          type: string
-          format: date-time
-        local:
-          type: string
-          format: date-time
-      additionalProperties: false
-    RequestCountry:
+    CommunicationType:
       enum:
-      - DZ
-      - AO
-      - AR
-      - AU
-      - AT
-      - AZ
-      - BH
-      - BY
-      - BE
-      - BA
-      - BR
-      - BN
-      - BG
-      - KH
-      - CA
-      - CL
-      - CN
-      - CO
-      - CR
-      - HR
-      - CY
-      - CZ
-      - DK
-      - EE
-      - FI
-      - FR
-      - GE
-      - DE
-      - GR
-      - HK
-      - HU
-      - IN
-      - ID
-      - IE
-      - IL
-      - IT
-      - JP
-      - KZ
-      - KE
-      - KR
-      - KW
-      - LA
-      - LV
-      - LB
-      - LT
-      - LU
-      - MK
-      - MY
-      - MT
-      - MU
-      - MX
-      - MD
-      - ME
-      - MA
-      - MM
-      - NL
-      - NZ
-      - 'NO'
-      - OM
-      - PA
-      - PE
-      - PH
-      - PL
-      - PT
-      - PR
-      - QA
-      - RO
-      - RU
-      - SA
-      - RS
-      - SG
-      - SK
-      - SI
-      - ZA
-      - ES
-      - LK
-      - SE
-      - CH
-      - TW
-      - TH
-      - TN
-      - TR
-      - UA
-      - AE
-      - GB
-      - US
-      - UY
-      - VE
-      - VN
+      - SMS
+      - Whatsapp
       type: string
-    VassTimeZoneM:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        offset:
-          type: integer
-          format: int32
-      additionalProperties: false
     VassImageM:
       type: object
       properties:
@@ -353,30 +307,6 @@ components:
           - string
           - 'null'
       additionalProperties: false
-    ResponseCommunicationRecipientM:
-      required:
-      - dialingCode
-      - mobileNumber
-      type: object
-      properties:
-        dialingCode:
-          maxLength: 5
-          minLength: 1
-          type: string
-        mobileNumber:
-          maxLength: 11
-          minLength: 8
-          type: string
-        lineType:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    CommunicationType:
-      enum:
-      - SMS
-      - Whatsapp
-      type: string
     TimeZone:
       enum:
       - Dateline_Standard_Time
@@ -476,43 +406,113 @@ components:
       - Tonga_Standard_Time
       - Samoa_Standard_Time
       type: string
-    VassVideoM:
+    RequestCountry:
+      enum:
+      - DZ
+      - AO
+      - AR
+      - AU
+      - AT
+      - AZ
+      - BH
+      - BY
+      - BE
+      - BA
+      - BR
+      - BN
+      - BG
+      - KH
+      - CA
+      - CL
+      - CN
+      - CO
+      - CR
+      - HR
+      - CY
+      - CZ
+      - DK
+      - EE
+      - FI
+      - FR
+      - GE
+      - DE
+      - GR
+      - HK
+      - HU
+      - IN
+      - ID
+      - IE
+      - IL
+      - IT
+      - JP
+      - KZ
+      - KE
+      - KR
+      - KW
+      - LA
+      - LV
+      - LB
+      - LT
+      - LU
+      - MK
+      - MY
+      - MT
+      - MU
+      - MX
+      - MD
+      - ME
+      - MA
+      - MM
+      - NL
+      - NZ
+      - 'NO'
+      - OM
+      - PA
+      - PE
+      - PH
+      - PL
+      - PT
+      - PR
+      - QA
+      - RO
+      - RU
+      - SA
+      - RS
+      - SG
+      - SK
+      - SI
+      - ZA
+      - ES
+      - LK
+      - SE
+      - CH
+      - TW
+      - TH
+      - TN
+      - TR
+      - UA
+      - AE
+      - GB
+      - US
+      - UY
+      - VE
+      - VN
+      type: string
+    ResponseCommunicationRecipientM:
+      required:
+      - dialingCode
+      - mobileNumber
       type: object
       properties:
-        id:
-          type:
-          - string
-          - 'null'
-        self:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ResponseCommunicationM:
-      type: object
-      properties:
-        status:
-          type:
-          - string
-          - 'null'
-        dateSent:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        errorMessage:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    VassCreateResponseM:
-      type: object
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-        self:
+        dialingCode:
+          maxLength: 5
+          minLength: 1
+          type: string
+        mobileNumber:
+          maxLength: 11
+          minLength: 8
+          type: string
+        lineType:
           type:
           - string
           - 'null'

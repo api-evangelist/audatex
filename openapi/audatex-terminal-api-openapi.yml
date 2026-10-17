@@ -120,31 +120,6 @@ paths:
         - ReferenceData.System
 components:
   schemas:
-    AudaAPI.Models.Terminal:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        MasterList_SiteId:
-          $ref: '#/components/schemas/AudaAPI.Models.Site'
-        MasterList_CustomerNumber:
-          $ref: '#/components/schemas/AudaAPI.Models.MasterList_CustomerNumber'
-        AudaMailName:
-          type: string
-        HexId:
-          type: string
-        IsAudaMailAddress:
-          type: boolean
-        TerminalId:
-          type: string
-    AudaAPI.Models.SiteOption:
-      type: object
-      properties:
-        Name:
-          type: string
-        Value:
-          type: string
     AudaAPI.Models.Site:
       type: object
       properties:
@@ -163,23 +138,12 @@ components:
           type: string
         ExternalCode:
           type: string
-    AudaAPI.Models.Address:
+    AudaAPI.Models.SiteOption:
       type: object
       properties:
-        ID:
-          format: uuid
+        Name:
           type: string
-        AddressLine1:
-          type: string
-        AddressLine2:
-          type: string
-        AddressLine3:
-          type: string
-        AddressLine4:
-          type: string
-        AddressLine5:
-          type: string
-        PostCode:
+        Value:
           type: string
     AudaAPI.Models.Contact:
       type: object
@@ -267,6 +231,42 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.Models.SiteOption'
+    AudaAPI.Models.Address:
+      type: object
+      properties:
+        ID:
+          format: uuid
+          type: string
+        AddressLine1:
+          type: string
+        AddressLine2:
+          type: string
+        AddressLine3:
+          type: string
+        AddressLine4:
+          type: string
+        AddressLine5:
+          type: string
+        PostCode:
+          type: string
+    AudaAPI.Models.Terminal:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        MasterList_SiteId:
+          $ref: '#/components/schemas/AudaAPI.Models.Site'
+        MasterList_CustomerNumber:
+          $ref: '#/components/schemas/AudaAPI.Models.MasterList_CustomerNumber'
+        AudaMailName:
+          type: string
+        HexId:
+          type: string
+        IsAudaMailAddress:
+          type: boolean
+        TerminalId:
+          type: string
   securitySchemes:
     oauth2:
       type: oauth2

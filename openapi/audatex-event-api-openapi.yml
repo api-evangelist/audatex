@@ -541,46 +541,12 @@ paths:
         - BMS.Basic
 components:
   schemas:
-    AudaAPI.BMSAPI.DTO.SubscriptionObsolete:
+    AudaAPI.BMSAPI.DTO.Topic:
       type: object
       properties:
-        SubscriptionId:
-          format: uuid
+        TopicCode:
           type: string
-        Topic:
-          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
-        CreatedAt:
-          format: date-time
-          type: string
-    AudaAPI.BMSAPI.DTO.Subscription:
-      type: object
-      properties:
-        SubscriptionId:
-          format: uuid
-          type: string
-        Topic:
-          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
-        CreatedAt:
-          format: date-time
-          type: string
-        Push:
-          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionPush'
-    AudaAPI.BMSAPI.DTO.SubscriptionPush:
-      type: object
-      properties:
-        URL:
-          type: string
-        Format:
-          enum:
-          - Uninitialised
-          - XML
-          - JSON
-          type: string
-        AuthEnabled:
-          type: boolean
-        AuthScheme:
-          type: string
-        AuthParameter:
+        Description:
           type: string
     AudaAPI.BMSAPI.DTO.NotificationMessage:
       type: object
@@ -612,6 +578,36 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.NotificationResource'
+    AudaAPI.BMSAPI.DTO.Subscription:
+      type: object
+      properties:
+        SubscriptionId:
+          format: uuid
+          type: string
+        Topic:
+          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+        CreatedAt:
+          format: date-time
+          type: string
+        Push:
+          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.SubscriptionPush'
+    AudaAPI.BMSAPI.DTO.SubscriptionPush:
+      type: object
+      properties:
+        URL:
+          type: string
+        Format:
+          enum:
+          - Uninitialised
+          - XML
+          - JSON
+          type: string
+        AuthEnabled:
+          type: boolean
+        AuthScheme:
+          type: string
+        AuthParameter:
+          type: string
     AudaAPI.BMSAPI.DTO.NotificationResource:
       type: object
       properties:
@@ -627,12 +623,16 @@ components:
           type: string
         Value:
           type: string
-    AudaAPI.BMSAPI.DTO.Topic:
+    AudaAPI.BMSAPI.DTO.SubscriptionObsolete:
       type: object
       properties:
-        TopicCode:
+        SubscriptionId:
+          format: uuid
           type: string
-        Description:
+        Topic:
+          $ref: '#/components/schemas/AudaAPI.BMSAPI.DTO.Topic'
+        CreatedAt:
+          format: date-time
           type: string
   securitySchemes:
     oauth2:

@@ -80,20 +80,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    RAMCustomField:
+    InsuredViewModel:
+      required:
+      - name
       type: object
       properties:
-        fieldId:
-          type: string
-          format: uuid
         name:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
+          type: string
       additionalProperties: false
     VehicleViewModel:
       required:
@@ -123,91 +116,6 @@ components:
           minimum: 1901
           type: integer
           format: int32
-      additionalProperties: false
-    ClaimRepairersReqViewModel:
-      required:
-      - claim
-      - insured
-      - numberOfResultsPerScheme
-      - vehicle
-      - vehicleLocation
-      type: object
-      properties:
-        claim:
-          $ref: '#/components/schemas/ClaimRepairersClaimViewModel'
-        vehicle:
-          $ref: '#/components/schemas/VehicleViewModel'
-        vehicleLocation:
-          $ref: '#/components/schemas/LocationViewModel'
-        insured:
-          $ref: '#/components/schemas/InsuredViewModel'
-        numberOfResultsPerScheme:
-          maximum: 4294967295
-          minimum: 1
-          type: integer
-          format: int32
-      additionalProperties: false
-    LocationViewModel:
-      required:
-      - latitude
-      - longitude
-      type: object
-      properties:
-        latitude:
-          maximum: 90
-          minimum: -90
-          type: number
-          format: double
-        longitude:
-          maximum: 180
-          minimum: -180
-          type: number
-          format: double
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    InsuredViewModel:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          type: string
-      additionalProperties: false
-    RamGenericData:
-      type: object
-      properties:
-        text:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     ClaimRepairerRespViewModel:
       type: object
@@ -255,6 +163,46 @@ components:
         isWarranty:
           type: boolean
       additionalProperties: false
+    RAMCustomField:
+      type: object
+      properties:
+        fieldId:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
     ClaimRepairersClaimViewModel:
       required:
       - claimNumber
@@ -275,6 +223,58 @@ components:
         incidentDateTimeUTC:
           type: string
           format: date-time
+      additionalProperties: false
+    LocationViewModel:
+      required:
+      - latitude
+      - longitude
+      type: object
+      properties:
+        latitude:
+          maximum: 90
+          minimum: -90
+          type: number
+          format: double
+        longitude:
+          maximum: 180
+          minimum: -180
+          type: number
+          format: double
+      additionalProperties: false
+    RamGenericData:
+      type: object
+      properties:
+        text:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ClaimRepairersReqViewModel:
+      required:
+      - claim
+      - insured
+      - numberOfResultsPerScheme
+      - vehicle
+      - vehicleLocation
+      type: object
+      properties:
+        claim:
+          $ref: '#/components/schemas/ClaimRepairersClaimViewModel'
+        vehicle:
+          $ref: '#/components/schemas/VehicleViewModel'
+        vehicleLocation:
+          $ref: '#/components/schemas/LocationViewModel'
+        insured:
+          $ref: '#/components/schemas/InsuredViewModel'
+        numberOfResultsPerScheme:
+          maximum: 4294967295
+          minimum: 1
+          type: integer
+          format: int32
       additionalProperties: false
   securitySchemes:
     Bearer:

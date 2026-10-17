@@ -283,78 +283,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    AudaAPI.Models.Notification.SubscriptionPush:
-      type: object
-      properties:
-        URL:
-          type: string
-        Format:
-          enum:
-          - Uninitialised
-          - XML
-          - JSON
-          type: string
-        AuthEnabled:
-          type: boolean
-        AuthScheme:
-          type: string
-        AuthParameter:
-          type: string
-    AudaAPI.Models.Notification.Topic:
-      type: object
-      properties:
-        TopicCode:
-          type: string
-        Description:
-          type: string
-    AudaAPI.Models.Notification.NotificationResource:
-      type: object
-      properties:
-        ResourceType:
-          type: string
-        ResourceId:
-          format: uuid
-          type: string
-    AudaAPI.WebAPI.Models.RaiseNotification:
-      type: object
-      properties:
-        Id:
-          format: int64
-          type: integer
-        CustomerId:
-          format: int32
-          type: integer
-        SiteId:
-          format: int32
-          type: integer
-        Type:
-          enum:
-          - Order
-          - Quote
-          type: string
-        Action:
-          enum:
-          - Create
-          - Update
-          type: string
-        AssessmentId:
-          format: uuid
-          type: string
-    AudaAPI.Models.Notification.SubscriptionResponse:
-      required:
-      - SubscriptionId
-      type: object
-      properties:
-        SubscriptionId:
-          format: uuid
-          type: string
-    AudaAPI.Models.Notification.NotificationParameter:
-      type: object
-      properties:
-        Key:
-          type: string
-        Value:
-          type: string
     AudaAPI.Models.Notification.NotificationMessage:
       type: object
       properties:
@@ -385,7 +313,31 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AudaAPI.Models.Notification.NotificationResource'
+    AudaAPI.Models.Notification.Topic:
+      type: object
+      properties:
+        TopicCode:
+          type: string
+        Description:
+          type: string
     AudaAPI.WebAPI.Models.PushDetails:
+      type: object
+      properties:
+        URL:
+          type: string
+        Format:
+          enum:
+          - Uninitialised
+          - XML
+          - JSON
+          type: string
+        AuthEnabled:
+          type: boolean
+        AuthScheme:
+          type: string
+        AuthParameter:
+          type: string
+    AudaAPI.Models.Notification.SubscriptionPush:
       type: object
       properties:
         URL:
@@ -407,6 +359,46 @@ components:
       properties:
         TopicCode:
           type: string
+    AudaAPI.Models.Notification.SubscriptionResponse:
+      required:
+      - SubscriptionId
+      type: object
+      properties:
+        SubscriptionId:
+          format: uuid
+          type: string
+    AudaAPI.WebAPI.Models.SubscribeDataWithPush:
+      type: object
+      properties:
+        TopicCode:
+          type: string
+        Push:
+          $ref: '#/components/schemas/AudaAPI.WebAPI.Models.PushDetails'
+    AudaAPI.WebAPI.Models.RaiseNotification:
+      type: object
+      properties:
+        Id:
+          format: int64
+          type: integer
+        CustomerId:
+          format: int32
+          type: integer
+        SiteId:
+          format: int32
+          type: integer
+        Type:
+          enum:
+          - Order
+          - Quote
+          type: string
+        Action:
+          enum:
+          - Create
+          - Update
+          type: string
+        AssessmentId:
+          format: uuid
+          type: string
     AudaAPI.Models.Notification.Subscription:
       type: object
       properties:
@@ -420,13 +412,21 @@ components:
           type: string
         Push:
           $ref: '#/components/schemas/AudaAPI.Models.Notification.SubscriptionPush'
-    AudaAPI.WebAPI.Models.SubscribeDataWithPush:
+    AudaAPI.Models.Notification.NotificationResource:
       type: object
       properties:
-        TopicCode:
+        ResourceType:
           type: string
-        Push:
-          $ref: '#/components/schemas/AudaAPI.WebAPI.Models.PushDetails'
+        ResourceId:
+          format: uuid
+          type: string
+    AudaAPI.Models.Notification.NotificationParameter:
+      type: object
+      properties:
+        Key:
+          type: string
+        Value:
+          type: string
   securitySchemes:
     oauth2:
       type: oauth2

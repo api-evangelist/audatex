@@ -110,6 +110,30 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    ProductAlignment:
+      type: object
+      properties:
+        vertical:
+          type:
+          - string
+          - 'null'
+        productCategory:
+          type:
+          - string
+          - 'null'
+        product:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    DomainAlignment:
+      type: object
+      properties:
+        domainContext:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
     AppDetail:
       type: object
       properties:
@@ -148,30 +172,6 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/Scope'
-      additionalProperties: false
-    ProductAlignment:
-      type: object
-      properties:
-        vertical:
-          type:
-          - string
-          - 'null'
-        productCategory:
-          type:
-          - string
-          - 'null'
-        product:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    DomainAlignment:
-      type: object
-      properties:
-        domainContext:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
   securitySchemes:
     Bearer:

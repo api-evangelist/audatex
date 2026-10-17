@@ -190,26 +190,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    PingModel:
-      type: object
-      properties:
-        pingId:
-          type: string
-          format: uuid
-      additionalProperties: false
-    PingResponse:
-      type: object
-      properties:
-        pingId:
-          type: string
-          format: uuid
-        pingResults:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/PingResult'
-      additionalProperties: false
     PingResult:
       type: object
       properties:
@@ -227,11 +207,31 @@ components:
           - string
           - 'null'
       additionalProperties: false
+    PingModel:
+      type: object
+      properties:
+        pingId:
+          type: string
+          format: uuid
+      additionalProperties: false
     PingStatus:
       enum:
       - Failure
       - Success
       type: string
+    PingResponse:
+      type: object
+      properties:
+        pingId:
+          type: string
+          format: uuid
+        pingResults:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PingResult'
+      additionalProperties: false
   securitySchemes:
     Bearer:
       type: apiKey

@@ -773,177 +773,33 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SelfModel:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-        communicationId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        warnings:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WarningModel'
-        communicationErrors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WarningModel'
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/SelfModel'
-      additionalProperties: false
-    AssetPropertiesReqVM:
-      required:
-      - axManufacturer
-      - axModel
-      - axModelOptions
-      - axSubModel
-      - bodyType
-      - make
-      - model
-      - year
-      type: object
-      properties:
-        make:
-          minLength: 1
-          type: string
-        model:
-          minLength: 1
-          type: string
-        year:
-          minLength: 1
-          type: string
-        bodyType:
-          minLength: 1
-          type: string
-        axManufacturer:
-          minLength: 1
-          type: string
-        axModel:
-          minLength: 1
-          type: string
-        axSubModel:
-          minLength: 1
-          type: string
-        axModelOptions:
-          minLength: 1
-          type: string
-      additionalProperties: false
+    ImageCaptureStatusType:
+      enum:
+      - Pending
+      - Expired
+      - Completed
+      type: string
     ImageType:
       enum:
       - Png
       - Jpeg
       - Svg
       type: string
-    ICExternalV2ImageInfoReqVM:
+    ImageCaptureAssetIdentifierReqVM:
       required:
-      - type
+      - identifier
+      - value
       type: object
       properties:
-        filename:
-          maxLength: 200
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Tag'
-        type:
-          $ref: '#/components/schemas/ImageType'
-      additionalProperties: false
-    WarningModel:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    ProblemDetails:
-      type: object
-      properties:
-        type:
-          type:
-          - string
-          - 'null'
-        title:
-          type:
-          - string
-          - 'null'
-        status:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        detail:
-          type:
-          - string
-          - 'null'
-        instance:
-          type:
-          - string
-          - 'null'
-      additionalProperties: {}
-    ICExternalV2ReqVM:
-      required:
-      - clientReferenceId
-      type: object
-      properties:
-        clientReferenceId:
+        identifier:
+          $ref: '#/components/schemas/AssetIdentifier'
+        value:
           maxLength: 255
           minLength: 1
           type: string
-          description: Customer unique reference Id
-        asset:
-          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
-        collectionId:
-          type:
-          - string
-          - 'null'
-          description: Image CollectionId
-          format: uuid
-        jobId:
-          type:
-          - string
-          - 'null'
-          description: Job for this ImageRequest to be linked with
-          format: uuid
-        expiryDate:
-          maximum: 30
-          minimum: 1
-          type:
-          - integer
-          - 'null'
-          format: int32
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ICExternalV2ImageInfoReqVM'
-          description: List of images information to be initialized
+          description: Value against the identifier
+        assetProperties:
+          $ref: '#/components/schemas/AssetPropertiesReqVM'
       additionalProperties: false
     ICExternalReqVM:
       required:
@@ -970,21 +826,68 @@ components:
           description: Job for the Image Capture to be linked with
           format: uuid
       additionalProperties: false
-    ImageCaptureAssetIdentifierReqVM:
-      required:
-      - identifier
-      - value
+    Tag:
+      enum:
+      - wheel
+      - front
+      - rear
+      - left
+      - right
+      - interior
+      - mileage
+      - vin
+      - centre
+      - roof
+      - window
+      - library
+      - digitalSignature
+      - wideAngle
+      - selfPortrait
+      - fullView
+      - closeUp
+      type: string
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type:
+          - string
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        status:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        detail:
+          type:
+          - string
+          - 'null'
+        instance:
+          type:
+          - string
+          - 'null'
+      additionalProperties: {}
+    ImageCaptureAssetIdentifierResVM:
       type: object
       properties:
         identifier:
-          $ref: '#/components/schemas/AssetIdentifier'
+          type:
+          - string
+          - 'null'
         value:
-          maxLength: 255
-          minLength: 1
-          type: string
-          description: Value against the identifier
-        assetProperties:
-          $ref: '#/components/schemas/AssetPropertiesReqVM'
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ImageCaptureAssetPropertyRespVM'
       additionalProperties: false
     ICExternalImageVM:
       required:
@@ -1008,107 +911,10 @@ components:
           - 'null'
           description: Reference id setting by the client for this particular image
       additionalProperties: false
-    AssetIdentifier:
-      enum:
-      - VIN
-      type: string
-    ICExternalV2RespVM:
+    ImageCaptureAssetPropertyRespVM:
       type: object
       properties:
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ExternalImageRequestV2Images'
-        clientReferenceId:
-          type:
-          - string
-          - 'null'
-        asset:
-          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
-        status:
-          $ref: '#/components/schemas/ImageCaptureStatusType'
-        jobId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      additionalProperties: false
-    ICExternalRespVM:
-      type: object
-      properties:
-        images:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ICExternalImageRespVM'
-        clientReferenceId:
-          type:
-          - string
-          - 'null'
-        asset:
-          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
-        status:
-          $ref: '#/components/schemas/ImageCaptureStatusType'
-        jobId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      additionalProperties: false
-    ICExternalImageRespVM:
-      type: object
-      properties:
-        imageId:
-          type: string
-          format: uuid
-        image:
-          type:
-          - string
-          - 'null'
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Tag'
-        clientReferenceImageId:
-          type:
-          - string
-          - 'null'
-          description: Reference id setting by the client for this particular image
-      additionalProperties: false
-    ExternalImageRequestV2Images:
-      type: object
-      properties:
-        imageId:
-          type: string
-          format: uuid
-        filename:
-          type:
-          - string
-          - 'null'
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          type:
-          - string
-          - 'null'
-        tags:
-          type:
-          - array
-          - 'null'
-          items:
-            type: string
-      additionalProperties: false
-    ImageCaptureAssetIdentifierResVM:
-      type: object
-      properties:
-        identifier:
+        key:
           type:
           - string
           - 'null'
@@ -1116,52 +922,7 @@ components:
           type:
           - string
           - 'null'
-        properties:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ImageCaptureAssetPropertyRespVM'
       additionalProperties: false
-    ImageCaptureStatusType:
-      enum:
-      - Pending
-      - Expired
-      - Completed
-      type: string
-    ICExternalSelfVM:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        self:
-          type:
-          - string
-          - 'null'
-        error:
-          $ref: '#/components/schemas/ErrorModel'
-      additionalProperties: false
-    Tag:
-      enum:
-      - wheel
-      - front
-      - rear
-      - left
-      - right
-      - interior
-      - mileage
-      - vin
-      - centre
-      - roof
-      - window
-      - library
-      - digitalSignature
-      - wideAngle
-      - selfPortrait
-      - fullView
-      - closeUp
-      type: string
     ErrorModel:
       type: object
       properties:
@@ -1202,17 +963,256 @@ components:
           format: int32
           readOnly: true
       additionalProperties: false
-    ImageCaptureAssetPropertyRespVM:
+    ICExternalRespVM:
       type: object
       properties:
-        key:
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ICExternalImageRespVM'
+        clientReferenceId:
           type:
           - string
           - 'null'
-        value:
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        jobId:
           type:
           - string
           - 'null'
+          format: uuid
+      additionalProperties: false
+    SelfModel:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        communicationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        warnings:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        communicationErrors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/WarningModel'
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/SelfModel'
+      additionalProperties: false
+    ExternalImageRequestV2Images:
+      type: object
+      properties:
+        imageId:
+          type: string
+          format: uuid
+        filename:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+      additionalProperties: false
+    ICExternalV2ImageInfoReqVM:
+      required:
+      - type
+      type: object
+      properties:
+        filename:
+          maxLength: 200
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+        type:
+          $ref: '#/components/schemas/ImageType'
+      additionalProperties: false
+    WarningModel:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    AssetIdentifier:
+      enum:
+      - VIN
+      type: string
+    ICExternalV2RespVM:
+      type: object
+      properties:
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ExternalImageRequestV2Images'
+        clientReferenceId:
+          type:
+          - string
+          - 'null'
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierResVM'
+        status:
+          $ref: '#/components/schemas/ImageCaptureStatusType'
+        jobId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      additionalProperties: false
+    ICExternalV2ReqVM:
+      required:
+      - clientReferenceId
+      type: object
+      properties:
+        clientReferenceId:
+          maxLength: 255
+          minLength: 1
+          type: string
+          description: Customer unique reference Id
+        asset:
+          $ref: '#/components/schemas/ImageCaptureAssetIdentifierReqVM'
+        collectionId:
+          type:
+          - string
+          - 'null'
+          description: Image CollectionId
+          format: uuid
+        jobId:
+          type:
+          - string
+          - 'null'
+          description: Job for this ImageRequest to be linked with
+          format: uuid
+        expiryDate:
+          maximum: 30
+          minimum: 1
+          type:
+          - integer
+          - 'null'
+          format: int32
+        images:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ICExternalV2ImageInfoReqVM'
+          description: List of images information to be initialized
+      additionalProperties: false
+    ICExternalSelfVM:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        self:
+          type:
+          - string
+          - 'null'
+        error:
+          $ref: '#/components/schemas/ErrorModel'
+      additionalProperties: false
+    AssetPropertiesReqVM:
+      required:
+      - axManufacturer
+      - axModel
+      - axModelOptions
+      - axSubModel
+      - bodyType
+      - make
+      - model
+      - year
+      type: object
+      properties:
+        make:
+          minLength: 1
+          type: string
+        model:
+          minLength: 1
+          type: string
+        year:
+          minLength: 1
+          type: string
+        bodyType:
+          minLength: 1
+          type: string
+        axManufacturer:
+          minLength: 1
+          type: string
+        axModel:
+          minLength: 1
+          type: string
+        axSubModel:
+          minLength: 1
+          type: string
+        axModelOptions:
+          minLength: 1
+          type: string
+      additionalProperties: false
+    ICExternalImageRespVM:
+      type: object
+      properties:
+        imageId:
+          type: string
+          format: uuid
+        image:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Tag'
+        clientReferenceImageId:
+          type:
+          - string
+          - 'null'
+          description: Reference id setting by the client for this particular image
       additionalProperties: false
   securitySchemes:
     Bearer:

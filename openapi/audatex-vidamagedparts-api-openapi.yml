@@ -162,6 +162,56 @@ components:
           items:
             $ref: '#/components/schemas/ViDamagedPartsPartsRespVM'
       additionalProperties: false
+    ViErrorPropertyViewModel:
+      type: object
+      properties:
+        name:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    ViErrorViewModel:
+      type: object
+      properties:
+        code:
+          type:
+          - string
+          - 'null'
+        message:
+          type:
+          - string
+          - 'null'
+        properties:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorPropertyViewModel'
+      additionalProperties: false
+    ViDamagedPartsRespVM:
+      type: object
+      properties:
+        status:
+          type:
+          - string
+          - 'null'
+        errors:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViErrorViewModel'
+        damagedParts:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ViDamagedPartsValueRespVM'
+      additionalProperties: false
     ViDamagedPartsPartsRespVM:
       type: object
       properties:
@@ -216,24 +266,6 @@ components:
           - 'null'
           format: double
       additionalProperties: false
-    ViErrorViewModel:
-      type: object
-      properties:
-        code:
-          type:
-          - string
-          - 'null'
-        message:
-          type:
-          - string
-          - 'null'
-        properties:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ViErrorPropertyViewModel'
-      additionalProperties: false
     ViDamagedPartsReqVM:
       required:
       - countryCode
@@ -246,18 +278,6 @@ components:
           format: uuid
         countryCode:
           $ref: '#/components/schemas/Country'
-      additionalProperties: false
-    ViErrorPropertyViewModel:
-      type: object
-      properties:
-        name:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
       additionalProperties: false
     Country:
       enum:
@@ -363,26 +383,6 @@ components:
           - 'null'
           items:
             type: string
-      additionalProperties: false
-    ViDamagedPartsRespVM:
-      type: object
-      properties:
-        status:
-          type:
-          - string
-          - 'null'
-        errors:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ViErrorViewModel'
-        damagedParts:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/ViDamagedPartsValueRespVM'
       additionalProperties: false
   securitySchemes:
     Bearer:

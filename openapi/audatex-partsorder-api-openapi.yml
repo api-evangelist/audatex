@@ -370,80 +370,6 @@ paths:
     - url: https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI
 components:
   schemas:
-    AudaAPI.Models.Parts.Model:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        ManufacturerName:
-          type: string
-        ModelName:
-          type: string
-    AudaAPI.Models.Parts.Part:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        Description:
-          type: string
-        PartNumber:
-          type: string
-        OeNumber:
-          type: string
-        AftermarketPartNumber:
-          type: string
-        Manufacturer:
-          type: string
-        ManufType:
-          enum:
-          - OE
-          - NonOE
-          type: string
-        GuideNumber:
-          format: int32
-          type: integer
-        Quantity:
-          format: int32
-          type: integer
-        UnitCost:
-          format: double
-          type: number
-        TotalCost:
-          format: double
-          type: number
-        Status:
-          enum:
-          - Pending
-          - Ordered
-          - Received
-          - Returned
-          - Cancelled
-          type: string
-    AudaAPI.Models.Parts.Calculation:
-      type: object
-      properties:
-        Id:
-          format: uuid
-          type: string
-        CalculationDate:
-          format: date-time
-          type: string
-        GrandTotalIncludingVat:
-          format: double
-          type: number
-        GrandTotalExcludingVat:
-          format: double
-          type: number
-        Parts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Parts.Part'
-        Zone99Parts:
-          type: array
-          items:
-            $ref: '#/components/schemas/AudaAPI.Models.Parts.Zone99Part'
     AudaAPI.Models.Parts.PartsOrder:
       type: object
       properties:
@@ -517,32 +443,100 @@ components:
           type: string
         Error:
           type: string
-    AudaAPI.Models.Parts.PartsResult:
-      type: object
-      properties:
-        Order:
-          $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
-        Status:
-          enum:
-          - Ok
-          - Failed
-          - GeneralError
-          type: string
-        Error:
-          type: string
-    AudaAPI.Models.Parts.Zone99Part:
+    AudaAPI.Models.Parts.Model:
       type: object
       properties:
         Id:
           format: uuid
           type: string
+        ManufacturerName:
+          type: string
+        ModelName:
+          type: string
+    AudaAPI.Models.Parts.Calculation:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        CalculationDate:
+          format: date-time
+          type: string
+        GrandTotalIncludingVat:
+          format: double
+          type: number
+        GrandTotalExcludingVat:
+          format: double
+          type: number
+        Parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Parts.Part'
+        Zone99Parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AudaAPI.Models.Parts.Zone99Part'
+    AudaAPI.Models.Parts.Vehicle:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        Vin:
+          type: string
+        Registration:
+          type: string
+        MonthOfRegistration:
+          format: int32
+          type: integer
+        YearOfRegistration:
+          format: int32
+          type: integer
+        BodyColour:
+          type: string
+        Odometer:
+          format: int32
+          type: integer
+    AudaAPI.Models.Parts.Part:
+      type: object
+      properties:
+        Id:
+          format: uuid
+          type: string
+        Description:
+          type: string
         PartNumber:
           type: string
+        OeNumber:
+          type: string
+        AftermarketPartNumber:
+          type: string
+        Manufacturer:
+          type: string
+        ManufType:
+          enum:
+          - OE
+          - NonOE
+          type: string
+        GuideNumber:
+          format: int32
+          type: integer
         Quantity:
           format: int32
           type: integer
-        CalculationId:
-          format: uuid
+        UnitCost:
+          format: double
+          type: number
+        TotalCost:
+          format: double
+          type: number
+        Status:
+          enum:
+          - Pending
+          - Ordered
+          - Received
+          - Returned
+          - Cancelled
           type: string
     AudaAPI.Models.Parts.SupplierPartPrice:
       type: object
@@ -568,27 +562,33 @@ components:
         Price:
           format: double
           type: number
-    AudaAPI.Models.Parts.Vehicle:
+    AudaAPI.Models.Parts.Zone99Part:
       type: object
       properties:
         Id:
           format: uuid
           type: string
-        Vin:
+        PartNumber:
           type: string
-        Registration:
-          type: string
-        MonthOfRegistration:
+        Quantity:
           format: int32
           type: integer
-        YearOfRegistration:
-          format: int32
-          type: integer
-        BodyColour:
+        CalculationId:
+          format: uuid
           type: string
-        Odometer:
-          format: int32
-          type: integer
+    AudaAPI.Models.Parts.PartsResult:
+      type: object
+      properties:
+        Order:
+          $ref: '#/components/schemas/AudaAPI.Models.Parts.PartsOrder'
+        Status:
+          enum:
+          - Ok
+          - Failed
+          - GeneralError
+          type: string
+        Error:
+          type: string
     AudaAPI.BMSAPI.DTO.Parts.PartsOrder:
       type: object
       properties:
