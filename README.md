@@ -1,4 +1,4 @@
-# Audatex (audatex)
+# Audatex
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,111 +64,188 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Audatex (part of Solera Holdings) provides automotive claims and repair solutions with data and technology services for the automotive insurance, collision repair, and fleet management industries. It offers the AudaConnect API platform for third-party integration with claims processing, damage assessment, repair cost estimation, and vehicle data workflows. APIs are RESTful with JSON/XML support and OAuth 2.0 authentication.
+Audatex (a Solera company) provides automotive claims and repair solutions with data and technology services for the automotive insurance, collision repair, and fleet management industries. It publishes the AudaConnect API platform for third-party integration (Audatex UK: assessments, vehicle reference data, parts orders, images, total-loss quotes and notification subscriptions, plus a bodyshop-management BMS API), an Intelligent Vehicle Inspection API Gateway (image capture, AI triage, video assessment, webhooks), and North American GIC / Dashboard Assignment integration APIs. APIs are RESTful with JSON/XML support, secured with OAuth 2.0 (AudaConnect portal and an OpenID Connect identity server), and access is granted through the AudaConnect service desk rather than self-service sign-up.
 
-**URL:** [https://www.audatex.com](https://www.audatex.com)
+**Areas:** Automotive · Claims Processing · Insurance · Repair Management · Vehicle Data · Collision Repair · Vehicle Inspection
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Audatex on APIs.io
 
-## Tags:
+Everything profiled for Audatex is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/audatex/](https://apis.io/providers/audatex/)** — or go straight to one of the APIs or properties below.
 
- - Automotive, Claims Processing, Insurance, Repair Management, Vehicle Data
+### APIs (50)
 
-## Timestamps
+- [Solera API Gateway (North America)](https://apis.io/apis/audatex/solera-api-gateway/) — The Solera Integrations Public API portal for North America lists the Audatex/Solera claims services available to integrators, including the ClaimImage…
+- [Audatex AI Triage API](https://apis.io/apis/audatex/audatex-aitriage-api/) — The AiTriage API from Audatex — 2 operation(s) for aitriage.
+- [Audatex Assessment API](https://apis.io/apis/audatex/audatex-assessment-api/) — The Assessment API from Audatex — 26 operation(s) for assessment.
+- [Audatex Assessment Export API](https://apis.io/apis/audatex/audatex-assessmentexport-api/) — The AssessmentExport API from Audatex — 1 operation(s) for assessmentexport.
+- [Audatex Assessment Import API](https://apis.io/apis/audatex/audatex-assessmentimport-api/) — The AssessmentImport API from Audatex — 2 operation(s) for assessmentimport.
+- [Audatex Assessment Report API](https://apis.io/apis/audatex/audatex-assessmentreport-api/) — The AssessmentReport API from Audatex — 2 operation(s) for assessmentreport.
+- [Audatex Audio API](https://apis.io/apis/audatex/audatex-audio-api/) — The Audio API from Audatex — 2 operation(s) for audio.
+- [Audatex BMS API](https://apis.io/apis/audatex/audatex-bms-api/) — The BMS API from Audatex — 1 operation(s) for bms.
+- [Audatex Calculation API](https://apis.io/apis/audatex/audatex-calculation-api/) — The Calculation API from Audatex — 2 operation(s) for calculation.
+- [Audatex Claim API](https://apis.io/apis/audatex/audatex-claim-api/) — The Claim API from Audatex — 3 operation(s) for claim.
+- [Audatex Claim Repairers API](https://apis.io/apis/audatex/audatex-claimrepairers-api/) — The ClaimRepairers API from Audatex — 1 operation(s) for claimrepairers.
+- [Audatex Client Configuration API](https://apis.io/apis/audatex/audatex-clientconfiguration-api/) — The ClientConfiguration API from Audatex — 1 operation(s) for clientconfiguration.
+- [Audatex Company API](https://apis.io/apis/audatex/audatex-company-api/) — The Company API from Audatex — 2 operation(s) for company.
+- [Audatex Event API](https://apis.io/apis/audatex/audatex-event-api/) — The Event API from Audatex — 10 operation(s) for event.
+- [Audatex Filter API](https://apis.io/apis/audatex/audatex-filter-api/) — The Filter API from Audatex — 3 operation(s) for filter.
+- [Audatex Fraud Check API](https://apis.io/apis/audatex/audatex-fraudcheck-api/) — The FraudCheck API from Audatex — 1 operation(s) for fraudcheck.
+- [Audatex GIC Integration API](https://apis.io/apis/audatex/audatex-gicintegration-api/) — The GICIntegration API from Audatex — 2 operation(s) for gicintegration.
+- [Audatex Hero Image API](https://apis.io/apis/audatex/audatex-heroimage-api/) — The HeroImage API from Audatex — 1 operation(s) for heroimage.
+- [Audatex History API](https://apis.io/apis/audatex/audatex-history-api/) — The History API from Audatex — 1 operation(s) for history.
+- [Audatex Image API](https://apis.io/apis/audatex/audatex-image-api/) — The Image API from Audatex — 6 operation(s) for image.
+- [Audatex Image Attachment API](https://apis.io/apis/audatex/audatex-imageattachment-api/) — The ImageAttachment API from Audatex — 2 operation(s) for imageattachment.
+- [Audatex Image Capture API](https://apis.io/apis/audatex/audatex-imagecapture-api/) — The ImageCapture API from Audatex — 9 operation(s) for imagecapture.
+- [Audatex Image Capture External API](https://apis.io/apis/audatex/audatex-imagecaptureexternal-api/) — The ImageCaptureExternal API from Audatex — 10 operation(s) for imagecaptureexternal.
+- [Audatex Internal Data API](https://apis.io/apis/audatex/audatex-internaldata-api/) — The InternalData API from Audatex — 5 operation(s) for internaldata.
+- [Audatex Introspection API](https://apis.io/apis/audatex/audatex-introspection-api/) — The Introspection API from Audatex — 4 operation(s) for introspection.
+- [Audatex Job API](https://apis.io/apis/audatex/audatex-job-api/) — The Job API from Audatex — 3 operation(s) for job.
+- [Audatex Log Management API](https://apis.io/apis/audatex/audatex-logmanagement-api/) — The LogManagement API from Audatex — 1 operation(s) for logmanagement.
+- [Audatex Notification API](https://apis.io/apis/audatex/audatex-notification-api/) — The Notification API from Audatex — 6 operation(s) for notification.
+- [Audatex Offer API](https://apis.io/apis/audatex/audatex-offer-api/) — The Offer API from Audatex — 3 operation(s) for offer.
+- [Audatex Parts Order API](https://apis.io/apis/audatex/audatex-partsorder-api/) — The PartsOrder API from Audatex — 6 operation(s) for partsorder.
+- [Audatex Ping Event API](https://apis.io/apis/audatex/audatex-pingevent-api/) — The PingEvent API from Audatex — 2 operation(s) for pingevent.
+- [Audatex Reminder API](https://apis.io/apis/audatex/audatex-reminder-api/) — The Reminder API from Audatex — 2 operation(s) for reminder.
+- [Audatex Repairer API](https://apis.io/apis/audatex/audatex-repairer-api/) — The Repairer API from Audatex — 1 operation(s) for repairer.
+- [Audatex Repairers API](https://apis.io/apis/audatex/audatex-repairers-api/) — The Repairers API from Audatex — 1 operation(s) for repairers.
+- [Audatex Reports API](https://apis.io/apis/audatex/audatex-reports-api/) — The Reports API from Audatex — 1 operation(s) for reports.
+- [Audatex Supplier API](https://apis.io/apis/audatex/audatex-supplier-api/) — The Supplier API from Audatex — 6 operation(s) for supplier.
+- [Audatex Template API](https://apis.io/apis/audatex/audatex-template-api/) — The Template API from Audatex — 5 operation(s) for template.
+- [Audatex Terminal API](https://apis.io/apis/audatex/audatex-terminal-api/) — The Terminal API from Audatex — 3 operation(s) for terminal.
+- [Audatex Total Loss API](https://apis.io/apis/audatex/audatex-totalloss-api/) — The TotalLoss API from Audatex — 4 operation(s) for totalloss.
+- [Audatex User API](https://apis.io/apis/audatex/audatex-user-api/) — The User API from Audatex — 4 operation(s) for user.
+- [Audatex Vass API](https://apis.io/apis/audatex/audatex-vass-api/) — The Vass API from Audatex — 2 operation(s) for vass.
+- [Audatex Vehicle API](https://apis.io/apis/audatex/audatex-vehicle-api/) — The Vehicle API from Audatex — 6 operation(s) for vehicle.
+- [Audatex Version API](https://apis.io/apis/audatex/audatex-version-api/) — The Version API from Audatex — 1 operation(s) for version.
+- [Audatex Vi Damaged Parts API](https://apis.io/apis/audatex/audatex-vidamagedparts-api/) — The ViDamagedParts API from Audatex — 2 operation(s) for vidamagedparts.
+- [Audatex Video API](https://apis.io/apis/audatex/audatex-video-api/) — The Video API from Audatex — 2 operation(s) for video.
+- [Audatex Vi Full Calculation API](https://apis.io/apis/audatex/audatex-vifullcalculation-api/) — The ViFullCalculation API from Audatex — 2 operation(s) for vifullcalculation.
+- [Audatex Vi No Calculation API](https://apis.io/apis/audatex/audatex-vinocalculation-api/) — The ViNoCalculation API from Audatex — 5 operation(s) for vinocalculation.
+- [Audatex Webhooks API](https://apis.io/apis/audatex/audatex-webhooks-api/) — The Webhooks API from Audatex — 3 operation(s) for webhooks.
+- [Audatex Workprovider API](https://apis.io/apis/audatex/audatex-workprovider-api/) — The Workprovider API from Audatex — 2 operation(s) for workprovider.
+- [Audatex Reference Data API](https://apis.io/apis/audatex/audatex-reference-data-api/) — The Reference Data API from Audatex — 12 operation(s) for reference data.
 
-- **Created:** 2025-01-01
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### Audatex AudaConnect API
-The AudaConnect API enables third-party software developers to access, query, and update the Audatex platform including assessments, vehicle reference data, repair orders, and photo management using RESTful methods with OAuth 2.0.
+#### AsyncAPI (1)
 
-**Human URL:** [https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/Home/About](https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/Home/About)
+Event-driven and webhook contracts.
 
-#### Tags:
+- [Audatex Webhooks](https://apis.io/asyncapis/audatex/audatex-webhooks/)
 
- - Assessments, Claims, Insurance, Repair
+#### MCP servers (1)
 
-#### Properties
+Model Context Protocol servers that expose the API to agents.
 
-- [Documentation](https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/Home/About)
-- [OpenAPI](https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Bmsapi/)
-- [Authentication](https://audaconnect-demo.ax-aee.co.uk/AudaAPI.Portal/Home/About)
+- [audatex-mcp.yml](https://apis.io/servers/audatex/audatex-mcp-yml/)
 
-### Audatex GIC API
-The Audatex GIC (Global Integration Component) API provides integration capabilities for claims processing and vehicle damage assessment workflows in the insurance and collision repair industries.
+#### Overlays (5)
 
-**Human URL:** [https://api-demo.audatex.com/TestGICapi/docs/index.html](https://api-demo.audatex.com/TestGICapi/docs/index.html)
+OpenAPI overlays, including conversational phrasing for each operation.
 
-#### Tags:
+- [Audatex Api Gateway Overlay](https://apis.io/overlays/audatex/audatex-api-gateway-overlay/)
+- [Audatex Audaconnect Api Overlay](https://apis.io/overlays/audatex/audatex-audaconnect-api-overlay/)
+- [Audatex Audaconnect Bms Api Overlay](https://apis.io/overlays/audatex/audatex-audaconnect-bms-api-overlay/)
+- [Audatex Dashboard Assignment Api Overlay](https://apis.io/overlays/audatex/audatex-dashboard-assignment-api-overlay/)
+- [Audatex Gic Integration Api Overlay](https://apis.io/overlays/audatex/audatex-gic-integration-api-overlay/)
 
- - Claims, GIC, Insurance, Integration
+#### Security (2)
 
-#### Properties
+Authentication, trust centre, and vulnerability disclosure.
 
-- [Documentation](https://api-demo.audatex.com/TestGICapi/docs/index.html)
+- [Audatex Authentication](https://apis.io/security/audatex/audatex-authentication/)
+- [Audatex Domain Security](https://apis.io/security/audatex/audatex-domain-security/)
 
-### Solera API Gateway
-The Solera API Gateway provides access to Audatex and Solera claims processing services including ClaimImage document return and other automotive claims data APIs for North American insurance markets.
+#### OAuth scopes (1)
 
-**Human URL:** [https://na.api.solera.com/](https://na.api.solera.com/)
+The permissions the API asks for.
 
-#### Tags:
+- [Audatex Scopes](https://apis.io/scopes/audatex/audatex-scopes/)
 
- - Claims, Documents, Insurance, Solera
+#### Plans and pricing (1)
 
-#### Properties
+Published plans, tiers and prices.
 
-- [Documentation](https://na.api.solera.com/)
-- [Authentication](https://na.api.solera.com/)
+- [Audatex Plans Pricing](https://apis.io/plans/audatex/audatex-plans-pricing/)
 
-## Common Properties
+#### Rate limits (1)
 
-- [Website](https://www.audatex.com/)
-- [Documentation](https://www.audatex.com/solutions/)
-- [PrivacyPolicy](https://www.audatex.com/privacy-policy/)
-- [TermsOfService](https://www.audatex.com/terms-and-conditions/)
-- [Contact](https://www.audatex.com/contact/)
+Published request limits.
 
-## Features
+- [Audatex Rate Limits](https://apis.io/rate-limits/audatex/audatex-rate-limits/)
 
-| Name | Description |
-|------|-------------|
-| Claims Assessment API | Search, download, upload, and amend vehicle damage assessments programmatically via the AudaConnect API. |
-| Repair Cost Estimation | Access Audatex repair cost estimation data and labor rates for collision repair workflow automation. |
-| Photo Management | Upload, retrieve, and manage vehicle damage photos attached to claims via the assessment API. |
-| Repair Order Integration | Create, update, and query repair orders from bodyshop management systems via BMS API integration. |
-| Vehicle Reference Data | Query vehicle reference data including make, model, trim, and VIN decoding for assessment setup. |
-| OAuth 2.0 Security | All AudaConnect APIs are secured with OAuth 2.0 authorization for enterprise-grade access control. |
+#### FinOps (1)
 
-## Use Cases
+What the API costs to run, by operation.
 
-| Name | Description |
-|------|-------------|
-| Insurance Claims Automation | Automate first notice of loss, damage assessment, and claims settlement workflows for auto insurers. |
-| Bodyshop Management System Integration | Integrate bodyshop management systems with Audatex for repair order creation, parts pricing, and labor time. |
-| Total Loss Determination | Access vehicle valuation and total loss thresholds to automate total loss claims decisions. |
-| Digital Claims Submission | Enable digital submission of vehicle damage photos and assessment data from mobile apps to the Audatex platform. |
+- [Audatex Finops](https://apis.io/finops/audatex/audatex-finops/)
 
-## Integrations
+## Where to find this API
 
-| Name | Description |
-|------|-------------|
-| Bodyshop Management Systems | Native integration with major BMS platforms for automated repair order and parts pricing workflows. |
-| Insurance Core Systems | Integration with insurance policy and claims management systems for end-to-end claims processing. |
-| Vehicle History Providers | Integration with vehicle history and VIN data providers for complete vehicle information at claims initiation. |
-| Parts Suppliers | Connection to OEM and aftermarket parts supplier catalogs for parts pricing and availability in repair estimates. |
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-## Solutions
+- [Website](https://audatex.co.uk/)
+- [Documentation](https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help)
+- [Getting started](https://audaconnect.ax-aee.co.uk/AudaAPI.BMSAPI/home/register)
+- [API reference](https://audaconnect.ax-aee.co.uk/AudaAPI.WebAPI/help)
+- [Support](https://audatex.co.uk/support/)
+- [Blog](https://audatex.co.uk/news/)
+- [Terms of service](https://www.solera.com/us-canada-master-services-agreement/)
+- [Privacy policy](https://audatex.co.uk/privacy-policy/)
 
-| Name | Description |
-|------|-------------|
-| Claims Process Automation | End-to-end automation of auto insurance claims from FNOL through repair authorization and settlement. |
-| Repair Shop Workflow | Digital workflow management for collision repair shops integrating estimates, parts, labor, and customer communication. |
+## API Evangelist rating
 
-## Maintainers
+**Kin Score 48.7** — developing · rubric 0.25.0 · scored 2026-10-23
 
-**FN:** Kin Lane
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 52.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 66.1 |
+| Access clarity | 27.6 |
 
-**Email:** kin@apievangelist.com
+**Agent readiness 36.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 36.8** — Insurance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/audatex/](https://apis.io/providers/audatex/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Audatex: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/audatex/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
